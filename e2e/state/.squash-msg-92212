@@ -1,0 +1,20 @@
+feat: scaffold "Layer 2 — Audience and Outreach" from BUILD-SPEC [builder-claw]
+
+Feature: Layer 2 — Audience and Outreach
+Key: layer_2_audience_and_outreach
+Routes: /projects/[id]/audience
+
+**codeAreas:** `app/projects/[id]/audience/`, `app/api/leads/`, `app/api/outreach/`, `lib/outreach/`, `components/Outreach/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Audience definition | None | `/projects/[id]/audience` — job role, company type, inclusion/exclusion rules |
+| Lead ma
+
+Files changed:
+  * app/api/audience/route.ts
+  * app/api/leads/[id]/route.ts
+  * app/api/leads/route.ts
+  * lib/outreach/index.ts
+  * supabase/migrations/20260303000001_create_audience_and_outreach.sql
+  + 6 state/report/doc file(s)
