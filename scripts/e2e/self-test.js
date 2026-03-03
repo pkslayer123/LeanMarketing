@@ -57,7 +57,7 @@ async function runChecks() {
   const fixed = [];
   const warnings = [];
 
-  // 1. Playwright installed
+  // 1. Playwright installed (both root and e2e/)
   log("Checking Playwright...");
   const pw = execQuiet("npx playwright --version");
   if (pw.ok) {
@@ -70,6 +70,36 @@ async function runChecks() {
     } else {
       failed.push("playwright: not installed and auto-install failed");
     }
+  }
+
+  // 1b. e2e/package.json and e2e/node_modules/playwright
+  log("Checking e2e/ Playwright setup...");
+  const e2eDir = path.join(ROOT, "e2e");
+  const e2ePkg = path.join(e2eDir, "package.json");
+  if (!fs.existsSync(e2ePkg)) {
+    log("  e2e/package.json missing — creating...");
+    try {
+      fs.writeFileSync(e2ePkg, JSON.stringify({
+        name: `${path.basename(ROOT).toLowerCase()}-e2e`,
+        private: true,
+        scripts: { test: "npx playwright test", "test:list": "npx playwright test --list" },
+        devDependencies: { "@playwright/test": "latest", "playwright": "latest" },
+      }, null, 2) + "\n");
+      fixed.push("e2e/package.json: created");
+    } catch (err) {
+      failed.push(`e2e/package.json: could not create — ${err.message}`);
+    }
+  }
+  if (!fs.existsSync(path.join(e2eDir, "node_modules", "playwright"))) {
+    log("  e2e/node_modules/playwright missing — running npm install...");
+    const e2eInstall = execQuiet("npm install --prefix e2e", 120000);
+    if (e2eInstall.ok) {
+      fixed.push("e2e/node_modules: npm install succeeded");
+    } else {
+      failed.push("e2e/node_modules: npm install failed");
+    }
+  } else {
+    passed.push("e2e/node_modules/playwright: present");
   }
 
   // 2. Claude CLI available

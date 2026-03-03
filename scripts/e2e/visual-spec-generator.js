@@ -68,7 +68,13 @@ const maxPagesArg = args.includes("--max-pages") ? parseInt(args[args.indexOf("-
 const rolesArg = args.includes("--roles") ? args[args.indexOf("--roles") + 1] : "developer";
 const requestedRoles = rolesArg.split(",").map(r => r.trim()).filter(Boolean);
 
-const BASE_URL = process.env.BASE_URL || "https://moc-ai.vercel.app";
+// Load BASE_URL: env var > persona-engine.json > fallback
+const BASE_URL = process.env.BASE_URL || (() => {
+  try {
+    const pe = JSON.parse(fs.readFileSync(path.join(ROOT, "persona-engine.json"), "utf-8"));
+    return pe.baseUrl || "https://moc-ai.vercel.app";
+  } catch { return "https://moc-ai.vercel.app"; }
+})();
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const VISION_KEY = GEMINI_API_KEY ?? OPENAI_API_KEY;

@@ -1,0 +1,12 @@
+{
+  "name": "leanmarketing-e2e",
+  "private": true,
+  "scripts": {
+    "test": "npx playwright test",
+    "test:list": "npx playwright test --list"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "playwright": "latest"
+  }
+}

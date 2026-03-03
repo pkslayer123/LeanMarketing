@@ -112,6 +112,9 @@ function runChecks() {
   // -------------------------------------------------------------------------
   log("Checking state file schemas...");
 
+  // Load config early — needed for schema validation and later checks
+  const config = loadJson(CONFIG_PATH, {});
+
   // Issue queue schema — read required fields from config, with sensible defaults
   const issueSchema = config?.issueSchema ?? {};
   const requiredIssueFields = issueSchema.requiredFields ?? ["title", "status"];
@@ -174,7 +177,6 @@ function runChecks() {
 
   // Health summary staleness — if diagnostics ran recently, summary shouldn't be ancient
   const healthAge = fileAge(path.join(STATE_DIR, "daemon-health-summary.json"));
-  const config = loadJson(CONFIG_PATH, {});
   const heartbeatHours = config?.claws?.diagnostics?.healthHeartbeatHours ?? 6;
   const maxHealthAge = heartbeatHours * 3 * 3600000; // 3x the interval = stale
   if (healthAge < Infinity && healthAge > maxHealthAge) {

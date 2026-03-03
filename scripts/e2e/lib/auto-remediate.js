@@ -29,11 +29,41 @@ function log(msg) {
 
 function fixPlaywrightBrowsers() {
   log("checking Playwright browser installation...");
+
+  // Step 0: Ensure e2e/package.json exists with playwright dependency
+  const e2eDir = path.join(ROOT, "e2e");
+  const e2ePkg = path.join(e2eDir, "package.json");
+  if (!fs.existsSync(e2ePkg)) {
+    log("e2e/package.json missing — creating with playwright dependency");
+    try {
+      fs.writeFileSync(e2ePkg, JSON.stringify({
+        name: `${path.basename(ROOT).toLowerCase()}-e2e`,
+        private: true,
+        scripts: { test: "npx playwright test", "test:list": "npx playwright test --list" },
+        devDependencies: { "@playwright/test": "latest", "playwright": "latest" },
+      }, null, 2) + "\n");
+      log("created e2e/package.json");
+    } catch (err) {
+      log(`failed to create e2e/package.json: ${err.message}`);
+    }
+  }
+
+  // Step 0b: Ensure e2e/node_modules exists (npm install)
+  if (!fs.existsSync(path.join(e2eDir, "node_modules", "playwright"))) {
+    log("e2e/node_modules/playwright missing — running npm install...");
+    try {
+      execSync("npm install", { cwd: e2eDir, encoding: "utf-8", timeout: 120000, stdio: "pipe" });
+      log("npm install in e2e/ succeeded");
+    } catch (err) {
+      log(`npm install in e2e/ failed: ${err.message.slice(0, 200)}`);
+    }
+  }
+
   try {
     // Quick check: can playwright list tests?
     const listResult = execSync(
       "npx playwright test --list --reporter=json 2>&1",
-      { cwd: path.join(ROOT, "e2e"), encoding: "utf-8", timeout: 30000 }
+      { cwd: e2eDir, encoding: "utf-8", timeout: 30000 }
     );
     if (listResult.includes('"tests"') || listResult.includes("spec.ts")) {
       log("Playwright browsers OK — test listing works");
@@ -41,7 +71,7 @@ function fixPlaywrightBrowsers() {
     }
   } catch (err) {
     const output = err.stdout || err.stderr || err.message || "";
-    if (output.includes("browserType.launch") || output.includes("Executable doesn't exist") || output.includes("chromium")) {
+    if (output.includes("browserType.launch") || output.includes("Executable doesn't exist") || output.includes("chromium") || output.includes("Cannot find module")) {
       log("Playwright browsers missing — installing...");
       try {
         execSync("npx playwright install chromium", {

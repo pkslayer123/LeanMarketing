@@ -99,6 +99,18 @@ class DiagnosticsClaw extends Claw {
 
       // Execute remediation based on check action
       switch (check.action) {
+        case "fix-zero-results": {
+          this.log("  -> running fixZeroResults (zero tests detected)");
+          try {
+            const { fixZeroResults } = require("../lib/auto-remediate");
+            const result = fixZeroResults();
+            this.log(`  -> fixZeroResults: ${result.detail}`);
+          } catch (err) {
+            this.log(`  -> fixZeroResults failed: ${err.message}`);
+          }
+          await notify(`CRITICAL: ${check.detail}`, "critical");
+          break;
+        }
         case "force-trigger-test-runner": {
           this.log("  -> force-triggering test-runner");
           this._forceTriggerClaw("test-runner");

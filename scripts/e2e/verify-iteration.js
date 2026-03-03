@@ -150,8 +150,12 @@ function checkAfterTests() {
     return { passed: true, detail: "valid" };
   });
 
-  check("orchestrator ran recently", () => {
-    const age = fileAge(path.join(STATE, "orchestrator-state.json"));
+  check("daemon ran recently", () => {
+    // Prefer claw-signals.json (daemon model) over orchestrator-state.json (loop.sh model)
+    const signalsPath = path.join(STATE, "claw-signals.json");
+    const orchestratorPath = path.join(STATE, "orchestrator-state.json");
+    const statePath = fs.existsSync(signalsPath) ? signalsPath : orchestratorPath;
+    const age = fileAge(statePath);
     const mins = minutesAgo(age);
     return {
       passed: mins < 30,
@@ -180,8 +184,12 @@ function checkCpMeta() {
 }
 
 function checkAfterIteration() {
-  check("orchestrator-state.json fresh", () => {
-    const age = fileAge(path.join(STATE, "orchestrator-state.json"));
+  // Daemon-compatible: check claw-signals.json (daemon model) or orchestrator-state.json (loop.sh model)
+  check("daemon state fresh", () => {
+    const signalsPath = path.join(STATE, "claw-signals.json");
+    const orchestratorPath = path.join(STATE, "orchestrator-state.json");
+    const statePath = fs.existsSync(signalsPath) ? signalsPath : orchestratorPath;
+    const age = fileAge(statePath);
     const mins = minutesAgo(age);
     return {
       passed: mins < 10,
@@ -189,45 +197,97 @@ function checkAfterIteration() {
     };
   });
 
-  check("orchestrator subsystems ran", () => {
-    const { data } = validJson(path.join(STATE, "orchestrator-state.json"));
+  check("claws ran successfully", () => {
+    const signalsPath = path.join(STATE, "claw-signals.json");
+    const orchestratorPath = path.join(STATE, "orchestrator-state.json");
+
+    // Daemon model: check claw-signals.json
+    if (fs.existsSync(signalsPath)) {
+      const { data } = validJson(signalsPath);
+      if (!data?.claws) {
+        return { passed: false, detail: "no claw data in signals" };
+      }
+      const claws = Object.entries(data.claws);
+      const okStatuses = new Set(["idle", "running", "stopped", "starting", "waiting"]);
+      const errorStatuses = new Set(["circuit_broken", "error"]);
+      const ok = claws.filter(([, c]) => okStatuses.has(c.status)).length;
+      const errored = claws.filter(([, c]) => errorStatuses.has(c.status)).length;
+      return {
+        passed: ok > 0,
+        detail: `${ok} ok, ${errored} errored out of ${claws.length} claws`,
+      };
+    }
+
+    // Loop.sh model fallback: orchestrator-state.json
+    const { data } = validJson(orchestratorPath);
     if (!data) {
-      return { passed: false, detail: "no orchestrator state" };
+      return { passed: false, detail: "no daemon/orchestrator state" };
     }
     const ok = data.summary?.ok || 0;
     const failed = data.summary?.failed || 0;
-    const skipped = data.summary?.skipped || 0;
     return {
       passed: ok > 0,
-      detail: `${ok} ok, ${failed} failed, ${skipped} skipped`,
+      detail: `${ok} ok, ${failed} failed`,
     };
   });
 
-  const criticalSubsystems = [
-    "self-clean-queue",
-    "feature-health",
-    "coverage-matrix",
-    "improvement-report",
+  const criticalClaws = [
+    "test-runner",
+    "finding-pipeline",
+    "fix-engine",
+    "health-deploy",
   ];
 
-  check("critical subsystems passed", () => {
-    const { data } = validJson(path.join(STATE, "orchestrator-state.json"));
+  check("critical claws healthy", () => {
+    const signalsPath = path.join(STATE, "claw-signals.json");
+    const orchestratorPath = path.join(STATE, "orchestrator-state.json");
+
+    // Daemon model
+    if (fs.existsSync(signalsPath)) {
+      const { data } = validJson(signalsPath);
+      if (!data?.claws) {
+        return { passed: false, detail: "no claw data" };
+      }
+      const failures = criticalClaws.filter(
+        (name) => data.claws[name]?.status === "circuit_broken" || data.claws[name]?.status === "error"
+      );
+      return {
+        passed: failures.length === 0,
+        detail: failures.length === 0
+          ? `all ${criticalClaws.length} critical claws ok`
+          : `FAILED: ${failures.join(", ")}`,
+      };
+    }
+
+    // Loop.sh model fallback
+    const { data } = validJson(orchestratorPath);
     if (!data?.subsystems) {
       return { passed: false, detail: "no subsystem data" };
     }
-    const failures = criticalSubsystems.filter(
+    const failures = ["self-clean-queue", "feature-health", "coverage-matrix", "improvement-report"].filter(
       (name) => data.subsystems[name]?.status === "failed"
     );
     return {
       passed: failures.length === 0,
-      detail: failures.length === 0
-        ? `all ${criticalSubsystems.length} critical subsystems ok`
-        : `FAILED: ${failures.join(", ")}`,
+      detail: failures.length === 0 ? "all critical subsystems ok" : `FAILED: ${failures.join(", ")}`,
     };
   });
 
-  check("subsystem failure count reasonable", () => {
-    const { data } = validJson(path.join(STATE, "orchestrator-state.json"));
+  check("error count reasonable", () => {
+    const signalsPath = path.join(STATE, "claw-signals.json");
+    const orchestratorPath = path.join(STATE, "orchestrator-state.json");
+
+    if (fs.existsSync(signalsPath)) {
+      const { data } = validJson(signalsPath);
+      const claws = Object.values(data?.claws ?? {});
+      const errored = claws.filter((c) => c.status === "circuit_broken" || c.status === "error").length;
+      return {
+        passed: errored <= 3,
+        detail: errored <= 3 ? `${errored} errors (within threshold)` : `${errored} errors — systemic issue`,
+      };
+    }
+
+    const { data } = validJson(orchestratorPath);
     const failed = data?.summary?.failed || 0;
     return {
       passed: failed <= 3,

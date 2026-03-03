@@ -96,11 +96,29 @@ function readJsonlTail(filename, maxEntries = 50) {
 // ---------------------------------------------------------------------------
 
 /**
- * Detects N consecutive test runs with 0% pass rate (but total > 0 tests).
+ * Detects N consecutive test runs with 0% pass rate OR zero tests discovered.
  * @param {number} collapseRuns — number of consecutive 0% runs to trigger (default 3)
  */
 function checkPassRateCollapse(collapseRuns = 3) {
   const entries = readJsonlTail("loop-performance.jsonl", 20);
+
+  // Also check claw-signals for zero-total from test-runner
+  const signals = readState("claw-signals.json");
+  const testsComplete = signals?.signals?.["tests-complete"];
+
+  // Zero total tests — Playwright can't find or run any tests at all
+  if (testsComplete && (testsComplete.total ?? 0) === 0 && testsComplete.at) {
+    const age = Date.now() - new Date(testsComplete.at).getTime();
+    if (age < 3600000) { // within last hour
+      return {
+        name: "pass-rate-collapse",
+        ok: false,
+        detail: "test-runner completed with 0 total tests — Playwright may not be installed or no test files found",
+        action: "fix-zero-results",
+      };
+    }
+  }
+
   if (entries.length < collapseRuns) {
     return { name: "pass-rate-collapse", ok: true, detail: `insufficient data (${entries.length} entries)` };
   }
@@ -113,12 +131,26 @@ function checkPassRateCollapse(collapseRuns = 3) {
     return passRate === 0 && total > 0;
   });
 
+  // Also check for consecutive zero-total runs (no tests found at all)
+  const allZeroTotal = recent.every((e) => {
+    const total = e.totalTests ?? e.total ?? e.tests ?? 0;
+    return total === 0;
+  });
+
+  if (allZeroTotal) {
+    return {
+      name: "pass-rate-collapse",
+      ok: false,
+      detail: `${collapseRuns} consecutive runs with 0 total tests — Playwright may not be installed or no test files found`,
+      action: "fix-zero-results",
+    };
+  }
+
   if (!allZero) {
     return { name: "pass-rate-collapse", ok: true, detail: "pass rate within normal range" };
   }
 
   // Check if collapse started after a deploy
-  const signals = readState("claw-signals.json");
   const deploySha = signals?.signals?.["deploy-detected"]?.sha ?? null;
   const deployDetail = deploySha ? ` (after deploy ${deploySha.slice(0, 8)})` : "";
 
