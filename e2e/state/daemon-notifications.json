@@ -1,15 +1,5 @@
 [
   {
-    "message": "Daemon stuck: 2 approved MOCs, 394 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T07:57:42.412Z"
-  },
-  {
-    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T07:57:45.776Z"
-  },
-  {
     "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T07:57:49.908Z"
@@ -498,5 +488,15 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T08:52:37.537Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 463 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T08:52:42.950Z"
+  },
+  {
+    "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T08:52:52.568Z"
   }
 ]
