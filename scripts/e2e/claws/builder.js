@@ -15,7 +15,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
+const { execSync, spawnSync } = require("child_process");
 const { Claw, ROOT, STATE_DIR } = require("../claw");
 
 const QUEUE_PATH = path.join(STATE_DIR, "moc-queue.json");
@@ -439,44 +439,92 @@ class BuilderClaw extends Claw {
 
     const prompt = this._buildScaffoldPrompt(gap);
 
-    // Write prompt to temp file so we can pipe it to Claude CLI
+    // Write prompt to temp file (same pattern as fix-engine)
     const promptPath = path.join(STATE_DIR, `builder-prompt-${process.pid}.md`);
     fs.writeFileSync(promptPath, prompt);
 
     try {
       this.log(`Scaffolding feature: ${gap.name} via Claude CLI`);
-      // Use execAsync so the claw can respond to shutdown signals
-      // IMPORTANT: Do NOT use --print — it only outputs text to stdout without
-      // writing files. Without --print, Claude runs in agent mode and actually
-      // creates/edits files on disk via its tools (Write, Edit, Bash).
-      const result = await this.execAsync(
-        `claude --dangerously-skip-permissions --model sonnet --max-budget-usd 3.00 < "${promptPath}"`,
-        { label: "claude-scaffold", timeoutMs: 300000, env: { CLAUDECODE: "", CLAUDE_CODE: "", CLAUDE_CODE_ENTRYPOINT: "builder" } }
+
+      // Snapshot git state before Claude runs (fix-engine pattern)
+      let diffBefore = "";
+      try {
+        diffBefore = execSync("git diff --name-only", { cwd: ROOT, stdio: "pipe" }).toString().trim();
+      } catch { /* ignore */ }
+
+      // Use spawnSync with shell:false — proven pattern from fix-engine.
+      // --print + --dangerously-skip-permissions: Claude writes files via Edit tool,
+      // budget-controlled, non-interactive. Input via stdin, not shell redirection.
+      const result = spawnSync(
+        "claude",
+        ["--print", "--dangerously-skip-permissions", "--model", "sonnet", "--max-budget-usd", "3.00"],
+        {
+          cwd: ROOT,
+          input: fs.readFileSync(promptPath),
+          stdio: ["pipe", "pipe", "pipe"],
+          timeout: 300000, // 5 min
+          windowsHide: true,
+          shell: false, // Direct spawn — no bash intermediary
+          env: {
+            ...process.env,
+            CLAUDE_CODE_ENTRYPOINT: "builder",
+            CLAUDECODE: "",
+            CLAUDE_CODE: "",
+          },
+        }
       );
       try { fs.unlinkSync(promptPath); } catch {}
 
+      const stdout = (result.stdout || "").toString();
+      const stderr = (result.stderr || "").toString();
+      const ok = result.status === 0;
+
       // Track budget spend
-      const promptSize = fs.existsSync(promptPath) ? 0 : prompt.length;
-      const outputSize = (result.stdout || "").length;
       try {
         const tokenLogger = require("../lib/token-logger");
-        const estimated = tokenLogger.estimateClaudeCost(promptSize || prompt.length, outputSize, "sonnet");
+        const estimated = tokenLogger.estimateClaudeCost(prompt.length, stdout.length, "sonnet");
         this.addBudgetSpend(estimated);
-
-        // Detect truncated output
-        const exhaustion = tokenLogger.detectBudgetExhaustion(result.stdout || "", result.ok ? 0 : 1);
-        const outcome = exhaustion.exhausted ? "budget_exceeded"
-          : exhaustion.partial ? "partial"
-          : result.ok ? "success" : "failure";
-        tokenLogger.logBudgetOutcome("builder", `scaffold-${gap.featureKey}`, "sonnet", estimated, outcome, result.ok && !exhaustion.partial);
+        const outcome = ok ? "success" : "failure";
+        tokenLogger.logBudgetOutcome("builder", `scaffold-${gap.featureKey}`, "sonnet", estimated, outcome, ok);
       } catch { /* non-fatal */ }
 
-      if (result.ok) {
-        this.log(`Claude scaffolding complete: ${result.stdout.slice(0, 200)}`);
-      } else {
-        this.log(`Scaffold failed: ${result.stderr.slice(0, 200)}`);
+      // Check what Claude changed (fix-engine pattern: git diff before/after)
+      let diffAfter = "";
+      try {
+        diffAfter = execSync("git diff --name-only", { cwd: ROOT, stdio: "pipe" }).toString().trim();
+      } catch { /* ignore */ }
+
+      const beforeSet = new Set(diffBefore.split("\n").filter(Boolean));
+      const afterSet = new Set(diffAfter.split("\n").filter(Boolean));
+      const newlyChanged = [...afterSet].filter((f) => !beforeSet.has(f));
+
+      // Also check for untracked new files
+      let untrackedFiles = [];
+      try {
+        const untracked = execSync("git ls-files --others --exclude-standard app/ components/ lib/ supabase/", { cwd: ROOT, stdio: "pipe" }).toString().trim();
+        untrackedFiles = untracked.split("\n").filter(Boolean);
+      } catch { /* ignore */ }
+
+      const allNewFiles = [...new Set([...newlyChanged, ...untrackedFiles])];
+      const codeChanges = allNewFiles.filter((f) =>
+        f.startsWith("app/") || f.startsWith("lib/") || f.startsWith("components/") || f.startsWith("supabase/")
+      );
+
+      if (codeChanges.length > 0) {
+        this.log(`Claude scaffolding complete: ${codeChanges.length} files changed (${codeChanges.slice(0, 5).join(", ")})`);
+        return true;
       }
-      return result.ok;
+
+      // Claude ran but didn't write files — log output for debugging
+      if (ok && stdout.trim()) {
+        this.log(`Claude completed but no file changes detected. Output: ${stdout.slice(0, 300)}`);
+        // Save raw output for debugging
+        const debugPath = path.join(STATE_DIR, `builder-raw-output-${Date.now()}.md`);
+        try { fs.writeFileSync(debugPath, stdout.slice(0, 50000)); } catch {}
+      } else {
+        this.log(`Scaffold failed (exit ${result.status}): ${stderr.slice(0, 200)}`);
+      }
+      return false;
     } catch (err) {
       try { fs.unlinkSync(promptPath); } catch {}
       this.log(`Scaffold failed: ${(err.message ?? "").slice(0, 200)}`);
@@ -494,21 +542,34 @@ ${gap.description}
 ## Expected Routes
 ${gap.routes.length > 0 ? gap.routes.map((r) => `- ${r}`).join("\n") : "- Determine appropriate routes from the feature description"}
 
-## Instructions
-1. Create the necessary page routes under app/ (page.tsx files)
-2. Create any needed API routes under app/api/ (route.ts files)
-3. Create shared components under components/
-4. If the feature needs database tables, create a Supabase migration file
-5. Use the project's existing patterns: Tailwind CSS for styling, Supabase for DB, handleGET/handlePOST for API routes
-6. After creating files, run \`npx tsc --noEmit\` to verify no type errors
+## Output Format
+You MUST output each file as a fenced code block with the file path after the language tag.
+Example:
+\`\`\`tsx app/dashboard/page.tsx
+export default function DashboardPage() {
+  return <div>Dashboard</div>;
+}
+\`\`\`
+
+Output ALL files needed for this feature in this format. Each file must have its
+relative path (starting with app/, components/, lib/, or supabase/).
+
+## Tech Stack & Patterns
+- Next.js App Router with TypeScript
+- Tailwind CSS for styling
+- Supabase for database and auth (use \`@supabase/ssr\` createBrowserClient/createServerClient)
+- React Server Components by default; add "use client" only when needed (hooks, interactivity)
+- API routes use Next.js route handlers (app/api/.../route.ts with GET/POST exports)
 
 ## Project Structure
-- app/ — Next.js App Router pages and API routes
+- app/ — Next.js App Router pages (page.tsx) and API routes (route.ts)
 - components/ — Shared UI components
 - lib/ — Utilities, services, hooks
 - supabase/migrations/ — Database migrations (numbered sequentially)
 
-Keep the implementation minimal but functional. Focus on getting the route and basic UI working so persona tests can validate it.
+Keep the implementation minimal but functional. Focus on getting the routes and basic UI
+working so persona tests can validate the feature exists and renders correctly.
+Do NOT import modules that don't exist yet — keep each file self-contained where possible.
 `;
   }
 
