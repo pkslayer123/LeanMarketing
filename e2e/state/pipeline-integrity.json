@@ -5,7 +5,7 @@
     "claw-signals: correct format ({ signals, claws })",
     "issue-queue: all 277 entries have valid schema",
     "findings: all 0 entries have valid schema",
-    "convergence: valid state \"converged\"",
+    "convergence: valid state \"stuck\"",
     "plausibility: health summary queue depth consistent with moc-queue",
     "signal-flow: test-runner → tests-complete signal connected"
   ],
@@ -16,7 +16,7 @@
     "config-alignment: test-runner.coverageBasedSuspend is not set in config (defaults to false). Add it explicitly to prevent surprises.",
     "principles: daemon-principles.json does not exist — no design constraints encoded"
   ],
-  "at": "2026-03-03T12:39:47.629Z",
+  "at": "2026-03-03T12:41:20.878Z",
   "passedCount": 8,
   "failedCount": 1,
   "warningCount": 2,
