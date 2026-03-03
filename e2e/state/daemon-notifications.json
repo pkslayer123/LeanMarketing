@@ -1,10 +1,5 @@
 [
   {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 19:14:21] [builder]   fail: git-diff-check — \n[2026-03-03 19:15:28] [diagnostics]   classification: unknown — [2026-03-03 19:14:21] [builder]   fail: git-diff-check — \n[2026-03-03 19:16:16",
-    "severity": "critical",
-    "at": "2026-03-03T19:22:58.587Z"
-  },
-  {
     "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x2)",
     "severity": "warning",
     "at": "2026-03-03T19:22:58.588Z"
@@ -498,5 +493,10 @@
     "message": "11/11 claws healthy (builder:idle, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 100% pass rate. 0 MOCs pending approval. Pipeline: degraded (1 failures).",
     "severity": "info",
     "at": "2026-03-03T21:45:53.298Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T21:47:53.773Z"
   }
 ]
