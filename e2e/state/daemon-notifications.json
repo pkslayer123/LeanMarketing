@@ -2,16 +2,6 @@
   {
     "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
     "severity": "warning",
-    "at": "2026-03-03T09:19:54.013Z"
-  },
-  {
-    "message": "Daemon stuck: 2 approved MOCs, 496 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T09:22:18.813Z"
-  },
-  {
-    "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
-    "severity": "warning",
     "at": "2026-03-03T09:22:24.109Z"
   },
   {
@@ -498,5 +488,15 @@
     "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T10:21:16.790Z"
+  },
+  {
+    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T10:21:42.114Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T10:21:42.122Z"
   }
 ]
