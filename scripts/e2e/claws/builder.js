@@ -714,7 +714,19 @@ ${this._buildScaffoldPrompt(gap)}
         return true;
       }
 
-      // Builder created code — push to trigger Vercel deploy
+      // Builder created code — verify build before pushing to avoid broken Vercel deploys
+      const buildCheck = this.exec("npx next build 2>&1", { label: "pre-push-build-check", timeoutMs: 180000 });
+      if (!buildCheck.ok) {
+        // Build failed — revert the commit so we don't accumulate broken code
+        const buildErr = (buildCheck.stderr || buildCheck.stdout || "").slice(0, 500);
+        this.log(`PRE-PUSH BUILD FAILED — reverting commit. Error:\n${buildErr}`);
+        this.exec("git reset --soft HEAD~1 2>/dev/null || true", { label: "git-reset-failed-build" });
+        this.exec("git reset HEAD . 2>/dev/null || true", { label: "git-unstage-failed-build" });
+        this.emitSignal("build-failed", { claw: this.name, error: buildErr.slice(0, 200) });
+        return false;
+      }
+      this.log("Pre-push build check passed");
+
       // Squash accumulated chore commits so deploy title shows the scaffold, not a health report
       this._squashChoreCommitsBeforePush();
       // Pull first to avoid divergence
