@@ -1,10 +1,23 @@
 {
-  "lastRun": "2026-03-03T18:57:17.722Z",
-  "total": 0,
+  "lastRun": "2026-03-03T19:01:46.529Z",
+  "total": 3,
   "noiseAutoClose": 0,
-  "fixAttempted": 0,
+  "fixAttempted": 2,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 0,
-  "details": []
+  "noFixNeeded": 2,
+  "details": [
+    {
+      "action": "archived",
+      "reason": "Critical route: /login"
+    },
+    {
+      "action": "no_fix_needed",
+      "reason": "described for this MOC. Looking at the code, `app/api/projects/route.ts` is already well-implemented:\n\n- Auth checks with proper 401 responses\n- Null-safe returns (`data ?? []`)\n- Input validation and JSON parse error handling\n- Proper error propagation (500 on DB errors)\n- RLS-safe queries scoped t"
+    },
+    {
+      "action": "no_fix_needed",
+      "reason": " Auth check with 401 on failure\n- JSON parse guard with 400 error\n- Full field validation before processing\n- Quality gate runs correctly via `runQualityGate()`\n- Upsert with `onConflict: \"project_id,user_id\"` handles idempotency\n- GET handler properly filters by both `project_id` and `user_id` (RLS"
+    }
+  ]
 }
