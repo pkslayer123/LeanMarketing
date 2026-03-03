@@ -479,6 +479,10 @@ class BuilderClaw extends Claw {
       const stderr = (result.stderr || "").toString();
       const ok = result.status === 0;
 
+      this.log(`Claude exit=${result.status} signal=${result.signal} stdout=${stdout.length}b stderr=${stderr.length}b cwd=${ROOT}`);
+      if (stderr) this.log(`Claude stderr: ${stderr.slice(0, 500)}`);
+      if (stdout) this.log(`Claude stdout preview: ${stdout.slice(0, 300)}`);
+
       // Track budget spend
       try {
         const tokenLogger = require("../lib/token-logger");
@@ -533,26 +537,41 @@ class BuilderClaw extends Claw {
   }
 
   _buildScaffoldPrompt(gap) {
-    return `You are building a new feature for a Next.js application based on a BUILD-SPEC.
+    // Identify which code areas are missing vs existing
+    const missingAreas = [];
+    const existingAreas = [];
+    for (const area of gap.codeAreas || []) {
+      const fullPath = path.join(ROOT, area);
+      const exists = fs.existsSync(fullPath) ||
+        fs.existsSync(fullPath + ".ts") ||
+        fs.existsSync(fullPath + ".tsx") ||
+        fs.existsSync(fullPath + "/page.tsx") ||
+        fs.existsSync(fullPath + "/route.ts");
+      if (exists) {
+        existingAreas.push(area);
+      } else {
+        missingAreas.push(area);
+      }
+    }
+
+    const missingSection = missingAreas.length > 0
+      ? `\n## Missing Code Areas (MUST CREATE)\n${missingAreas.map(a => `- ${a}`).join("\n")}\n`
+      : "";
+    const existingSection = existingAreas.length > 0
+      ? `\n## Already Existing (do NOT recreate)\n${existingAreas.map(a => `- ${a}`).join("\n")}\n`
+      : "";
+    const gapItems = (gap.specGaps || []).length > 0
+      ? `\n## Specific Gaps to Fill\n${gap.specGaps.map(g => `- ${g}`).join("\n")}\n`
+      : "";
+
+    return `You are building a new feature for a Next.js application.
 
 ## Feature to Build: ${gap.name}
 
 ${gap.description}
-
+${missingSection}${existingSection}${gapItems}
 ## Expected Routes
 ${gap.routes.length > 0 ? gap.routes.map((r) => `- ${r}`).join("\n") : "- Determine appropriate routes from the feature description"}
-
-## Output Format
-You MUST output each file as a fenced code block with the file path after the language tag.
-Example:
-\`\`\`tsx app/dashboard/page.tsx
-export default function DashboardPage() {
-  return <div>Dashboard</div>;
-}
-\`\`\`
-
-Output ALL files needed for this feature in this format. Each file must have its
-relative path (starting with app/, components/, lib/, or supabase/).
 
 ## Tech Stack & Patterns
 - Next.js App Router with TypeScript
@@ -567,9 +586,8 @@ relative path (starting with app/, components/, lib/, or supabase/).
 - lib/ — Utilities, services, hooks
 - supabase/migrations/ — Database migrations (numbered sequentially)
 
-Keep the implementation minimal but functional. Focus on getting the routes and basic UI
-working so persona tests can validate the feature exists and renders correctly.
-Do NOT import modules that don't exist yet — keep each file self-contained where possible.
+Focus on creating the MISSING code areas listed above. Create minimal but functional
+implementations. Do NOT import modules that don't exist yet — keep each file self-contained.
 `;
   }
 
