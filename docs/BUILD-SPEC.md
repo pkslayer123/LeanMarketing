@@ -280,3 +280,116 @@ The current Lean default build plan is:
 Do not implement Milestone 2 unless the task explicitly requests it.
 
 ## End of Master Build Prompt
+
+## Feature Areas
+
+### Authentication and User Management
+**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Login page | None | `/auth/login` — email/password login via Supabase Auth |
+| Signup page | None | `/auth/signup` — registration with email verification |
+| Auth middleware | None | Protect routes, redirect unauthenticated users |
+| Session management | None | Supabase session handling in layout |
+| Logout | None | Sign-out action and redirect |
+
+### Dashboard and Project Overview
+**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Dashboard page | None | `/dashboard` — list all projects with status |
+| Project detection | None | Detect persona-engine projects in the daemon network |
+| Project cards | None | Show project name, status, last activity |
+| Navigation | None | Sidebar/header nav between sections |
+| Project isolation | None | Ensure projects never share data |
+
+### Layer 1 — Idea Definition
+**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |
+| Payment assumption | None | Field: what must be true for someone to pay |
+| Next step definition | None | Field: smallest next step after reply |
+| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |
+| Idea storage | None | Supabase table for ideas linked to projects |
+
+### Layer 2 — Audience and Outreach
+**codeAreas:** `app/projects/[id]/audience/`, `app/api/leads/`, `app/api/outreach/`, `lib/outreach/`, `components/Outreach/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Audience definition | None | `/projects/[id]/audience` — job role, company type, inclusion/exclusion rules |
+| Lead management | None | Lead list with fit reasons, status tracking |
+| Message templates | None | A/B message editor with two parallel versions |
+| Mock sender | None | Provider-neutral mock sender for end-to-end testing (Milestone 1) |
+| Quality Gate 2 | None | Pass/fail: audience defined, lead fit documented, single CTA, opt-out enabled |
+| Sending controls | None | Rate limits, caps, stop-on-reply |
+
+### Layer 3 — Conversation and Qualification
+**codeAreas:** `app/projects/[id]/conversations/`, `app/api/conversations/`, `lib/conversations/`, `components/Conversations/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Reply classification | None | Classify: not relevant, curious, interested, ready to evaluate |
+| Stage pipeline | None | Visual stage progression for leads |
+| Conversation log | None | Full exchange history per lead |
+| Next action suggestions | None | Auto-suggest smallest next step based on interest level |
+| Quality Gate 3 | None | Pass/fail: classification accuracy, effort check, logging |
+
+### Layer 4 — Proof and Demonstration
+**codeAreas:** `app/projects/[id]/proof/`, `app/api/proof/`, `lib/proof/`, `components/Proof/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Proof management | None | `/projects/[id]/proof` — manage proof artifacts per project |
+| Proof types | None | Support: written summary, walkthrough demo, trial |
+| Landing page builder | None | Simple landing page generator following spec rules |
+| Quality Gate 4 | None | Pass/fail: outcome shown, under 10min, clear decision request |
+
+### Layer 5 — Paid Conversion
+**codeAreas:** `app/projects/[id]/conversion/`, `app/api/offers/`, `lib/offers/`, `components/Offers/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Offer builder | None | `/projects/[id]/conversion` — scope, time, price, success definition |
+| Offer templates | None | Trial, early access, pilot agreement templates |
+| Quality Gate 5 | None | Pass/fail: scope, duration, price, measurable success |
+| Offer tracking | None | Track sent offers, acceptance, conversion |
+
+### Layer 6 — Review and Adjustment
+**codeAreas:** `app/projects/[id]/review/`, `app/api/analytics/`, `lib/analytics/`, `components/Analytics/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Weekly review dashboard | None | `/projects/[id]/review` — messages sent, replies, stage advancement |
+| Bottleneck identification | None | Auto-identify biggest drop-off point |
+| Variable tracking | None | Track single-variable changes per cycle |
+| Quality Gate 6 | None | Pass/fail: 30+ attempts, bottleneck identified, one variable, hypothesis written |
+| Experiment history | None | Log of past cycles and their results |
+
+### Database Schema
+**codeAreas:** `lib/database/`, `supabase/migrations/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Projects table | None | id, name, owner_id, created_at, status |
+| Ideas table | None | project_id, description, audience, problem, payment_assumption, next_step |
+| Leads table | None | project_id, name, email, company, fit_reason, status, stage |
+| Messages table | None | project_id, lead_id, template_version, sent_at, content |
+| Conversations table | None | lead_id, direction, content, classification, created_at |
+| Offers table | None | project_id, lead_id, scope, duration, price, success_definition, status |
+| Analytics table | None | project_id, cycle, messages_sent, replies, stage_advances, bottleneck |
+| RLS policies | None | Row-level security per user/project |
+
+### Approval Mode Toggle
+**codeAreas:** `app/settings/`, `app/api/settings/`, `lib/settings/`, `components/Settings/`
+
+| Aspect | Current | Gap |
+|--------|---------|-----|
+| Settings page | None | `/settings` — approval mode toggle |
+| Strict mode | None | All classifications and next actions require approval |
+| Relaxed mode | None | Low-risk auto-advance, high-risk requires approval |
+| Mode persistence | None | Store mode in database per project |
