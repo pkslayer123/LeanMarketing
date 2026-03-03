@@ -8280,7 +8280,10 @@
       "createdAt": "2026-03-03T19:02:47.406Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T19:02:48.361Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772564567406",
@@ -8292,7 +8295,10 @@
       "createdAt": "2026-03-03T19:02:47.406Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:03:02.783Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: es were reported for this file. Looking at the code itself, `app/api/projects/route.ts` is well-formed:\n\n- Auth check before any data access\n- Null safety with `?.` and `?? []`\n- Proper error propagation with appropriate HTTP status codes\n- Input validation on POST (name required, JSON parse guarded)\n\nNo changes are needed. This appears to be a builder-phase MOC that was queued for scaffolding a dashboard feature, but the API route itself already exists and is correct. There are no bugs to fix.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: es were reported for this file. Looking at the code itself, `app/api/projects/route.ts` is well-formed:\n\n- Auth check before any data access\n- Null safety with `?.` and `?? []`\n- Proper error propagation with appropriate HTTP status codes\n- Input validation on POST (name required, JSON parse guarded)\n\nNo changes are needed. This appears to be a builder-phase MOC that was queued for scaffolding a dashboard feature, but the API route itself already exists and is correct. There are no bugs to fix.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772564567406",
@@ -8304,7 +8310,10 @@
       "createdAt": "2026-03-03T19:02:47.406Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:03:31.632Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: ed for this MOC. The route code in `app/api/ideas/route.ts` and `lib/ideas.ts` are both correct:\n\n- Auth check is present and returns 401 properly\n- All fields are validated before use\n- `runQualityGate` is called correctly\n- Upsert with `onConflict: \"project_id,user_id\"` is appropriate\n- GET endpoint filters by both `project_id` and `user_id` (correct RLS pattern)\n\nThe TypeScript errors shown are in an unrelated file (`audience/_client.tsx`) and pre-exist this task. No changes are needed here.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: ed for this MOC. The route code in `app/api/ideas/route.ts` and `lib/ideas.ts` are both correct:\n\n- Auth check is present and returns 401 properly\n- All fields are validated before use\n- `runQualityGate` is called correctly\n- Upsert with `onConflict: \"project_id,user_id\"` is appropriate\n- GET endpoint filters by both `project_id` and `user_id` (correct RLS pattern)\n\nThe TypeScript errors shown are in an unrelated file (`audience/_client.tsx`) and pre-exist this task. No changes are needed here.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
