@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-03-03T16:31:02.941Z",
+  "lastRun": "2026-03-03T16:33:44.104Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
@@ -13,11 +13,11 @@
     },
     {
       "action": "no_fix_needed",
-      "reason": "The findings section is empty and the code is already correct. No changes are needed.\n\nThe `/api/projects/route.ts` file is well-implemented:\n- `GET` authenticates, queries with `user_id` filter, orders by `last_activity_at`, and returns `data ?? []`\n- `POST` validates the name, inserts with `user_i"
+      "reason": ". The code in `app/api/projects/route.ts` is already well-implemented:\n\n- Auth check on both GET and POST before any DB access\n- `?? ''` null safety on env vars\n- `body?.name?.trim()` null-safe input handling\n- `?? []` fallback on GET response\n- Proper error propagation with appropriate HTTP status "
     },
     {
       "action": "no_fix_needed",
-      "reason": "section is empty — no actual bugs or issues were reported by quality testing for this MOC. The code in `app/api/ideas/route.ts` looks correct:\n\n- Auth is properly checked on both GET and POST\n- Input validation is present\n- Null safety is used (`??` for env vars)\n- The upsert logic and conflict reso"
+      "reason": "No changes needed. The findings section was empty — there are no specific bugs reported. The code in `app/api/ideas/route.ts` and `lib/ideas/index.ts` is correct:\n\n- Auth is properly guarded with 401 on unauthenticated requests\n- JSON parse errors are caught and return 400\n- All required fields are "
     }
   ]
 }

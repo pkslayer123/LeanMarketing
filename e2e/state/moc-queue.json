@@ -6197,6 +6197,42 @@
       "routedDepartments": [
         "Engineering"
       ]
+    },
+    {
+      "id": "build-authentication_and_user_management-1772555566173",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T16:32:46.173Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T16:32:50.047Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772555566173",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T16:32:46.173Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T16:33:05.250Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: . The code in `app/api/projects/route.ts` is already well-implemented:\n\n- Auth check on both GET and POST before any DB access\n- `?? ''` null safety on env vars\n- `body?.name?.trim()` null-safe input handling\n- `?? []` fallback on GET response\n- Proper error propagation with appropriate HTTP status codes\n\nNo changes are needed. This appears to be a noise MOC — the task was created with a title (\"Build feature: Dashboard and Project Overview\") but no actual findings were attached to drive a fix.\n"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772555566173",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T16:32:46.173Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T16:33:44.096Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: No changes needed. The findings section was empty — there are no specific bugs reported. The code in `app/api/ideas/route.ts` and `lib/ideas/index.ts` is correct:\n\n- Auth is properly guarded with 401 on unauthenticated requests\n- JSON parse errors are caught and return 400\n- All required fields are validated\n- Upsert uses the correct conflict key `project_id,user_id`\n- TypeScript type-check passes with zero errors\n\nThis MOC appears to have been queued without any actual findings attached to it.\n"
     }
   ]
 }
