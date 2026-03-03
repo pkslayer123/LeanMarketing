@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-03-03T17:20:01.157Z",
+  "lastRun": "2026-03-03T17:25:22.723Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
@@ -13,11 +13,11 @@
     },
     {
       "action": "no_fix_needed",
-      "reason": "No type errors. The file `app/api/projects/route.ts` is already correct and type-clean. Since the findings list is empty, there is no real bug to fix here — this MOC appears to be noise (likely a transient test failure or stale queue entry). No changes are needed.\n"
+      "reason": "The findings section is empty — there are no specific bugs or issues described for this MOC. Looking at `app/api/projects/route.ts`, the code is correct:\n\n- Auth guard on both GET and POST\n- Null-safe user access (`data: { user }` destructuring with early return)\n- Proper error handling with appropr"
     },
     {
       "action": "no_fix_needed",
-      "reason": "The findings section is empty and the code passes type-check with no errors. The route at `app/api/ideas/route.ts` looks correct:\n\n- Auth guard on both GET and POST\n- Proper validation of required fields\n- Quality gate runs before upsert\n- Upsert uses correct conflict key (`project_id,user_id`)\n- Er"
+      "reason": " findings were provided in this MOC, and the type-check passes with zero errors. The `app/api/ideas/route.ts` file looks correct:\n\n- Auth is properly validated before any data access\n- Required fields are validated before upserting\n- The `runQualityGate` call is correct and typed properly\n- Error ha"
     }
   ]
 }
