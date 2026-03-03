@@ -44444,5 +44444,63 @@
       "iteration report generated",
       "passRate recorded"
     ]
+  },
+  "iteration-772": {
+    "iteration": 772,
+    "timestamp": "2026-03-03T23:32:18.183Z",
+    "phases": {
+      "after-iteration": {
+        "passed": 6,
+        "failed": 2,
+        "checks": [
+          {
+            "name": "daemon state fresh",
+            "passed": true,
+            "detail": "updated 0m ago"
+          },
+          {
+            "name": "claws ran successfully",
+            "passed": true,
+            "detail": "11 ok, 0 errored out of 11 claws"
+          },
+          {
+            "name": "critical claws healthy",
+            "passed": true,
+            "detail": "all 4 critical claws ok"
+          },
+          {
+            "name": "error count reasonable",
+            "passed": true,
+            "detail": "0 errors (within threshold)"
+          },
+          {
+            "name": "green-history.json valid",
+            "passed": true,
+            "detail": "1 test entries"
+          },
+          {
+            "name": "persona-learning.json valid",
+            "passed": true,
+            "detail": "0 persona entries"
+          },
+          {
+            "name": "iteration report generated",
+            "passed": false,
+            "detail": "no iteration-772-*.md report found"
+          },
+          {
+            "name": "passRate recorded",
+            "passed": false,
+            "detail": "passed=0 failed=0 total=0"
+          }
+        ]
+      }
+    },
+    "totalPassed": 6,
+    "totalFailed": 2,
+    "failedChecks": [
+      "iteration report generated",
+      "passRate recorded"
+    ]
   }
 }
