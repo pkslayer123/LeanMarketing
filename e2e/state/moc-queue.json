@@ -5739,6 +5739,100 @@
       ],
       "archivedAt": "2026-03-03T15:34:49.649Z",
       "archivedReason": "Deduplicated — newer MOC build-layer_5_paid_conversion-1772552065593 covers same area"
+    },
+    {
+      "id": "build-layer_6_review_and_adjustment-1772552377600",
+      "title": "Build feature: Layer 6 — Review and Adjustment",
+      "description": "**Feature:** Layer 6 — Review and Adjustment\n**Routes:** /projects/[id]/review\n\n**codeAreas:** `app/projects/[id]/review/`, `app/api/analytics/`, `lib/analytics/`, `components/Analytics/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Weekly review dashboard | None | `/projects/[id]/review` — messages sent, replies, stage advancement |\n| Bottleneck identification | None | Auto-identify biggest drop-off point |\n| Variable tracking | None | Track single-variable changes per cycle |\n| Quality Gate 6 | None | Pass/fail: 30+ attempts, bottleneck identified, one variable, hypothesis written |\n| Experiment history | None | Log of past cycles and their results |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_6_review_and_adjustment",
+      "createdAt": "2026-03-03T15:39:37.600Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "noSourceSkips": 3,
+      "archivedAt": "2026-03-03T15:40:43.189Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/analytics\" after 3 attempts"
+    },
+    {
+      "id": "build-approval_mode_toggle-1772552377600",
+      "title": "Build feature: Approval Mode Toggle",
+      "description": "**Feature:** Approval Mode Toggle\n**Routes:** /settings\n\n**codeAreas:** `app/settings/`, `app/api/settings/`, `lib/settings/`, `components/Settings/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Settings page | None | `/settings` — approval mode toggle |\n| Strict mode | None | All classifications and next actions require approval |\n| Relaxed mode | None | Low-risk auto-advance, high-risk requires approval |\n| Mode persistence | None | Store mode in database per project |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "approval_mode_toggle",
+      "createdAt": "2026-03-03T15:39:37.600Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:39:40.378Z",
+      "archivedReason": "Deduplicated — newer MOC build-layer_6_review_and_adjustment-1772552377600 covers same area"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772552377600",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T15:39:37.600Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:39:40.379Z",
+      "archivedReason": "Deduplicated — newer MOC build-layer_6_review_and_adjustment-1772552377600 covers same area"
+    },
+    {
+      "id": "build-approval_mode_toggle-1772552981645",
+      "title": "Build feature: Approval Mode Toggle",
+      "description": "**Feature:** Approval Mode Toggle\n**Routes:** /settings\n\n**codeAreas:** `app/settings/`, `app/api/settings/`, `lib/settings/`, `components/Settings/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Settings page | None | `/settings` — approval mode toggle |\n| Strict mode | None | All classifications and next actions require approval |\n| Relaxed mode | None | Low-risk auto-advance, high-risk requires approval |\n| Mode persistence | None | Store mode in database per project |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "approval_mode_toggle",
+      "createdAt": "2026-03-03T15:49:41.645Z",
+      "source": "builder-claw",
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:50:19.241Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/settings\" after 3 attempts"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772552981645",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T15:49:41.645Z",
+      "source": "builder-claw",
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:49:57.176Z",
+      "archivedReason": "Deduplicated — newer MOC build-approval_mode_toggle-1772552981645 covers same area"
+    },
+    {
+      "id": "build-layer_3_conversation_and_qualification-1772552981645",
+      "title": "Build feature: Layer 3 — Conversation and Qualification",
+      "description": "**Feature:** Layer 3 — Conversation and Qualification\n**Routes:** TBD\n\n**codeAreas:** `app/projects/[id]/conversations/`, `app/api/conversations/`, `lib/conversations/`, `components/Conversations/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Reply classification | None | Classify: not relevant, curious, interested, ready to evaluate |\n| Stage pipeline | None | Visual stage progression for leads |\n| Conversation log | None | Full exchange history per lead |\n| Next action suggestions | None | Auto-suggest smallest next step based on interest level |\n| Quality Gate 3 | None | Pass/fail: classification accuracy, effort check, logging |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_3_conversation_and_qualification",
+      "createdAt": "2026-03-03T15:49:41.645Z",
+      "source": "builder-claw",
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:49:57.176Z",
+      "archivedReason": "Deduplicated — newer MOC build-approval_mode_toggle-1772552981645 covers same area"
     }
   ]
 }
