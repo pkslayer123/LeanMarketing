@@ -1,10 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T10:21:42.114Z"
-  },
-  {
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T10:21:42.122Z"
@@ -498,5 +493,10 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T11:09:14.480Z"
+  },
+  {
+    "message": "Daemon stuck: 1 approved MOCs, 622 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T11:09:18.643Z"
   }
 ]
