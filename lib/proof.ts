@@ -46,6 +46,13 @@ export interface LandingPageInput {
   proof_id?: string;
 }
 
+export interface LandingPage extends LandingPageInput {
+  id: string;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
 // ─── Quality gate types ───────────────────────────────────────────────────────
 
 export interface QualityGateCheck {

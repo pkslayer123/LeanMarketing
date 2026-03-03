@@ -75,6 +75,7 @@ export interface QualityGateCheck {
   label: string;
   passed: boolean;
   feedback: string;
+  detail?: string;
 }
 
 export interface QualityGateFeedback {
