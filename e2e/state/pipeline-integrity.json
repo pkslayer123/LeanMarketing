@@ -1,11 +1,11 @@
 {
   "passed": [
-    "moc-queue: correct format ({ mocs: [...] }), 457 entries",
+    "moc-queue: correct format ({ mocs: [...] }), 460 entries",
     "findings: valid format, 0 entries",
     "claw-signals: correct format ({ signals, claws })",
-    "issue-queue: all 457 entries have valid schema",
+    "issue-queue: all 460 entries have valid schema",
     "findings: all 0 entries have valid schema",
-    "convergence: valid state \"converged\"",
+    "convergence: valid state \"stuck\"",
     "plausibility: health summary queue depth consistent with moc-queue",
     "signal-flow: test-runner → tests-complete signal connected"
   ],
@@ -16,7 +16,7 @@
     "config-alignment: test-runner.coverageBasedSuspend is not set in config (defaults to false). Add it explicitly to prevent surprises.",
     "principles: daemon-principles.json does not exist — no design constraints encoded"
   ],
-  "at": "2026-03-03T17:28:16.678Z",
+  "at": "2026-03-03T17:33:19.240Z",
   "passedCount": 8,
   "failedCount": 1,
   "warningCount": 2,

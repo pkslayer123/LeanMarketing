@@ -1,23 +1,10 @@
 {
-  "lastRun": "2026-03-03T17:27:49.635Z",
-  "total": 3,
+  "lastRun": "2026-03-03T17:32:46.971Z",
+  "total": 0,
   "noiseAutoClose": 0,
-  "fixAttempted": 2,
+  "fixAttempted": 0,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 2,
-  "details": [
-    {
-      "action": "archived",
-      "reason": "Critical route: /login"
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "/projects/route.ts` is clean:\n\n- Auth guard returns 401 for unauthenticated requests\n- GET filters by `user_id` with proper ordering (`nullsFirst: false`)\n- POST validates the request body and returns `data ?? []` / 201 on success\n- Null safety is correctly applied throughout (`?.`, `?? ''`, `?? []`"
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "/api/ideas/route.ts` and `lib/ideas.ts` is correctly implemented:\n\n- Auth check is present and returns 401 on failure\n- Input validation covers all required fields\n- The quality gate runs and stores results\n- Upsert uses the correct conflict target (`project_id,user_id`)\n- GET endpoint filters by bo"
-    }
-  ]
+  "noFixNeeded": 0,
+  "details": []
 }
