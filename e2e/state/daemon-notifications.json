@@ -1,20 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x3)",
-    "severity": "warning",
-    "at": "2026-03-03T04:02:01.535Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T04:02:01.541Z"
-  },
-  {
-    "message": "Watchdog restarted daemon (attempt 1). Reason: daemon pid 41056 not running",
-    "severity": "warning",
-    "at": "2026-03-03T04:04:12.926Z"
-  },
-  {
     "message": "Daemon stuck: 2 approved MOCs, 91 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T04:04:20.029Z"
@@ -498,5 +483,20 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T04:56:26.463Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T05:00:57.684Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T05:01:11.625Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T05:01:11.632Z"
   }
 ]
