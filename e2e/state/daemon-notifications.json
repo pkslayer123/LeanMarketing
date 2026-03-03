@@ -1,10 +1,5 @@
 [
   {
-    "message": "Daemon stuck: 1 approved MOCs, 431 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T08:26:23.699Z"
-  },
-  {
     "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T08:26:36.332Z"
@@ -498,5 +493,10 @@
     "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T09:23:09.244Z"
+  },
+  {
+    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T09:23:54.308Z"
   }
 ]
