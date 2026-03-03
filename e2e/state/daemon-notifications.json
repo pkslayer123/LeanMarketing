@@ -78,5 +78,25 @@
     "message": "Daemon stuck: 2 approved MOCs, 11 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T02:10:37.926Z"
+  },
+  {
+    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T02:10:38.144Z"
+  },
+  {
+    "message": "Circuit breaker tripped for intelligence: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T02:10:43.417Z"
+  },
+  {
+    "message": "Circuit breaker tripped: intelligence — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T02:10:49.347Z"
+  },
+  {
+    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T02:10:49.364Z"
   }
 ]
