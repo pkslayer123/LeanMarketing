@@ -1,12 +1,13 @@
 # Daemon Stuck — Needs Attention
 
-Generated: 2026-03-03T12:09:08.844Z
+Generated: 2026-03-03T12:23:38.397Z
 
 ## Summary
-- **Approved MOCs:** 2
-- **Consecutive zero-fix runs:** 697
+- **Approved MOCs:** 3
+- **Consecutive zero-fix runs:** 716
 
 ## Open MOCs (approved/pending_fix)
+- Build feature: Authentication and User Management (build)
 - Build feature: Dashboard and Project Overview (build)
 - Build feature: Layer 1 — Idea Definition (build)
 
