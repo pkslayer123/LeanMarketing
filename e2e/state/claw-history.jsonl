@@ -314,3 +314,11 @@
 {"claw":"diagnostics","cycle":31,"at":"2026-03-03T04:00:16.446Z","durationMs":16,"ok":false,"summary":"4 actions, 2/8 checks failing"}
 {"claw":"fix-engine","cycle":59,"at":"2026-03-03T04:00:28.092Z","durationMs":1362,"ok":true,"summary":"0 fixes applied, 0 failed"}
 {"claw":"intelligence","cycle":43,"at":"2026-03-03T04:00:34.356Z","durationMs":9098,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
+{"claw":"health-deploy","cycle":43,"at":"2026-03-03T04:00:49.618Z","durationMs":2741,"ok":true,"summary":"6 checks, 0 failed"}
+{"claw":"builder","cycle":32,"at":"2026-03-03T04:01:10.382Z","durationMs":62896,"ok":false,"summary":"0% complete, 10 gaps, 3 MOCs [failed: commit]"}
+{"claw":"diagnostics","cycle":32,"at":"2026-03-03T04:01:16.503Z","durationMs":12,"ok":false,"summary":"3 actions, 1/8 checks failing"}
+{"claw":"cp-meta","cycle":49,"at":"2026-03-03T04:01:21.442Z","durationMs":5975,"ok":false,"summary":"pushed 0 MOCs, 37 errors"}
+{"claw":"test-runner","cycle":29,"at":"2026-03-03T04:01:32.383Z","durationMs":6498,"ok":true,"summary":"10/10 passed, 0 failed"}
+{"claw":"diagnostics","cycle":33,"at":"2026-03-03T04:01:46.530Z","durationMs":13,"ok":false,"summary":"3 actions, 1/8 checks failing"}
+{"claw":"finding-pipeline","cycle":29,"at":"2026-03-03T04:01:46.955Z","durationMs":718,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
+{"claw":"cp-meta","cycle":50,"at":"2026-03-03T04:01:57.395Z","durationMs":5938,"ok":false,"summary":"pushed 0 MOCs, 37 errors"}

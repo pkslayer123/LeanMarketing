@@ -1,15 +1,5 @@
 [
   {
-    "message": "8/8 claws healthy (builder:idle, cp-meta:idle, finding-pipeline:idle, diagnostics:running, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle). 0% pass rate. 0 MOCs pending approval.",
-    "severity": "info",
-    "at": "2026-03-03T02:09:04.231Z"
-  },
-  {
-    "message": "Daemon stuck: 2 approved MOCs, 3 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T02:09:17.502Z"
-  },
-  {
     "message": "Daemon stuck: 2 approved MOCs, 4 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T02:09:18.134Z"
@@ -473,5 +463,40 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T04:00:16.434Z"
+  },
+  {
+    "message": "Circuit breaker tripped for builder: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T04:01:10.379Z"
+  },
+  {
+    "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T04:01:16.482Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T04:01:16.487Z"
+  },
+  {
+    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T04:01:16.500Z"
+  },
+  {
+    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T04:01:46.512Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T04:01:46.519Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x3)",
+    "severity": "warning",
+    "at": "2026-03-03T04:01:57.392Z"
   }
 ]
