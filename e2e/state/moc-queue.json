@@ -2842,29 +2842,40 @@
       "createdAt": "2026-03-03T07:35:01.144Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T07:35:08.195Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772523301144",
       "title": "Build feature: Dashboard and Project Overview",
       "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
-      "tier": "build",
+      "tier": "auto_approve",
       "status": "approved",
       "featureKey": "dashboard_and_project_overview",
       "createdAt": "2026-03-03T07:35:01.144Z",
       "source": "builder-claw",
-      "noSourceSkips": 1
+      "noSourceSkips": 2,
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772523301144",
       "title": "Build feature: Layer 1 — Idea Definition",
       "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
-      "tier": "build",
-      "status": "approved",
+      "tier": "auto_fix",
+      "status": "archived",
       "featureKey": "layer_1_idea_definition",
       "createdAt": "2026-03-03T07:35:01.144Z",
       "source": "builder-claw",
-      "noSourceSkips": 1
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T07:35:16.804Z",
+      "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772523301144 covers same area"
     }
   ]
 }
