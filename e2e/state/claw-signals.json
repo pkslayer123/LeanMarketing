@@ -1,4 +1,100 @@
 {
-  "signals": {},
-  "claws": {}
+  "signals": {
+    "mocs-ready": {
+      "at": "2026-03-03T02:09:01.575Z",
+      "emittedBy": "finding-pipeline",
+      "newMocs": 2
+    },
+    "build-complete": {
+      "at": "2026-03-03T02:09:01.659Z",
+      "emittedBy": "builder",
+      "iteration": 1,
+      "specCompletionRate": 0,
+      "complianceScore": 0,
+      "phase": "build",
+      "gapsRemaining": 2,
+      "mocsCreated": 2,
+      "scaffolded": 0
+    }
+  },
+  "claws": {
+    "builder": {
+      "status": "idle",
+      "pid": 70252,
+      "lastRun": "2026-03-03T02:09:01.660Z",
+      "nextRun": "2026-03-03T04:09:01.660Z",
+      "heartbeat": "2026-03-03T02:09:01.664Z",
+      "cycle": 1,
+      "phase": "starting",
+      "lastCycleDurationMs": 913,
+      "lastCycleResult": "error"
+    },
+    "cp-meta": {
+      "status": "idle",
+      "pid": 28772,
+      "lastRun": "2026-03-03T02:09:00.564Z",
+      "nextRun": "2026-03-03T02:39:00.564Z",
+      "heartbeat": "2026-03-03T02:09:00.687Z",
+      "cycle": 1,
+      "phase": "starting",
+      "lastCycleDurationMs": 0,
+      "lastCycleResult": "ok"
+    },
+    "finding-pipeline": {
+      "status": "idle",
+      "pid": 36440,
+      "lastRun": "2026-03-03T02:09:01.703Z",
+      "nextRun": "2026-03-03T02:39:01.703Z",
+      "heartbeat": "2026-03-03T02:09:01.706Z",
+      "cycle": 1,
+      "phase": "starting",
+      "lastCycleDurationMs": 1139,
+      "lastCycleResult": "error"
+    },
+    "diagnostics": {
+      "status": "running",
+      "pid": 43812,
+      "lastRun": null,
+      "nextRun": null,
+      "heartbeat": "2026-03-03T02:09:00.670Z",
+      "cycle": 1,
+      "phase": "starting"
+    },
+    "fix-engine": {
+      "status": "running",
+      "pid": 23536,
+      "lastRun": null,
+      "nextRun": null,
+      "heartbeat": "2026-03-03T02:09:00.580Z",
+      "cycle": 1,
+      "phase": "docs-update"
+    },
+    "intelligence": {
+      "status": "running",
+      "pid": 34336,
+      "lastRun": null,
+      "nextRun": null,
+      "heartbeat": "2026-03-03T02:09:00.580Z",
+      "cycle": 1,
+      "phase": "starting"
+    },
+    "test-runner": {
+      "status": "running",
+      "pid": 75280,
+      "lastRun": null,
+      "nextRun": null,
+      "heartbeat": "2026-03-03T02:09:00.595Z",
+      "cycle": 1,
+      "phase": "starting"
+    },
+    "health-deploy": {
+      "status": "running",
+      "pid": 29688,
+      "lastRun": null,
+      "nextRun": null,
+      "heartbeat": "2026-03-03T02:09:00.650Z",
+      "cycle": 1,
+      "phase": "starting"
+    }
+  }
 }
