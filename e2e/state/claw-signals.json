@@ -30,9 +30,9 @@
       "routes": []
     },
     "build-complete": {
-      "at": "2026-03-03T23:12:31.065Z",
+      "at": "2026-03-03T23:13:01.211Z",
       "emittedBy": "builder",
-      "iteration": 607,
+      "iteration": 608,
       "specCompletionRate": 1,
       "gapsRemaining": 0
     },
@@ -74,14 +74,14 @@
   },
   "claws": {
     "builder": {
-      "status": "running",
+      "status": "idle",
       "pid": 59004,
-      "lastRun": "2026-03-03T23:12:31.067Z",
-      "nextRun": "2026-03-04T01:12:31.067Z",
-      "heartbeat": "2026-03-03T23:13:01.087Z",
+      "lastRun": "2026-03-03T23:13:01.214Z",
+      "nextRun": "2026-03-04T05:13:01.214Z",
+      "heartbeat": "2026-03-03T23:13:01.217Z",
       "cycle": 608,
       "phase": "starting",
-      "lastCycleDurationMs": 119,
+      "lastCycleDurationMs": 126,
       "lastCycleResult": "ok",
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
@@ -119,12 +119,12 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 89240,
       "lastRun": "2026-03-03T23:12:33.733Z",
       "nextRun": "2026-03-04T00:12:33.733Z",
-      "heartbeat": "2026-03-03T23:13:00.444Z",
-      "cycle": 387,
+      "heartbeat": "2026-03-03T23:13:03.754Z",
+      "cycle": 388,
       "phase": "docs-update",
       "lastCycleDurationMs": 1149,
       "lastCycleResult": "ok"
@@ -152,14 +152,14 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 45452,
-      "lastRun": "2026-03-03T23:12:28.022Z",
-      "nextRun": "2026-03-04T03:12:28.022Z",
-      "heartbeat": "2026-03-03T23:12:58.034Z",
+      "lastRun": "2026-03-03T23:13:01.375Z",
+      "nextRun": "2026-03-04T03:13:01.375Z",
+      "heartbeat": "2026-03-03T23:13:01.479Z",
       "cycle": 741,
       "phase": "starting",
-      "lastCycleDurationMs": 3368,
+      "lastCycleDurationMs": 3339,
       "lastCycleResult": "error"
     },
     "observer": {
@@ -201,3 +201,4 @@
     "emittedBy": "manual",
     "reason": "gap detection rewrite"
   }
+}
