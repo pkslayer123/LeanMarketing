@@ -2011,3 +2011,7 @@
 {"claw":"intelligence","cycle":645,"at":"2026-03-03T21:54:14.724Z","durationMs":10867,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
 {"claw":"diagnostics","cycle":665,"at":"2026-03-03T21:54:23.963Z","durationMs":20,"ok":true,"summary":"2 actions, 0/8 checks failing"}
 {"claw":"finding-pipeline","cycle":492,"at":"2026-03-03T21:54:30.920Z","durationMs":737,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
+{"claw":"health-deploy","cycle":637,"at":"2026-03-03T21:54:33.952Z","durationMs":3706,"ok":false,"summary":"6 checks, 1 failed"}
+{"claw":"builder","cycle":502,"at":"2026-03-03T21:54:36.866Z","durationMs":102,"ok":true,"summary":"spec complete (100%)"}
+{"claw":"cp-meta","cycle":676,"at":"2026-03-03T21:54:45.604Z","durationMs":6796,"ok":false,"summary":"pushed 0 MOCs, 592 errors"}
+{"claw":"test-runner","cycle":486,"at":"2026-03-03T21:54:48.150Z","durationMs":6629,"ok":true,"summary":"10/10 passed, 0 failed"}
