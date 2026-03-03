@@ -1,9 +1,9 @@
 {
-  "at": "2026-03-03T21:45:53.296Z",
-  "summary": "11/11 claws healthy (builder:idle, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 100% pass rate. 0 MOCs pending approval. Pipeline: degraded (1 failures).",
+  "at": "2026-03-03T22:37:33.261Z",
+  "summary": "11/11 claws healthy (builder:running, cp-meta:running, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 100% pass rate. 0 MOCs pending approval. Pipeline: degraded (1 failures).",
   "claws": {
-    "builder": "idle",
-    "cp-meta": "idle",
+    "builder": "running",
+    "cp-meta": "running",
     "finding-pipeline": "idle",
     "diagnostics": "idle",
     "fix-engine": "idle",
@@ -23,11 +23,11 @@
   "healthChecks": {
     "pass-rate-collapse": true,
     "signal-flow": true,
-    "convergence-stuck": true,
+    "convergence-stuck": false,
     "moc-queue-stagnation": true,
     "pool-account-health": true,
     "finding-pipeline-liveness": true,
     "deploy-health": true,
-    "fix-efficacy": true
+    "fix-efficacy": false
   }
 }
