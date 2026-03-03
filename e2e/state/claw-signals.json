@@ -6,7 +6,7 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T09:19:46.353Z",
+      "at": "2026-03-03T09:22:18.706Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -18,17 +18,17 @@
       "failed": 2
     },
     "diagnostics-complete": {
-      "at": "2026-03-03T09:19:54.025Z",
+      "at": "2026-03-03T09:22:24.124Z",
       "emittedBy": "diagnostics",
-      "actions": 2,
+      "actions": 4,
       "healthChecks": 8,
-      "healthChecksFailing": 0
+      "healthChecksFailing": 2
     },
     "diagnostics-requested": {
-      "at": "2026-03-03T09:19:42.982Z",
-      "emittedBy": "intelligence",
-      "reason": "config-changed",
-      "changes": 1
+      "at": "2026-03-03T09:22:18.803Z",
+      "emittedBy": "convergence-tracker",
+      "reason": "stuck",
+      "mocCount": 2
     },
     "docs-synced": {
       "at": "2026-03-03T09:08:16.282Z",
@@ -116,32 +116,32 @@
     "diagnostics": {
       "status": "idle",
       "pid": 94912,
-      "lastRun": "2026-03-03T09:19:54.028Z",
-      "nextRun": "2026-03-03T15:19:54.028Z",
-      "heartbeat": "2026-03-03T09:21:39.908Z",
-      "cycle": 241,
+      "lastRun": "2026-03-03T09:22:24.126Z",
+      "nextRun": "2026-03-03T15:22:24.126Z",
+      "heartbeat": "2026-03-03T09:22:24.128Z",
+      "cycle": 242,
       "phase": "starting",
-      "lastCycleDurationMs": 16,
-      "lastCycleResult": "ok"
+      "lastCycleDurationMs": 17,
+      "lastCycleResult": "error"
     },
     "fix-engine": {
       "status": "running",
       "pid": 53928,
-      "lastRun": "2026-03-03T09:19:46.453Z",
-      "nextRun": "2026-03-03T10:19:46.453Z",
-      "heartbeat": "2026-03-03T09:22:16.564Z",
-      "cycle": 335,
+      "lastRun": "2026-03-03T09:22:18.825Z",
+      "nextRun": "2026-03-03T10:22:18.825Z",
+      "heartbeat": "2026-03-03T09:22:33.844Z",
+      "cycle": 336,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1447,
+      "lastCycleDurationMs": 2260,
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "idle",
+      "status": "running",
       "pid": 37012,
       "lastRun": "2026-03-03T09:19:49.386Z",
       "nextRun": "2026-03-03T11:19:49.386Z",
-      "heartbeat": "2026-03-03T09:22:18.159Z",
-      "cycle": 244,
+      "heartbeat": "2026-03-03T09:22:34.496Z",
+      "cycle": 245,
       "phase": "starting",
       "lastCycleDurationMs": 8846,
       "lastCycleResult": "ok"
