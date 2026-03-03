@@ -1,33 +1,253 @@
 {
   "pages": {
     "/:light": {
-      "hash": "c8916f7bc917c92374522b6b364395bc",
+      "hash": "e50c90f6110565834789b038da78862e",
       "analysis": {
-        "purpose": "Vision analysis skipped (no API key or --skip-vision)",
-        "elements": [],
-        "dataShown": [],
-        "interactions": [],
-        "navigation": [],
-        "issues": [],
-        "accessibility": ""
+        "purpose": "This page serves as the login interface for the LeanMarketing application, allowing existing users to access their accounts by entering their email and password. It is intended for users who need to manage AI-assisted marketing governance for lean startups.",
+        "elements": [
+          "Application title text: 'LeanMarketing'",
+          "Application slogan text: 'AI-assisted marketing governance for lean startups'",
+          "Page title text: 'Sign in to your account'",
+          "Text label: 'Email'",
+          "Text input field for email",
+          "Text label: 'Password'",
+          "Text input field for password",
+          "Button: 'Sign In'",
+          "Informational text: 'Don't have an account?'",
+          "Text link: 'Sign up'"
+        ],
+        "dataShown": [
+          "Application name: LeanMarketing",
+          "Application description/slogan",
+          "Instructions for signing in",
+          "Labels for email and password input fields",
+          "Prompt for new users to sign up"
+        ],
+        "interactions": [
+          "User can type into the 'Email' input field",
+          "User can type into the 'Password' input field",
+          "User can click the 'Sign In' button to submit login credentials",
+          "User can click the 'Sign up' link to navigate to a registration page"
+        ],
+        "navigation": [
+          "To the main application dashboard or home page (after successful 'Sign In')",
+          "To a 'Sign up' or registration page (via the 'Sign up' link)"
+        ],
+        "issues": [
+          "No visual issues such as broken layout, cut-off text, or contrast problems are apparent in the screenshot."
+        ],
+        "accessibility": "Labels for input fields ('Email', 'Password') are clearly visible and appear to be associated with their respective fields. Text contrast against the white background seems sufficient. Focus indicators are not visible in a static image but would be crucial for keyboard navigation."
       },
       "status": 200,
-      "analyzedAt": "2026-03-03T03:13:05.290Z"
+      "analyzedAt": "2026-03-03T19:24:30.714Z"
     },
     "/:dark": {
-      "hash": "5a1f2adc779ed4270e520483b330abfe",
+      "hash": "e50c90f6110565834789b038da78862e",
       "analysis": {
-        "purpose": "Vision analysis skipped (no API key or --skip-vision)",
-        "elements": [],
-        "dataShown": [],
-        "interactions": [],
-        "navigation": [],
-        "issues": [],
-        "accessibility": ""
+        "purpose": "This page serves as the login interface for the LeanMarketing application, allowing existing users to access their accounts by providing their email and password.",
+        "elements": [
+          "Header text: 'LeanMarketing'",
+          "Descriptive text: 'AI-assisted marketing governance for lean startups'",
+          "Page title: 'Sign in to your account'",
+          "Label: 'Email'",
+          "Text input field for Email",
+          "Label: 'Password'",
+          "Text input field for Password",
+          "Button: 'Sign In'",
+          "Text: 'Don't have an account?'",
+          "Link: 'Sign up'"
+        ],
+        "dataShown": [
+          "Application name: 'LeanMarketing'",
+          "Application tagline: 'AI-assisted marketing governance for lean startups'",
+          "Login prompt: 'Sign in to your account'",
+          "Form field labels: 'Email', 'Password'",
+          "Call to action for login: 'Sign In'",
+          "Prompt for new users: 'Don't have an account?'",
+          "Link text for registration: 'Sign up'"
+        ],
+        "interactions": [
+          "User can type text into the 'Email' input field",
+          "User can type text into the 'Password' input field",
+          "User can click the 'Sign In' button to submit login credentials",
+          "User can click the 'Sign up' link to navigate to a registration page"
+        ],
+        "navigation": [
+          "To the LeanMarketing dashboard or home page (upon successful 'Sign In')",
+          "To a 'Sign up' or registration page (via the 'Sign up' link)"
+        ],
+        "issues": [
+          "The prompt specified 'dark mode', but the provided image displays a light mode interface. No other visual issues like broken layout or cut-off text are apparent."
+        ],
+        "accessibility": "Text and background contrast appears sufficient for readability. Input fields are clearly labeled ('Email', 'Password'). Focus indicators cannot be assessed from a static image."
       },
       "status": 200,
-      "analyzedAt": "2026-03-03T03:13:07.592Z"
+      "analyzedAt": "2026-03-03T19:24:39.739Z"
+    },
+    "/login:light": {
+      "hash": "e50c90f6110565834789b038da78862e",
+      "analysis": {
+        "purpose": "This page serves as the login interface for the LeanMarketing application, allowing existing users to access their accounts by entering their email and password. It is intended for registered users of the AI-assisted marketing governance platform.",
+        "elements": [
+          "Header text: \"LeanMarketing\"",
+          "Slogan text: \"AI-assisted marketing governance for lean startups\"",
+          "Page title: \"Sign in to your account\"",
+          "Label: \"Email\"",
+          "Text input field for email",
+          "Label: \"Password\"",
+          "Text input field for password",
+          "Button: \"Sign In\"",
+          "Text: \"Don't have an account?\"",
+          "Link: \"Sign up\""
+        ],
+        "dataShown": [
+          "Application name: \"LeanMarketing\"",
+          "Application slogan: \"AI-assisted marketing governance for lean startups\"",
+          "Login form labels: \"Email\", \"Password\"",
+          "Prompt for new users: \"Don't have an account? Sign up\""
+        ],
+        "interactions": [
+          "User can type into the 'Email' text input field.",
+          "User can type into the 'Password' text input field.",
+          "User can click the 'Sign In' button to submit login credentials.",
+          "User can click the 'Sign up' link to navigate to the registration page."
+        ],
+        "navigation": [
+          "To the registration/sign-up page via the 'Sign up' link."
+        ],
+        "issues": [
+          "The styling of the input fields and the 'Sign In' button appears very basic, lacking modern UI design elements.",
+          "There are no visible indicators for input validation or error messages on the form."
+        ],
+        "accessibility": "Labels are clearly associated with their respective input fields ('Email', 'Password'). Text contrast (black on white) is generally good. The 'Sign up' link is visually distinct with blue text and an underline, indicating its interactive nature."
+      },
+      "status": 200,
+      "analyzedAt": "2026-03-03T19:24:48.218Z"
+    },
+    "/login:dark": {
+      "hash": "e50c90f6110565834789b038da78862e",
+      "analysis": {
+        "purpose": "This page serves as the login interface for the LeanMarketing application, allowing existing users to access their accounts by entering their credentials.",
+        "elements": [
+          "Header text: LeanMarketing",
+          "Subheader text: AI-assisted marketing governance for lean startups",
+          "Page title: Sign in to your account",
+          "Label: Email",
+          "Input field for Email",
+          "Label: Password",
+          "Input field for Password",
+          "Button: Sign In",
+          "Text: Don't have an account?",
+          "Link: Sign up"
+        ],
+        "dataShown": [
+          "Application name: LeanMarketing",
+          "Application tagline: AI-assisted marketing governance for lean startups",
+          "Login prompt: Sign in to your account",
+          "Input field labels: Email, Password",
+          "Action button text: Sign In",
+          "Account creation prompt: Don't have an account?",
+          "Account creation link text: Sign up"
+        ],
+        "interactions": [
+          "Users can type text into the 'Email' input field.",
+          "Users can type text into the 'Password' input field.",
+          "Users can click the 'Sign In' button to attempt to log in.",
+          "Users can click the 'Sign up' link to navigate to an account registration page."
+        ],
+        "navigation": [
+          "The user can navigate to a 'Sign up' page by clicking the 'Sign up' link."
+        ],
+        "issues": [
+          "The request specified 'dark mode', but the provided image displays a light mode theme with black text on a white background. No other visual issues like broken layout or cut-off text are apparent."
+        ],
+        "accessibility": "The contrast between the black text and white background is high, ensuring good readability. Input fields have visible borders, indicating their interactive nature. It is not possible to assess focus indicators or ARIA labels from the static image."
+      },
+      "status": 200,
+      "analyzedAt": "2026-03-03T19:24:57.099Z"
+    },
+    "/pricing:light": {
+      "hash": "e50c90f6110565834789b038da78862e",
+      "analysis": {
+        "purpose": "This page serves as a login portal for users to access their LeanMarketing account by providing their email and password. It is intended for existing users of the AI-assisted marketing governance platform.",
+        "elements": [
+          "Header text: \"LeanMarketing\"",
+          "Sub-header text: \"AI-assisted marketing governance for lean startups\"",
+          "Main title: \"Sign in to your account\"",
+          "Label: \"Email\"",
+          "Text input field (for Email)",
+          "Label: \"Password\"",
+          "Text input field (for Password)",
+          "Button: \"Sign In\"",
+          "Text: \"Don't have an account?\"",
+          "Link: \"Sign up\""
+        ],
+        "dataShown": [
+          "Application name: \"LeanMarketing\"",
+          "Application tagline: \"AI-assisted marketing governance for lean startups\"",
+          "Page title: \"Sign in to your account\"",
+          "Form field labels: \"Email\", \"Password\"",
+          "Action button text: \"Sign In\"",
+          "Account creation prompt: \"Don't have an account? Sign up\""
+        ],
+        "interactions": [
+          "User can input text into the 'Email' field.",
+          "User can input text into the 'Password' field.",
+          "User can click the 'Sign In' button to submit credentials.",
+          "User can click the 'Sign up' link to navigate to an account registration page."
+        ],
+        "navigation": [
+          "User can navigate to a 'Sign up' page via the 'Sign up' link."
+        ],
+        "issues": [
+          "The text input fields for Email and Password appear visually narrow, which might limit the visible length of entered text.",
+          "The 'Sign In' button has a default browser-like styling, which may not be consistent with a custom design system."
+        ],
+        "accessibility": "Labels are clearly associated with their respective input fields. The text contrast (black on white) is generally good for readability. Focus indicators are not visible in a static image, but interactive elements are present."
+      },
+      "status": 200,
+      "analyzedAt": "2026-03-03T19:25:05.412Z"
+    },
+    "/pricing:dark": {
+      "hash": "e50c90f6110565834789b038da78862e",
+      "analysis": {
+        "purpose": "This page serves as a login portal for users to access their accounts on the LeanMarketing platform. It is used by existing users to sign in.",
+        "elements": [
+          "Header text: 'LeanMarketing'",
+          "Sub-header text: 'AI-assisted marketing governance for lean startups'",
+          "Page title: 'Sign in to your account'",
+          "Label: 'Email'",
+          "Text input field for Email",
+          "Label: 'Password'",
+          "Text input field for Password",
+          "Button: 'Sign In'",
+          "Text: 'Don't have an account?'",
+          "Link: 'Sign up'"
+        ],
+        "dataShown": [
+          "Application name: 'LeanMarketing'",
+          "Application description: 'AI-assisted marketing governance for lean startups'",
+          "Login prompt: 'Sign in to your account'",
+          "Input labels for 'Email' and 'Password'",
+          "Call to action for new users: 'Don't have an account? Sign up'"
+        ],
+        "interactions": [
+          "User can type into the 'Email' text input field",
+          "User can type into the 'Password' text input field",
+          "User can click the 'Sign In' button to submit credentials",
+          "User can click the 'Sign up' link to navigate to a registration page"
+        ],
+        "navigation": [
+          "User can navigate to a 'Sign up' (registration) page"
+        ],
+        "issues": [
+          "None visible. The layout appears clean and functional, and all text is legible."
+        ],
+        "accessibility": "Input fields have clear labels ('Email', 'Password'). The 'Sign In' button is clearly identifiable. The 'Sign up' link is visually distinct. Contrast for text on the white background is good."
+      },
+      "status": 200,
+      "analyzedAt": "2026-03-03T19:25:12.188Z"
     }
   },
-  "lastRun": "2026-03-03T03:13:07.641Z"
+  "lastRun": "2026-03-03T19:25:12.218Z"
 }

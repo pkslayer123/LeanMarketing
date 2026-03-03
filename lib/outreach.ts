@@ -41,6 +41,31 @@ export interface MessageTemplateInput {
   body: string;
 }
 
+// ─── Row types (database records) ────────────────────────────────────────────
+
+export interface Lead extends LeadInput {
+  id: string;
+  status: LeadStatus;
+  stage?: string;
+  created_at: string;
+}
+
+export interface AudienceDefinition extends AudienceInput {
+  id: string;
+  created_at: string;
+}
+
+export interface MessageTemplate extends MessageTemplateInput {
+  id: string;
+  created_at: string;
+}
+
+export interface OutreachCampaign extends CampaignInput {
+  id: string;
+  status: string;
+  created_at: string;
+}
+
 // ─── Quality gate types ───────────────────────────────────────────────────────
 
 export interface QualityGateCheck {

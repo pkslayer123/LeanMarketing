@@ -8,6 +8,25 @@
 
 export type ProofType = 'summary' | 'demo' | 'trial';
 
+export interface Proof extends ProofInput {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  quality_gate_feedback?: QualityGateFeedback | null;
+}
+
+export const PROOF_TYPE_LABELS: Record<ProofType, string> = {
+  summary: 'Written Summary',
+  demo: 'Walkthrough Demo',
+  trial: 'Trial / Pilot',
+};
+
+export const PROOF_TYPE_DESCRIPTIONS: Record<ProofType, string> = {
+  summary: 'A concise written document showing the outcome.',
+  demo: 'A live or recorded walkthrough of the product.',
+  trial: 'A time-limited trial or pilot agreement.',
+};
+
 export interface ProofInput {
   project_id: string;
   proof_type: ProofType;
