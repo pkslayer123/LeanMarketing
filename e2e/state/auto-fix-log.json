@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-03-03T16:55:20.059Z",
+  "lastRun": "2026-03-03T17:14:55.842Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
@@ -13,11 +13,11 @@
     },
     {
       "action": "no_fix_needed",
-      "reason": " empty — no specific issues are described. Looking at `app/api/projects/route.ts`, the code is correct:\n\n- Authentication is checked before any DB access\n- Null safety is applied (`??`, `?.`, optional chaining)\n- Error responses return proper status codes\n- `data ?? []` guards against null on the GE"
+      "reason": "No type errors. The file is clean and no findings were provided describing an actual bug. No changes are needed — this MOC appears to be noise (likely triggered by a build-phase task with no actionable content).\n"
     },
     {
       "action": "no_fix_needed",
-      "reason": "port to fail at build time along with `components/IdeaForm` and `app/projects/[id]/idea/page.tsx`.\n\n**What I created (`lib/ideas.ts`):**\n- `IdeaInput` — input type for the POST body\n- `QualityGateCheck` / `QualityGateFeedback` — structured feedback with a `checks` array matching what `IdeaForm` rend"
+      "reason": "No TypeScript errors. The code in `app/api/ideas/route.ts` and `lib/ideas.ts` is clean:\n\n- The POST handler validates all required fields, runs the quality gate, and upserts to Supabase.\n- The GET handler checks auth, requires `project_id`, and returns ideas filtered by user.\n- `lib/ideas.ts` export"
     }
   ]
 }

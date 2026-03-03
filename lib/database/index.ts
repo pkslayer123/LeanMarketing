@@ -73,6 +73,7 @@ export interface LeadRow {
   job_role: string | null;
   fit_reason: string;
   status: LeadStatus;
+  stage: ConversationStage;
   created_at: string;
   updated_at: string;
 }
@@ -107,8 +108,10 @@ export interface OutreachCampaignRow {
 export interface OutreachSendRow {
   id: string;
   campaign_id: string;
+  project_id: string;
   lead_id: string;
   template_version: 'A' | 'B';
+  content: string | null;
   status: SendStatus;
   sent_at: string | null;
   created_at: string;
@@ -169,6 +172,7 @@ export interface LandingPageRow {
 export interface OfferRow {
   id: string;
   project_id: string;
+  lead_id: string | null;
   user_id: string;
   template: OfferTemplate;
   scope: string;
