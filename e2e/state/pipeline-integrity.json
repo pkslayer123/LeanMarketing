@@ -6,18 +6,18 @@
     "issue-queue: all 11 entries have valid schema",
     "findings: all 0 entries have valid schema",
     "convergence: valid state \"converged\"",
+    "plausibility: health summary queue depth consistent with moc-queue",
     "config-alignment: auto-tune made 2 adjustments in 24h (within bounds)",
     "signal-flow: test-runner → tests-complete signal connected"
   ],
   "failed": [],
   "warnings": [
-    "plausibility: 1 approved MOCs in queue but health summary reports 0 pending. Health heartbeat may have stale data.",
     "config-alignment: test-runner.coverageBasedSuspend is not set in config (defaults to false). Add it explicitly to prevent surprises.",
     "principles: daemon-principles.json does not exist — no design constraints encoded"
   ],
-  "at": "2026-03-03T03:35:41.769Z",
-  "passedCount": 8,
+  "at": "2026-03-03T03:36:15.047Z",
+  "passedCount": 9,
   "failedCount": 0,
-  "warningCount": 3,
+  "warningCount": 2,
   "healthy": true
 }
