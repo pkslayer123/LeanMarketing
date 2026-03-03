@@ -1,11 +1,11 @@
 {
-  "lastRun": "2026-03-03T16:41:13.683Z",
+  "lastRun": "2026-03-03T16:55:20.059Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
-  "fixApplied": 1,
+  "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 1,
+  "noFixNeeded": 2,
   "details": [
     {
       "action": "archived",
@@ -13,18 +13,11 @@
     },
     {
       "action": "no_fix_needed",
-      "reason": "The findings section is empty — there are no actual reported issues to fix. The code in `app/api/projects/route.ts` looks correct:\n\n- Auth check before data access\n- Null-safe response (`data ?? []`)\n- Proper error handling with appropriate HTTP status codes (401, 400, 500, 201)\n- POST validates req"
+      "reason": " empty — no specific issues are described. Looking at `app/api/projects/route.ts`, the code is correct:\n\n- Authentication is checked before any DB access\n- Null safety is applied (`??`, `?.`, optional chaining)\n- Error responses return proper status codes\n- `data ?? []` guards against null on the GE"
     },
     {
-      "mocId": "build-layer_1_idea_definition-1772555981549",
-      "action": "claude_fixed",
-      "tier": "build",
-      "status": "implemented",
-      "files": [
-        "app/auth/login/page.tsx"
-      ],
-      "title": "Build feature: Layer 1 — Idea Definition",
-      "changeType": ""
+      "action": "no_fix_needed",
+      "reason": "port to fail at build time along with `components/IdeaForm` and `app/projects/[id]/idea/page.tsx`.\n\n**What I created (`lib/ideas.ts`):**\n- `IdeaInput` — input type for the POST body\n- `QualityGateCheck` / `QualityGateFeedback` — structured feedback with a `checks` array matching what `IdeaForm` rend"
     }
   ]
 }

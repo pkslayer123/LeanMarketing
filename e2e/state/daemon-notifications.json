@@ -1,70 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x3)",
-    "severity": "warning",
-    "at": "2026-03-03T15:40:32.774Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T15:40:32.786Z"
-  },
-  {
-    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T15:41:23.081Z"
-  },
-  {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T15:41:32.855Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T15:41:32.866Z"
-  },
-  {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 14:54:20] [builder]   fail: git-diff-check — \n[2026-03-03 14:55:51] [builder]   fail: git-diff-check — \n[2026-03-03 14:57:44] [builder]   fail: git-diff-check — \n[2026-03-03 14:59:14] [bui",
-    "severity": "critical",
-    "at": "2026-03-03T15:44:47.975Z"
-  },
-  {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T15:44:47.977Z"
-  },
-  {
-    "message": "Daemon stuck: 3 approved MOCs, 976 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T15:49:46.331Z"
-  },
-  {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 14:54:20] [builder]   fail: git-diff-check — \n[2026-03-03 14:55:51] [builder]   fail: git-diff-check — \n[2026-03-03 14:57:44] [builder]   fail: git-diff-check — \n[2026-03-03 14:59:14] [bui",
-    "severity": "critical",
-    "at": "2026-03-03T15:49:48.183Z"
-  },
-  {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T15:49:48.184Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T15:49:48.196Z"
-  },
-  {
-    "message": "Daemon stuck: 1 approved MOCs, 977 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T15:50:03.412Z"
-  },
-  {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 14:55:51] [builder]   fail: git-diff-check — \n[2026-03-03 14:57:44] [builder]   fail: git-diff-check — \n[2026-03-03 14:59:14] [builder]   fail: git-diff-check — \n[2026-03-03 15:00:42] [bui",
-    "severity": "critical",
-    "at": "2026-03-03T15:50:18.233Z"
-  },
-  {
     "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T15:50:18.234Z"
@@ -498,5 +433,70 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T16:40:20.682Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x2)",
+    "severity": "warning",
+    "at": "2026-03-03T16:45:21.820Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 15:03:57] [builder]   fail: git-diff-check — \n[2026-03-03 16:07:49] [diagnostics]   classification: unknown — [2026-03-03 15:00:42] [builder]   fail: git-diff-check — \n[2026-03-03 15:02:26",
+    "severity": "critical",
+    "at": "2026-03-03T16:45:35.870Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x2)",
+    "severity": "warning",
+    "at": "2026-03-03T16:45:35.872Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T16:45:35.883Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x4)",
+    "severity": "warning",
+    "at": "2026-03-03T16:51:34.603Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 16:08:04] [diagnostics]   classification: unknown — [2026-03-03 15:00:42] [builder]   fail: git-diff-check — \n[2026-03-03 15:02:26] [builder]   fail: git-diff-check — \n[2026-03-03 15:03:57",
+    "severity": "critical",
+    "at": "2026-03-03T16:51:51.135Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x4)",
+    "severity": "warning",
+    "at": "2026-03-03T16:51:51.137Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T16:51:51.149Z"
+  },
+  {
+    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x3)",
+    "severity": "warning",
+    "at": "2026-03-03T16:51:51.164Z"
+  },
+  {
+    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T16:51:59.437Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 15:03:57] [builder]   fail: git-diff-check — \n[2026-03-03 16:08:34] [diagnostics]   classification: unknown — [2026-03-03 15:02:26] [builder]   fail: git-diff-check — \n[2026-03-03 15:03:57",
+    "severity": "critical",
+    "at": "2026-03-03T16:52:21.189Z"
+  },
+  {
+    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T16:52:21.190Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T16:52:21.203Z"
   }
 ]

@@ -6344,7 +6344,10 @@
       "createdAt": "2026-03-03T16:39:41.549Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T16:39:48.806Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772555981549",
@@ -6356,7 +6359,10 @@
       "createdAt": "2026-03-03T16:39:41.549Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:40:28.456Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: The findings section is empty — there are no actual reported issues to fix. The code in `app/api/projects/route.ts` looks correct:\n\n- Auth check before data access\n- Null-safe response (`data ?? []`)\n- Proper error handling with appropriate HTTP status codes (401, 400, 500, 201)\n- POST validates required fields before insert\n\nNo changes are needed. This MOC appears to have been created without any actionable findings attached to it.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: The findings section is empty — there are no actual reported issues to fix. The code in `app/api/projects/route.ts` looks correct:\n\n- Auth check before data access\n- Null-safe response (`data ?? []`)\n- Proper error handling with appropriate HTTP status codes (401, 400, 500, 201)\n- POST validates required fields before insert\n\nNo changes are needed. This MOC appears to have been created without any actionable findings attached to it.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772555981549",
@@ -6369,7 +6375,145 @@
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:41:13.671Z",
       "implementationNotes": "Claude Code fix (build): app/auth/login/page.tsx. No TypeScript errors. The findings section in this MOC is empty — there are no specific issues reported. The route file at `app/api/ideas/route.ts` is [Verification: 0/10 — The diff only modifies the login page styling and branding, which is completely unrelated to the Layer 1 Idea Definition feature that requires new routes, forms, database tables, and validation logic.]",
-      "commit_sha": "874dae1f6e72cbdda390dc104580b9a6fb9a04fa"
+      "commit_sha": "874dae1f6e72cbdda390dc104580b9a6fb9a04fa",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-authentication_and_user_management-1772556124469",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T16:42:04.469Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T16:42:18.834Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772556124469",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T16:42:04.469Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T16:42:10.638Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772556124469 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772556124469",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T16:42:04.469Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T16:42:10.639Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772556124469 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772556361867",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T16:46:01.867Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T16:46:06.984Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772556361867",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T16:46:01.867Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T16:46:06.581Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772556361867 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772556361867",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T16:46:01.867Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T16:46:06.582Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772556361867 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772556832897",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T16:53:52.897Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T16:53:56.742Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772556832897",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T16:53:52.897Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T16:54:12.211Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  empty — no specific issues are described. Looking at `app/api/projects/route.ts`, the code is correct:\n\n- Authentication is checked before any DB access\n- Null safety is applied (`??`, `?.`, optional chaining)\n- Error responses return proper status codes\n- `data ?? []` guards against null on the GET response\n\nNo changes are needed. This appears to be a build scaffolding MOC (the title says \"Build feature\") rather than a specific bug report, and the API route is already implemented and correct.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772556832897",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T16:53:52.897Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T16:55:20.051Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: port to fail at build time along with `components/IdeaForm` and `app/projects/[id]/idea/page.tsx`.\n\n**What I created (`lib/ideas.ts`):**\n- `IdeaInput` — input type for the POST body\n- `QualityGateCheck` / `QualityGateFeedback` — structured feedback with a `checks` array matching what `IdeaForm` renders (label, passed, feedback per field)\n- `Idea` — database record type needed by the page and form\n- `runQualityGate()` — validates minimum character lengths per field and returns per-field feedback\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
