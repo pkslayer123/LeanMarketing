@@ -170,12 +170,15 @@
       "id": "build-authentication_and_user_management-1772509022173",
       "title": "Build feature: Authentication and User Management",
       "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
-      "tier": "build",
+      "tier": "auto_approve",
       "status": "archived",
       "featureKey": "authentication_and_user_management",
       "createdAt": "2026-03-03T03:37:02.173Z",
       "source": "builder-claw",
-      "archivedAt": "2026-03-03T03:37:16.167Z",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T03:37:32.657Z",
       "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
     }
   ]
