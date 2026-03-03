@@ -6253,7 +6253,10 @@
       "createdAt": "2026-03-03T16:35:06.962Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T16:35:16.112Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772555706962",
@@ -6265,7 +6268,10 @@
       "createdAt": "2026-03-03T16:35:06.962Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:35:32.232Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  code is already in good shape:\n- Authentication is checked with proper 401 response\n- Null safety is used (`??`, `?.`)\n- Error handling returns appropriate status codes (400, 401, 500)\n- GET returns `data ?? []` for safe empty state\n- POST validates the name and returns 201 on success\n\nNo changes are needed. This appears to be a noise MOC — the builder claw generated a task for \"Dashboard and Project Overview\" but the findings list is empty, meaning no actual issues were detected in this file.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  code is already in good shape:\n- Authentication is checked with proper 401 response\n- Null safety is used (`??`, `?.`)\n- Error handling returns appropriate status codes (400, 401, 500)\n- GET returns `data ?? []` for safe empty state\n- POST validates the name and returns 201 on success\n\nNo changes are needed. This appears to be a noise MOC — the builder claw generated a task for \"Dashboard and Project Overview\" but the findings list is empty, meaning no actual issues were detected in this file.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772555706962",
@@ -6277,7 +6283,10 @@
       "createdAt": "2026-03-03T16:35:06.962Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:36:04.364Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: s` and `lib/ideas/index.ts` appears correctly implemented:\n\n- The `runQualityGate` import and `IdeaInput` type resolve correctly from `lib/ideas/index.ts`\n- Auth checks are in place on both GET and POST handlers\n- The upsert uses the correct conflict key (`project_id,user_id`)\n- Null safety is handled with `?.` and `?? \"\"`\n- No type errors visible\n\n**No changes needed.** This MOC has empty findings, which means it was generated without any actual test failures to report. There is no bug to fix.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: s` and `lib/ideas/index.ts` appears correctly implemented:\n\n- The `runQualityGate` import and `IdeaInput` type resolve correctly from `lib/ideas/index.ts`\n- Auth checks are in place on both GET and POST handlers\n- The upsert uses the correct conflict key (`project_id,user_id`)\n- Null safety is handled with `?.` and `?? \"\"`\n- No type errors visible\n\n**No changes needed.** This MOC has empty findings, which means it was generated without any actual test failures to report. There is no bug to fix.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
