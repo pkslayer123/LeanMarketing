@@ -1,10 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
-    "severity": "warning",
-    "at": "2026-03-03T19:32:44.228Z"
-  },
-  {
     "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 19:14:21] [builder]   fail: git-diff-check — \n[2026-03-03 19:15:28] [diagnostics]   classification: unknown — [2026-03-03 19:14:21] [builder]   fail: git-diff-check — \n[2026-03-03 19:16:16",
     "severity": "critical",
     "at": "2026-03-03T19:33:14.271Z"
@@ -498,5 +493,10 @@
     "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T22:01:09.450Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T22:02:09.515Z"
   }
 ]
