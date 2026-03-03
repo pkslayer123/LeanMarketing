@@ -1,20 +1,5 @@
 [
   {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 17:58:24] [diagnostics]   classification: unknown — [2026-03-03 15:54:11] [builder]   fail: git-diff-check — \n[2026-03-03 16:25:46] [builder]   fail: git-diff-check — \n[2026-03-03 17:16:16",
-    "severity": "critical",
-    "at": "2026-03-03T18:25:40.517Z"
-  },
-  {
-    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T18:25:40.520Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T18:25:40.541Z"
-  },
-  {
     "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x1)",
     "severity": "warning",
     "at": "2026-03-03T18:28:00.625Z"
@@ -498,5 +483,20 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
     "severity": "warning",
     "at": "2026-03-03T19:12:58.009Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 18:37:26] [diagnostics]   classification: unknown — [2026-03-03 18:10:27] [builder]   fail: git-diff-check — \n[2026-03-03 18:11:49] [builder]   fail: git-diff-check — \n[2026-03-03 18:14:04",
+    "severity": "critical",
+    "at": "2026-03-03T19:13:28.042Z"
+  },
+  {
+    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T19:13:28.045Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T19:13:28.064Z"
   }
 ]

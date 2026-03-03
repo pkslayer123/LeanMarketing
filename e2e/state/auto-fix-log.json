@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-03-03T19:11:30.353Z",
+  "lastRun": "2026-03-03T19:13:37.946Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
@@ -13,11 +13,11 @@
     },
     {
       "action": "no_fix_needed",
-      "reason": "bed for this MOC. The `app/api/projects/route.ts` code is already well-structured:\n\n- Auth checks on both GET and POST\n- Proper error handling with correct status codes\n- Null safety (`??`, optional chaining)\n- Input validation on POST (name required, trimmed)\n- Ordered query with `nullsFirst: false"
+      "reason": "The findings section for this MOC is empty — there's no specific issue described. The current `app/api/projects/route.ts` code is well-structured:\n\n- Auth guard is in place (`401` on missing user)\n- Null-safe query with `?? []` fallback on GET\n- JSON parse guard on POST\n- Proper status codes (`201` "
     },
     {
       "action": "no_fix_needed",
-      "reason": " changes are needed.** The findings section for this MOC is empty — no specific bugs or issues were reported. The route code is correct:\n\n- Auth check with proper null guard\n- JSON body parsing with error handling  \n- All required field validation\n- Quality gate evaluation\n- Upsert with conflict res"
+      "reason": "e both present and correctly implemented:\n\n- `route.ts`: Has valid POST (create/upsert idea with quality gate) and GET (fetch by project_id) endpoints with auth checks, input validation, and proper error handling.\n- `lib/ideas.ts`: Exports all required types and a functional `runQualityGate` impleme"
     }
   ]
 }
