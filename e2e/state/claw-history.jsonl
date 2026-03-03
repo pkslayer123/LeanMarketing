@@ -447,3 +447,8 @@
 {"claw":"health-deploy","cycle":61,"at":"2026-03-03T04:26:41.564Z","durationMs":3318,"ok":true,"summary":"6 checks, 0 failed"}
 {"claw":"diagnostics","cycle":50,"at":"2026-03-03T04:26:51.611Z","durationMs":12,"ok":false,"summary":"3 actions, 1/8 checks failing"}
 {"claw":"intelligence","cycle":62,"at":"2026-03-03T04:26:54.438Z","durationMs":9723,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
+{"claw":"health-deploy","cycle":62,"at":"2026-03-03T04:27:14.488Z","durationMs":2908,"ok":true,"summary":"6 checks, 0 failed"}
+{"claw":"builder","cycle":42,"at":"2026-03-03T04:28:46.881Z","durationMs":161419,"ok":false,"summary":"0% complete, 10 gaps, 3 MOCs [failed: commit]"}
+{"claw":"test-runner","cycle":39,"at":"2026-03-03T04:29:02.498Z","durationMs":6638,"ok":true,"summary":"10/10 passed, 0 failed"}
+{"claw":"finding-pipeline","cycle":39,"at":"2026-03-03T04:29:10.511Z","durationMs":782,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
+{"claw":"cp-meta","cycle":68,"at":"2026-03-03T04:29:12.056Z","durationMs":9428,"ok":false,"summary":"pushed 0 MOCs, 61 errors"}
