@@ -1,25 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T18:17:24.971Z"
-  },
-  {
-    "message": "Daemon stuck: 3 approved MOCs, 60 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T18:17:35.242Z"
-  },
-  {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 16:53:07] [builder]   fail: git-diff-check — \n[2026-03-03 17:42:59] [builder]   fail: git-diff-check — \n[2026-03-03 17:44:42] [builder]   fail: git-diff-check — \n[2026-03-03 17:46:19] [bui",
-    "severity": "critical",
-    "at": "2026-03-03T18:17:40.006Z"
-  },
-  {
-    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T18:17:40.008Z"
-  },
-  {
     "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T18:18:20.795Z"
@@ -498,5 +478,25 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T18:49:41.947Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T18:56:52.417Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 18:28:10] [diagnostics]   classification: unknown — [2026-03-03 17:58:52] [builder]   fail: git-diff-check — \n[2026-03-03 18:28:27] [builder]   fail: git-diff-check — \n[2026-03-03 18:29:21",
+    "severity": "critical",
+    "at": "2026-03-03T18:56:57.212Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T18:56:57.214Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T18:56:57.228Z"
   }
 ]
