@@ -31,7 +31,7 @@
       "mocCount": 3
     },
     "docs-synced": {
-      "at": "2026-03-03T18:08:48.721Z",
+      "at": "2026-03-03T19:08:50.685Z",
       "emittedBy": "docs-sync",
       "driftCount": 1,
       "fixedCount": 1
@@ -69,10 +69,10 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-03T19:03:02.537Z",
-      "emittedBy": "cp-meta",
-      "claw": "cp-meta",
-      "reason": "5 consecutive failures (same error x1)",
+      "at": "2026-03-03T19:08:42.307Z",
+      "emittedBy": "health-deploy",
+      "claw": "health-deploy",
+      "reason": "5 consecutive failures (same error x5)",
       "consecutiveFailures": 5
     },
     "claw-crashed": {
@@ -144,7 +144,7 @@
       "pid": 80784,
       "lastRun": "2026-03-03T19:08:29.208Z",
       "nextRun": "2026-03-03T21:08:29.208Z",
-      "heartbeat": "2026-03-03T19:08:29.212Z",
+      "heartbeat": "2026-03-03T19:08:44.212Z",
       "cycle": 571,
       "phase": "starting",
       "lastCycleDurationMs": 10641,
@@ -162,14 +162,14 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 32696,
-      "lastRun": "2026-03-03T19:06:37.714Z",
-      "nextRun": "2026-03-03T23:06:37.714Z",
-      "heartbeat": "2026-03-03T19:08:37.780Z",
+      "lastRun": "2026-03-03T19:08:42.301Z",
+      "nextRun": "2026-03-03T23:08:42.301Z",
+      "heartbeat": "2026-03-03T19:08:42.311Z",
       "cycle": 569,
       "phase": "starting",
-      "lastCycleDurationMs": 3206,
+      "lastCycleDurationMs": 4519,
       "lastCycleResult": "error"
     },
     "observer": {
@@ -186,10 +186,10 @@
     "test-regen": {
       "status": "idle",
       "pid": 85240,
-      "lastRun": "2026-03-03T18:08:49.147Z",
-      "nextRun": "2026-03-03T19:08:49.147Z",
-      "heartbeat": "2026-03-03T19:08:15.391Z",
-      "cycle": 17,
+      "lastRun": "2026-03-03T19:08:50.911Z",
+      "nextRun": "2026-03-03T20:08:50.911Z",
+      "heartbeat": "2026-03-03T19:08:50.914Z",
+      "cycle": 18,
       "phase": "starting",
       "lastCycleDurationMs": 1,
       "lastCycleResult": "ok"
@@ -197,10 +197,10 @@
     "docs-sync": {
       "status": "idle",
       "pid": 84852,
-      "lastRun": "2026-03-03T18:08:48.726Z",
-      "nextRun": "2026-03-03T19:08:48.726Z",
-      "heartbeat": "2026-03-03T19:08:15.234Z",
-      "cycle": 17,
+      "lastRun": "2026-03-03T19:08:50.690Z",
+      "nextRun": "2026-03-03T20:08:50.690Z",
+      "heartbeat": "2026-03-03T19:08:50.693Z",
+      "cycle": 18,
       "phase": "starting",
       "lastCycleDurationMs": 17,
       "lastCycleResult": "ok"

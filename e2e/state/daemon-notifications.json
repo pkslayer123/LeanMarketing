@@ -1,10 +1,5 @@
 [
   {
-    "message": "Daemon stuck: 3 approved MOCs, 70 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T18:22:58.991Z"
-  },
-  {
     "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 17:12:28] [builder]   fail: git-diff-check — \n[2026-03-03 17:52:08] [diagnostics]   classification: unknown — [2026-03-03 17:12:52] [diagnostics]   classification: unknown — [2026-03-03 16",
     "severity": "critical",
     "at": "2026-03-03T18:23:10.320Z"
@@ -498,5 +493,10 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T19:03:12.566Z"
+  },
+  {
+    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T19:08:42.309Z"
   }
 ]
