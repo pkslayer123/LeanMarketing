@@ -5,19 +5,19 @@
     "claw-signals: correct format ({ signals, claws })",
     "issue-queue: all 37 entries have valid schema",
     "findings: all 0 entries have valid schema",
-    "convergence: valid state \"converged\"",
+    "convergence: valid state \"stuck\"",
     "plausibility: health summary queue depth consistent with moc-queue",
-    "config-alignment: auto-tune made 2 adjustments in 24h (within bounds)",
-    "signal-flow: test-runner → tests-complete signal connected"
+    "config-alignment: auto-tune made 2 adjustments in 24h (within bounds)"
   ],
   "failed": [],
   "warnings": [
     "config-alignment: test-runner.coverageBasedSuspend is not set in config (defaults to false). Add it explicitly to prevent surprises.",
+    "signal-flow: test-runner ran recently but no tests-complete signal found.",
     "principles: daemon-principles.json does not exist — no design constraints encoded"
   ],
-  "at": "2026-03-03T04:02:20.974Z",
-  "passedCount": 9,
+  "at": "2026-03-03T04:04:49.092Z",
+  "passedCount": 8,
   "failedCount": 0,
-  "warningCount": 2,
+  "warningCount": 3,
   "healthy": true
 }
