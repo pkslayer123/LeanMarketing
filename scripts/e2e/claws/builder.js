@@ -369,40 +369,24 @@ class BuilderClaw extends Claw {
       const specGaps = (section.gapValues ?? []).filter((g) =>
         g !== "None" && g !== "--" && g !== ""
       );
-      const hasSpecGaps = specGaps.length > 0;
 
-      // 2. Check if codeAreas files exist on disk — primary signal for "is this built?"
-      let codeAreasMissing = 0;
-      const codeAreasTotal = (section.codeAreas ?? []).length;
-      for (const area of section.codeAreas ?? []) {
-        const fullPath = path.join(ROOT, area);
-        // Check as file (with common extensions) or directory
-        const exists = fs.existsSync(fullPath) ||
-          fs.existsSync(fullPath + ".ts") ||
-          fs.existsSync(fullPath + ".tsx") ||
-          fs.existsSync(fullPath + "/page.tsx") ||
-          fs.existsSync(fullPath + "/route.ts");
-        if (!exists) {
-          codeAreasMissing++;
-        }
-      }
+      // 2. Deep file-level scan of each codeArea — don't just check if directory exists,
+      //    enumerate actual files expected and check content quality.
+      const fileReport = this._deepScanCodeAreas(section.codeAreas ?? []);
 
-      const codeAreaCoverage = codeAreasTotal > 0 ? (codeAreasTotal - codeAreasMissing) / codeAreasTotal : 1;
-
-      // A section is "built" if code areas mostly exist (>=80%).
-      // Code area existence is the primary signal — the BUILD-SPEC Gap column describes
-      // requirements (what to build), not dynamic status. Once code is on disk, it's built.
-      // Spec gaps are passed to Claude as context but don't block "built" status.
-      if (codeAreaCoverage >= 0.8) {
+      // A section is "complete" only when ALL expected files exist AND have real content.
+      // Previous bug: directory-level checks at 80% threshold falsely marked features as
+      // "built" when a directory existed but most files inside were missing or stubs.
+      if (fileReport.completionScore >= 0.95 && fileReport.thinFiles.length === 0) {
         continue;
       }
 
       // Determine gap severity for prioritization
       let severity = "minor";
-      if (codeAreasMissing > 0 && codeAreaCoverage < 0.5) {
-        severity = "major"; // Most code areas missing — feature largely unbuilt
-      } else if (hasSpecGaps && specGaps.some((g) => /major|critical/i.test(g))) {
-        severity = "major";
+      if (fileReport.completionScore < 0.5) {
+        severity = "major"; // Feature is largely unbuilt
+      } else if (fileReport.thinFiles.length > 2) {
+        severity = "major"; // Many stub/thin files need substantial work
       }
 
       gaps.push({
@@ -412,10 +396,13 @@ class BuilderClaw extends Claw {
         routes: section.routes ?? [],
         codeAreas: section.codeAreas ?? [],
         specGaps,
-        codeAreasMissing,
-        codeAreasTotal,
-        codeAreaCoverage,
+        codeAreasMissing: fileReport.missingFiles.length,
+        codeAreasTotal: fileReport.totalExpected,
+        codeAreaCoverage: fileReport.completionScore,
         severity,
+        missingFiles: fileReport.missingFiles,
+        thinFiles: fileReport.thinFiles,
+        existingFiles: fileReport.existingFiles,
       });
     }
 
@@ -429,6 +416,148 @@ class BuilderClaw extends Claw {
     });
 
     return gaps;
+  }
+
+  /**
+   * Deep scan code areas: enumerate actual files inside directories, check content
+   * quality, and report missing/thin/complete files.
+   */
+  _deepScanCodeAreas(codeAreas) {
+    const missingFiles = [];
+    const thinFiles = [];     // exist but <30 lines (likely stubs)
+    const existingFiles = [];
+    let totalExpected = 0;
+
+    for (const area of codeAreas) {
+      const fullPath = path.join(ROOT, area);
+
+      // If codeArea is a single file (e.g. components/AuthForm.tsx)
+      if (area.endsWith(".tsx") || area.endsWith(".ts") || area.endsWith(".js") || area.endsWith(".sql")) {
+        totalExpected++;
+        if (fs.existsSync(fullPath)) {
+          const lines = this._countFileLines(fullPath);
+          if (lines < 30) {
+            thinFiles.push({ path: area, lines });
+          } else {
+            existingFiles.push({ path: area, lines });
+          }
+        } else {
+          missingFiles.push(area);
+        }
+        continue;
+      }
+
+      // codeArea is a directory — enumerate expected files inside
+      const expectedFiles = this._getExpectedFilesForArea(area);
+      totalExpected += expectedFiles.length;
+
+      for (const file of expectedFiles) {
+        const filePath = path.join(ROOT, file);
+        if (fs.existsSync(filePath)) {
+          const lines = this._countFileLines(filePath);
+          if (lines < 30) {
+            thinFiles.push({ path: file, lines });
+          } else {
+            existingFiles.push({ path: file, lines });
+          }
+        } else {
+          missingFiles.push(file);
+        }
+      }
+    }
+
+    // If no expected files were derived, fall back to checking directory existence
+    if (totalExpected === 0) {
+      totalExpected = codeAreas.length;
+      for (const area of codeAreas) {
+        const fullPath = path.join(ROOT, area);
+        if (fs.existsSync(fullPath)) {
+          existingFiles.push({ path: area, lines: -1 });
+        } else {
+          missingFiles.push(area);
+        }
+      }
+    }
+
+    const completionScore = totalExpected > 0
+      ? (existingFiles.length) / totalExpected
+      : 1;
+
+    return { missingFiles, thinFiles, existingFiles, totalExpected, completionScore };
+  }
+
+  /**
+   * Given a codeArea directory path (e.g. "app/dashboard/", "components/Dashboard/"),
+   * return the list of specific files expected inside it based on conventions.
+   */
+  _getExpectedFilesForArea(area) {
+    const fullPath = path.join(ROOT, area);
+    const files = [];
+
+    // Determine valid file extensions for this area
+    const isMigrations = area.includes("migrations");
+    const validExts = isMigrations
+      ? [".sql", ".ts"]
+      : [".ts", ".tsx"];
+
+    // If directory exists, enumerate its actual files
+    if (fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory()) {
+      try {
+        const entries = this._walkDir(fullPath, 2); // max depth 2
+        for (const entry of entries) {
+          if (validExts.some(ext => entry.endsWith(ext))) {
+            files.push(path.relative(ROOT, entry).replace(/\\/g, "/"));
+          }
+        }
+      } catch { /* ignore */ }
+    }
+
+    // If directory doesn't exist or is empty, infer expected files from conventions
+    if (files.length === 0) {
+      const cleanArea = area.replace(/\/$/, "");
+      if (cleanArea.startsWith("app/api/")) {
+        files.push(`${cleanArea}/route.ts`);
+      } else if (cleanArea.startsWith("app/")) {
+        files.push(`${cleanArea}/page.tsx`);
+      } else if (cleanArea.startsWith("components/")) {
+        files.push(`${cleanArea}/index.tsx`);
+      } else if (cleanArea.startsWith("lib/")) {
+        files.push(`${cleanArea}/index.ts`);
+      } else if (isMigrations) {
+        // Migrations: expect at least one .sql file — don't infer index.ts
+        files.push(`${cleanArea}/001_initial.sql`);
+      } else {
+        files.push(`${cleanArea}/index.ts`);
+      }
+    }
+
+    return files;
+  }
+
+  _walkDir(dir, maxDepth, currentDepth = 0) {
+    if (currentDepth >= maxDepth) return [];
+    const results = [];
+    try {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          results.push(...this._walkDir(fullPath, maxDepth, currentDepth + 1));
+        } else {
+          results.push(fullPath);
+        }
+      }
+    } catch { /* ignore */ }
+    return results;
+  }
+
+  _countFileLines(filePath) {
+    try {
+      const content = fs.readFileSync(filePath, "utf-8");
+      return content.split("\n").length;
+    } catch {
+      return 0;
+    }
   }
 
   _createBuildMocs(gaps) {
@@ -576,72 +705,85 @@ class BuilderClaw extends Claw {
   }
 
   _buildScaffoldPrompt(gap) {
-    // Identify which code areas are missing vs existing
-    const missingAreas = [];
-    const existingAreas = [];
-    for (const area of gap.codeAreas || []) {
-      const fullPath = path.join(ROOT, area);
-      const exists = fs.existsSync(fullPath) ||
-        fs.existsSync(fullPath + ".ts") ||
-        fs.existsSync(fullPath + ".tsx") ||
-        fs.existsSync(fullPath + "/page.tsx") ||
-        fs.existsSync(fullPath + "/route.ts");
-      if (exists) {
-        existingAreas.push(area);
-      } else {
-        missingAreas.push(area);
+    // Build detailed file lists from gap detection
+    const missingFiles = gap.missingFiles || [];
+    const thinFiles = gap.thinFiles || [];
+    const existingFiles = gap.existingFiles || [];
+
+    // Missing files section
+    const missingSection = missingFiles.length > 0
+      ? `\n## Files to Create (MUST CREATE THESE)\n${missingFiles.map(f => `- ${typeof f === 'string' ? f : f.path}`).join("\n")}\n`
+      : "";
+
+    // Thin/stub files that need substantial content
+    let thinSection = "";
+    if (thinFiles.length > 0) {
+      thinSection = `\n## Files That Need Rewriting (too thin — currently stubs)\nThese files exist but are incomplete stubs. REWRITE them with full, production-quality implementations:\n`;
+      for (const f of thinFiles) {
+        const filePath = typeof f === 'string' ? f : f.path;
+        const lineCount = typeof f === 'object' ? f.lines : '?';
+        // Read the thin file content so Claude can see what needs improvement
+        let preview = "";
+        try {
+          const content = fs.readFileSync(path.join(ROOT, filePath), "utf-8");
+          preview = content.slice(0, 500);
+        } catch { /* ignore */ }
+        thinSection += `\n### ${filePath} (${lineCount} lines — needs full rewrite)\n\`\`\`\n${preview}\n\`\`\`\n`;
       }
     }
 
-    const missingSection = missingAreas.length > 0
-      ? `\n## Missing Code Areas (MUST CREATE)\n${missingAreas.map(a => `- ${a}`).join("\n")}\n`
+    // Completed files — just list them so Claude knows what exists
+    const existingSection = existingFiles.length > 0
+      ? `\n## Already Complete (reference only — do not recreate)\n${existingFiles.map(f => `- ${typeof f === 'string' ? f : f.path} (${typeof f === 'object' ? f.lines : '?'} lines)`).join("\n")}\n`
       : "";
-    const existingSection = existingAreas.length > 0
-      ? `\n## Already Existing (do NOT recreate)\n${existingAreas.map(a => `- ${a}`).join("\n")}\n`
-      : "";
+
     const gapItems = (gap.specGaps || []).length > 0
-      ? `\n## Specific Gaps to Fill\n${gap.specGaps.map(g => `- ${g}`).join("\n")}\n`
+      ? `\n## Specification Requirements (from BUILD-SPEC)\nThe spec says these aspects need implementation:\n${gap.specGaps.map(g => `- ${g}`).join("\n")}\n`
       : "";
 
-    return `You are building a new feature for a Next.js application.
+    return `You are building a feature for a production Next.js application called "LeanMarketing".
+This is an AI-assisted marketing governance tool for lean startups. It manages marketing campaigns
+across a 6-layer validation funnel: Idea → Audience → Conversations → Conversion → Proof → Review.
 
-## Feature to Build: ${gap.name}
+## YOUR TASK: Build/Improve "${gap.name}"
 
 ${gap.description}
-${missingSection}${existingSection}${gapItems}
+${missingSection}${thinSection}${existingSection}${gapItems}
 ## Expected Routes
 ${gap.routes.length > 0 ? gap.routes.map((r) => `- ${r}`).join("\n") : "- Determine appropriate routes from the feature description"}
 
-## Tech Stack & Patterns
-- Next.js App Router with TypeScript
-- Tailwind CSS for styling
+## CRITICAL INSTRUCTIONS
+1. You MUST create or edit files. Do not just describe what should be done — actually write the code.
+2. If a file is listed under "Files to Create" — create it with a full implementation.
+3. If a file is listed under "Files That Need Rewriting" — rewrite it completely with production-quality code.
+4. Every component must be fully functional with real data fetching, forms, and error handling.
+5. You MUST write at least 50 lines per page component and 30 lines per utility/lib file.
+
+## Tech Stack
+- Next.js App Router with TypeScript (use .tsx for components, .ts for utilities)
+- Tailwind CSS for ALL styling (no CSS files)
 - Supabase for database and auth (use \`@supabase/ssr\` createBrowserClient/createServerClient)
 - React Server Components by default; add "use client" only when needed (hooks, interactivity)
-- API routes use Next.js route handlers (app/api/.../route.ts with GET/POST exports)
+- API routes: app/api/.../route.ts with GET/POST/PATCH/DELETE exports
 
-## Project Structure
-- app/ — Next.js App Router pages (page.tsx) and API routes (route.ts)
-- components/ — Shared UI components
-- lib/ — Utilities, services, hooks
-- supabase/migrations/ — Database migrations (numbered sequentially)
+## Design Requirements (MANDATORY)
+- Navigation: Import the sidebar from components/Dashboard/Sidebar.tsx or create it if missing.
+  It must show "LeanMarketing" branding and links to Dashboard, Settings, plus a logout button.
+- Color scheme: indigo-600 primary, gray-50 page backgrounds, white cards with border and shadow-sm.
+- Layout: max-w-4xl mx-auto with p-6 padding. Use flex layouts with the sidebar.
+- Cards: rounded-lg border border-gray-200 p-6 shadow-sm bg-white dark:bg-gray-800
+- Forms: labeled inputs with focus:ring-indigo-500, error states in red, success in green.
+- Typography: text-2xl font-bold for page titles, text-sm for labels, text-gray-500 for hints.
+- Empty states: centered text with a helpful message and an action button.
+- Responsive: grid-cols-1 md:grid-cols-2 lg:grid-cols-3 for card grids.
+- Dark mode: include dark: variants for all colors.
+- This MUST look like a professional SaaS product. No unstyled HTML. No placeholder text.
 
-## Design Requirements
-- Every page must have a proper navigation header with the app name "LeanMarketing" and links to
-  Dashboard, Settings. If the user is authenticated, show a logout button.
-- Use a shared layout component or import a shared <Nav /> component from components/Nav.tsx.
-  Create components/Nav.tsx if it doesn't exist.
-- Pages must look professional and complete — use Tailwind utility classes for:
-  - Consistent spacing (p-6/p-8), max-width containers (max-w-4xl mx-auto)
-  - Card-style sections with borders, rounded corners, subtle shadows
-  - Clear visual hierarchy: headings, subheadings, body text with proper font sizes
-  - Empty states with helpful text when no data exists
-  - Form inputs with labels, focus rings, and error states
-- Use indigo-600 as the primary color, gray-50 backgrounds, white cards.
-- The app should feel like a real SaaS product, not a coding exercise.
-
-Focus on creating the MISSING code areas listed above. Create functional implementations
-that look production-ready. Do NOT import modules that don't exist yet — keep each file
-self-contained or create the needed shared components.
+## File Conventions
+- app/[route]/page.tsx — Server component that fetches data and renders the page
+- app/api/[route]/route.ts — API handler with proper error responses
+- components/[Feature]/index.tsx — Client component with "use client" directive
+- lib/[feature].ts — Pure types, validators, helpers (no React)
 `;
   }
 
