@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-03-03T09:11:34.122Z",
+  "generatedAt": "2026-03-03T09:12:43.028Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 241,
+    "mocs_total": 244,
     "mocs_implemented": 0,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 240,
+    "mocs_archived": 243,
     "mocs_with_commit": 0,
     "mocs_verified": 0,
     "fixes_attempted": 0,
@@ -29,29 +29,29 @@
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 240,
+    "archived": 243,
     "approved": 1
   },
   "byTier": {
     "auto_approve": {
-      "total": 108,
+      "total": 109,
       "implemented": 0,
       "failed": 0,
-      "archived": 107,
+      "archived": 108,
       "awaiting": 0
     },
     "build": {
-      "total": 58,
+      "total": 59,
       "implemented": 0,
       "failed": 0,
-      "archived": 58,
+      "archived": 59,
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 75,
+      "total": 76,
       "implemented": 0,
       "failed": 0,
-      "archived": 75,
+      "archived": 76,
       "awaiting": 0
     }
   },
@@ -59,22 +59,13 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 241,
+      "from": 244,
       "to": 0,
-      "lostCount": 241,
+      "lostCount": 244,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 231,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 232,
@@ -150,6 +141,15 @@
     {
       "date": "2026-03-03",
       "iteration": 240,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 241,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
