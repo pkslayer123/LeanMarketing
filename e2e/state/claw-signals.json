@@ -65,7 +65,7 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-03T22:51:51.490Z",
+      "at": "2026-03-03T22:55:07.337Z",
       "emittedBy": "health-deploy",
       "claw": "health-deploy",
       "reason": "5 consecutive failures (same error x5)",
@@ -78,7 +78,7 @@
       "pid": 59004,
       "lastRun": "2026-03-03T22:54:26.697Z",
       "nextRun": "2026-03-04T04:54:26.697Z",
-      "heartbeat": "2026-03-03T22:54:26.700Z",
+      "heartbeat": "2026-03-03T22:55:09.963Z",
       "cycle": 578,
       "phase": "starting",
       "lastCycleDurationMs": 120,
@@ -86,12 +86,12 @@
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "idle",
+      "status": "running",
       "pid": 89092,
       "lastRun": "2026-03-03T22:54:53.797Z",
       "nextRun": "2026-03-03T23:24:53.797Z",
-      "heartbeat": "2026-03-03T22:55:00.296Z",
-      "cycle": 738,
+      "heartbeat": "2026-03-03T22:55:08.815Z",
+      "cycle": 739,
       "phase": "starting",
       "lastCycleDurationMs": 92443,
       "lastCycleResult": "error"
@@ -119,12 +119,12 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 89240,
       "lastRun": "2026-03-03T22:54:25.323Z",
       "nextRun": "2026-03-03T23:54:25.323Z",
-      "heartbeat": "2026-03-03T22:55:00.358Z",
-      "cycle": 358,
+      "heartbeat": "2026-03-03T22:55:10.358Z",
+      "cycle": 359,
       "phase": "docs-update",
       "lastCycleDurationMs": 1100,
       "lastCycleResult": "ok"
@@ -152,14 +152,14 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 45452,
-      "lastRun": "2026-03-03T22:54:19.075Z",
-      "nextRun": "2026-03-04T02:54:19.075Z",
-      "heartbeat": "2026-03-03T22:55:04.099Z",
+      "lastRun": "2026-03-03T22:55:07.333Z",
+      "nextRun": "2026-03-04T02:55:07.333Z",
+      "heartbeat": "2026-03-03T22:55:07.342Z",
       "cycle": 713,
       "phase": "starting",
-      "lastCycleDurationMs": 3136,
+      "lastCycleDurationMs": 3233,
       "lastCycleResult": "error"
     },
     "observer": {
