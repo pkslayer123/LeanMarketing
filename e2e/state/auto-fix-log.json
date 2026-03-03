@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-03-03T22:43:29.339Z",
+  "lastRun": "2026-03-03T22:45:09.921Z",
   "total": 1,
   "noiseAutoClose": 0,
   "fixAttempted": 1,
@@ -9,7 +9,7 @@
   "details": [
     {
       "action": "no_fix_needed",
-      "reason": "The findings section is empty — there are no specific issues reported for this file. The code looks correct:\n\n- Auth check with 401 on failure\n- Null-safe data access with `?.` and `?? []`\n- Proper error handling for both GET and POST\n- Input validation for POST body\n\nNo changes needed — this appear"
+      "reason": "The findings section is empty — there are no specific issues reported. The source file looks correct: proper auth check, null safety with `??`, standard CRUD operations. This appears to be noise with no actionable findings.\n\nNo changes needed. The `/api/projects` route is correctly implemented with "
     }
   ]
 }

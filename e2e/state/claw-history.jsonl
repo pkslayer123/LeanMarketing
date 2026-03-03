@@ -1998,3 +1998,15 @@
 {"claw":"fix-engine","cycle":344,"at":"2026-03-03T22:43:30.006Z","durationMs":13833,"ok":true,"summary":"0 fixes applied, 0 failed"}
 {"claw":"intelligence","cycle":709,"at":"2026-03-03T22:43:48.813Z","durationMs":9819,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
 {"claw":"health-deploy","cycle":700,"at":"2026-03-03T22:43:54.798Z","durationMs":3194,"ok":false,"summary":"6 checks, 1 failed"}
+{"claw":"builder","cycle":565,"at":"2026-03-03T22:44:10.497Z","durationMs":56373,"ok":true,"summary":"80% complete, 2 gaps, 1 MOCs"}
+{"claw":"test-runner","cycle":549,"at":"2026-03-03T22:44:30.634Z","durationMs":7889,"ok":true,"summary":"10/10 passed, 0 failed"}
+{"claw":"finding-pipeline","cycle":556,"at":"2026-03-03T22:44:33.623Z","durationMs":781,"ok":true,"summary":"6 phases, 0 failed, 0 MOCs queued"}
+{"claw":"fix-engine","cycle":345,"at":"2026-03-03T22:44:46.657Z","durationMs":1598,"ok":true,"summary":"0 fixes applied, 0 failed"}
+{"claw":"cp-meta","cycle":734,"at":"2026-03-03T22:44:51.477Z","durationMs":94166,"ok":false,"summary":"pushed 0 MOCs, 593 errors"}
+{"claw":"diagnostics","cycle":713,"at":"2026-03-03T22:45:03.594Z","durationMs":24,"ok":false,"summary":"3 actions, 1/8 checks failing"}
+{"claw":"fix-engine","cycle":346,"at":"2026-03-03T22:45:10.634Z","durationMs":8967,"ok":true,"summary":"0 fixes applied, 0 failed"}
+{"claw":"intelligence","cycle":710,"at":"2026-03-03T22:45:14.563Z","durationMs":10697,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
+{"claw":"health-deploy","cycle":701,"at":"2026-03-03T22:45:28.189Z","durationMs":3331,"ok":false,"summary":"6 checks, 1 failed"}
+{"claw":"test-regen","cycle":21,"at":"2026-03-03T22:45:30.493Z","durationMs":2,"ok":true,"summary":"no candidates"}
+{"claw":"docs-sync","cycle":21,"at":"2026-03-03T22:45:30.614Z","durationMs":16,"ok":true,"summary":"1 drift(s), 0 fixed, backlog: 0 items"}
+{"claw":"observer","cycle":21,"at":"2026-03-03T22:45:30.859Z","durationMs":276,"ok":true,"summary":"2 anomalies (0 critical)"}
