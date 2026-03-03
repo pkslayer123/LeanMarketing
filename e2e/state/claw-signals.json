@@ -1,7 +1,7 @@
 {
   "signals": {
     "mocs-ready": {
-      "at": "2026-03-03T23:49:08.792Z",
+      "at": "2026-03-03T23:49:54.584Z",
       "emittedBy": "finding-pipeline",
       "newMocs": 0
     },
@@ -65,9 +65,9 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-03T23:48:06.681Z",
-      "emittedBy": "diagnostics",
-      "claw": "diagnostics",
+      "at": "2026-03-03T23:49:49.863Z",
+      "emittedBy": "health-deploy",
+      "claw": "health-deploy",
       "reason": "5 consecutive failures (same error x5)",
       "consecutiveFailures": 5
     }
@@ -86,25 +86,25 @@
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 89092,
-      "lastRun": "2026-03-03T23:48:01.769Z",
-      "nextRun": "2026-03-04T00:18:01.769Z",
-      "heartbeat": "2026-03-03T23:49:00.703Z",
+      "lastRun": "2026-03-03T23:50:01.923Z",
+      "nextRun": "2026-03-04T00:20:01.923Z",
+      "heartbeat": "2026-03-03T23:50:01.993Z",
       "cycle": 766,
       "phase": "starting",
-      "lastCycleDurationMs": 93778,
+      "lastCycleDurationMs": 90124,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
       "status": "idle",
       "pid": 89160,
-      "lastRun": "2026-03-03T23:49:08.891Z",
-      "nextRun": "2026-03-04T00:19:08.891Z",
-      "heartbeat": "2026-03-03T23:49:08.894Z",
-      "cycle": 655,
+      "lastRun": "2026-03-03T23:49:54.679Z",
+      "nextRun": "2026-03-04T00:19:54.679Z",
+      "heartbeat": "2026-03-03T23:50:00.645Z",
+      "cycle": 656,
       "phase": "starting",
-      "lastCycleDurationMs": 760,
+      "lastCycleDurationMs": 748,
       "lastCycleResult": "ok"
     },
     "diagnostics": {
@@ -112,19 +112,19 @@
       "pid": 92928,
       "lastRun": "2026-03-03T23:48:36.734Z",
       "nextRun": "2026-03-04T05:48:36.734Z",
-      "heartbeat": "2026-03-03T23:49:00.531Z",
+      "heartbeat": "2026-03-03T23:50:00.534Z",
       "cycle": 745,
       "phase": "starting",
       "lastCycleDurationMs": 26,
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 89240,
       "lastRun": "2026-03-03T23:49:16.258Z",
       "nextRun": "2026-03-04T00:49:16.258Z",
-      "heartbeat": "2026-03-03T23:49:16.261Z",
-      "cycle": 445,
+      "heartbeat": "2026-03-03T23:50:01.293Z",
+      "cycle": 446,
       "phase": "docs-update",
       "lastCycleDurationMs": 1123,
       "lastCycleResult": "ok"
@@ -145,21 +145,21 @@
       "pid": 76796,
       "lastRun": "2026-03-03T23:49:47.241Z",
       "nextRun": "2026-03-04T07:49:47.241Z",
-      "heartbeat": "2026-03-03T23:49:47.244Z",
+      "heartbeat": "2026-03-03T23:50:00.725Z",
       "cycle": 649,
       "phase": "starting",
       "lastCycleDurationMs": 6649,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 45452,
-      "lastRun": "2026-03-03T23:49:01.615Z",
-      "nextRun": "2026-03-04T03:49:01.615Z",
-      "heartbeat": "2026-03-03T23:49:46.644Z",
+      "lastRun": "2026-03-03T23:49:49.858Z",
+      "nextRun": "2026-03-04T03:49:49.858Z",
+      "heartbeat": "2026-03-03T23:49:49.867Z",
       "cycle": 798,
       "phase": "starting",
-      "lastCycleDurationMs": 3059,
+      "lastCycleDurationMs": 3212,
       "lastCycleResult": "error"
     },
     "observer": {
@@ -178,7 +178,7 @@
       "pid": 4848,
       "lastRun": "2026-03-03T23:45:32.416Z",
       "nextRun": "2026-03-04T00:45:32.416Z",
-      "heartbeat": "2026-03-03T23:49:00.548Z",
+      "heartbeat": "2026-03-03T23:50:00.550Z",
       "cycle": 22,
       "phase": "starting",
       "lastCycleDurationMs": 1,
@@ -189,7 +189,7 @@
       "pid": 87940,
       "lastRun": "2026-03-03T23:45:32.588Z",
       "nextRun": "2026-03-04T00:45:32.588Z",
-      "heartbeat": "2026-03-03T23:49:00.811Z",
+      "heartbeat": "2026-03-03T23:50:00.709Z",
       "cycle": 22,
       "phase": "starting",
       "lastCycleDurationMs": 17,
