@@ -6,29 +6,29 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T07:02:09.779Z",
+      "at": "2026-03-03T07:03:41.917Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-03T07:02:18.107Z",
+      "at": "2026-03-03T07:03:57.564Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
     },
     "diagnostics-complete": {
-      "at": "2026-03-03T07:03:17.491Z",
+      "at": "2026-03-03T07:03:47.536Z",
       "emittedBy": "diagnostics",
       "actions": 3,
       "healthChecks": 8,
       "healthChecksFailing": 1
     },
     "diagnostics-requested": {
-      "at": "2026-03-03T06:55:49.198Z",
+      "at": "2026-03-03T07:03:42.004Z",
       "emittedBy": "convergence-tracker",
       "reason": "stuck",
-      "mocCount": 3
+      "mocCount": 2
     },
     "docs-synced": {
       "at": "2026-03-03T06:08:10.367Z",
@@ -72,10 +72,10 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-03T07:03:17.497Z",
-      "emittedBy": "diagnostics",
-      "claw": "diagnostics",
-      "reason": "5 consecutive failures (same error x5)",
+      "at": "2026-03-03T07:03:43.650Z",
+      "emittedBy": "cp-meta",
+      "claw": "cp-meta",
+      "reason": "5 consecutive failures (same error x1)",
       "consecutiveFailures": 5
     }
   },
@@ -92,14 +92,14 @@
       "lastCycleResult": "error"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 61764,
-      "lastRun": "2026-03-03T07:01:49.800Z",
-      "nextRun": "2026-03-03T07:31:49.800Z",
-      "heartbeat": "2026-03-03T07:03:38.985Z",
+      "lastRun": "2026-03-03T07:03:43.644Z",
+      "nextRun": "2026-03-03T07:33:43.644Z",
+      "heartbeat": "2026-03-03T07:03:58.670Z",
       "cycle": 160,
       "phase": "starting",
-      "lastCycleDurationMs": 23141,
+      "lastCycleDurationMs": 23797,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
@@ -116,34 +116,34 @@
     "diagnostics": {
       "status": "idle",
       "pid": 94912,
-      "lastRun": "2026-03-03T07:03:17.493Z",
-      "nextRun": "2026-03-03T13:03:17.493Z",
-      "heartbeat": "2026-03-03T07:03:39.096Z",
-      "cycle": 148,
+      "lastRun": "2026-03-03T07:03:47.538Z",
+      "nextRun": "2026-03-03T13:03:47.538Z",
+      "heartbeat": "2026-03-03T07:03:47.541Z",
+      "cycle": 149,
       "phase": "starting",
       "lastCycleDurationMs": 13,
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 53928,
-      "lastRun": "2026-03-03T07:02:09.881Z",
-      "nextRun": "2026-03-03T08:02:09.881Z",
-      "heartbeat": "2026-03-03T07:03:39.928Z",
+      "lastRun": "2026-03-03T07:03:42.023Z",
+      "nextRun": "2026-03-03T08:03:42.023Z",
+      "heartbeat": "2026-03-03T07:03:42.026Z",
       "cycle": 223,
       "phase": "docs-update",
-      "lastCycleDurationMs": 2019,
+      "lastCycleDurationMs": 2093,
       "lastCycleResult": "ok"
     },
     "intelligence": {
       "status": "idle",
       "pid": 37012,
-      "lastRun": "2026-03-03T07:02:18.110Z",
-      "nextRun": "2026-03-03T09:02:18.110Z",
-      "heartbeat": "2026-03-03T07:03:18.117Z",
-      "cycle": 162,
+      "lastRun": "2026-03-03T07:03:57.567Z",
+      "nextRun": "2026-03-03T09:03:57.567Z",
+      "heartbeat": "2026-03-03T07:03:57.570Z",
+      "cycle": 163,
       "phase": "starting",
-      "lastCycleDurationMs": 9786,
+      "lastCycleDurationMs": 9403,
       "lastCycleResult": "ok"
     },
     "test-runner": {
@@ -158,12 +158,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 31608,
       "lastRun": "2026-03-03T07:02:30.418Z",
       "nextRun": "2026-03-03T11:02:30.418Z",
-      "heartbeat": "2026-03-03T07:03:41.571Z",
-      "cycle": 161,
+      "heartbeat": "2026-03-03T07:04:00.478Z",
+      "cycle": 162,
       "phase": "starting",
       "lastCycleDurationMs": 2931,
       "lastCycleResult": "ok"
