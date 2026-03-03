@@ -1,23 +1,15 @@
 {
-  "lastRun": "2026-03-03T19:14:46.262Z",
-  "total": 3,
+  "lastRun": "2026-03-03T19:15:03.045Z",
+  "total": 1,
   "noiseAutoClose": 0,
-  "fixAttempted": 2,
+  "fixAttempted": 0,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 2,
+  "noFixNeeded": 0,
   "details": [
     {
       "action": "archived",
       "reason": "Critical route: /login"
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "tion is properly checked on both GET and POST\n- GET returns projects filtered by `user_id`, ordered by `last_activity_at` with null safety (`?? []`)\n- POST validates the request body and returns appropriate status codes (201 on success, 400/401/500 on errors)\n- No TypeScript issues visible\n\nThis app"
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "n `app/api/ideas/route.ts` and `lib/ideas.ts` is well-structured:\n\n- Auth checks are in place (401 on missing user)\n- Input validation covers all required fields\n- Quality gate runs before persisting\n- Upsert uses correct conflict key (`project_id,user_id`)\n- GET filters by both `project_id` and `us"
     }
   ]
 }

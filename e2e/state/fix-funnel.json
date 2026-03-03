@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-03-03T19:13:48.137Z",
+  "generatedAt": "2026-03-03T19:14:58.267Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 556,
-    "mocs_implemented": 86,
+    "mocs_total": 562,
+    "mocs_implemented": 88,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 470,
+    "mocs_archived": 473,
     "mocs_with_commit": 2,
     "mocs_verified": 0,
     "fixes_attempted": 2,
@@ -23,35 +23,36 @@
     "finding_to_moc": 0,
     "moc_to_fix_attempt": 0.004,
     "fix_attempt_to_success": 0,
-    "moc_to_implemented": 0.155,
+    "moc_to_implemented": 0.157,
     "implemented_to_verified": 0,
     "end_to_end": 0
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 470,
-    "implemented": 86
+    "archived": 473,
+    "implemented": 88,
+    "approved": 1
   },
   "byTier": {
     "auto_approve": {
-      "total": 207,
+      "total": 209,
       "implemented": 0,
       "failed": 0,
-      "archived": 207,
+      "archived": 208,
       "awaiting": 0
     },
     "build": {
-      "total": 202,
-      "implemented": 85,
+      "total": 205,
+      "implemented": 87,
       "failed": 0,
-      "archived": 117,
+      "archived": 118,
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 147,
+      "total": 148,
       "implemented": 1,
       "failed": 0,
-      "archived": 146,
+      "archived": 147,
       "awaiting": 0
     }
   },
@@ -59,30 +60,21 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 556,
-      "to": 86,
-      "lostCount": 470,
-      "dropRate": 85
+      "from": 562,
+      "to": 88,
+      "lostCount": 474,
+      "dropRate": 84
     },
     {
       "stage": "implemented_to_verified",
       "label": "Implemented → Verified (commit)",
-      "from": 86,
+      "from": 88,
       "to": 0,
-      "lostCount": 86,
+      "lostCount": 88,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 566,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 567,
@@ -158,6 +150,15 @@
     {
       "date": "2026-03-03",
       "iteration": 575,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 576,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
