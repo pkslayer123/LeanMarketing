@@ -8415,7 +8415,10 @@
       "createdAt": "2026-03-03T19:10:35.993Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T19:10:38.712Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772565035993",
@@ -8427,7 +8430,10 @@
       "createdAt": "2026-03-03T19:10:35.993Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:10:54.258Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: bed for this MOC. The `app/api/projects/route.ts` code is already well-structured:\n\n- Auth checks on both GET and POST\n- Proper error handling with correct status codes\n- Null safety (`??`, optional chaining)\n- Input validation on POST (name required, trimmed)\n- Ordered query with `nullsFirst: false`\n\nNo changes are needed. This appears to be a builder-generated MOC (\"Build feature: Dashboard and Project Overview\") with no actual findings attached, making it noise rather than a real bug to fix.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: bed for this MOC. The `app/api/projects/route.ts` code is already well-structured:\n\n- Auth checks on both GET and POST\n- Proper error handling with correct status codes\n- Null safety (`??`, optional chaining)\n- Input validation on POST (name required, trimmed)\n- Ordered query with `nullsFirst: false`\n\nNo changes are needed. This appears to be a builder-generated MOC (\"Build feature: Dashboard and Project Overview\") with no actual findings attached, making it noise rather than a real bug to fix.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772565035993",
@@ -8439,7 +8445,10 @@
       "createdAt": "2026-03-03T19:10:35.993Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:11:30.339Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  changes are needed.** The findings section for this MOC is empty — no specific bugs or issues were reported. The route code is correct:\n\n- Auth check with proper null guard\n- JSON body parsing with error handling  \n- All required field validation\n- Quality gate evaluation\n- Upsert with conflict resolution on `project_id,user_id`\n- Correct GET handler with user-scoped filtering\n\nThe existing type errors are pre-existing issues in a different file (`audience/_client.tsx`) unrelated to this task.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  changes are needed.** The findings section for this MOC is empty — no specific bugs or issues were reported. The route code is correct:\n\n- Auth check with proper null guard\n- JSON body parsing with error handling  \n- All required field validation\n- Quality gate evaluation\n- Upsert with conflict resolution on `project_id,user_id`\n- Correct GET handler with user-scoped filtering\n\nThe existing type errors are pre-existing issues in a different file (`audience/_client.tsx`) unrelated to this task.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
