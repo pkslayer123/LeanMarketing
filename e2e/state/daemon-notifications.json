@@ -1,30 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T18:24:53.742Z"
-  },
-  {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 16:24:29] [builder]   fail: git-diff-check — \n[2026-03-03 17:14:01] [builder]   fail: git-diff-check — \n[2026-03-03 17:57:45] [builder]   fail: git-diff-check — \n[2026-03-03 17:58:24] [dia",
-    "severity": "critical",
-    "at": "2026-03-03T18:25:10.443Z"
-  },
-  {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T18:25:10.445Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T18:25:10.466Z"
-  },
-  {
-    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T18:25:10.486Z"
-  },
-  {
     "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 17:58:24] [diagnostics]   classification: unknown — [2026-03-03 15:54:11] [builder]   fail: git-diff-check — \n[2026-03-03 16:25:46] [builder]   fail: git-diff-check — \n[2026-03-03 17:16:16",
     "severity": "critical",
     "at": "2026-03-03T18:25:40.517Z"
@@ -498,5 +473,30 @@
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T19:09:12.841Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T19:12:53.980Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 16:45:16] [builder]   fail: git-diff-check — \n[2026-03-03 18:35:35] [builder] cycle 409 complete (28.7s) — 0% complete, 10 gaps, 3 MOCs [failed: commit]\n[2026-03-03 18:36:55] [builder]   f",
+    "severity": "critical",
+    "at": "2026-03-03T19:12:57.973Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T19:12:57.975Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T19:12:57.991Z"
+  },
+  {
+    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T19:12:58.009Z"
   }
 ]
