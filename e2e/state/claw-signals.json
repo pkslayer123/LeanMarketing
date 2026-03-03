@@ -6,7 +6,7 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T08:52:59.606Z",
+      "at": "2026-03-03T08:54:01.554Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -18,17 +18,17 @@
       "failed": 2
     },
     "diagnostics-complete": {
-      "at": "2026-03-03T08:53:22.639Z",
+      "at": "2026-03-03T08:54:07.686Z",
       "emittedBy": "diagnostics",
-      "actions": 2,
+      "actions": 4,
       "healthChecks": 8,
-      "healthChecksFailing": 0
+      "healthChecksFailing": 2
     },
     "diagnostics-requested": {
-      "at": "2026-03-03T08:53:11.958Z",
-      "emittedBy": "intelligence",
-      "reason": "config-changed",
-      "changes": 1
+      "at": "2026-03-03T08:54:01.634Z",
+      "emittedBy": "convergence-tracker",
+      "reason": "stuck",
+      "mocCount": 2
     },
     "docs-synced": {
       "at": "2026-03-03T08:08:14.369Z",
@@ -116,23 +116,23 @@
     "diagnostics": {
       "status": "idle",
       "pid": 94912,
-      "lastRun": "2026-03-03T08:53:22.641Z",
-      "nextRun": "2026-03-03T14:53:22.641Z",
-      "heartbeat": "2026-03-03T08:53:39.713Z",
-      "cycle": 218,
+      "lastRun": "2026-03-03T08:54:07.688Z",
+      "nextRun": "2026-03-03T14:54:07.688Z",
+      "heartbeat": "2026-03-03T08:54:07.691Z",
+      "cycle": 219,
       "phase": "starting",
-      "lastCycleDurationMs": 12,
-      "lastCycleResult": "ok"
+      "lastCycleDurationMs": 16,
+      "lastCycleResult": "error"
     },
     "fix-engine": {
       "status": "running",
       "pid": 53928,
-      "lastRun": "2026-03-03T08:52:59.704Z",
-      "nextRun": "2026-03-03T09:52:59.704Z",
-      "heartbeat": "2026-03-03T08:53:59.741Z",
-      "cycle": 317,
+      "lastRun": "2026-03-03T08:54:01.654Z",
+      "nextRun": "2026-03-03T09:54:01.654Z",
+      "heartbeat": "2026-03-03T08:54:16.668Z",
+      "cycle": 318,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1731,
+      "lastCycleDurationMs": 1911,
       "lastCycleResult": "ok"
     },
     "intelligence": {
@@ -140,7 +140,7 @@
       "pid": 37012,
       "lastRun": "2026-03-03T08:53:18.538Z",
       "nextRun": "2026-03-03T10:53:18.538Z",
-      "heartbeat": "2026-03-03T08:53:18.541Z",
+      "heartbeat": "2026-03-03T08:54:07.270Z",
       "cycle": 231,
       "phase": "starting",
       "lastCycleDurationMs": 9115,
