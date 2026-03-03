@@ -1,10 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T10:35:12.817Z"
-  },
-  {
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T10:35:12.827Z"
@@ -498,5 +493,10 @@
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T11:17:44.999Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x3)",
+    "severity": "warning",
+    "at": "2026-03-03T11:20:03.472Z"
   }
 ]
