@@ -29,15 +29,29 @@
             "filesChanged": 1
           },
           "correct": false
+        },
+        {
+          "ts": "2026-03-03T17:17:48.230Z",
+          "input": {
+            "mocId": "build-dashboard_and_project_overview-1772558210276",
+            "tier": "build",
+            "model": "sonnet"
+          },
+          "output": {
+            "action": "fix_applied",
+            "verificationScore": 2,
+            "filesChanged": 1
+          },
+          "correct": false
         }
       ],
       "stats": {
-        "total": 2,
+        "total": 3,
         "correct": 0,
-        "incorrect": 2,
+        "incorrect": 3,
         "unknown": 0
       }
     }
   },
-  "updatedAt": "2026-03-03T16:41:13.671Z"
+  "updatedAt": "2026-03-03T17:17:48.230Z"
 }
