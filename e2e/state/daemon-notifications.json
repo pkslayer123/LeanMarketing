@@ -1,20 +1,5 @@
 [
   {
-    "message": "Watchdog restarted daemon (attempt 1). Reason: daemon pid 36796 not running",
-    "severity": "warning",
-    "at": "2026-03-03T13:35:54.896Z"
-  },
-  {
-    "message": "Daemon stuck: 3 approved MOCs, 814 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T14:02:25.907Z"
-  },
-  {
-    "message": "Daemon stuck: 2 approved MOCs, 815 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T14:02:27.949Z"
-  },
-  {
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T14:02:40.179Z"
@@ -498,5 +483,20 @@
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T14:37:02.856Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 879 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T14:38:17.289Z"
+  },
+  {
+    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T14:38:32.905Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T14:38:32.915Z"
   }
 ]
