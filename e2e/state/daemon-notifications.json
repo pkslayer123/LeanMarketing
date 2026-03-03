@@ -1,20 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T12:44:04.459Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T12:44:04.468Z"
-  },
-  {
-    "message": "Circuit breaker tripped for builder: 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T12:44:10.232Z"
-  },
-  {
     "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T12:44:14.333Z"
@@ -498,5 +483,20 @@
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T13:20:06.368Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 799 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T13:22:09.017Z"
+  },
+  {
+    "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T13:22:21.455Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T13:22:21.463Z"
   }
 ]
