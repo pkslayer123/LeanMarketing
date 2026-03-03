@@ -6,7 +6,7 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T23:32:13.358Z",
+      "at": "2026-03-03T23:32:44.670Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -86,14 +86,14 @@
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 89092,
-      "lastRun": "2026-03-03T23:30:51.259Z",
-      "nextRun": "2026-03-04T00:00:51.259Z",
-      "heartbeat": "2026-03-03T23:32:00.680Z",
+      "lastRun": "2026-03-03T23:32:44.839Z",
+      "nextRun": "2026-03-04T00:02:44.839Z",
+      "heartbeat": "2026-03-03T23:32:44.842Z",
       "cycle": 757,
       "phase": "starting",
-      "lastCycleDurationMs": 96352,
+      "lastCycleDurationMs": 98571,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
@@ -119,23 +119,23 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 89240,
-      "lastRun": "2026-03-03T23:32:13.488Z",
-      "nextRun": "2026-03-04T00:32:13.488Z",
-      "heartbeat": "2026-03-03T23:32:43.515Z",
+      "lastRun": "2026-03-03T23:32:44.773Z",
+      "nextRun": "2026-03-04T00:32:44.773Z",
+      "heartbeat": "2026-03-03T23:32:44.776Z",
       "cycle": 420,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1528,
+      "lastCycleDurationMs": 1257,
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "idle",
+      "status": "running",
       "pid": 82152,
       "lastRun": "2026-03-03T23:32:35.951Z",
       "nextRun": "2026-03-04T01:32:35.951Z",
-      "heartbeat": "2026-03-03T23:32:41.963Z",
-      "cycle": 782,
+      "heartbeat": "2026-03-03T23:32:50.970Z",
+      "cycle": 783,
       "phase": "starting",
       "lastCycleDurationMs": 11713,
       "lastCycleResult": "ok"
@@ -152,12 +152,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 45452,
       "lastRun": "2026-03-03T23:32:19.371Z",
       "nextRun": "2026-03-04T03:32:19.371Z",
-      "heartbeat": "2026-03-03T23:32:19.376Z",
-      "cycle": 772,
+      "heartbeat": "2026-03-03T23:32:49.394Z",
+      "cycle": 773,
       "phase": "starting",
       "lastCycleDurationMs": 3468,
       "lastCycleResult": "error"
