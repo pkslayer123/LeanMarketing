@@ -6,7 +6,7 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T14:08:22.393Z",
+      "at": "2026-03-03T14:17:03.868Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -18,17 +18,17 @@
       "failed": 2
     },
     "diagnostics-complete": {
-      "at": "2026-03-03T14:08:43.663Z",
+      "at": "2026-03-03T14:17:19.703Z",
       "emittedBy": "diagnostics",
-      "actions": 3,
+      "actions": 4,
       "healthChecks": 8,
-      "healthChecksFailing": 1
+      "healthChecksFailing": 2
     },
     "diagnostics-requested": {
-      "at": "2026-03-03T14:08:05.830Z",
+      "at": "2026-03-03T14:17:03.968Z",
       "emittedBy": "convergence-tracker",
       "reason": "stuck",
-      "mocCount": 3
+      "mocCount": 2
     },
     "docs-synced": {
       "at": "2026-03-03T14:08:25.260Z",
@@ -100,32 +100,32 @@
     "diagnostics": {
       "status": "idle",
       "pid": 28396,
-      "lastRun": "2026-03-03T14:08:43.665Z",
-      "nextRun": "2026-03-03T20:08:43.665Z",
-      "heartbeat": "2026-03-03T14:16:46.338Z",
-      "cycle": 441,
+      "lastRun": "2026-03-03T14:17:19.706Z",
+      "nextRun": "2026-03-03T20:17:19.706Z",
+      "heartbeat": "2026-03-03T14:17:19.710Z",
+      "cycle": 442,
       "phase": "starting",
-      "lastCycleDurationMs": 16,
+      "lastCycleDurationMs": 3328,
       "lastCycleResult": "error"
     },
     "fix-engine": {
       "status": "running",
       "pid": 82428,
-      "lastRun": "2026-03-03T14:08:22.507Z",
-      "nextRun": "2026-03-03T15:08:22.507Z",
-      "heartbeat": "2026-03-03T14:17:01.384Z",
-      "cycle": 544,
+      "lastRun": "2026-03-03T14:17:03.991Z",
+      "nextRun": "2026-03-03T15:17:03.991Z",
+      "heartbeat": "2026-03-03T14:17:19.018Z",
+      "cycle": 545,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1639,
+      "lastCycleDurationMs": 2605,
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "idle",
+      "status": "running",
       "pid": 18720,
       "lastRun": "2026-03-03T14:08:23.985Z",
       "nextRun": "2026-03-03T16:08:23.985Z",
-      "heartbeat": "2026-03-03T14:16:46.485Z",
-      "cycle": 408,
+      "heartbeat": "2026-03-03T14:17:16.530Z",
+      "cycle": 409,
       "phase": "starting",
       "lastCycleDurationMs": 10531,
       "lastCycleResult": "ok"
