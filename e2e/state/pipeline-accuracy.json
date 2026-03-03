@@ -43,15 +43,29 @@
             "filesChanged": 1
           },
           "correct": false
+        },
+        {
+          "ts": "2026-03-03T22:42:25.194Z",
+          "input": {
+            "mocId": "build-approval_mode_toggle-1772577675178",
+            "tier": "auto_approve",
+            "model": "sonnet"
+          },
+          "output": {
+            "action": "fix_applied",
+            "verificationScore": 0,
+            "filesChanged": 2
+          },
+          "correct": false
         }
       ],
       "stats": {
-        "total": 3,
+        "total": 4,
         "correct": 0,
-        "incorrect": 3,
+        "incorrect": 4,
         "unknown": 0
       }
     }
   },
-  "updatedAt": "2026-03-03T17:17:48.230Z"
+  "updatedAt": "2026-03-03T22:42:25.194Z"
 }
