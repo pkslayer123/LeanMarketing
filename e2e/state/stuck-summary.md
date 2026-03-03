@@ -1,14 +1,13 @@
 # Daemon Stuck — Needs Attention
 
-Generated: 2026-03-03T02:11:04.959Z
+Generated: 2026-03-03T02:16:52.836Z
 
 ## Summary
-- **Approved MOCs:** 2
-- **Consecutive zero-fix runs:** 13
+- **Approved MOCs:** 1
+- **Consecutive zero-fix runs:** 14
 
 ## Open MOCs (approved/pending_fix)
-- Build feature: Master Build Prompt (copy/paste) (build)
-- Build feature: End of Master Build Prompt (build)
+- Build feature: Master Build Prompt (copy/paste) (auto_approve)
 
 ## Actions
 - Run the auto-fix script manually or enable fix-engine

@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-03-03T02:16:52.717Z",
+  "funnel": {
+    "findings_total": 0,
+    "findings_open": 0,
+    "findings_resolved": 0,
+    "findings_noise": 0,
+    "mocs_total": 2,
+    "mocs_implemented": 0,
+    "mocs_awaiting_closeout": 0,
+    "mocs_pending_approval": 0,
+    "mocs_needs_human": 0,
+    "mocs_archived": 1,
+    "mocs_with_commit": 0,
+    "mocs_verified": 0,
+    "fixes_attempted": 0,
+    "fixes_applied": 0,
+    "fixes_failed": 0,
+    "fixes_noise_closed": 0,
+    "fixes_no_fix_needed": 0
+  },
+  "conversionRates": {
+    "finding_to_moc": 0,
+    "moc_to_fix_attempt": 0,
+    "fix_attempt_to_success": 0,
+    "moc_to_implemented": 0,
+    "implemented_to_verified": 0,
+    "end_to_end": 0
+  },
+  "findingsBySeverity": {},
+  "mocsByStatus": {
+    "approved": 1,
+    "archived": 1
+  },
+  "byTier": {
+    "auto_approve": {
+      "total": 2,
+      "implemented": 0,
+      "failed": 0,
+      "archived": 1,
+      "awaiting": 0
+    }
+  },
+  "leaks": [
+    {
+      "stage": "moc_to_implemented",
+      "label": "MOCs → Implemented",
+      "from": 2,
+      "to": 0,
+      "lostCount": 2,
+      "dropRate": 100
+    }
+  ],
+  "trend": [
+    {
+      "date": "2026-03-03",
+      "iteration": 6,
+      "findingsBefore": 0,
+      "findingsAfter": null,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    }
+  ]
+}
