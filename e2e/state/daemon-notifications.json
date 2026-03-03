@@ -1,30 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T13:22:36.500Z"
-  },
-  {
-    "message": "Daemon stuck: 2 approved MOCs, 804 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T13:25:59.675Z"
-  },
-  {
-    "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T13:26:06.559Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T13:26:06.569Z"
-  },
-  {
-    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
-    "severity": "warning",
-    "at": "2026-03-03T13:26:06.583Z"
-  },
-  {
     "message": "Daemon stuck: 2 approved MOCs, 805 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T13:26:16.428Z"
@@ -498,5 +473,30 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T14:29:20.396Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 864 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T14:30:42.702Z"
+  },
+  {
+    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T14:30:50.444Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T14:30:50.458Z"
+  },
+  {
+    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x2)",
+    "severity": "warning",
+    "at": "2026-03-03T14:30:50.475Z"
+  },
+  {
+    "message": "Circuit breaker tripped for builder: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T14:31:07.444Z"
   }
 ]
