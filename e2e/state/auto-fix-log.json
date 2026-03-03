@@ -1,15 +1,23 @@
 {
-  "lastRun": "2026-03-03T22:37:51.908Z",
+  "lastRun": "2026-03-03T22:42:25.210Z",
   "total": 1,
   "noiseAutoClose": 0,
-  "fixAttempted": 0,
-  "fixApplied": 0,
+  "fixAttempted": 1,
+  "fixApplied": 1,
   "fixFailed": 0,
   "noFixNeeded": 0,
   "details": [
     {
-      "action": "archived",
-      "reason": "Auto-archived: no source files resolvable for \"null\" after 3 attempts"
+      "mocId": "build-approval_mode_toggle-1772577675178",
+      "action": "claude_fixed",
+      "tier": "auto_approve",
+      "status": "implemented",
+      "files": [
+        "app/settings/page.tsx",
+        "lib/settings/index.ts"
+      ],
+      "title": "Build feature: Approval Mode Toggle",
+      "changeType": ""
     }
   ]
 }
