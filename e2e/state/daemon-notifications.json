@@ -1,10 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T13:00:05.239Z"
-  },
-  {
     "message": "Daemon stuck: 2 approved MOCs, 769 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T13:00:22.066Z"
@@ -498,5 +493,10 @@
     "message": "11/11 claws healthy (builder:running, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 100% pass rate. 0 MOCs pending approval. Pipeline: degraded (1 failures).",
     "severity": "info",
     "at": "2026-03-03T14:02:43.228Z"
+  },
+  {
+    "message": "Daemon stuck: 1 approved MOCs, 816 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T14:02:44.775Z"
   }
 ]
