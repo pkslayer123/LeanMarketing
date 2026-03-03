@@ -31,6 +31,69 @@ function loadJSON(filepath) {
 }
 
 function computeRouteCoverage() {
+  // Use sub-feature granularity: count individual Gap items in BUILD-SPEC
+  // rather than whole sections, giving ~2% increments instead of ~10%.
+  const specPath = path.join(ROOT, "docs", "BUILD-SPEC.md");
+  if (fs.existsSync(specPath)) {
+    try {
+      const content = fs.readFileSync(specPath, "utf-8");
+      const featureAreasMatch = content.match(/^## Feature Areas\s*$/m);
+      if (featureAreasMatch) {
+        const start = featureAreasMatch.index + featureAreasMatch[0].length;
+        const nextH2 = content.slice(start).match(/^## [^#]/m);
+        const end = nextH2 ? start + nextH2.index : content.length;
+        const featureContent = content.slice(start, end);
+
+        // Count all Gap column values (sub-features)
+        let totalGaps = 0;
+        let builtGaps = 0;
+        const lines = featureContent.split("\n");
+        let inGapTable = false;
+        let gapColIndex = -1;
+        let currentCodeAreas = [];
+
+        for (const line of lines) {
+          // Track codeAreas for current section
+          const codeAreasMatch = line.match(/\*\*codeAreas:\*\*\s*(.+)/i);
+          if (codeAreasMatch) {
+            currentCodeAreas = [];
+            const areaRegex = /`([^`]+)`/g;
+            let m;
+            while ((m = areaRegex.exec(codeAreasMatch[1])) !== null) {
+              currentCodeAreas.push(m[1].replace(/\/+$/, ""));
+            }
+          }
+
+          if (!line.trim().startsWith("|")) { inGapTable = false; gapColIndex = -1; continue; }
+          const cells = line.split("|").map(c => c.trim()).filter(c => c !== "");
+          if (!inGapTable) {
+            gapColIndex = cells.findIndex(c => c === "Gap");
+            if (gapColIndex >= 0) { inGapTable = true; continue; } else continue;
+          }
+          if (cells.every(c => c.match(/^-+$/))) continue;
+          if (gapColIndex < cells.length) {
+            const gap = cells[gapColIndex];
+            if (gap && gap !== "None" && !gap.match(/^-+$/)) {
+              totalGaps++;
+              // Check if code area files exist for this sub-feature
+              const hasCode = currentCodeAreas.some(area => {
+                const fp = path.join(ROOT, area);
+                return fs.existsSync(fp) || fs.existsSync(fp + ".ts") || fs.existsSync(fp + ".tsx") ||
+                  fs.existsSync(fp + "/page.tsx") || fs.existsSync(fp + "/route.ts");
+              });
+              if (hasCode) builtGaps++;
+            }
+          }
+        }
+
+        if (totalGaps > 0) {
+          return builtGaps / totalGaps;
+        }
+      }
+    } catch { /* fall through to builder-state */ }
+  }
+
+  // Fallback: use builder-state section-level metric
   const builderState = loadJSON(path.join(STATE_DIR, "builder-state.json"));
   if (!builderState || !builderState.totalSections) { return 0; }
   return builderState.specCompletionRate ?? 0;
@@ -92,11 +155,17 @@ function main() {
   const errorRate = computeErrorRate();
 
   // Weighted composite score
+  // When route coverage is very low (<20%), discount oracle/error signals
+  // since they're vacuously true (an empty app has no bugs or findings).
+  const buildMaturity = Math.min(1, routeCoverage / 0.2); // 0→0, 0.1→0.5, 0.2+→1.0
+  const adjustedOracle = oracleConfidence * buildMaturity;
+  const adjustedError = errorRate * buildMaturity;
+
   const score =
     routeCoverage * 0.35 +
     testPassRate * 0.30 +
-    oracleConfidence * 0.20 +
-    errorRate * 0.15;
+    adjustedOracle * 0.20 +
+    adjustedError * 0.15;
 
   const phase = determinePhase(score);
 

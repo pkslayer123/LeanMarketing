@@ -76,7 +76,13 @@ class BuilderClaw extends Claw {
     this.log(`Spec analysis: ${specSections.length} sections, ${gaps.length} unbuilt`);
 
     // In converged/polish/stabilize phases, cap builds to 1 per cycle
-    const slowPhase = ["converged", "polish", "stabilize"].includes(buildPhase);
+    // BUT: override to "build" phase when most features are unbuilt (>70% gaps)
+    const gapRatio = gaps.length / specSections.length;
+    const effectivePhase = gapRatio > 0.7 ? "build" : buildPhase;
+    if (effectivePhase !== buildPhase) {
+      this.log(`Phase override: ${buildPhase} → ${effectivePhase} (${gaps.length}/${specSections.length} features unbuilt)`);
+    }
+    const slowPhase = ["converged", "polish", "stabilize"].includes(effectivePhase);
     const stabilizeCap = slowPhase ? 1 : undefined;
 
     if (gaps.length === 0) {
