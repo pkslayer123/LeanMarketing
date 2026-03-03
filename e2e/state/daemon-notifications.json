@@ -433,5 +433,15 @@
     "message": "11/11 claws healthy (builder:running, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 72% pass rate. 0 MOCs pending approval. Pipeline: healthy.",
     "severity": "info",
     "at": "2026-03-03T03:54:01.248Z"
+  },
+  {
+    "message": "Daemon stuck: 1 approved MOCs, 78 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T03:54:03.617Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T03:54:16.281Z"
   }
 ]
