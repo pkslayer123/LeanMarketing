@@ -1,20 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T12:59:35.182Z"
-  },
-  {
-    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
-    "severity": "warning",
-    "at": "2026-03-03T12:59:35.198Z"
-  },
-  {
-    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x1)",
-    "severity": "warning",
-    "at": "2026-03-03T13:00:05.230Z"
-  },
-  {
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T13:00:05.239Z"
@@ -498,5 +483,20 @@
     "message": "Daemon stuck: 3 approved MOCs, 814 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T14:02:25.907Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 815 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T14:02:27.949Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T14:02:40.179Z"
+  },
+  {
+    "message": "11/11 claws healthy (builder:running, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 100% pass rate. 0 MOCs pending approval. Pipeline: degraded (1 failures).",
+    "severity": "info",
+    "at": "2026-03-03T14:02:43.228Z"
   }
 ]
