@@ -1,15 +1,5 @@
 [
   {
-    "message": "Daemon stuck: 2 approved MOCs, 8 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T02:10:06.072Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T02:10:19.316Z"
-  },
-  {
     "message": "Daemon stuck: 2 approved MOCs, 9 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T02:10:21.974Z"
@@ -498,5 +488,15 @@
     "message": "11/11 claws healthy (builder:running, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 77% pass rate. 0 MOCs pending approval. Pipeline: healthy.",
     "severity": "info",
     "at": "2026-03-03T04:04:35.756Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 96 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T04:08:39.547Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T04:08:50.878Z"
   }
 ]
