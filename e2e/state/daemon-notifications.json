@@ -98,5 +98,20 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
     "severity": "warning",
     "at": "2026-03-03T02:10:49.364Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 12 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T02:10:53.830Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 13 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T02:11:04.969Z"
+  },
+  {
+    "message": "Circuit breaker tripped for finding-pipeline: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T02:11:04.992Z"
   }
 ]

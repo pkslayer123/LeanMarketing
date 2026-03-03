@@ -52,7 +52,7 @@ interface ApiResult {
 
 export const test = base.extend<{ sim: PersonaSim }>({
   sim: async ({ page }, use) => {
-    const baseUrl = process.env.BASE_URL ?? "https://LeanMarketing.vercel.app";
+    const baseUrl = process.env.BASE_URL ?? "https://leanmarketing.vercel.app";
 
     // Create general-purpose adapter and oracle
     const adapter = new SimulationAdapter(page, {

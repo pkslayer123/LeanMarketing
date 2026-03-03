@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 4 : 8,
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
-    baseURL: process.env.BASE_URL ?? "https://LeanMarketing.vercel.app",
+    baseURL: process.env.BASE_URL ?? "https://leanmarketing.vercel.app",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },

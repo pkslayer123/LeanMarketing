@@ -1,5 +1,5 @@
 {
-  "name": "LeanMarketing",
+  "name": "leanmarketing",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,18 +14,19 @@
     "daemon:stop": "node scripts/e2e/daemon.js --stop"
   },
   "dependencies": {
+    "@supabase/ssr": "latest",
+    "@supabase/supabase-js": "latest",
+    "dotenv": "^17.3.1",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "@supabase/supabase-js": "latest",
-    "@supabase/ssr": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
-    "typescript": "latest",
+    "@playwright/test": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "tailwindcss": "latest",
-    "@playwright/test": "latest"
+    "typescript": "latest"
   }
 }
