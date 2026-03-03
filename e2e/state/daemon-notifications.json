@@ -1,40 +1,5 @@
 [
   {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 17:12:28] [builder]   fail: git-diff-check — \n[2026-03-03 17:52:08] [diagnostics]   classification: unknown — [2026-03-03 17:12:52] [diagnostics]   classification: unknown — [2026-03-03 16",
-    "severity": "critical",
-    "at": "2026-03-03T18:23:10.320Z"
-  },
-  {
-    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T18:23:10.322Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T18:23:10.334Z"
-  },
-  {
-    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T18:23:57.427Z"
-  },
-  {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 17:53:04] [builder]   fail: git-diff-check — \n[2026-03-03 17:54:48] [builder]   fail: git-diff-check — \n[2026-03-03 17:56:34] [builder]   fail: git-diff-check — \n[2026-03-03 17:57:08] [dia",
-    "severity": "critical",
-    "at": "2026-03-03T18:24:10.384Z"
-  },
-  {
-    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x2)",
-    "severity": "warning",
-    "at": "2026-03-03T18:24:10.385Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T18:24:10.403Z"
-  },
-  {
     "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T18:24:53.742Z"
@@ -498,5 +463,40 @@
     "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T19:08:42.309Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 18:33:10] [diagnostics]   classification: unknown — [2026-03-03 18:06:14] [builder]   fail: git-diff-check — \n[2026-03-03 18:07:09] [diagnostics]   classification: unknown — [2026-03-03 17",
+    "severity": "critical",
+    "at": "2026-03-03T19:08:57.781Z"
+  },
+  {
+    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T19:08:57.783Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T19:08:57.797Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x4)",
+    "severity": "warning",
+    "at": "2026-03-03T19:09:04.440Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 18:07:09] [diagnostics]   classification: unknown — [2026-03-03 17:28:31] [builder]   fail: git-diff-check — \n[2026-03-03 18:33:28] [builder]   fail: git-diff-check — \n[2026-03-03 18:34:36",
+    "severity": "critical",
+    "at": "2026-03-03T19:09:12.826Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x4)",
+    "severity": "warning",
+    "at": "2026-03-03T19:09:12.828Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T19:09:12.841Z"
   }
 ]
