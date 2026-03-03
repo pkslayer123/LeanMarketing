@@ -8269,6 +8269,42 @@
       "routedDepartments": [
         "Engineering"
       ]
+    },
+    {
+      "id": "build-authentication_and_user_management-1772564567406",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T19:02:47.406Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T19:02:48.361Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772564567406",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T19:02:47.406Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T19:03:02.783Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: es were reported for this file. Looking at the code itself, `app/api/projects/route.ts` is well-formed:\n\n- Auth check before any data access\n- Null safety with `?.` and `?? []`\n- Proper error propagation with appropriate HTTP status codes\n- Input validation on POST (name required, JSON parse guarded)\n\nNo changes are needed. This appears to be a builder-phase MOC that was queued for scaffolding a dashboard feature, but the API route itself already exists and is correct. There are no bugs to fix.\n"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772564567406",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T19:02:47.406Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T19:03:31.632Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: ed for this MOC. The route code in `app/api/ideas/route.ts` and `lib/ideas.ts` are both correct:\n\n- Auth check is present and returns 401 properly\n- All fields are validated before use\n- `runQualityGate` is called correctly\n- Upsert with `onConflict: \"project_id,user_id\"` is appropriate\n- GET endpoint filters by both `project_id` and `user_id` (correct RLS pattern)\n\nThe TypeScript errors shown are in an unrelated file (`audience/_client.tsx`) and pre-exist this task. No changes are needed here.\n"
     }
   ]
 }
