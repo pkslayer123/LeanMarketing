@@ -1,25 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T02:40:56.809Z"
-  },
-  {
-    "message": "Daemon stuck: 1 approved MOCs, 18 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T02:40:58.489Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T02:41:11.843Z"
-  },
-  {
-    "message": "CRITICAL: 3 consecutive runs with 0 total tests — Playwright may not be installed or no test files found",
-    "severity": "critical",
-    "at": "2026-03-03T03:07:52.405Z"
-  },
-  {
     "message": "11/11 claws healthy (builder:idle, cp-meta:idle, finding-pipeline:idle, diagnostics:running, fix-engine:idle, intelligence:running, test-runner:running, health-deploy:running, observer:idle, test-regen:idle, docs-sync:idle). 0% pass rate. 0 MOCs pending approval. Pipeline: healthy.",
     "severity": "info",
     "at": "2026-03-03T03:07:55.715Z"
@@ -498,5 +478,25 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T04:17:51.267Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 110 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T04:20:26.602Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T04:20:36.342Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T04:20:36.348Z"
+  },
+  {
+    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x2)",
+    "severity": "warning",
+    "at": "2026-03-03T04:20:36.363Z"
   }
 ]
