@@ -1,23 +1,12 @@
 {
-  "state": "converged",
-  "consecutiveZeroMocs": 644,
-  "consecutiveZeroFixes": 644,
+  "state": "stuck",
+  "consecutiveZeroMocs": 645,
+  "consecutiveZeroFixes": 645,
   "lastMocsSubmitted": 0,
   "lastFixesApplied": 0,
-  "approvedMocsCount": 0,
+  "approvedMocsCount": 2,
   "lastDeployAt": null,
   "history": [
-    {
-      "at": "2026-03-03T11:17:33.760Z",
-      "mocsSubmitted": 0,
-      "fixesApplied": 0,
-      "approvedMocs": 2,
-      "fixSuccessRate": null,
-      "netProgress": 0,
-      "findingsResolved": 0,
-      "findingsCreated": 0,
-      "state": "stuck"
-    },
     {
       "at": "2026-03-03T11:19:30.031Z",
       "mocsSubmitted": 0,
@@ -127,12 +116,23 @@
       "findingsResolved": 0,
       "findingsCreated": 0,
       "state": "converged"
+    },
+    {
+      "at": "2026-03-03T11:25:00.246Z",
+      "mocsSubmitted": 0,
+      "fixesApplied": 0,
+      "approvedMocs": 2,
+      "fixSuccessRate": null,
+      "netProgress": 0,
+      "findingsResolved": 0,
+      "findingsCreated": 0,
+      "state": "stuck"
     }
   ],
-  "updatedAt": "2026-03-03T11:24:47.648Z",
+  "updatedAt": "2026-03-03T11:25:00.246Z",
   "fixSuccessRate": null,
   "findingsResolvedLast24h": 0,
   "findingsCreatedLast24h": 0,
   "netProgress": 0,
-  "convergedSince": "2026-03-03T11:23:01.760Z"
+  "convergedSince": null
 }
