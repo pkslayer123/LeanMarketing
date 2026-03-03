@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-03-03T02:16:54.137Z",
+  "mode": "fused",
+  "maxPersonas": 20,
+  "prioritizedPersonas": [
+    {
+      "persona": "admin_power_admin",
+      "priority": 0.11,
+      "reason": "balanced coverage",
+      "specPath": "tests/personas/admin_power_admin.spec.ts"
+    },
+    {
+      "persona": "admin_team_manager",
+      "priority": 0.11,
+      "reason": "balanced coverage",
+      "specPath": "tests/personas/admin_team_manager.spec.ts"
+    },
+    {
+      "persona": "user_impatient_buyer",
+      "priority": 0.11,
+      "reason": "balanced coverage",
+      "specPath": "tests/personas/user_impatient_buyer.spec.ts"
+    },
+    {
+      "persona": "user_bargain_hunter",
+      "priority": 0.11,
+      "reason": "balanced coverage",
+      "specPath": "tests/personas/user_bargain_hunter.spec.ts"
+    },
+    {
+      "persona": "unauthenticated_outsider",
+      "priority": 0.11,
+      "reason": "balanced coverage",
+      "specPath": "tests/personas/unauthenticated_outsider.spec.ts"
+    }
+  ],
+  "coverageGaps": [],
+  "focusPages": [],
+  "skipRecommendations": [],
+  "testMode": "balanced",
+  "estimatedDuration": "unknown",
+  "effectiveMaxPersonas": 20,
+  "neverRunPersonas": 5,
+  "rotationSlotsUsed": 0,
+  "reasoning": "Algorithmic fusion of 5 personas across 7 data sources (incl. ROI + cold-start). Top scorer: admin_power_admin (0.11). 5 never-run, 0 overdue.",
+  "_source": "algorithmic",
+  "recommendedFilter": [],
+  "skipFilter": []
+}
