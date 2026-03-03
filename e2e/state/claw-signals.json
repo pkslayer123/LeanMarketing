@@ -6,26 +6,26 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T19:13:38.531Z",
+      "at": "2026-03-03T19:13:54.960Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-03T19:11:46.850Z",
+      "at": "2026-03-03T19:13:56.918Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
     },
     "diagnostics-complete": {
-      "at": "2026-03-03T19:13:28.071Z",
+      "at": "2026-03-03T19:13:58.126Z",
       "emittedBy": "diagnostics",
       "actions": 6,
       "healthChecks": 8,
       "healthChecksFailing": 2
     },
     "diagnostics-requested": {
-      "at": "2026-03-03T18:41:07.433Z",
+      "at": "2026-03-03T19:13:55.072Z",
       "emittedBy": "convergence-tracker",
       "reason": "stuck",
       "mocCount": 3
@@ -84,12 +84,12 @@
   },
   "claws": {
     "builder": {
-      "status": "idle",
+      "status": "running",
       "pid": 73700,
       "lastRun": "2026-03-03T19:13:09.758Z",
-      "nextRun": "2026-03-04T01:13:09.758Z",
-      "heartbeat": "2026-03-03T19:13:09.908Z",
-      "cycle": 428,
+      "nextRun": "2026-03-03T21:13:09.758Z",
+      "heartbeat": "2026-03-03T19:13:54.794Z",
+      "cycle": 429,
       "phase": "starting",
       "lastCycleDurationMs": 29844,
       "lastCycleResult": "ok",
@@ -98,12 +98,12 @@
     "cp-meta": {
       "status": "idle",
       "pid": 73192,
-      "lastRun": "2026-03-03T19:13:30.669Z",
-      "nextRun": "2026-03-03T19:43:30.669Z",
-      "heartbeat": "2026-03-03T19:13:30.672Z",
-      "cycle": 588,
+      "lastRun": "2026-03-03T19:14:06.770Z",
+      "nextRun": "2026-03-03T19:44:06.770Z",
+      "heartbeat": "2026-03-03T19:14:06.773Z",
+      "cycle": 589,
       "phase": "starting",
-      "lastCycleDurationMs": 6663,
+      "lastCycleDurationMs": 6080,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
@@ -120,34 +120,34 @@
     "diagnostics": {
       "status": "idle",
       "pid": 48148,
-      "lastRun": "2026-03-03T19:13:28.075Z",
-      "nextRun": "2026-03-04T01:13:28.075Z",
-      "heartbeat": "2026-03-03T19:13:28.079Z",
-      "cycle": 607,
+      "lastRun": "2026-03-03T19:13:58.128Z",
+      "nextRun": "2026-03-04T01:13:58.128Z",
+      "heartbeat": "2026-03-03T19:13:58.131Z",
+      "cycle": 608,
       "phase": "starting",
-      "lastCycleDurationMs": 39,
+      "lastCycleDurationMs": 28,
       "lastCycleResult": "error"
     },
     "fix-engine": {
       "status": "running",
       "pid": 52944,
-      "lastRun": "2026-03-03T19:13:38.648Z",
-      "nextRun": "2026-03-03T20:13:38.648Z",
-      "heartbeat": "2026-03-03T19:13:53.656Z",
-      "cycle": 208,
-      "phase": "docs-update",
-      "lastCycleDurationMs": 52534,
+      "lastRun": "2026-03-03T19:13:55.094Z",
+      "nextRun": "2026-03-03T20:13:55.094Z",
+      "heartbeat": "2026-03-03T19:14:10.106Z",
+      "cycle": 209,
+      "phase": "moc-auto-fix",
+      "lastCycleDurationMs": 1437,
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "running",
+      "status": "idle",
       "pid": 80784,
-      "lastRun": "2026-03-03T19:11:46.853Z",
-      "nextRun": "2026-03-03T21:11:46.853Z",
-      "heartbeat": "2026-03-03T19:13:46.900Z",
+      "lastRun": "2026-03-03T19:13:56.920Z",
+      "nextRun": "2026-03-03T21:13:56.920Z",
+      "heartbeat": "2026-03-03T19:13:56.922Z",
       "cycle": 575,
       "phase": "starting",
-      "lastCycleDurationMs": 9870,
+      "lastCycleDurationMs": 10018,
       "lastCycleResult": "ok"
     },
     "test-runner": {
@@ -162,12 +162,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 32696,
       "lastRun": "2026-03-03T19:12:08.948Z",
       "nextRun": "2026-03-03T23:12:08.948Z",
-      "heartbeat": "2026-03-03T19:13:19.868Z",
-      "cycle": 572,
+      "heartbeat": "2026-03-03T19:14:09.034Z",
+      "cycle": 573,
       "phase": "starting",
       "lastCycleDurationMs": 3526,
       "lastCycleResult": "error"
