@@ -89,12 +89,12 @@
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "idle",
+      "status": "running",
       "pid": 43432,
       "lastRun": "2026-03-03T19:51:57.930Z",
       "nextRun": "2026-03-03T20:21:57.930Z",
-      "heartbeat": "2026-03-03T19:51:57.932Z",
-      "cycle": 643,
+      "heartbeat": "2026-03-03T19:52:12.945Z",
+      "cycle": 644,
       "phase": "starting",
       "lastCycleDurationMs": 6877,
       "lastCycleResult": "error"
@@ -122,12 +122,12 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 10636,
       "lastRun": "2026-03-03T19:51:44.544Z",
       "nextRun": "2026-03-03T20:51:44.544Z",
-      "heartbeat": "2026-03-03T19:51:50.054Z",
-      "cycle": 248,
+      "heartbeat": "2026-03-03T19:52:14.561Z",
+      "cycle": 249,
       "phase": "docs-update",
       "lastCycleDurationMs": 1163,
       "lastCycleResult": "ok"
@@ -144,25 +144,25 @@
       "lastCycleResult": "ok"
     },
     "test-runner": {
-      "status": "idle",
+      "status": "running",
       "pid": 29200,
       "lastRun": "2026-03-03T19:51:56.698Z",
       "nextRun": "2026-03-04T03:51:56.698Z",
-      "heartbeat": "2026-03-03T19:51:56.702Z",
-      "cycle": 455,
+      "heartbeat": "2026-03-03T19:52:11.719Z",
+      "cycle": 456,
       "phase": "starting",
       "lastCycleDurationMs": 7287,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 39532,
-      "lastRun": "2026-03-03T19:51:51.468Z",
-      "nextRun": "2026-03-03T23:51:51.468Z",
-      "heartbeat": "2026-03-03T19:52:06.482Z",
+      "lastRun": "2026-03-03T19:52:10.593Z",
+      "nextRun": "2026-03-03T23:52:10.593Z",
+      "heartbeat": "2026-03-03T19:52:10.596Z",
       "cycle": 608,
       "phase": "starting",
-      "lastCycleDurationMs": 3712,
+      "lastCycleDurationMs": 4110,
       "lastCycleResult": "error"
     },
     "observer": {
