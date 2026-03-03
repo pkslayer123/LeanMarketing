@@ -1,23 +1,10 @@
 {
-  "lastRun": "2026-03-03T19:13:37.946Z",
-  "total": 3,
+  "lastRun": "2026-03-03T19:13:54.186Z",
+  "total": 0,
   "noiseAutoClose": 0,
-  "fixAttempted": 2,
+  "fixAttempted": 0,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 2,
-  "details": [
-    {
-      "action": "archived",
-      "reason": "Critical route: /login"
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "The findings section for this MOC is empty — there's no specific issue described. The current `app/api/projects/route.ts` code is well-structured:\n\n- Auth guard is in place (`401` on missing user)\n- Null-safe query with `?? []` fallback on GET\n- JSON parse guard on POST\n- Proper status codes (`201` "
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "e both present and correctly implemented:\n\n- `route.ts`: Has valid POST (create/upsert idea with quality gate) and GET (fetch by project_id) endpoints with auth checks, input validation, and proper error handling.\n- `lib/ideas.ts`: Exports all required types and a functional `runQualityGate` impleme"
-    }
-  ]
+  "noFixNeeded": 0,
+  "details": []
 }

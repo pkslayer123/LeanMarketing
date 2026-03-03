@@ -8460,7 +8460,10 @@
       "createdAt": "2026-03-03T19:12:40.030Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T19:12:47.696Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772565160030",
@@ -8472,7 +8475,10 @@
       "createdAt": "2026-03-03T19:12:40.030Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:13:02.605Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: The findings section for this MOC is empty — there's no specific issue described. The current `app/api/projects/route.ts` code is well-structured:\n\n- Auth guard is in place (`401` on missing user)\n- Null-safe query with `?? []` fallback on GET\n- JSON parse guard on POST\n- Proper status codes (`201` on create, `500` on DB error)\n\nWith no concrete findings to act on, this appears to be noise from an incomplete MOC record. No changes are needed.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: The findings section for this MOC is empty — there's no specific issue described. The current `app/api/projects/route.ts` code is well-structured:\n\n- Auth guard is in place (`401` on missing user)\n- Null-safe query with `?? []` fallback on GET\n- JSON parse guard on POST\n- Proper status codes (`201` on create, `500` on DB error)\n\nWith no concrete findings to act on, this appears to be noise from an incomplete MOC record. No changes are needed.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772565160030",
@@ -8484,7 +8490,10 @@
       "createdAt": "2026-03-03T19:12:40.030Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:13:37.937Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: e both present and correctly implemented:\n\n- `route.ts`: Has valid POST (create/upsert idea with quality gate) and GET (fetch by project_id) endpoints with auth checks, input validation, and proper error handling.\n- `lib/ideas.ts`: Exports all required types and a functional `runQualityGate` implementation.\n\nThe TypeScript errors shown are in `app/projects/[id]/audience/_client.tsx` (unrelated to this task's scope). No changes are needed here — the `/api/ideas` route is working correctly as-is.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: e both present and correctly implemented:\n\n- `route.ts`: Has valid POST (create/upsert idea with quality gate) and GET (fetch by project_id) endpoints with auth checks, input validation, and proper error handling.\n- `lib/ideas.ts`: Exports all required types and a functional `runQualityGate` implementation.\n\nThe TypeScript errors shown are in `app/projects/[id]/audience/_client.tsx` (unrelated to this task's scope). No changes are needed here — the `/api/ideas` route is working correctly as-is.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
