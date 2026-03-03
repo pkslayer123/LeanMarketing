@@ -6163,7 +6163,10 @@
       "createdAt": "2026-03-03T16:30:12.288Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T16:30:18.224Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772555412288",
@@ -6175,7 +6178,10 @@
       "createdAt": "2026-03-03T16:30:12.288Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:30:47.611Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: The findings section is empty and the code is already correct. No changes are needed.\n\nThe `/api/projects/route.ts` file is well-implemented:\n- `GET` authenticates, queries with `user_id` filter, orders by `last_activity_at`, and returns `data ?? []`\n- `POST` validates the name, inserts with `user_id`, and returns 201\n- Null safety with `?.` and `?? ''` is in place\n- No type errors\n\nThis MOC appears to be noise — the feature was already scaffolded and the route is functioning correctly.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: The findings section is empty and the code is already correct. No changes are needed.\n\nThe `/api/projects/route.ts` file is well-implemented:\n- `GET` authenticates, queries with `user_id` filter, orders by `last_activity_at`, and returns `data ?? []`\n- `POST` validates the name, inserts with `user_id`, and returns 201\n- Null safety with `?.` and `?? ''` is in place\n- No type errors\n\nThis MOC appears to be noise — the feature was already scaffolded and the route is functioning correctly.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772555412288",
@@ -6187,7 +6193,10 @@
       "createdAt": "2026-03-03T16:30:12.288Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:31:02.930Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: section is empty — no actual bugs or issues were reported by quality testing for this MOC. The code in `app/api/ideas/route.ts` looks correct:\n\n- Auth is properly checked on both GET and POST\n- Input validation is present\n- Null safety is used (`??` for env vars)\n- The upsert logic and conflict resolution are correct\n- Error handling returns appropriate status codes\n\nNo changes are needed. This is a case where the MOC was generated but no findings were attached to it, so there's nothing to fix.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: section is empty — no actual bugs or issues were reported by quality testing for this MOC. The code in `app/api/ideas/route.ts` looks correct:\n\n- Auth is properly checked on both GET and POST\n- Input validation is present\n- Null safety is used (`??` for env vars)\n- The upsert logic and conflict resolution are correct\n- Error handling returns appropriate status codes\n\nNo changes are needed. This is a case where the MOC was generated but no findings were attached to it, so there's nothing to fix.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
