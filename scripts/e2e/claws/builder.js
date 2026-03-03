@@ -446,8 +446,11 @@ class BuilderClaw extends Claw {
     try {
       this.log(`Scaffolding feature: ${gap.name} via Claude CLI`);
       // Use execAsync so the claw can respond to shutdown signals
+      // IMPORTANT: Do NOT use --print — it only outputs text to stdout without
+      // writing files. Without --print, Claude runs in agent mode and actually
+      // creates/edits files on disk via its tools (Write, Edit, Bash).
       const result = await this.execAsync(
-        `claude --print --dangerously-skip-permissions --model sonnet --max-budget-usd 3.00 < "${promptPath}"`,
+        `claude --dangerously-skip-permissions --model sonnet --max-budget-usd 3.00 < "${promptPath}"`,
         { label: "claude-scaffold", timeoutMs: 300000, env: { CLAUDECODE: "", CLAUDE_CODE: "", CLAUDE_CODE_ENTRYPOINT: "builder" } }
       );
       try { fs.unlinkSync(promptPath); } catch {}
