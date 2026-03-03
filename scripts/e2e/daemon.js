@@ -1,23 +1,23 @@
 #!/usr/bin/env node
 
 /**
- * Daemon — Long-running process manager for independent claws.
+ * Daemon — Long-running process manager for 5 independent claws.
  *
- * Generic version for @changepilot/persona-engine.
  * Spawns claw processes, monitors heartbeats, restarts on crash,
  * handles graceful shutdown, and exposes an HTTP status endpoint.
  *
  * Usage:
- *   node runtime/daemon.js                    # Start all claws
- *   node runtime/daemon.js --claw test-runner # Start single claw
- *   node runtime/daemon.js --status           # Show claw statuses
- *   node runtime/daemon.js --pause fix-engine # Pause a claw
- *   node runtime/daemon.js --resume fix-engine # Resume a claw
- *   node runtime/daemon.js --trigger test-runner # Trigger immediate run
- *   node runtime/daemon.js --full-cycle       # Run all claws sequentially (like loop.sh)
- *   node runtime/daemon.js --tail fix-engine  # Stream claw output
- *   node runtime/daemon.js --signal deploy-detected --sha abc123
- *   node runtime/daemon.js --stop             # Graceful shutdown
+ *   node scripts/e2e/daemon.js                    # Start all claws
+ *   node scripts/e2e/daemon.js --claw test-runner # Start single claw
+ *   node scripts/e2e/daemon.js --status           # Show claw statuses
+ *   node scripts/e2e/daemon.js --pause fix-engine # Pause a claw
+ *   node scripts/e2e/daemon.js --resume fix-engine # Resume a claw
+ *   node scripts/e2e/daemon.js --trigger test-runner # Trigger immediate run
+ *   node scripts/e2e/daemon.js --full-cycle       # Run all claws sequentially (like loop.sh)
+ *   node scripts/e2e/daemon.js --tail fix-engine  # Stream claw output
+ *   node scripts/e2e/daemon.js --signal deploy-detected --sha abc123
+ *   node scripts/e2e/daemon.js --stop             # Graceful shutdown
+ *   node scripts/e2e/daemon.js --detach          # Start as hidden background process (survives terminal close)
  */
 
 const { fork, execSync } = require("child_process");
@@ -47,17 +47,7 @@ function killProcessTree(pid, signal) {
   }
 }
 
-function findProjectRoot() {
-  let dir = path.resolve(__dirname, "..", "..");
-  for (let i = 0; i < 5; i++) {
-    if (fs.existsSync(path.join(dir, "persona-engine.json")) || fs.existsSync(path.join(dir, "daemon-config.json")) || fs.existsSync(path.join(dir, "package.json"))) {
-      return dir;
-    }
-    dir = path.dirname(dir);
-  }
-  return path.resolve(__dirname, "..", "..");
-}
-const ROOT = findProjectRoot();
+const ROOT = path.resolve(__dirname, "..", "..");
 const STATE_DIR = path.join(ROOT, "e2e", "state");
 const SIGNALS_PATH = path.join(STATE_DIR, "claw-signals.json");
 const CONFIG_PATH = path.join(ROOT, "daemon-config.json");
@@ -73,48 +63,21 @@ const CHANGEPILOT_SERVICE_KEY = process.env.CHANGEPILOT_SERVICE_KEY;
 const CHANGEPILOT_API_URL = process.env.CHANGEPILOT_API_URL ?? "https://moc-ai.vercel.app";
 const MACHINE_ID = `${os.hostname()}-${os.userInfo().username}`;
 
-let remoteSignalBus;
-try {
-  remoteSignalBus = require("./remote-signal-bus");
-} catch {
-  remoteSignalBus = null;
-}
+const CLAW_FILES = {
+  "test-runner": path.join(__dirname, "claws", "test-runner.js"),
+  "finding-pipeline": path.join(__dirname, "claws", "finding-pipeline.js"),
+  "builder": path.join(__dirname, "claws", "builder.js"),
+  "cp-meta": path.join(__dirname, "claws", "cp-meta.js"),
+  "fix-engine": path.join(__dirname, "claws", "fix-engine.js"),
+  "intelligence": path.join(__dirname, "claws", "intelligence.js"),
+  "health-deploy": path.join(__dirname, "claws", "health-deploy.js"),
+  "diagnostics": path.join(__dirname, "claws", "diagnostics.js"),
+  "observer": path.join(__dirname, "claws", "observer.js"),
+  "test-regen": path.join(__dirname, "claws", "test-regen.js"),
+  "docs-sync": path.join(__dirname, "claws", "docs-sync.js"),
+};
 
-function loadClawFiles() {
-  const clawDir = path.join(__dirname, "claws");
-  const configPath = path.join(ROOT, "daemon-config.json");
-  const defaultClaws = {};
-
-  // Discover from claws directory
-  try {
-    const files = fs.readdirSync(clawDir).filter(f => f.endsWith(".js"));
-    for (const f of files) {
-      const name = f.replace(".js", "");
-      defaultClaws[name] = path.join(clawDir, f);
-    }
-  } catch {}
-
-  // Config may override
-  try {
-    const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
-    if (config.claws) {
-      for (const name of Object.keys(config.claws)) {
-        if (!defaultClaws[name]) {
-          const possiblePath = path.join(clawDir, `${name}.js`);
-          if (fs.existsSync(possiblePath)) {
-            defaultClaws[name] = possiblePath;
-          }
-        }
-      }
-    }
-  } catch {}
-
-  return defaultClaws;
-}
-
-const CLAW_FILES = loadClawFiles();
-
-const CLAW_ORDER = Object.keys(CLAW_FILES);
+const CLAW_ORDER = ["test-runner", "finding-pipeline", "builder", "cp-meta", "fix-engine", "intelligence", "health-deploy", "diagnostics", "observer", "test-regen", "docs-sync"];
 
 // ---------------------------------------------------------------------------
 // Atomic write (import from claw.js or inline for standalone use)
@@ -249,19 +212,43 @@ function loadConfig() {
 
 function gcSignals() {
   const config = loadConfig();
-  const expiryMs = (config.daemon?.signalExpiryHours ?? 24) * 60 * 60 * 1000;
+  const defaultExpiryMs = (config.daemon?.signalExpiryHours ?? 6) * 60 * 60 * 1000;
   const now = Date.now();
+
+  // Notification-only signals expire fast (1h) — they're events, not triggers
+  const FAST_EXPIRY_SIGNALS = [
+    "circuit-broken", "diagnostics-requested", "diagnostics-complete",
+    "intelligence-complete", "cp-meta-complete", "build-complete",
+  ];
+  const FAST_EXPIRY_MS = 60 * 60 * 1000; // 1 hour
 
   withSignalsLock((signals) => {
     for (const [name, data] of Object.entries(signals.signals)) {
-      // Never GC command signals (they're deleted after processing)
       if (name.startsWith("_cmd_")) { continue; }
-      if (data.at && (now - new Date(data.at).getTime()) > expiryMs) {
+      if (!data.at) { continue; }
+      const ageMs = now - new Date(data.at).getTime();
+      const expiryMs = FAST_EXPIRY_SIGNALS.includes(name) ? FAST_EXPIRY_MS : defaultExpiryMs;
+      if (ageMs > expiryMs) {
         delete signals.signals[name];
-        log(`gc: expired signal ${name} (age: ${Math.round((now - new Date(data.at).getTime()) / 3600000)}h)`);
+        log(`gc: expired signal ${name} (age: ${Math.round(ageMs / 3600000)}h)`);
       }
     }
   });
+
+  // Clean stale lock files (older than 1 hour)
+  try {
+    const lockFiles = fs.readdirSync(STATE_DIR).filter((f) => f.startsWith(".lock-"));
+    for (const lf of lockFiles) {
+      const lockPath = path.join(STATE_DIR, lf);
+      try {
+        const stat = fs.statSync(lockPath);
+        if (now - stat.mtimeMs > 3600000) {
+          fs.unlinkSync(lockPath);
+          log(`gc: removed stale lock ${lf}`);
+        }
+      } catch {}
+    }
+  } catch {}
 }
 
 // ---------------------------------------------------------------------------
@@ -306,7 +293,61 @@ if (hasArg("--tail")) {
   // Does not exit — streams output
 }
 
-if (hasArg("--full-cycle")) {
+// --detach: Spawn daemon as a hidden background process that survives terminal close.
+// On Windows uses PowerShell Start-Process -WindowStyle Hidden.
+// On Unix uses child_process.spawn with detached + unref.
+if (hasArg("--detach")) {
+  // Clear stale markers before detaching
+  try { fs.unlinkSync(path.join(STATE_DIR, "daemon.suspend")); } catch {}
+  try { fs.unlinkSync(path.join(STATE_DIR, "daemon.shutdown")); } catch {}
+
+  const scriptPath = path.resolve(__dirname, "daemon.js");
+  const extraArgs = args.filter((a) => a !== "--detach");
+
+  // Strip Claude Code env vars so daemon children can spawn `claude --print`
+  // even when daemon is started from within a Claude Code session
+  delete process.env.CLAUDECODE;
+  delete process.env.CLAUDE_CODE;
+
+  if (os.platform() === "win32") {
+    const nodeExe = process.execPath.replace(/\\/g, "\\\\");
+    const argStr = [scriptPath, ...extraArgs].map((a) => `'${a}'`).join(",");
+    const psCmd = `Start-Process -FilePath '${nodeExe}' -ArgumentList ${argStr} -WorkingDirectory '${ROOT.replace(/\\/g, "\\\\")}' -WindowStyle Hidden`;
+    try {
+      execSync(`powershell.exe -Command "${psCmd}"`, { stdio: "inherit", timeout: 10000 });
+      console.log("Daemon launched as hidden background process.");
+      console.log("Check status: node scripts/e2e/daemon.js --status");
+      console.log("Stop:         node scripts/e2e/daemon.js --stop");
+    } catch (err) {
+      console.error("Failed to detach:", err.message);
+      process.exit(1);
+    }
+  } else {
+    const { spawn } = require("child_process");
+    const child = spawn(process.execPath, [scriptPath, ...extraArgs], {
+      cwd: ROOT,
+      detached: true,
+      stdio: "ignore",
+    });
+    child.unref();
+    console.log(`Daemon launched as background process (pid ${child.pid}).`);
+    console.log("Check status: node scripts/e2e/daemon.js --status");
+    console.log("Stop:         node scripts/e2e/daemon.js --stop");
+  }
+
+  // Wait briefly and verify it started
+  setTimeout(() => {
+    try {
+      const pid = parseInt(fs.readFileSync(PID_FILE, "utf-8").trim(), 10);
+      if (pid > 0) {
+        console.log(`Verified: daemon running (pid ${pid})`);
+      }
+    } catch {
+      console.log("Daemon PID not yet written — check --status in a few seconds.");
+    }
+    process.exit(0);
+  }, 3000);
+} else if (hasArg("--full-cycle")) {
   fullCycle().then((ok) => process.exit(ok ? 0 : 1));
 } else {
   const singleClaw = getArg("--claw");
@@ -600,7 +641,7 @@ async function negotiateAndStart(singleClaw, opts = {}) {
     const res = await fetch(`${CHANGEPILOT_API_URL}/api/daemon-network/heartbeat`, {
       method: "POST",
       headers: { "Authorization": `Bearer ${CHANGEPILOT_SERVICE_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ machine_id: MACHINE_ID, status: "negotiating" }),
+      body: JSON.stringify({ machine_id: MACHINE_ID, status: "paused" }),
     });
 
     if (res.ok) {
@@ -646,7 +687,7 @@ async function negotiateAndStart(singleClaw, opts = {}) {
         const checkRes = await fetch(`${CHANGEPILOT_API_URL}/api/daemon-network/heartbeat`, {
           method: "POST",
           headers: { "Authorization": `Bearer ${CHANGEPILOT_SERVICE_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ machine_id: MACHINE_ID, status: "negotiating" }),
+          body: JSON.stringify({ machine_id: MACHINE_ID, status: "paused" }),
         });
         if (checkRes.ok) {
           const checkData = await checkRes.json();
@@ -719,17 +760,96 @@ async function negotiateAndStart(singleClaw, opts = {}) {
 // ---------------------------------------------------------------------------
 
 function startDaemon(singleClaw, networkOpts = {}) {
+  // Strip Claude Code nesting guards so children can spawn `claude --print`
+  delete process.env.CLAUDECODE;
+  delete process.env.CLAUDE_CODE;
+
+  // Top-level crash handler — prevents silent death on startup errors
+  process.on("uncaughtException", (err) => {
+    try { log(`FATAL uncaughtException: ${err.message}\n${err.stack || ""}`); } catch { /* ignore */ }
+    try { fs.appendFileSync(LOG_FILE, `[${new Date().toISOString()}] [daemon] FATAL: ${err.message}\n`); } catch { /* ignore */ }
+    process.exit(1);
+  });
+  process.on("unhandledRejection", (reason) => {
+    try { log(`FATAL unhandledRejection: ${reason}`); } catch { /* ignore */ }
+    try { fs.appendFileSync(LOG_FILE, `[${new Date().toISOString()}] [daemon] FATAL rejection: ${reason}\n`); } catch { /* ignore */ }
+  });
+
   const config = loadConfig();
   const daemonConfig = config.daemon ?? {};
   const maxRestartsPerHour = daemonConfig.maxRestartsPerHour ?? 3;
   const healthPort = daemonConfig.healthPort ?? 9100;
   const heartbeatStaleMs = (daemonConfig.heartbeatStaleThresholdMinutes ?? 5) * 60 * 1000;
+  const zombieDetect = {}; // name -> first-seen timestamp (for claws that never send heartbeat)
   const daemonStartedAt = new Date().toISOString();
 
-  // Write PID file and clear stale shutdown marker
+  // Prevent duplicate daemons — check if another instance is already running.
+  // This was causing the daemon to sometimes appear under Cursor and also as a
+  // standalone Windows process (two instances fighting over the same state files).
+  if (fs.existsSync(PID_FILE)) {
+    const existingPid = parseInt(fs.readFileSync(PID_FILE, "utf-8").trim(), 10);
+    if (existingPid && existingPid !== process.pid) {
+      let alive = false;
+      try { process.kill(existingPid, 0); alive = true; } catch {}
+      if (alive) {
+        log(`daemon already running (pid ${existingPid}) — killing it before starting new instance`);
+        try {
+          if (os.platform() === "win32") {
+            execSync(`taskkill /PID ${existingPid} /T /F`, { stdio: "ignore", timeout: 10000 });
+          } else {
+            process.kill(existingPid, "SIGTERM");
+          }
+          // Brief wait for old daemon to die
+          const waitStart = Date.now();
+          while (Date.now() - waitStart < 5000) {
+            try { process.kill(existingPid, 0); } catch { break; }
+            execSync("timeout /T 1 /NOBREAK >NUL 2>&1 || sleep 1", { stdio: "ignore", timeout: 3000 });
+          }
+        } catch {}
+      }
+    }
+  }
+
+  // Write PID file and clear stale shutdown/suspend markers
   fs.writeFileSync(PID_FILE, String(process.pid));
   try { fs.unlinkSync(SHUTDOWN_MARKER); } catch {}
+  try { fs.unlinkSync(SUSPEND_FILE); } catch {}
+
+  // Clear stale _cmd_shutdown signal — prevents a --stop aimed at a dead daemon
+  // from killing the next daemon that starts
+  withSignalsLock((signals) => {
+    const staleKeys = Object.keys(signals.signals).filter((k) => k.startsWith("_cmd_"));
+    for (const key of staleKeys) {
+      log(`cleared stale signal: ${key}`);
+      delete signals.signals[key];
+    }
+  });
+
   log(`daemon started (pid ${process.pid})`);
+
+  // Run signal GC immediately on startup to clean stale state from previous runs
+  gcSignals();
+
+  // Clear stale test-runner signals from previous daemon run.
+  // Without this, observer reads the old tests-complete (total:0 from a killed run)
+  // and immediately force-triggers restarts, creating a kill-restart loop that
+  // prevents the first test cycle from ever completing.
+  withSignalsLock((signals) => {
+    const staleTestSignals = ["tests-complete", "observer-alert", "circuit-broken", "claw-crashed"];
+    for (const name of staleTestSignals) {
+      if (signals.signals[name]) {
+        log(`cleared stale signal from previous run: ${name}`);
+        delete signals.signals[name];
+      }
+    }
+    // Write daemon-started-at so observer can skip zero-result checks during warmup
+    signals.signals["daemon-started"] = {
+      timestamp: daemonStartedAt,
+      at: daemonStartedAt,
+      from: "daemon",
+      pid: process.pid,
+    };
+  });
 
   // Kill any orphaned node processes from previous daemon runs
   if (os.platform() === "win32") {
@@ -740,9 +860,11 @@ function startDaemon(singleClaw, networkOpts = {}) {
       ).toString();
       let orphansKilled = 0;
       for (const line of output.split("\n")) {
-        // Only target moc-ai/e2e/eslint processes, skip MCP servers, Claude, and ourselves
+        // Only target moc-ai/e2e/eslint processes, skip MCP servers and ourselves
         if (!line.includes("moc-ai") && !line.includes("e2e\\") && !line.includes("eslint")) { continue; }
-        if (line.includes("modelcontextprotocol") || line.includes("claude") || line.includes("daemon.js")) { continue; }
+        // Skip MCP servers, Claude Code IDE (but NOT claude --print spawned by auto-fix), and daemon itself
+        if (line.includes("modelcontextprotocol") || line.includes("daemon.js")) { continue; }
+        if (line.includes("claude") && !line.includes("claude --print") && !line.includes("moc-auto-fix")) { continue; }
         const parts = line.split(",");
         const pid = parseInt(parts[parts.length - 1], 10);
         if (!pid || pid === process.pid) { continue; }
@@ -982,7 +1104,8 @@ function startDaemon(singleClaw, networkOpts = {}) {
       }
     });
 
-    // Handle crash — restart with backoff, permanently disable after max restarts
+    // Handle crash — NEVER permanently disable. Always retry with increasing backoff.
+    // Crashed claws enter the self-healing pipeline (diagnostics → repair MOC → fix → verify).
     child.on("exit", (code, signal) => {
       log(`claw ${name} exited (code=${code}, signal=${signal})`);
       delete children[name];
@@ -990,36 +1113,106 @@ function startDaemon(singleClaw, networkOpts = {}) {
       // Don't restart during shutdown
       if (shuttingDown) { return; }
 
-      // Track restart count (hourly window + session total)
-      if (!restartCounts[name]) { restartCounts[name] = { timestamps: [], disabledForSession: false }; }
-      if (restartCounts[name].disabledForSession) {
-        log(`claw ${name} is disabled for this session — not restarting`);
-        return;
-      }
+      // Track restart count (hourly window)
+      if (!restartCounts[name]) { restartCounts[name] = { timestamps: [], healingMode: false }; }
       const now = Date.now();
       restartCounts[name].timestamps = restartCounts[name].timestamps.filter((t) => now - t < 3600000);
       restartCounts[name].timestamps.push(now);
 
-      if (restartCounts[name].timestamps.length > maxRestartsPerHour) {
-        restartCounts[name].disabledForSession = true;
-        log(`claw ${name} exceeded max restarts (${maxRestartsPerHour}/hour) — disabled for session`);
+      const restartsThisHour = restartCounts[name].timestamps.length;
+
+      if (restartsThisHour > maxRestartsPerHour && !restartCounts[name].healingMode) {
+        // Enter healing mode — emit crash signal for self-healing pipeline,
+        // but NEVER give up. Use extended backoff (5min) instead of disabling.
+        restartCounts[name].healingMode = true;
+        log(`claw ${name} exceeded ${maxRestartsPerHour} restarts/hour — entering healing mode (5min backoff)`);
         withSignalsLock((signals) => {
           if (!signals.claws[name]) { signals.claws[name] = {}; }
           signals.claws[name].status = "crashed";
-          signals.claws[name].lastError = `exceeded max restarts — disabled for session`;
+          signals.claws[name].lastError = `exceeded max restarts — in healing mode (5min backoff)`;
           signals.signals["claw-crashed"] = {
             at: new Date().toISOString(),
             emittedBy: "daemon",
             claw: name,
-            reason: `exceeded max restarts (${maxRestartsPerHour}/hour) — permanently disabled`,
+            reason: `exceeded max restarts (${restartsThisHour}/hour) — healing mode`,
+          };
+          // Also request diagnostics immediately
+          signals.signals["diagnostics-requested"] = {
+            at: new Date().toISOString(),
+            emittedBy: "daemon",
+            reason: `repeated-crash: ${name} crashed ${restartsThisHour} times in 1h`,
+            source: "daemon",
+            claw: name,
           };
         });
-        return;
+
+        // Special case: diagnostics can't repair itself, so daemon creates
+        // the repair MOC directly when diagnostics is the one that crashed
+        if (name === "diagnostics") {
+          try {
+            const queuePath = path.join(STATE_DIR, "moc-queue.json");
+            const queue = fs.existsSync(queuePath)
+              ? JSON.parse(fs.readFileSync(queuePath, "utf-8"))
+              : { version: 2, mocs: [] };
+            const mocs = Array.isArray(queue?.mocs) ? queue.mocs : [];
+            const existing = mocs.find((m) =>
+              m.tier === "claw_repair" &&
+              !["archived", "implemented", "needs_human"].includes(m.status) &&
+              m.title?.includes("[CLAW-REPAIR:diagnostics]")
+            );
+            if (!existing) {
+              const mocId = `moc-claw-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+              mocs.push({
+                id: mocId,
+                platformMocId: null,
+                platformMocNumber: null,
+                title: `[CLAW-REPAIR:diagnostics] repeated crashes — daemon-created repair`,
+                description: `**Tier:** claw_repair\n**Source:** daemon (diagnostics self-protection bypass)\n**Claw:** diagnostics\n\n### Problem\nDiagnostics claw crashed ${restartsThisHour} times in 1h. Daemon continues retrying with extended backoff.\n\n### Scope\n- scripts/e2e/claws/diagnostics.js\n- scripts/e2e/lib/health-checks.js\n\n### Validation\n1. node -c scripts/e2e/claws/diagnostics.js\n2. node scripts/e2e/self-test.js`,
+                tier: "claw_repair",
+                category: "pipeline",
+                status: "approved",
+                source: "daemon",
+                persona: null,
+                changeType: "bug_fix",
+                changeTypeLabel: "Claw Repair",
+                riskLevel: "high",
+                reviewDepth: "Standard",
+                routedDepartments: ["Engineering"],
+                requiresManagement: false,
+                findings: [],
+                affectedFiles: ["scripts/e2e/claws/diagnostics.js", "scripts/e2e/lib/health-checks.js"],
+                submittedAt: new Date().toISOString(),
+                approvedAt: new Date().toISOString(),
+              });
+              queue.mocs = mocs;
+              atomicWriteSync(queuePath, JSON.stringify(queue, null, 2) + "\n");
+              log(`created claw_repair MOC for crashed diagnostics: ${mocId}`);
+              withSignalsLock((signals) => {
+                signals.signals["mocs-ready"] = {
+                  at: new Date().toISOString(),
+                  emittedBy: "daemon",
+                  source: "daemon-diagnostics-repair",
+                };
+              });
+            }
+          } catch (err) {
+            log(`failed to create diagnostics repair MOC: ${err.message}`);
+          }
+        }
       }
 
-      // Restart with exponential backoff: 10s, 20s, 40s, 60s max
-      const backoff = Math.min(60000, 10000 * Math.pow(2, restartCounts[name].timestamps.length - 1));
-      log(`restarting claw ${name} in ${backoff / 1000}s (restart ${restartCounts[name].timestamps.length}/${maxRestartsPerHour})`);
+      // Reset healing mode after 1h of no crashes (clears the extended backoff)
+      if (restartCounts[name].healingMode && restartsThisHour <= 1) {
+        restartCounts[name].healingMode = false;
+        log(`claw ${name} stable — exiting healing mode`);
+      }
+
+      // Backoff: normal = 10s→20s→40s→60s. Healing mode = 300s (5min).
+      // After healing mode, on deploy-detected signal, reset to try immediately.
+      const backoff = restartCounts[name].healingMode
+        ? 300000  // 5min in healing mode — keeps retrying, never gives up
+        : Math.min(60000, 10000 * Math.pow(2, restartsThisHour - 1));
+      log(`restarting claw ${name} in ${backoff / 1000}s (restart ${restartsThisHour}/${maxRestartsPerHour}, healing=${restartCounts[name].healingMode})`);
       setTimeout(() => {
         if (!shuttingDown) { spawnClaw(name); }
       }, backoff);
@@ -1038,15 +1231,30 @@ function startDaemon(singleClaw, networkOpts = {}) {
   const idleState = {}; // name -> { idleCycles, budgetExhausted, circuitBroken }
   const idleShutdownThreshold = daemonConfig.idleShutdownThreshold ?? 30;
   const idleCheckIntervalMs = daemonConfig.idleCheckIntervalMs ?? 60000;
+  const daemonStartTime = Date.now();
 
   const idleChecker = setInterval(() => {
     const activeClaws = Object.keys(children);
     if (activeClaws.length === 0) { return; }
 
+    // Don't auto-shutdown within first 45 minutes (allow claws time to complete initial cycles)
+    if (Date.now() - daemonStartTime < 45 * 60 * 1000) { return; }
+
+    // Check signals to see which claws are actively running — never count those as idle
+    let signals;
+    try { signals = loadSignals(); } catch { return; }
+
     const allIdle = activeClaws.every((name) => {
+      // If claw is running according to signals, it's NOT idle regardless of idle state
+      const clawSig = signals.claws?.[name];
+      if (clawSig?.status === "running") { return false; }
+
       const state = idleState[name];
       if (!state) { return false; }
-      return state.idleCycles >= idleShutdownThreshold ||
+      // Only trust idle cycles from THIS daemon session (cap at minutes since start)
+      const maxPlausibleCycles = Math.floor((Date.now() - daemonStartTime) / idleCheckIntervalMs);
+      const effectiveIdleCycles = Math.min(state.idleCycles, maxPlausibleCycles);
+      return effectiveIdleCycles >= idleShutdownThreshold ||
              state.budgetExhausted ||
              state.circuitBroken;
     });
@@ -1072,7 +1280,7 @@ function startDaemon(singleClaw, networkOpts = {}) {
   const emergencyMemoryPercent = daemonConfig.emergencyMemoryPercent ?? 92;
   let consecutiveHighMemory = 0;
   const HIGH_MEMORY_SHUTDOWN_COUNT = 5;
-  const NON_ESSENTIAL_CLAWS = ["intelligence", "health-deploy", "diagnostics", "builder"];
+  const NON_ESSENTIAL_CLAWS = ["intelligence", "health-deploy", "diagnostics", "builder", "observer", "test-regen", "docs-sync"];
 
   // Capture baseline memory at startup (before claws spawn)
   const baselineUsedBytes = os.totalmem() - os.freemem();
@@ -1080,7 +1288,8 @@ function startDaemon(singleClaw, networkOpts = {}) {
 
   // Expected max node processes: daemon(1) + claws(7) + watchdog(1) = 9
   // Each claw may have 1 active child = up to 16 total. Anything above 25 is likely zombies.
-  const MAX_EXPECTED_NODE_PROCESSES = 25;
+  // 11 claws + daemon + watchdog + up to 2 children per claw = ~35
+  const MAX_EXPECTED_NODE_PROCESSES = 40;
 
   /**
    * Count node.exe processes on Windows that belong to this project.
@@ -1133,8 +1342,9 @@ function startDaemon(singleClaw, networkOpts = {}) {
       ).toString();
       for (const line of output.split("\n")) {
         if (!line.includes("moc-ai") && !line.includes("e2e") && !line.includes("eslint")) { continue; }
-        // Skip MCP servers and Claude Code processes
-        if (line.includes("modelcontextprotocol") || line.includes("claude")) { continue; }
+        // Skip MCP servers and Claude Code IDE (but NOT claude --print spawned by auto-fix)
+        if (line.includes("modelcontextprotocol")) { continue; }
+        if (line.includes("claude") && !line.includes("claude --print") && !line.includes("moc-auto-fix")) { continue; }
         const parts = line.split(",");
         const pid = parseInt(parts[parts.length - 1], 10);
         if (!pid || knownPids.has(pid)) { continue; }
@@ -1246,6 +1456,7 @@ function startDaemon(singleClaw, networkOpts = {}) {
     { name: "loop-performance.jsonl", maxLines: 2000 },
     { name: "oracle-feedback.jsonl", maxLines: 5000 },
     { name: "screenshot-metadata.jsonl", maxLines: 3000 },
+    { name: "persona-token-usage.jsonl", maxLines: 3000 },
   ];
 
   const logPruneInterval = setInterval(() => {
@@ -1292,24 +1503,92 @@ function startDaemon(singleClaw, networkOpts = {}) {
   // ---------------------------------------------------------------------------
 
   const commandPollInterval = setInterval(() => {
+    // --- Suspend file check (instant kill switch) ---
     try {
-      // --- Suspend file check (instant kill switch) ---
       if (fs.existsSync(SUSPEND_FILE)) {
+        const uptimeMs = Date.now() - new Date(daemonStartedAt).getTime();
+        if (uptimeMs < 60000) {
+          try { fs.unlinkSync(SUSPEND_FILE); } catch {}
+          return;
+        }
         log("suspend file detected — initiating graceful shutdown");
         setImmediate(() => gracefulShutdown("suspend-file"));
         return;
       }
+    } catch (err) {
+      log(`poll: suspend check error: ${err.message}`);
+    }
 
-      const signals = loadSignals();
+    let signals;
+    try {
+      signals = loadSignals();
+    } catch (err) {
+      log(`poll: failed to load signals: ${err.message}`);
+      return; // Can't do anything without signals
+    }
 
-      // --- Broadcast signals to children via IPC (reduces per-claw fs reads) ---
+    // --- Broadcast signals to children via IPC ---
+    try {
       for (const [bcastName, bcastChild] of Object.entries(children)) {
         try {
           bcastChild.send({ type: "signals-update", signals: signals.signals, claws: signals.claws });
         } catch {}
       }
+    } catch (err) {
+      log(`poll: broadcast error: ${err.message}`);
+    }
 
-      // --- Process CLI commands ---
+    // --- Deploy-detected: reset healing mode for all claws (new code might fix the crash) ---
+    try {
+      const deploySig = signals.signals?.["deploy-detected"];
+      if (deploySig?.at) {
+        for (const [cname, cdata] of Object.entries(restartCounts)) {
+          if (cdata.healingMode) {
+            const deployAge = Date.now() - new Date(deploySig.at).getTime();
+            if (deployAge < 60000) { // Only if deploy in last 60s (avoid stale signals)
+              cdata.healingMode = false;
+              cdata.timestamps = [];
+              log(`deploy-detected: reset healing mode for ${cname} — immediate retry`);
+              // If claw is not currently running, spawn it immediately
+              if (!children[cname]) {
+                spawnClaw(cname);
+              } else {
+                try { children[cname].send({ type: "trigger" }); } catch {}
+              }
+            }
+          }
+        }
+      }
+    } catch (err) {
+      log(`poll: deploy-reset error: ${err.message}`);
+    }
+
+    // --- Process force-trigger signals from claws (immediate IPC trigger) ---
+    try {
+      const forceTriggerKeys = Object.keys(signals.signals).filter((k) => k.startsWith("_force_trigger_"));
+      if (forceTriggerKeys.length > 0) {
+        withSignalsLock((sigs) => {
+          for (const key of forceTriggerKeys) {
+            const targetClaw = key.replace("_force_trigger_", "");
+            const child = children[targetClaw];
+            if (child) {
+              try { child.send({ type: "trigger" }); } catch {}
+              log(`force-triggered ${targetClaw} via IPC (requested by ${sigs.signals[key]?.from ?? "unknown"})`);
+            } else if (!shuttingDown) {
+              // Claw isn't running — spawn it fresh
+              log(`force-trigger: ${targetClaw} not running — spawning`);
+              spawnClaw(targetClaw);
+            }
+            delete sigs.signals[key];
+          }
+        });
+      }
+    } catch (err) {
+      log(`poll: force-trigger error: ${err.message}`);
+    }
+
+    // --- Process CLI commands ---
+    try {
       const cmdKeys = Object.keys(signals.signals).filter((k) => k.startsWith("_cmd_"));
       if (cmdKeys.length > 0) {
         withSignalsLock((sigs) => {
@@ -1318,7 +1597,6 @@ function startDaemon(singleClaw, networkOpts = {}) {
 
             if (key === "_cmd_shutdown") {
               delete sigs.signals[key];
-              // Defer shutdown to after lock release
               setImmediate(() => gracefulShutdown("cli-command"));
               return;
             }
@@ -1341,31 +1619,92 @@ function startDaemon(singleClaw, networkOpts = {}) {
           }
         });
       }
+    } catch (err) {
+      log(`poll: command processing error: ${err.message}`);
+    }
 
-      // --- Heartbeat monitoring: detect hung claws ---
+    // --- Heartbeat monitoring: detect hung/stale claws ---
+    // Runs independently — signal/command errors don't skip it
+    try {
+      const config = loadConfig?.() ?? {};
+      const clawConfigs = config.claws ?? {};
+
       for (const name of Object.keys(children)) {
         const clawState = signals.claws?.[name];
         if (!clawState?.heartbeat) { continue; }
         const hbAge = Date.now() - new Date(clawState.heartbeat).getTime();
+
+        // Case 1: Running claw with stale heartbeat — hung process
         if (hbAge > heartbeatStaleMs && clawState.status === "running") {
           log(`claw ${name} heartbeat stale (${Math.round(hbAge / 60000)}min) — killing hung process`);
           const child = children[name];
           if (child) {
-            try { child.kill("SIGKILL"); } catch {}
-            // The exit handler will restart it
+            try {
+              if (os.platform() === "win32") {
+                execSync(`taskkill /PID ${child.pid} /T /F`, { stdio: "ignore", timeout: 10000 });
+              } else {
+                process.kill(-child.pid, "SIGKILL");
+              }
+            } catch {}
+          }
+          continue;
+        }
+
+        // Case 2: Idle claw way overdue — silently stuck (>4x interval, min 1h)
+        if (clawState.status === "idle" && clawState.lastRun) {
+          const intervalMin = clawConfigs[name]?.intervalMinutes ?? 60;
+          const overdueMs = intervalMin * 4 * 60 * 1000;
+          const idleSince = Date.now() - new Date(clawState.lastRun).getTime();
+          if (idleSince > overdueMs && idleSince > 3600000) {
+            log(`claw ${name} idle and overdue (${Math.round(idleSince / 60000)}min since last run, interval=${intervalMin}min) — force-restarting`);
+            const child = children[name];
+            if (child) {
+              try {
+                if (os.platform() === "win32") {
+                  execSync(`taskkill /PID ${child.pid} /T /F`, { stdio: "ignore", timeout: 10000 });
+                } else {
+                  process.kill(-child.pid, "SIGKILL");
+                }
+              } catch {}
+            }
           }
         }
+
+        // Case 3: Spawned but never reached "running" — zombie claw (no heartbeat after 5min)
+        if (!clawState?.heartbeat && children[name]) {
+          if (!zombieDetect[name]) { zombieDetect[name] = Date.now(); }
+          const zombieAge = Date.now() - zombieDetect[name];
+          if (zombieAge > 300000) { // 5 minutes with no heartbeat
+            log(`claw ${name} spawned ${Math.round(zombieAge / 60000)}min ago but never sent heartbeat — killing zombie`);
+            const child = children[name];
+            if (child) {
+              try {
+                if (os.platform() === "win32") {
+                  execSync(`taskkill /PID ${child.pid} /T /F`, { stdio: "ignore", timeout: 10000 });
+                } else {
+                  process.kill(-child.pid, "SIGKILL");
+                }
+              } catch {}
+            }
+            delete zombieDetect[name];
+          }
+        } else {
+          delete zombieDetect[name];
+        }
       }
-    } catch {}
+    } catch (err) {
+      log(`poll: heartbeat monitoring error: ${err.message}`);
+    }
   }, 5000);
 
   // ---------------------------------------------------------------------------
   // Periodic signal GC (every hour)
   // ---------------------------------------------------------------------------
 
+  // Run signal GC every 30min (was 1h) — stale signals cause false alarms in diagnostics
   const gcInterval = setInterval(() => {
     gcSignals();
-  }, 3600000);
+  }, 1800000);
 
   // ---------------------------------------------------------------------------
   // Network heartbeat — report active claws so remote daemons can join/takeover
@@ -1380,7 +1719,7 @@ function startDaemon(singleClaw, networkOpts = {}) {
           headers: { "Authorization": `Bearer ${CHANGEPILOT_SERVICE_KEY}`, "Content-Type": "application/json" },
           body: JSON.stringify({
             machine_id: MACHINE_ID,
-            status: shuttingDown ? "stopping" : "active",
+            status: shuttingDown ? "offline" : "active",
             metadata: { active_claws: Object.keys(children), network_mode: networkMode },
           }),
         });
@@ -1412,13 +1751,6 @@ function startDaemon(singleClaw, networkOpts = {}) {
           }
         }
       } catch {}
-
-      // Forward signals via remote signal bus if available
-      if (remoteSignalBus) {
-        try {
-          await remoteSignalBus.syncSignals(loadSignals());
-        } catch {}
-      }
     };
 
     sendNetworkHeartbeat();
@@ -1458,13 +1790,34 @@ function startDaemon(singleClaw, networkOpts = {}) {
       }
     });
 
-    httpServer.listen(healthPort, "127.0.0.1", () => {
-      log(`health endpoint: http://127.0.0.1:${healthPort}/health`);
-    });
+    // Retry port binding with backoff (handles TIME_WAIT from previous daemon)
+    let portRetries = 0;
+    const maxPortRetries = 5;
+    const tryListen = () => {
+      httpServer.listen(healthPort, "127.0.0.1", () => {
+        log(`health endpoint: http://127.0.0.1:${healthPort}/health`);
+      });
+    };
 
     httpServer.on("error", (err) => {
-      log(`health endpoint error (port ${healthPort}): ${err.message}`);
+      if (err.code === "EADDRINUSE" && portRetries < maxPortRetries) {
+        portRetries++;
+        const delay = portRetries * 2000; // 2s, 4s, 6s, 8s, 10s
+        log(`health port ${healthPort} in use, retry ${portRetries}/${maxPortRetries} in ${delay / 1000}s`);
+        setTimeout(tryListen, delay);
+      } else if (err.code === "EADDRINUSE") {
+        // Fall back to next port
+        const fallbackPort = healthPort + 1;
+        log(`health port ${healthPort} still in use after ${maxPortRetries} retries, trying ${fallbackPort}`);
+        httpServer.listen(fallbackPort, "127.0.0.1", () => {
+          log(`health endpoint: http://127.0.0.1:${fallbackPort}/health (fallback port)`);
+        });
+      } else {
+        log(`health endpoint error (port ${healthPort}): ${err.message}`);
+      }
     });
+
+    tryListen();
   } catch (err) {
     log(`could not start health endpoint: ${err.message}`);
   }
@@ -1496,14 +1849,27 @@ function startDaemon(singleClaw, networkOpts = {}) {
       }).catch(() => {});
     }
 
-    // Kill watchdog so it doesn't restart us
-    const wdPidFile = path.join(STATE_DIR, "watchdog.pid");
-    if (fs.existsSync(wdPidFile)) {
+    // Leave watchdog alive — it respects the shutdown marker for 30min
+    // then auto-restarts the daemon. For permanent stop, use --stop --permanent.
+    const permanentStop = process.argv.includes("--permanent");
+    if (permanentStop) {
+      const wdPidFile = path.join(STATE_DIR, "watchdog.pid");
+      if (fs.existsSync(wdPidFile)) {
+        try {
+          const wdPid = parseInt(fs.readFileSync(wdPidFile, "utf-8").trim(), 10);
+          killProcessTree(wdPid, "SIGTERM");
+          log(`killed watchdog tree (pid ${wdPid}) — permanent stop`);
+        } catch {}
+      }
+      // Write permanent marker so scheduled task also respects it
       try {
-        const wdPid = parseInt(fs.readFileSync(wdPidFile, "utf-8").trim(), 10);
-        killProcessTree(wdPid, "SIGTERM");
-        log(`killed watchdog tree (pid ${wdPid})`);
+        fs.writeFileSync(
+          path.join(STATE_DIR, "daemon.shutdown"),
+          JSON.stringify({ at: new Date().toISOString(), reason: reason || "permanent-stop", pid: process.pid, permanent: true }) + "\n"
+        );
       } catch {}
+    } else {
+      log(`watchdog left alive — daemon will auto-restart in 30m (use --stop --permanent to fully stop)`);
     }
 
     // Send shutdown to all children, then kill their process trees
@@ -1547,7 +1913,9 @@ function startDaemon(singleClaw, networkOpts = {}) {
             let swept = 0;
             for (const line of output.split("\n")) {
               if (!line.includes("moc-ai") && !line.includes("e2e\\") && !line.includes("eslint")) { continue; }
-              if (line.includes("modelcontextprotocol") || line.includes("claude") || line.includes("daemon.js")) { continue; }
+              // Skip MCP servers and daemon itself. Allow claude --print / moc-auto-fix children to be swept.
+              if (line.includes("modelcontextprotocol") || line.includes("daemon.js")) { continue; }
+              if (line.includes("claude") && !line.includes("claude --print") && !line.includes("moc-auto-fix")) { continue; }
               const parts = line.split(",");
               const pid = parseInt(parts[parts.length - 1], 10);
               if (!pid || pid === process.pid) { continue; }

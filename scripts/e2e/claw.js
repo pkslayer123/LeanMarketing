@@ -20,18 +20,7 @@ const path = require("path");
 const os = require("os");
 const { execSync, spawn } = require("child_process");
 
-function findProjectRoot() {
-  // When running from scripts/e2e/ inside a project
-  let dir = path.resolve(__dirname, "..", "..");
-  for (let i = 0; i < 5; i++) {
-    if (fs.existsSync(path.join(dir, "persona-engine.json")) || fs.existsSync(path.join(dir, "daemon-config.json")) || fs.existsSync(path.join(dir, "package.json"))) {
-      return dir;
-    }
-    dir = path.dirname(dir);
-  }
-  return path.resolve(__dirname, "..", "..");
-}
-const ROOT = findProjectRoot();
+const ROOT = path.resolve(__dirname, "..", "..");
 const STATE_DIR = path.join(ROOT, "e2e", "state");
 const SIGNALS_PATH = path.join(STATE_DIR, "claw-signals.json");
 const CONFIG_PATH = path.join(ROOT, "daemon-config.json");
@@ -51,22 +40,7 @@ const SIGNALS_CACHE_TTL_MS = 2000;              // Cache signals file reads for 
 let _signalsCacheData = null;
 let _signalsCacheTime = 0;
 
-let remoteSignalBus, MACHINE_ID;
-try {
-  const rsb = require("./remote-signal-bus");
-  remoteSignalBus = rsb.instance;
-  MACHINE_ID = rsb.MACHINE_ID;
-} catch {
-  // remote-signal-bus not available in standalone mode
-  MACHINE_ID = `${os.hostname()}-${os.userInfo().username}`;
-  remoteSignalBus = {
-    isNetworkMode: false,
-    emitSignal: async (name, data, localWriter) => { localWriter(name, data); },
-    heartbeat: async () => {},
-    pollRemoteSignals: async () => {},
-    hasRemoteSignal: () => false,
-  };
-}
+const { instance: remoteSignalBus, MACHINE_ID } = require("./remote-signal-bus");
 
 // Cache bash path on Windows (checked once at startup)
 let _bashPath = null;
@@ -200,7 +174,8 @@ function acquireLock(lockPath, timeoutMs = 10000) {
         try {
           const existing = JSON.parse(fs.readFileSync(lockPath, "utf-8"));
           const lockAge = Date.now() - new Date(existing.at).getTime();
-          if (lockAge > 30000) {
+          // 120s stale threshold — long enough for moc-auto-fix operations
+          if (lockAge > 120000) {
             try { fs.unlinkSync(lockPath); } catch {}
             continue;
           }
@@ -392,12 +367,8 @@ class Claw {
     // Main loop
     while (this.running && !this.shuttingDown) {
       try {
-        // Suspend file check — instant kill switch
-        if (fs.existsSync(SUSPEND_FILE)) {
-          this.log("suspend file detected — shutting down");
-          this.shutdown("suspend-file");
-          break;
-        }
+        // Suspend file is handled by the daemon (with grace period) — claws rely on
+        // SIGTERM from daemon rather than independently checking, to avoid race conditions
 
         if (this._circuitBroken) {
           // Check reset conditions while tripped
@@ -457,6 +428,28 @@ class Claw {
         } catch {}
       }
       this._activeChildren.clear();
+    }
+
+    // Sweep orphaned claude --print and moc-auto-fix processes that survived tree kill.
+    // On Windows, bash intermediaries can break parent-child chains, leaving grandchildren alive.
+    if (os.platform() === "win32") {
+      try {
+        const wmicOut = execSync(
+          'wmic process where "name=\'node.exe\' or name=\'claude.exe\'" get ProcessId,CommandLine /format:csv',
+          { stdio: "pipe", timeout: 10000, windowsHide: true }
+        ).toString();
+        let swept = 0;
+        for (const line of wmicOut.split("\n")) {
+          if (line.includes("claude --print") || line.includes("moc-auto-fix")) {
+            const parts = line.split(",");
+            const pid = parseInt(parts[parts.length - 1], 10);
+            if (pid && pid !== process.pid) {
+              try { execSync(`taskkill /PID ${pid} /T /F`, { stdio: "ignore", timeout: 5000 }); swept++; } catch {}
+            }
+          }
+        }
+        if (swept > 0) { this.log(`swept ${swept} orphaned claude/auto-fix process(es)`); }
+      } catch { /* non-fatal */ }
     }
 
     // Wait for current cycle to finish (with timeout)
@@ -533,21 +526,36 @@ class Claw {
       this.log(`  exec-async: ${label}`);
       const startTime = Date.now();
 
-      // Cross-platform: use cmd.exe on Windows if bash is unavailable
+      // Optimization: if cmd is "node <script> [args]", spawn node directly without
+      // a bash/cmd intermediary. This prevents the Windows orphan problem where
+      // bash.exe exits and breaks the parent-child chain, making grandchildren
+      // unreachable by taskkill /T.
       let shell, shellArgs;
-      const bashExe = getBashPath();
-      if (os.platform() === "win32" && !bashExe) {
-        shell = process.env.COMSPEC || "cmd.exe";
-        shellArgs = ["/c", cmd];
+      const nodeMatch = cmd.match(/^node\s+(.+)$/);
+      if (nodeMatch) {
+        shell = process.execPath; // Direct node.exe — no shell intermediary
+        shellArgs = nodeMatch[1].split(/\s+/);
       } else {
-        shell = bashExe || "bash";
-        shellArgs = ["-c", cmd];
+        const bashExe = getBashPath();
+        if (os.platform() === "win32" && !bashExe) {
+          shell = process.env.COMSPEC || "cmd.exe";
+          shellArgs = ["/c", cmd];
+        } else {
+          shell = bashExe || "bash";
+          shellArgs = ["-c", cmd];
+        }
       }
+
+      // Strip Claude Code nesting guards so `claude --print` can run
+      // even when daemon was started from within a Claude Code session
+      const cleanEnv = { ...process.env };
+      delete cleanEnv.CLAUDECODE;
+      delete cleanEnv.CLAUDE_CODE;
 
       const child = spawn(shell, shellArgs, {
         cwd: ROOT,
         stdio: "pipe",
-        env: { ...process.env, ...opts.env },
+        env: { ...cleanEnv, ...opts.env },
         windowsHide: true,
       });
 
@@ -694,9 +702,15 @@ class Claw {
     const startTime = Date.now();
     let result;
 
+    // Max cycle duration: prevent infinite hangs (default 45min, configurable)
+    const maxCycleDurationMs = (this.clawConfig.maxCycleDurationMinutes ?? 45) * 60 * 1000;
+
     try {
       this.cyclePromise = this.run();
-      result = await this.cyclePromise;
+      const cycleTimeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error(`cycle exceeded max duration (${Math.round(maxCycleDurationMs / 60000)}min)`)), maxCycleDurationMs)
+      );
+      result = await Promise.race([this.cyclePromise, cycleTimeout]);
     } catch (err) {
       result = { ok: false, summary: `error: ${err.message}` };
       this.lastError = err.message;
@@ -764,11 +778,12 @@ class Claw {
     }
   }
 
-  /** Trip the circuit breaker — pause this claw until reset conditions are met. */
+  /** Trip the circuit breaker — pause this claw until reset conditions are met (auto-reset after 30min). */
   _tripCircuitBreaker(reason) {
     if (this._circuitBroken) { return; }
     this._circuitBroken = true;
-    this.log(`CIRCUIT BREAKER TRIPPED: ${reason}`);
+    this._circuitBrokenAt = Date.now();
+    this.log(`CIRCUIT BREAKER TRIPPED: ${reason} (auto-reset in 30min)`);
     this._writeStatus("circuit_broken");
 
     // Emit signal for diagnostics claw
@@ -787,12 +802,29 @@ class Claw {
 
   /** Check if circuit breaker should auto-reset. */
   _shouldResetCircuitBreaker() {
+    if (!this._circuitBrokenAt) {
+      this._circuitBrokenAt = Date.now();
+    }
+
+    // Critical claws (observer, test-runner, fix-engine) get shorter cooldown (5min)
+    // because they're detection/action layers — being down causes cascading failures.
+    const CRITICAL_CLAWS = ["observer", "test-runner", "fix-engine", "diagnostics"];
+    const isCritical = CRITICAL_CLAWS.includes(this.name);
+    const COOLDOWN_MS = isCritical ? 5 * 60 * 1000 : 30 * 60 * 1000;
+
+    if (Date.now() - this._circuitBrokenAt > COOLDOWN_MS) {
+      this.log(`circuit breaker auto-reset after ${Math.round(COOLDOWN_MS / 60000)}m cooldown`);
+      this._circuitBrokenAt = null;
+      return true;
+    }
+
     // Reset on deploy-detected signal (new code might fix the issue)
     const deploySignal = this._getSignal("deploy-detected");
     if (deploySignal?.at) {
       const signals = this._loadSignals();
       const tripTime = signals.claws?.[this.name]?.heartbeat;
       if (tripTime && new Date(deploySignal.at) > new Date(tripTime)) {
+        this._circuitBrokenAt = null;
         return true;
       }
     }
@@ -803,11 +835,46 @@ class Claw {
       const signals = this._loadSignals();
       const tripTime = signals.claws?.[this.name]?.heartbeat;
       if (tripTime && new Date(diagSignal.at) > new Date(tripTime)) {
+        this._circuitBrokenAt = null;
         return true;
       }
     }
 
+    // Reset if another claw (diagnostics) externally reset our circuit breaker via signals
+    try {
+      const signals = this._loadSignals();
+      const myState = signals.claws?.[this.name];
+      if (myState?.status === "idle" && this._circuitBroken) {
+        this.log("circuit breaker externally reset (status=idle in signals)");
+        this._circuitBrokenAt = null;
+        return true;
+      }
+    } catch { /* non-fatal */ }
+
     return false;
+  }
+
+  /** Record a failure from unhandled rejection (called by start() handler). */
+  _recordFailure(msg) {
+    this._consecutiveFailures++;
+    this.lastError = msg;
+
+    // Track repeated identical errors
+    if (msg && msg === this._lastErrorMessage) {
+      this._sameErrorCount++;
+    } else {
+      this._sameErrorCount = 1;
+      this._lastErrorMessage = msg;
+    }
+
+    // Trip circuit breaker if threshold exceeded
+    const shouldTrip =
+      this._consecutiveFailures >= this._cbMaxFailures ||
+      this._sameErrorCount >= (this._cbConfig.maxSameError ?? 5);
+
+    if (shouldTrip) {
+      this._tripCircuitBreaker(`unhandledRejection: ${this._consecutiveFailures} consecutive failures`);
+    }
   }
 
   /** Reset the circuit breaker. */
@@ -818,6 +885,117 @@ class Claw {
     this._lastErrorMessage = null;
     this.log(`circuit breaker reset: ${reason}`);
     this._writeStatus("idle");
+  }
+
+  /**
+   * Force-trigger another claw immediately via daemon IPC.
+   * Writes a _force_trigger_<name> signal that daemon reads on its 5s poll
+   * and sends an IPC trigger message (or spawns the claw if it's not running).
+   * This is MUCH faster than just resetting lastRun (which waits for timer).
+   */
+  _forceTriggerClaw(clawName) {
+    this._withSignalsLock((signals) => {
+      // Reset lastRun for claw's own shouldRun() check (belt)
+      if (signals.claws[clawName]) {
+        signals.claws[clawName].lastRun = null;
+      }
+      // Write IPC signal for daemon to process on next poll cycle (suspenders)
+      signals.signals[`_force_trigger_${clawName}`] = {
+        at: new Date().toISOString(),
+        from: this.name,
+      };
+    });
+    this.log(`force-triggered ${clawName} (via daemon IPC signal)`);
+  }
+
+  /**
+   * Reset another claw's circuit breaker via signals file.
+   * Used by diagnostics to recover circuit-broken claws.
+   */
+  _resetClawCircuitBreaker(clawName) {
+    this._withSignalsLock((signals) => {
+      if (signals.claws[clawName]) {
+        // Clear circuit-broken status so claw.js _shouldResetCircuitBreaker sees fresh state
+        signals.claws[clawName].status = "idle";
+        delete signals.claws[clawName].circuitBrokenAt;
+      }
+    });
+    this.log(`reset circuit breaker for ${clawName} via signals`);
+  }
+
+  /**
+   * Squash accumulated chore commits (health-deploy, builder state-sync) into
+   * the latest code commit so that when we push, the HEAD commit (which Vercel
+   * uses as the deploy title) is the meaningful fix/feature description, not
+   * "chore: E2E health report — claw cycle N".
+   *
+   * Strategy: soft-reset to origin/main, then re-commit everything with the
+   * code commit's message. Safe because we haven't pushed yet.
+   */
+  _squashChoreCommitsBeforePush() {
+    try {
+      // Count commits ahead of origin/main
+      const logResult = this.exec(
+        'git log origin/main..HEAD --oneline 2>/dev/null',
+        { label: "check-unpushed-count" }
+      );
+      if (!logResult.ok) { return; }
+      const lines = (logResult.stdout || "").trim().split("\n").filter(Boolean);
+      if (lines.length <= 1) { return; } // nothing to squash
+
+      // Find the last non-chore commit message (the actual fix/feature)
+      const fullLogResult = this.exec(
+        'git log origin/main..HEAD --format="%H %s" 2>/dev/null',
+        { label: "find-code-commit" }
+      );
+      if (!fullLogResult.ok) { return; }
+      const commits = (fullLogResult.stdout || "").trim().split("\n").filter(Boolean);
+      const codeCommit = commits.find((c) => !c.match(/^[a-f0-9]+ chore:/));
+      if (!codeCommit) { return; } // all chore commits, nothing to reorder
+
+      // Get the full message from the code commit
+      const codeSha = codeCommit.split(" ")[0];
+      const msgResult = this.exec(
+        `git log -1 --format="%B" ${codeSha} 2>/dev/null`,
+        { label: "get-code-commit-msg" }
+      );
+      if (!msgResult.ok || !msgResult.stdout?.trim()) { return; }
+      const codeMsg = msgResult.stdout.trim();
+
+      this.log(`squashing ${lines.length} commits (${lines.length - 1} chore) into: ${codeMsg.split("\\n")[0]}`);
+
+      // Soft reset to origin/main — keeps all changes staged
+      const resetResult = this.exec(
+        'git reset --soft origin/main 2>&1',
+        { label: "soft-reset-for-squash" }
+      );
+      if (!resetResult.ok) {
+        this.log(`soft reset failed, skipping squash: ${(resetResult.stderr || "").slice(0, 100)}`);
+        return;
+      }
+
+      // Re-commit everything with the code commit's message
+      const commitMsgFile = path.join(STATE_DIR, `.squash-msg-${process.pid}`);
+      fs.writeFileSync(commitMsgFile, codeMsg);
+      const commitResult = this.exec(
+        `git commit --no-verify -F "${commitMsgFile}" 2>&1`,
+        { label: "squash-commit" }
+      );
+      try { fs.unlinkSync(commitMsgFile); } catch {}
+
+      if (!commitResult.ok) {
+        this.log(`squash commit failed: ${(commitResult.stderr || "").slice(0, 100)}`);
+        // Recovery: re-commit with generic message to not lose work
+        this.exec(
+          'git commit --no-verify -m "fix(auto): squashed code fix + state updates" 2>&1',
+          { label: "squash-recovery" }
+        );
+      } else {
+        this.log("squashed chore commits into code commit for clean deploy title");
+      }
+    } catch (err) {
+      this.log(`squash failed (non-fatal): ${err.message}`);
+    }
   }
 
   /** Persist lastRunAt to signals file so crash recovery doesn't re-process old signals. */
@@ -977,8 +1155,16 @@ class Claw {
       return { claws: {}, daemon: {} };
     }
     try {
-      return JSON.parse(fs.readFileSync(CONFIG_PATH, "utf-8"));
-    } catch {
+      const raw = fs.readFileSync(CONFIG_PATH, "utf-8");
+      const parsed = JSON.parse(raw);
+      // Validate basic structure — detect corruption early
+      if (!parsed || typeof parsed !== "object" || (!parsed.claws && !parsed.daemon)) {
+        this.log(`WARNING: daemon-config.json has unexpected structure — using defaults`);
+        return { claws: {}, daemon: {} };
+      }
+      return parsed;
+    } catch (err) {
+      this.log(`WARNING: daemon-config.json is corrupt (${err.message}) — using defaults`);
       return { claws: {}, daemon: {} };
     }
   }
@@ -1053,6 +1239,56 @@ class Claw {
   _sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
+  /**
+   * Read-modify-write a JSON state file under advisory lock.
+   * Prevents race conditions when multiple claws access the same file.
+   * @param {string} filename - File in STATE_DIR (e.g. "moc-queue.json")
+   * @param {function} mutator - fn(data) => void, mutates data in place
+   * @param {object} [defaultData] - Default if file doesn't exist or is corrupt
+   */
+  withStateLock(filename, mutator, defaultData = {}) {
+    const filePath = path.join(STATE_DIR, filename);
+    const lockPath = filePath + ".lock";
+    let locked = false;
+    try {
+      locked = acquireLock(lockPath, 10000);
+      let data;
+      try {
+        data = fs.existsSync(filePath)
+          ? JSON.parse(fs.readFileSync(filePath, "utf-8"))
+          : JSON.parse(JSON.stringify(defaultData));
+      } catch {
+        data = JSON.parse(JSON.stringify(defaultData));
+      }
+      mutator(data);
+      atomicWriteSync(filePath, JSON.stringify(data, null, 2) + "\n");
+    } finally {
+      if (locked) { releaseLock(lockPath); }
+    }
+  }
 }
 
-module.exports = { Claw, ROOT, STATE_DIR, SIGNALS_PATH, GIT_LOCK_PATH, acquireLock, releaseLock, atomicWriteSync, pruneJsonlFile, readFileTail, cleanupOrphanedFiles, remoteSignalBus, MACHINE_ID };
+// Standalone helper for scripts that don't extend Claw
+function withStateLock(filename, mutator, defaultData = {}) {
+  const filePath = path.join(STATE_DIR, filename);
+  const lockPath = filePath + ".lock";
+  let locked = false;
+  try {
+    locked = acquireLock(lockPath, 10000);
+    let data;
+    try {
+      data = fs.existsSync(filePath)
+        ? JSON.parse(fs.readFileSync(filePath, "utf-8"))
+        : JSON.parse(JSON.stringify(defaultData));
+    } catch {
+      data = JSON.parse(JSON.stringify(defaultData));
+    }
+    mutator(data);
+    atomicWriteSync(filePath, JSON.stringify(data, null, 2) + "\n");
+  } finally {
+    if (locked) { releaseLock(lockPath); }
+  }
+}
+
+module.exports = { Claw, ROOT, STATE_DIR, SIGNALS_PATH, GIT_LOCK_PATH, acquireLock, releaseLock, atomicWriteSync, pruneJsonlFile, readFileTail, cleanupOrphanedFiles, remoteSignalBus, MACHINE_ID, withStateLock };

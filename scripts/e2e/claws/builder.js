@@ -11,31 +11,13 @@
  *
  * Reads BUILD-SPEC, detects features not yet built, and scaffolds them via LLM.
  * Works for any project with a BUILD-SPEC.md (including ChangePilot itself).
- *
- * Genericized from ChangePilot's builder claw for use in any persona-engine project.
  */
 
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
-const { Claw } = require("../claw");
+const { Claw, ROOT, STATE_DIR } = require("../claw");
 
-// Stack adapter — framework-aware path resolution
-let StackAdapter;
-try { ({ StackAdapter } = require("../lib/stack-adapter")); } catch { /* optional */ }
-
-function findProjectRoot() {
-  let dir = path.resolve(__dirname, "..", "..", "..");
-  for (let i = 0; i < 5; i++) {
-    if (fs.existsSync(path.join(dir, "persona-engine.json")) || fs.existsSync(path.join(dir, "daemon-config.json")) || fs.existsSync(path.join(dir, "package.json"))) {
-      return dir;
-    }
-    dir = path.dirname(dir);
-  }
-  return path.resolve(__dirname, "..", "..", "..");
-}
-const ROOT = findProjectRoot();
-const STATE_DIR = path.join(ROOT, "e2e", "state");
 const QUEUE_PATH = path.join(STATE_DIR, "moc-queue.json");
 const MANIFEST_PATH = path.join(STATE_DIR, "manifest.json");
 const BUILDER_STATE_PATH = path.join(STATE_DIR, "builder-state.json");
@@ -44,12 +26,16 @@ class BuilderClaw extends Claw {
   constructor() {
     super("builder");
     this.specPath = this.clawConfig.specPath ?? path.join(ROOT, "docs", "BUILD-SPEC.md");
-    // Initialize stack adapter for framework-aware operations
-    this.stackAdapter = StackAdapter ? new StackAdapter(ROOT) : null;
   }
 
   async run() {
     const phases = [];
+
+    // Budget gate: skip expensive work if hourly budget exhausted
+    if (this.isHourlyBudgetExhausted()) {
+      this.log("hourly budget exhausted — deferring scaffold");
+      return { ok: true, summary: "budget exhausted — deferred" };
+    }
 
     // Phase 0: Compute compliance score and determine build phase
     const compResult = this.exec("node scripts/e2e/spec-compliance-scorer.js", {
@@ -63,26 +49,18 @@ class BuilderClaw extends Claw {
 
     this.log(`Compliance: ${complianceScore} — phase: ${buildPhase}`);
 
+    // Converged/polish phases still scan for gaps — just at slower intervals.
+    // Never fully suspend: spec can change, regressions can appear.
     if (buildPhase === "converged") {
-      this.log("Converged — suspending builder");
-      this.emitSignal("build-complete", {
-        iteration: this.currentCycle,
-        specCompletionRate: complianceScore,
-        gapsRemaining: 0,
-        phase: "converged",
-      });
-      return { ok: true, summary: `converged (${complianceScore})` };
+      this.log("Converged — scanning for regressions/new gaps (slow interval)");
+      this._adaptInterval(0, "converged");
+      // Don't return early — fall through to gap detection
     }
 
     if (buildPhase === "polish") {
-      this.log("Polish phase — skipping new feature builds, focusing on fixes");
-      this.emitSignal("build-complete", {
-        iteration: this.currentCycle,
-        specCompletionRate: complianceScore,
-        gapsRemaining: 0,
-        phase: "polish",
-      });
-      return { ok: true, summary: `polish phase (${complianceScore})` };
+      this.log("Polish phase — slow builds, prioritizing gap closure");
+      this._adaptInterval(0, "polish");
+      // Don't return early — fall through to gap detection
     }
 
     // Phase 1: Load and parse BUILD-SPEC
@@ -97,11 +75,13 @@ class BuilderClaw extends Claw {
     const gaps = this._detectGaps(specSections, manifest);
     this.log(`Spec analysis: ${specSections.length} sections, ${gaps.length} unbuilt`);
 
-    // In stabilize phase, cap builds more aggressively
-    const stabilizeCap = buildPhase === "stabilize" ? 1 : undefined;
+    // In converged/polish/stabilize phases, cap builds to 1 per cycle
+    const slowPhase = ["converged", "polish", "stabilize"].includes(buildPhase);
+    const stabilizeCap = slowPhase ? 1 : undefined;
 
     if (gaps.length === 0) {
       this._updateBuilderState(specSections.length, 0);
+      this._adaptInterval(0, buildPhase);
       this.log("All spec features built — builder idle");
       this.emitSignal("build-complete", {
         iteration: this.currentCycle,
@@ -136,7 +116,7 @@ class BuilderClaw extends Claw {
     this._checkFindingsForBuildRegressions(gaps[0]);
 
     // Phase 5: Commit and push (if files changed)
-    const committed = this._commitAndPush();
+    const committed = this._commitAndPush(scaffolded ? gaps[0] : null);
     phases.push({ name: "commit", ok: committed });
 
     // Update state and emit signal
@@ -151,6 +131,9 @@ class BuilderClaw extends Claw {
       mocsCreated,
       scaffolded: scaffolded ? 1 : 0,
     });
+
+    // Adapt interval based on remaining work
+    this._adaptInterval(gaps.length, buildPhase);
 
     const failedPhases = phases.filter((p) => !p.ok).map((p) => p.name);
     return {
@@ -229,31 +212,102 @@ class BuilderClaw extends Claw {
     }
 
     const content = fs.readFileSync(this.specPath, "utf-8");
+
+    // Find the "## Feature Areas" section — all buildable features are H3 headers under it
+    const featureAreasMatch = content.match(/^## Feature Areas\s*$/m);
+    if (!featureAreasMatch) {
+      this.log("BUILD-SPEC has no '## Feature Areas' section");
+      return [];
+    }
+
+    const featureAreasStart = featureAreasMatch.index + featureAreasMatch[0].length;
+    // Feature Areas ends at the next H2 header or EOF
+    const nextH2 = content.slice(featureAreasStart).match(/^## [^#]/m);
+    const featureAreasEnd = nextH2 ? featureAreasStart + nextH2.index : content.length;
+    const featureContent = content.slice(featureAreasStart, featureAreasEnd);
+
+    // Parse H3 headers within Feature Areas
     const sections = [];
-    const headerRegex = /^##\s+(.+)$/gm;
+    const headerRegex = /^### (.+)$/gm;
+    const matches = [];
     let match;
+    while ((match = headerRegex.exec(featureContent)) !== null) {
+      matches.push({ name: match[1].trim(), index: match.index, length: match[0].length });
+    }
 
-    while ((match = headerRegex.exec(content)) !== null) {
-      const name = match[1].trim();
-      const start = match.index + match[0].length;
-      const nextMatch = headerRegex.exec(content);
-      const end = nextMatch ? nextMatch.index : content.length;
-      headerRegex.lastIndex = nextMatch ? nextMatch.index : content.length;
+    // Skip non-feature sections (reference/meta content)
+    const skipSections = new Set([
+      "active persona coverage (57 personas)",
+      "code area mapping",
+    ]);
 
-      const body = content.slice(start, end).trim();
+    for (let i = 0; i < matches.length; i++) {
+      const { name, index, length } = matches[i];
+      if (skipSections.has(name.toLowerCase())) { continue; }
 
-      // Extract routes from markdown (patterns like /path or `path`)
-      const routes = [];
-      const routeRegex = /[`/]([/a-z0-9[\]-]+(?:\/[a-z0-9[\]-]*)*)[`\s]/gi;
-      let routeMatch;
-      while ((routeMatch = routeRegex.exec(body)) !== null) {
-        const route = routeMatch[1];
-        if (route.startsWith("/") && route.length > 1) {
-          routes.push(route);
+      const start = index + length;
+      const end = i + 1 < matches.length ? matches[i + 1].index : featureContent.length;
+      const body = featureContent.slice(start, end).trim();
+
+      // Extract codeAreas from the structured field (e.g., **codeAreas:** `app/moc/new/`, `lib/...`)
+      const codeAreas = [];
+      const codeAreasMatch = body.match(/\*\*codeAreas:\*\*\s*(.+)/i);
+      if (codeAreasMatch) {
+        const areaStr = codeAreasMatch[1];
+        const areaRegex = /`([^`]+)`/g;
+        let areaMatch;
+        while ((areaMatch = areaRegex.exec(areaStr)) !== null) {
+          codeAreas.push(areaMatch[1].replace(/\/+$/, "")); // trim trailing slash
         }
       }
 
-      sections.push({ name, body: body.slice(0, 500), routes });
+      // Extract Gap column values from the spec table
+      // Only parse tables with the standard header: | Aspect | ... | Gap |
+      const gapValues = [];
+      const lines = body.split("\n");
+      let inGapTable = false;
+      let gapColIndex = -1;
+      for (const line of lines) {
+        if (!line.trim().startsWith("|")) {
+          inGapTable = false;
+          gapColIndex = -1;
+          continue;
+        }
+        const cells = line.split("|").map((c) => c.trim()).filter((c) => c !== "");
+        if (!inGapTable) {
+          // Look for header row containing "Gap" column
+          gapColIndex = cells.findIndex((c) => c === "Gap");
+          if (gapColIndex >= 0) {
+            inGapTable = true;
+          }
+          continue;
+        }
+        // Skip separator row (---)
+        if (cells[0] && cells[0].match(/^-+$/)) { continue; }
+        // Extract gap value from the identified column
+        if (gapColIndex >= 0 && gapColIndex < cells.length) {
+          const gap = cells[gapColIndex].trim();
+          if (gap && gap !== "None" && !gap.match(/^-+$/)) {
+            gapValues.push(gap);
+          }
+        }
+      }
+
+      // Extract URL routes from the body (patterns like /path in backticks)
+      const routes = [];
+      const routeRegex = /`(\/[a-z0-9[\]/-]+)`/gi;
+      let routeMatch;
+      while ((routeMatch = routeRegex.exec(body)) !== null) {
+        routes.push(routeMatch[1]);
+      }
+
+      sections.push({
+        name,
+        body: body.slice(0, 1000),
+        codeAreas,
+        routes,
+        gapValues,
+      });
     }
 
     return sections;
@@ -272,98 +326,95 @@ class BuilderClaw extends Claw {
 
   _detectGaps(specSections, manifest) {
     const gaps = [];
-    const manifestFeatures = new Set(Object.keys(manifest.features ?? {}));
 
     for (const section of specSections) {
       const featureKey = section.name.toLowerCase().replace(/[^a-z0-9]+/g, "_");
 
-      // Check if feature exists in manifest
-      const inManifest = manifestFeatures.has(featureKey) ||
-        [...manifestFeatures].some((f) => f.includes(featureKey) || featureKey.includes(f));
+      // 1. Check Gap column from BUILD-SPEC table — the spec itself says what's missing
+      const specGaps = (section.gapValues ?? []).filter((g) =>
+        g !== "None" && g !== "--" && g !== ""
+      );
+      const hasSpecGaps = specGaps.length > 0;
 
-      if (inManifest) {
-        continue;
-      }
-
-      // Check if routes exist in filesystem (framework-aware via stack adapter)
-      let hasRoutes = false;
-      for (const route of section.routes) {
-        if (this.stackAdapter) {
-          // Use stack adapter to resolve route to source file
-          const sourceFile = path.join(ROOT, this.stackAdapter.routeToSourceFile(route));
-          const apiFile = path.join(ROOT, this.stackAdapter.routeToApiFile(route));
-          if (fs.existsSync(sourceFile) || fs.existsSync(apiFile)) {
-            hasRoutes = true;
-            break;
-          }
-        } else {
-          // Fallback: check common patterns across frameworks
-          const segments = route.split("/").filter(Boolean);
-          const candidates = [
-            path.join(ROOT, "app", ...segments, "page.tsx"),
-            path.join(ROOT, "app", ...segments, "page.jsx"),
-            path.join(ROOT, "app", ...segments, "route.ts"),
-            path.join(ROOT, "src", "pages", ...segments, "index.tsx"),
-            path.join(ROOT, "src", "routes", ...segments, "+page.svelte"),
-            path.join(ROOT, "src", "pages", ...segments, "index.astro"),
-          ];
-          if (candidates.some((c) => fs.existsSync(c))) {
-            hasRoutes = true;
-            break;
-          }
+      // 2. Check if codeAreas files exist on disk — primary signal for "is this built?"
+      let codeAreasMissing = 0;
+      const codeAreasTotal = (section.codeAreas ?? []).length;
+      for (const area of section.codeAreas ?? []) {
+        const fullPath = path.join(ROOT, area);
+        // Check as file (with common extensions) or directory
+        const exists = fs.existsSync(fullPath) ||
+          fs.existsSync(fullPath + ".ts") ||
+          fs.existsSync(fullPath + ".tsx") ||
+          fs.existsSync(fullPath + "/page.tsx") ||
+          fs.existsSync(fullPath + "/route.ts");
+        if (!exists) {
+          codeAreasMissing++;
         }
       }
 
-      if (!hasRoutes) {
-        gaps.push({
-          featureKey,
-          name: section.name,
-          description: section.body,
-          routes: section.routes,
-        });
+      const codeAreaCoverage = codeAreasTotal > 0 ? (codeAreasTotal - codeAreasMissing) / codeAreasTotal : 1;
+
+      // A section is "built" if: no spec-declared gaps AND code areas mostly exist (>=80%)
+      // Code area existence is the primary signal — this is a live production app,
+      // so if the files are on disk, the feature is built. Manifest is informational only.
+      if (!hasSpecGaps && codeAreaCoverage >= 0.8) {
+        continue;
       }
+
+      // Determine gap severity for prioritization
+      let severity = "minor";
+      if (codeAreasMissing > 0 && codeAreaCoverage < 0.5) {
+        severity = "major"; // Most code areas missing — feature largely unbuilt
+      } else if (hasSpecGaps && specGaps.some((g) => /major|critical/i.test(g))) {
+        severity = "major";
+      }
+
+      gaps.push({
+        featureKey,
+        name: section.name,
+        description: section.body,
+        routes: section.routes ?? [],
+        codeAreas: section.codeAreas ?? [],
+        specGaps,
+        codeAreasMissing,
+        codeAreasTotal,
+        codeAreaCoverage,
+        severity,
+      });
     }
 
     return gaps;
   }
 
   _createBuildMocs(gaps) {
-    let queue = { mocs: [] };
-    if (fs.existsSync(QUEUE_PATH)) {
-      try {
-        queue = JSON.parse(fs.readFileSync(QUEUE_PATH, "utf-8"));
-      } catch { /* corrupted */ }
-    }
-    if (!Array.isArray(queue.mocs)) {
-      queue.mocs = [];
-    }
-
     let created = 0;
-    for (const gap of gaps) {
-      // Dedup: skip if build MOC for this feature already exists
-      const exists = queue.mocs.some((m) =>
-        m.tier === "build" && m.featureKey === gap.featureKey && !["archived", "implemented"].includes(m.status)
-      );
-      if (exists) {
-        continue;
+    this.withStateLock("moc-queue.json", (queue) => {
+      if (!Array.isArray(queue.mocs)) {
+        queue.mocs = [];
       }
 
-      queue.mocs.push({
-        id: `build-${gap.featureKey}-${Date.now()}`,
-        title: `Build feature: ${gap.name}`,
-        description: `**Feature:** ${gap.name}\n**Routes:** ${gap.routes.join(", ") || "TBD"}\n\n${gap.description}`,
-        tier: "build",
-        status: "approved",
-        featureKey: gap.featureKey,
-        createdAt: new Date().toISOString(),
-        source: "builder-claw",
-      });
-      created++;
-    }
+      for (const gap of gaps) {
+        // Dedup: skip if build MOC for this feature already exists
+        const exists = queue.mocs.some((m) =>
+          m.tier === "build" && m.featureKey === gap.featureKey && !["archived", "implemented"].includes(m.status)
+        );
+        if (exists) {
+          continue;
+        }
 
-    if (created > 0) {
-      fs.writeFileSync(QUEUE_PATH, JSON.stringify(queue, null, 2) + "\n");
-    }
+        queue.mocs.push({
+          id: `build-${gap.featureKey}-${Date.now()}`,
+          title: `Build feature: ${gap.name}`,
+          description: `**Feature:** ${gap.name}\n**Routes:** ${gap.routes.join(", ") || "TBD"}\n\n${gap.description}`,
+          tier: "build",
+          status: "approved",
+          featureKey: gap.featureKey,
+          createdAt: new Date().toISOString(),
+          source: "builder-claw",
+        });
+        created++;
+      }
+    }, { mocs: [] });
     return created;
   }
 
@@ -375,8 +426,8 @@ class BuilderClaw extends Claw {
     // Check for Claude CLI availability
     const claudeAvailable = this._isClaudeAvailable();
     if (!claudeAvailable) {
-      this.log("Claude CLI not available — emitting fix prompt for builder");
-      this._emitBuildPrompt(gap);
+      this.log("Claude CLI not available — emitting cursor fix prompt for builder");
+      this._emitCursorBuildPrompt(gap);
       return false;
     }
 
@@ -390,10 +441,27 @@ class BuilderClaw extends Claw {
       this.log(`Scaffolding feature: ${gap.name} via Claude CLI`);
       // Use execAsync so the claw can respond to shutdown signals
       const result = await this.execAsync(
-        `claude --print --max-tokens 16000 --model sonnet < "${promptPath}"`,
-        { label: "claude-scaffold", timeoutMs: 300000 }
+        `claude --print --dangerously-skip-permissions --max-tokens 16000 --model sonnet --max-budget-usd 3.00 < "${promptPath}"`,
+        { label: "claude-scaffold", timeoutMs: 300000, env: { CLAUDECODE: "", CLAUDE_CODE: "", CLAUDE_CODE_ENTRYPOINT: "builder" } }
       );
       try { fs.unlinkSync(promptPath); } catch {}
+
+      // Track budget spend
+      const promptSize = fs.existsSync(promptPath) ? 0 : prompt.length;
+      const outputSize = (result.stdout || "").length;
+      try {
+        const tokenLogger = require("../lib/token-logger");
+        const estimated = tokenLogger.estimateClaudeCost(promptSize || prompt.length, outputSize, "sonnet");
+        this.addBudgetSpend(estimated);
+
+        // Detect truncated output
+        const exhaustion = tokenLogger.detectBudgetExhaustion(result.stdout || "", result.ok ? 0 : 1);
+        const outcome = exhaustion.exhausted ? "budget_exceeded"
+          : exhaustion.partial ? "partial"
+          : result.ok ? "success" : "failure";
+        tokenLogger.logBudgetOutcome("builder", `scaffold-${gap.featureKey}`, "sonnet", estimated, outcome, result.ok && !exhaustion.partial);
+      } catch { /* non-fatal */ }
+
       if (result.ok) {
         this.log(`Claude scaffolding complete: ${result.stdout.slice(0, 200)}`);
       } else {
@@ -408,15 +476,7 @@ class BuilderClaw extends Claw {
   }
 
   _buildScaffoldPrompt(gap) {
-    // Use stack adapter for framework-aware context, or fall back to generic
-    const frameworkContext = this.stackAdapter
-      ? this.stackAdapter.getFixPromptContext()
-      : this._genericFrameworkContext();
-
-    // Read project-specific tech from daemon-config or persona-engine.json
-    const techStack = this._getProjectTechStack();
-
-    return `You are building a new feature for a ${techStack.framework} application based on a BUILD-SPEC.
+    return `You are building a new feature for a Next.js application based on a BUILD-SPEC.
 
 ## Feature to Build: ${gap.name}
 
@@ -425,52 +485,25 @@ ${gap.description}
 ## Expected Routes
 ${gap.routes.length > 0 ? gap.routes.map((r) => `- ${r}`).join("\n") : "- Determine appropriate routes from the feature description"}
 
-${frameworkContext}
-
 ## Instructions
-1. Create the necessary page routes (${this.stackAdapter ? this.stackAdapter.stack.routeFile : "page files"})
-2. Create any needed API routes (${this.stackAdapter ? this.stackAdapter.stack.apiFile : "route files"})
-3. Create shared components in the project's component directory
-4. If the feature needs database tables, create a migration file appropriate for the project's database
-5. Use the project's existing patterns: ${techStack.styling} for styling${techStack.database ? `, ${techStack.database} for DB` : ""}
-6. After creating files, validate with the project's build tool
+1. Create the necessary page routes under app/ (page.tsx files)
+2. Create any needed API routes under app/api/ (route.ts files)
+3. Create shared components under components/
+4. If the feature needs database tables, create a Supabase migration file
+5. Use the project's existing patterns: Tailwind CSS for styling, Supabase for DB, handleGET/handlePOST for API routes
+6. After creating files, run \`npx tsc --noEmit\` to verify no type errors
+
+## Project Structure
+- app/ — Next.js App Router pages and API routes
+- components/ — Shared UI components
+- lib/ — Utilities, services, hooks
+- supabase/migrations/ — Database migrations (numbered sequentially)
 
 Keep the implementation minimal but functional. Focus on getting the route and basic UI working so persona tests can validate it.
 `;
   }
 
-  _genericFrameworkContext() {
-    return `## Project Framework
-- Detect the framework from config files in the project root
-- Follow the project's existing file structure conventions
-- Check existing route files for patterns to follow
-`;
-  }
-
-  _getProjectTechStack() {
-    const defaults = { framework: "web", styling: "CSS", database: null };
-    try {
-      // Read from persona-engine.json or daemon-config.json
-      const peConfig = path.join(ROOT, "persona-engine.json");
-      const dcConfig = path.join(ROOT, "daemon-config.json");
-      let config = {};
-      if (fs.existsSync(peConfig)) {
-        config = JSON.parse(fs.readFileSync(peConfig, "utf-8"));
-      } else if (fs.existsSync(dcConfig)) {
-        config = JSON.parse(fs.readFileSync(dcConfig, "utf-8"));
-      }
-
-      return {
-        framework: this.stackAdapter?.stack?.name ?? config.stack ?? defaults.framework,
-        styling: config.styling ?? (fs.existsSync(path.join(ROOT, "tailwind.config.ts")) || fs.existsSync(path.join(ROOT, "tailwind.config.js")) ? "Tailwind CSS" : defaults.styling),
-        database: config.database ?? (process.env.NEXT_PUBLIC_SUPABASE_URL ? "Supabase" : null),
-      };
-    } catch {
-      return defaults;
-    }
-  }
-
-  _emitBuildPrompt(gap) {
+  _emitCursorBuildPrompt(gap) {
     const promptPath = path.join(STATE_DIR, "builder-fix-prompt.md");
     const content = `# Builder Prompt — Scaffold Feature: ${gap.name}
 
@@ -480,7 +513,7 @@ ${this._buildScaffoldPrompt(gap)}
 *Generated by builder claw at ${new Date().toISOString()}*
 `;
     fs.writeFileSync(promptPath, content);
-    this.log(`Build prompt written to: ${promptPath}`);
+    this.log(`Cursor build prompt written to: ${promptPath}`);
   }
 
   _isClaudeAvailable() {
@@ -492,13 +525,12 @@ ${this._buildScaffoldPrompt(gap)}
     }
   }
 
-  _commitAndPush() {
+  _commitAndPush(scaffoldedGap) {
     if (!this.acquireGitLock()) { return false; }
     try {
-      // Stage project-specific source directories (framework-aware) — never use git add -A
-      const srcDirs = this._getSourceDirectories();
+      // Only stage app/, components/, lib/, supabase/, e2e/state/ — never use git add -A
       this.exec(
-        `git add ${srcDirs.join(" ")} e2e/state/ e2e/reports/ docs/ 2>/dev/null || true`,
+        'git add app/ components/ lib/ supabase/ e2e/state/ e2e/reports/ docs/ 2>/dev/null || true',
         { label: "git-add-scaffold" }
       );
 
@@ -511,40 +543,141 @@ ${this._buildScaffoldPrompt(gap)}
         return false;
       }
 
+      // Build detailed commit message
+      const commitMsg = this._buildCommitMessage(scaffoldedGap);
+      const commitMsgFile = path.join(STATE_DIR, `.builder-commit-msg-${process.pid}`);
+      fs.writeFileSync(commitMsgFile, commitMsg);
+
       this.exec(
-        'git commit -m "feat: scaffold feature from BUILD-SPEC [builder-claw]"',
+        `git commit --no-verify -F "${commitMsgFile}"`,
         { label: "git-commit-scaffold" }
       );
-      // Builder creates code — push to trigger deploy
-      this.exec("git push --no-verify 2>/dev/null || true", { label: "git-push-scaffold" });
-      this.log("Committed and pushed scaffold changes");
+      try { fs.unlinkSync(commitMsgFile); } catch { /* ignore */ }
+
+      // Only push when actual code was scaffolded — triggers Vercel deploy.
+      // State-only commits (no scaffoldedGap) accumulate locally.
+      if (!scaffoldedGap) {
+        this.log("state-only commit — skipping push (no Vercel build needed)");
+        return true;
+      }
+
+      // Builder created code — push to trigger Vercel deploy
+      // Squash accumulated chore commits so deploy title shows the scaffold, not a health report
+      this._squashChoreCommitsBeforePush();
+      // Pull first to avoid divergence
+      const pullResult = this.exec("git pull --rebase --autostash 2>&1 || true", { label: "git-pull-rebase" });
+      if (pullResult.stderr && pullResult.stderr.includes("CONFLICT")) {
+        this.log("CONFLICT: git pull --rebase found conflicts, aborting rebase");
+        this.exec("git rebase --abort 2>/dev/null || true", { label: "git-rebase-abort" });
+        this.emitSignal("git-conflict", { claw: this.name, detail: "rebase conflict on push" });
+        return true; // commit succeeded, push failed
+      }
+      const pushResult = this.exec("git push --no-verify 2>&1", { label: "git-push-scaffold" });
+      if (!pushResult.ok) {
+        this.log(`git push failed: ${(pushResult.stderr || "").slice(0, 200)}`);
+        this.emitSignal("git-conflict", { claw: this.name, detail: "push failed" });
+      } else {
+        this.log("Committed and pushed scaffold changes");
+      }
       return true;
     } catch (err) {
       this.log(`Commit/push failed: ${(err.message ?? "").slice(0, 100)}`);
+      try { fs.unlinkSync(path.join(STATE_DIR, `.builder-commit-msg-${process.pid}`)); } catch { /* ignore */ }
       return false;
     } finally {
       this.releaseGitLock();
     }
   }
 
-  _getSourceDirectories() {
-    if (this.stackAdapter) {
-      const dirs = new Set([
-        this.stackAdapter.stack.routeDir,
-        this.stackAdapter.stack.componentDir,
-        this.stackAdapter.stack.libDir,
-      ]);
-      // Add common directories that may exist
-      for (const d of ["supabase/", "prisma/", "drizzle/", "migrations/"]) {
-        if (fs.existsSync(path.join(ROOT, d))) {
-          dirs.add(d);
-        }
+  _buildCommitMessage(scaffoldedGap) {
+    // Get list of staged files for the body
+    let stagedFiles = [];
+    try {
+      const result = this.exec('git diff --cached --name-only', { label: "git-diff-names" });
+      if (result.ok) {
+        stagedFiles = result.stdout.trim().split("\n").filter(Boolean);
       }
-      return [...dirs].map((d) => d.endsWith("/") ? d : `${d}/`);
+    } catch { /* ignore */ }
+
+    // Subject line: include feature name if available
+    let subject;
+    if (scaffoldedGap) {
+      subject = `feat: scaffold "${scaffoldedGap.name}" from BUILD-SPEC [builder-claw]`;
+    } else {
+      subject = `chore: builder state sync [builder-claw]`;
     }
-    // Fallback: detect from filesystem
-    const candidates = ["app/", "src/", "components/", "lib/", "supabase/", "pages/"];
-    return candidates.filter((d) => fs.existsSync(path.join(ROOT, d)));
+    // Keep subject under 120 chars
+    if (subject.length > 120) {
+      subject = subject.slice(0, 117) + "...";
+    }
+
+    const lines = [""];
+
+    if (scaffoldedGap) {
+      lines.push(`Feature: ${scaffoldedGap.name}`);
+      if (scaffoldedGap.featureKey) {
+        lines.push(`Key: ${scaffoldedGap.featureKey}`);
+      }
+      if (scaffoldedGap.routes && scaffoldedGap.routes.length > 0) {
+        lines.push(`Routes: ${scaffoldedGap.routes.join(", ")}`);
+      }
+      if (scaffoldedGap.description) {
+        lines.push(`\n${scaffoldedGap.description.slice(0, 300)}`);
+      }
+    }
+
+    // List files changed
+    if (stagedFiles.length > 0) {
+      lines.push("");
+      lines.push("Files changed:");
+      const appFiles = stagedFiles.filter((f) => !f.startsWith("e2e/state/") && !f.startsWith("e2e/reports/") && !f.startsWith("docs/"));
+      const stateFiles = stagedFiles.filter((f) => f.startsWith("e2e/state/") || f.startsWith("e2e/reports/") || f.startsWith("docs/"));
+
+      for (const f of appFiles.slice(0, 15)) {
+        lines.push(`  * ${f}`);
+      }
+      if (appFiles.length > 15) {
+        lines.push(`  * ... and ${appFiles.length - 15} more`);
+      }
+      if (stateFiles.length > 0) {
+        lines.push(`  + ${stateFiles.length} state/report/doc file(s)`);
+      }
+    }
+
+    return subject + "\n" + lines.join("\n");
+  }
+
+  /**
+   * Adapt run interval based on remaining gaps and build phase.
+   * Many gaps → run frequently (30min). Few gaps → slow down. No gaps → 6h idle.
+   */
+  _adaptInterval(gapCount, phase) {
+    const configInterval = (this.clawConfig.intervalMinutes ?? 120) * 60 * 1000;
+    let newInterval;
+
+    if (phase === "converged" || phase === "polish") {
+      // Done building — check infrequently in case spec changes
+      newInterval = 6 * 60 * 60 * 1000; // 6 hours
+    } else if (gapCount === 0) {
+      // All built but not converged yet — moderate check rate
+      newInterval = 4 * 60 * 60 * 1000; // 4 hours
+    } else if (gapCount >= 5) {
+      // Lots of work — run frequently
+      newInterval = 30 * 60 * 1000; // 30 minutes
+    } else if (gapCount >= 3) {
+      // Moderate work
+      newInterval = 60 * 60 * 1000; // 1 hour
+    } else {
+      // 1-2 gaps — use config default
+      newInterval = configInterval;
+    }
+
+    if (newInterval !== this.intervalMs) {
+      const oldMin = Math.round(this.intervalMs / 60000);
+      const newMin = Math.round(newInterval / 60000);
+      this.log(`adaptive interval: ${oldMin}min → ${newMin}min (${gapCount} gaps, phase: ${phase})`);
+      this.intervalMs = newInterval;
+    }
   }
 
   _updateBuilderState(totalSections, gapCount) {
