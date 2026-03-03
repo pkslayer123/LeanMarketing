@@ -4814,6 +4814,741 @@
       ],
       "archivedAt": "2026-03-03T14:40:55.190Z",
       "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772548837221 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549135334",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:45:35.334Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T14:45:37.120Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549135334",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:45:35.334Z",
+      "source": "builder-claw",
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:46:10.341Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/projects\" after 3 attempts"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549135334",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:45:35.334Z",
+      "source": "builder-claw",
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:45:50.768Z",
+      "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772549135334 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549236010",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:47:16.010Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T14:47:28.522Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549236010",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:47:16.010Z",
+      "source": "builder-claw",
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:48:02.310Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/projects\" after 3 attempts"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549236010",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:47:16.010Z",
+      "source": "builder-claw",
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:47:29.902Z",
+      "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772549236010 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549309012",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:48:29.012Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T14:48:34.310Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549309013",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:48:29.013Z",
+      "source": "builder-claw",
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:49:24.557Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/projects\" after 3 attempts"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549309013",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:48:29.013Z",
+      "source": "builder-claw",
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:48:36.900Z",
+      "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772549309013 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549366025",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:49:26.025Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:49:57.962Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549366025",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:49:26.025Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:49:28.126Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549366025 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549366025",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:49:26.025Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:49:28.127Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549366025 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549513854",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:51:53.854Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:52:01.913Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549513854",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:51:53.854Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:51:58.910Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549513854 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549513854",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:51:53.854Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:51:58.911Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549513854 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549595330",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:53:15.330Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T14:53:19.983Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549595330",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:53:15.330Z",
+      "source": "builder-claw",
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:53:53.591Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/projects\" after 3 attempts"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549595330",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:53:15.330Z",
+      "source": "builder-claw",
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:53:35.363Z",
+      "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772549595330 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549705980",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:55:05.980Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T14:55:11.438Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549705980",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:55:05.980Z",
+      "source": "builder-claw",
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:55:45.192Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/projects\" after 3 attempts"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549705980",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:55:05.980Z",
+      "source": "builder-claw",
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:55:28.348Z",
+      "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772549705980 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549796892",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:56:36.892Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:56:50.453Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549796892",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:56:36.892Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:56:49.735Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549796892 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549796892",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:56:36.892Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:56:49.736Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549796892 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549910121",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:58:30.121Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:58:38.380Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549910121",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:58:30.121Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:58:31.655Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549910121 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549910121",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:58:30.121Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T14:58:31.656Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549910121 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772549984530",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T14:59:44.530Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:00:14.118Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772549984530",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T14:59:44.530Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:00:07.345Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549984530 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772549984530",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T14:59:44.530Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:00:07.346Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772549984530 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772550177315",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T15:02:57.315Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T15:03:02.746Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772550177315",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T15:02:57.315Z",
+      "source": "builder-claw",
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:03:36.491Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/projects\" after 3 attempts"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772550177315",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T15:02:57.315Z",
+      "source": "builder-claw",
+      "noSourceSkips": 1,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:03:13.992Z",
+      "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772550177315 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772550282944",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T15:04:42.944Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:04:54.151Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772550282944",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T15:04:42.944Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:04:49.693Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772550282944 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772550282944",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T15:04:42.944Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:04:49.694Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772550282944 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772550473951",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T15:07:53.951Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:08:14.067Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772550473951",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T15:07:53.951Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:08:09.971Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772550473951 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772550473951",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T15:07:53.951Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:08:09.972Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772550473951 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772550642300",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T15:10:42.300Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:11:04.577Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772550642300",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T15:10:42.300Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:11:01.757Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772550642300 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772550642300",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T15:10:42.300Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:11:01.758Z",
+      "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772550642300 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772550736914",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T15:12:16.914Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T15:12:21.757Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772550736914",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T15:12:16.914Z",
+      "source": "builder-claw",
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:12:56.187Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/projects\" after 3 attempts"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772550736914",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T15:12:16.914Z",
+      "source": "builder-claw",
+      "noSourceSkips": 2,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:12:42.599Z",
+      "archivedReason": "Deduplicated — newer MOC build-dashboard_and_project_overview-1772550736914 covers same area"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772550793665",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T15:13:13.665Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "noSourceSkips": 3,
+      "archivedAt": "2026-03-03T15:14:03.572Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"/api/ideas\" after 3 attempts"
+    },
+    {
+      "id": "build-layer_2_audience_and_outreach-1772550793665",
+      "title": "Build feature: Layer 2 — Audience and Outreach",
+      "description": "**Feature:** Layer 2 — Audience and Outreach\n**Routes:** /projects/[id]/audience\n\n**codeAreas:** `app/projects/[id]/audience/`, `app/api/leads/`, `app/api/outreach/`, `lib/outreach/`, `components/Outreach/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Audience definition | None | `/projects/[id]/audience` — job role, company type, inclusion/exclusion rules |\n| Lead management | None | Lead list with fit reasons, status tracking |\n| Message templates | None | A/B message editor with two parallel versions |\n| Mock sender | None | Provider-neutral mock sender for end-to-end testing (Milestone 1) |\n| Quality Gate 2 | None | Pass/fail: audience defined, lead fit documented, single CTA, opt-out enabled |\n| Sending controls | None | Rate limits, caps, stop-on-reply |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_2_audience_and_outreach",
+      "createdAt": "2026-03-03T15:13:13.665Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:13:14.410Z",
+      "archivedReason": "Deduplicated — newer MOC build-layer_1_idea_definition-1772550793665 covers same area"
+    },
+    {
+      "id": "build-layer_3_conversation_and_qualification-1772550793665",
+      "title": "Build feature: Layer 3 — Conversation and Qualification",
+      "description": "**Feature:** Layer 3 — Conversation and Qualification\n**Routes:** TBD\n\n**codeAreas:** `app/projects/[id]/conversations/`, `app/api/conversations/`, `lib/conversations/`, `components/Conversations/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Reply classification | None | Classify: not relevant, curious, interested, ready to evaluate |\n| Stage pipeline | None | Visual stage progression for leads |\n| Conversation log | None | Full exchange history per lead |\n| Next action suggestions | None | Auto-suggest smallest next step based on interest level |\n| Quality Gate 3 | None | Pass/fail: classification accuracy, effort check, logging |",
+      "tier": "auto_fix",
+      "status": "archived",
+      "featureKey": "layer_3_conversation_and_qualification",
+      "createdAt": "2026-03-03T15:13:13.665Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T15:13:14.411Z",
+      "archivedReason": "Deduplicated — newer MOC build-layer_1_idea_definition-1772550793665 covers same area"
     }
   ]
 }
