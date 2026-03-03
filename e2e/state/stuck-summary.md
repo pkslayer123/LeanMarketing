@@ -1,14 +1,13 @@
 # Daemon Stuck — Needs Attention
 
-Generated: 2026-03-03T04:46:21.284Z
+Generated: 2026-03-03T04:46:38.087Z
 
 ## Summary
-- **Approved MOCs:** 2
-- **Consecutive zero-fix runs:** 137
+- **Approved MOCs:** 1
+- **Consecutive zero-fix runs:** 138
 
 ## Open MOCs (approved/pending_fix)
-- Build feature: Dashboard and Project Overview (build)
-- Build feature: Layer 1 — Idea Definition (build)
+- Build feature: Dashboard and Project Overview (auto_approve)
 
 ## Actions
 - Run the auto-fix script manually or enable fix-engine
