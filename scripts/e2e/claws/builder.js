@@ -616,11 +616,12 @@ ${this._buildScaffoldPrompt(gap)}
   _commitAndPush(scaffoldedGap) {
     if (!this.acquireGitLock()) { return false; }
     try {
-      // Only stage app/, components/, lib/, supabase/, e2e/state/ — never use git add -A
-      this.exec(
-        'git add app/ components/ lib/ supabase/ e2e/state/ e2e/reports/ docs/ 2>/dev/null || true',
-        { label: "git-add-scaffold" }
-      );
+      // Stage each directory individually — git add aborts entirely if ANY pathspec
+      // doesn't match, so a missing dir (e.g. supabase/) would prevent ALL files from staging.
+      const stageDirs = ["app/", "components/", "lib/", "supabase/", "e2e/state/", "e2e/reports/", "docs/"];
+      for (const dir of stageDirs) {
+        this.exec(`git add ${dir} 2>/dev/null || true`, { label: `git-add-${dir.replace(/\//g, "")}` });
+      }
 
       const diffResult = this.exec(
         'git diff --cached --quiet',
