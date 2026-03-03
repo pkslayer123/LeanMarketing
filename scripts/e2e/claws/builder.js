@@ -389,10 +389,11 @@ class BuilderClaw extends Claw {
 
       const codeAreaCoverage = codeAreasTotal > 0 ? (codeAreasTotal - codeAreasMissing) / codeAreasTotal : 1;
 
-      // A section is "built" if: no spec-declared gaps AND code areas mostly exist (>=80%)
-      // Code area existence is the primary signal — this is a live production app,
-      // so if the files are on disk, the feature is built. Manifest is informational only.
-      if (!hasSpecGaps && codeAreaCoverage >= 0.8) {
+      // A section is "built" if code areas mostly exist (>=80%).
+      // Code area existence is the primary signal — the BUILD-SPEC Gap column describes
+      // requirements (what to build), not dynamic status. Once code is on disk, it's built.
+      // Spec gaps are passed to Claude as context but don't block "built" status.
+      if (codeAreaCoverage >= 0.8) {
         continue;
       }
 
