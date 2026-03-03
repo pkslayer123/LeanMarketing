@@ -1,60 +1,3 @@
-{"claw":"finding-pipeline","cycle":313,"at":"2026-03-03T14:52:55.668Z","durationMs":796,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
-{"claw":"fix-engine","cycle":34,"at":"2026-03-03T14:53:03.784Z","durationMs":1125,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"cp-meta","cycle":389,"at":"2026-03-03T14:53:07.830Z","durationMs":4805,"ok":false,"summary":"pushed 0 MOCs, 328 errors"}
-{"claw":"intelligence","cycle":443,"at":"2026-03-03T14:53:19.634Z","durationMs":10391,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
-{"claw":"fix-engine","cycle":35,"at":"2026-03-03T14:53:20.973Z","durationMs":2179,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"health-deploy","cycle":442,"at":"2026-03-03T14:53:36.234Z","durationMs":4673,"ok":false,"summary":"6 checks, 1 failed"}
-{"claw":"fix-engine","cycle":36,"at":"2026-03-03T14:53:37.800Z","durationMs":1802,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"diagnostics","cycle":481,"at":"2026-03-03T14:53:38.786Z","durationMs":18,"ok":false,"summary":"4 actions, 2/8 checks failing"}
-{"claw":"intelligence","cycle":444,"at":"2026-03-03T14:53:46.996Z","durationMs":12351,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
-{"claw":"fix-engine","cycle":37,"at":"2026-03-03T14:53:54.362Z","durationMs":1547,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"health-deploy","cycle":443,"at":"2026-03-03T14:53:55.942Z","durationMs":4696,"ok":false,"summary":"6 checks, 1 failed"}
-{"claw":"diagnostics","cycle":482,"at":"2026-03-03T14:54:08.815Z","durationMs":15,"ok":false,"summary":"3 actions, 1/8 checks failing"}
-{"claw":"intelligence","cycle":445,"at":"2026-03-03T14:54:12.687Z","durationMs":10675,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
-{"claw":"builder","cycle":319,"at":"2026-03-03T14:54:20.824Z","durationMs":65614,"ok":true,"summary":"0% complete, 10 gaps, 3 MOCs"}
-{"claw":"health-deploy","cycle":444,"at":"2026-03-03T14:54:30.090Z","durationMs":4123,"ok":false,"summary":"6 checks, 1 failed"}
-{"claw":"cp-meta","cycle":390,"at":"2026-03-03T14:54:42.524Z","durationMs":4640,"ok":false,"summary":"pushed 0 MOCs, 331 errors"}
-{"claw":"test-runner","cycle":315,"at":"2026-03-03T14:54:47.559Z","durationMs":7138,"ok":true,"summary":"9/9 passed, 0 failed"}
-{"claw":"finding-pipeline","cycle":314,"at":"2026-03-03T14:54:56.489Z","durationMs":772,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
-{"claw":"fix-engine","cycle":38,"at":"2026-03-03T14:55:12.426Z","durationMs":2998,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"cp-meta","cycle":391,"at":"2026-03-03T14:55:17.972Z","durationMs":5421,"ok":false,"summary":"pushed 0 MOCs, 334 errors"}
-{"claw":"diagnostics","cycle":483,"at":"2026-03-03T14:55:23.877Z","durationMs":24,"ok":false,"summary":"4 actions, 2/8 checks failing"}
-{"claw":"fix-engine","cycle":39,"at":"2026-03-03T14:55:29.382Z","durationMs":1931,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"intelligence","cycle":446,"at":"2026-03-03T14:55:37.628Z","durationMs":9910,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
-{"claw":"diagnostics","cycle":484,"at":"2026-03-03T14:55:38.909Z","durationMs":20,"ok":false,"summary":"4 actions, 2/8 checks failing"}
-{"claw":"fix-engine","cycle":40,"at":"2026-03-03T14:55:45.996Z","durationMs":1590,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"health-deploy","cycle":445,"at":"2026-03-03T14:55:48.344Z","durationMs":3200,"ok":false,"summary":"6 checks, 1 failed"}
-{"claw":"builder","cycle":320,"at":"2026-03-03T14:55:51.705Z","durationMs":45857,"ok":true,"summary":"0% complete, 10 gaps, 3 MOCs"}
-{"claw":"diagnostics","cycle":485,"at":"2026-03-03T14:55:53.948Z","durationMs":19,"ok":false,"summary":"3 actions, 1/8 checks failing"}
-{"claw":"intelligence","cycle":447,"at":"2026-03-03T14:56:03.738Z","durationMs":11099,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
-{"claw":"cp-meta","cycle":392,"at":"2026-03-03T14:56:08.344Z","durationMs":5332,"ok":false,"summary":"pushed 0 MOCs, 334 errors"}
-{"claw":"test-runner","cycle":316,"at":"2026-03-03T14:56:11.552Z","durationMs":8946,"ok":true,"summary":"10/10 passed, 0 failed"}
-{"claw":"health-deploy","cycle":446,"at":"2026-03-03T14:56:21.790Z","durationMs":3427,"ok":false,"summary":"6 checks, 1 failed"}
-{"claw":"finding-pipeline","cycle":315,"at":"2026-03-03T14:56:27.345Z","durationMs":796,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
-{"claw":"fix-engine","cycle":41,"at":"2026-03-03T14:56:34.567Z","durationMs":3524,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"cp-meta","cycle":393,"at":"2026-03-03T14:56:42.986Z","durationMs":4618,"ok":false,"summary":"pushed 0 MOCs, 337 errors"}
-{"claw":"fix-engine","cycle":42,"at":"2026-03-03T14:56:51.307Z","durationMs":1727,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"intelligence","cycle":448,"at":"2026-03-03T14:57:00.699Z","durationMs":11923,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
-{"claw":"health-deploy","cycle":447,"at":"2026-03-03T14:57:10.472Z","durationMs":3660,"ok":false,"summary":"6 checks, 1 failed"}
-{"claw":"builder","cycle":321,"at":"2026-03-03T14:57:44.987Z","durationMs":68250,"ok":true,"summary":"0% complete, 10 gaps, 3 MOCs"}
-{"claw":"cp-meta","cycle":394,"at":"2026-03-03T14:58:02.455Z","durationMs":4426,"ok":false,"summary":"pushed 0 MOCs, 337 errors"}
-{"claw":"test-runner","cycle":317,"at":"2026-03-03T14:58:03.964Z","durationMs":7346,"ok":true,"summary":"10/10 passed, 0 failed"}
-{"claw":"finding-pipeline","cycle":316,"at":"2026-03-03T14:58:13.132Z","durationMs":732,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
-{"claw":"cp-meta","cycle":395,"at":"2026-03-03T14:58:22.031Z","durationMs":4562,"ok":false,"summary":"pushed 0 MOCs, 337 errors"}
-{"claw":"fix-engine","cycle":43,"at":"2026-03-03T14:58:22.559Z","durationMs":1186,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"fix-engine","cycle":44,"at":"2026-03-03T14:58:39.174Z","durationMs":1602,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"intelligence","cycle":449,"at":"2026-03-03T14:58:41.501Z","durationMs":10739,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
-{"claw":"health-deploy","cycle":448,"at":"2026-03-03T14:58:58.850Z","durationMs":3343,"ok":false,"summary":"6 checks, 1 failed"}
-{"claw":"builder","cycle":322,"at":"2026-03-03T14:59:14.372Z","durationMs":44371,"ok":true,"summary":"0% complete, 10 gaps, 3 MOCs"}
-{"claw":"test-runner","cycle":318,"at":"2026-03-03T14:59:25.703Z","durationMs":6692,"ok":true,"summary":"10/10 passed, 0 failed"}
-{"claw":"cp-meta","cycle":396,"at":"2026-03-03T14:59:26.994Z","durationMs":4920,"ok":false,"summary":"pushed 0 MOCs, 340 errors"}
-{"claw":"finding-pipeline","cycle":317,"at":"2026-03-03T14:59:28.943Z","durationMs":756,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
-{"claw":"diagnostics","cycle":486,"at":"2026-03-03T14:59:39.091Z","durationMs":16,"ok":false,"summary":"3 actions, 1/8 checks failing"}
-{"claw":"fix-engine","cycle":45,"at":"2026-03-03T14:59:40.397Z","durationMs":1172,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"intelligence","cycle":450,"at":"2026-03-03T14:59:51.325Z","durationMs":9789,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
-{"claw":"fix-engine","cycle":46,"at":"2026-03-03T14:59:58.279Z","durationMs":2871,"ok":true,"summary":"0 fixes applied, 0 failed"}
-{"claw":"cp-meta","cycle":397,"at":"2026-03-03T15:00:02.604Z","durationMs":5587,"ok":false,"summary":"pushed 0 MOCs, 343 errors"}
-{"claw":"health-deploy","cycle":449,"at":"2026-03-03T15:00:02.729Z","durationMs":3840,"ok":false,"summary":"6 checks, 1 failed"}
 {"claw":"diagnostics","cycle":487,"at":"2026-03-03T15:00:09.140Z","durationMs":20,"ok":false,"summary":"4 actions, 2/8 checks failing"}
 {"claw":"fix-engine","cycle":47,"at":"2026-03-03T15:00:14.879Z","durationMs":1580,"ok":true,"summary":"0 fixes applied, 0 failed"}
 {"claw":"intelligence","cycle":451,"at":"2026-03-03T15:00:31.738Z","durationMs":25402,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
@@ -2052,3 +1995,7 @@
 {"claw":"finding-pipeline","cycle":548,"at":"2026-03-03T22:30:46.781Z","durationMs":849,"ok":true,"summary":"6 phases, 0 failed, 0 MOCs queued"}
 {"claw":"health-deploy","cycle":690,"at":"2026-03-03T22:30:46.965Z","durationMs":3344,"ok":false,"summary":"6 checks, 1 failed"}
 {"claw":"builder","cycle":558,"at":"2026-03-03T22:30:59.761Z","durationMs":118,"ok":true,"summary":"spec complete (100%)"}
+{"claw":"fix-engine","cycle":334,"at":"2026-03-03T22:31:00.665Z","durationMs":1241,"ok":true,"summary":"0 fixes applied, 0 failed"}
+{"claw":"test-runner","cycle":542,"at":"2026-03-03T22:31:17.331Z","durationMs":7953,"ok":true,"summary":"10/10 passed, 0 failed"}
+{"claw":"intelligence","cycle":700,"at":"2026-03-03T22:31:25.863Z","durationMs":10452,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
+{"claw":"finding-pipeline","cycle":549,"at":"2026-03-03T22:31:32.651Z","durationMs":838,"ok":true,"summary":"6 phases, 0 failed, 0 MOCs queued"}
