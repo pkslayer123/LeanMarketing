@@ -1,23 +1,30 @@
 {
-  "lastRun": "2026-03-03T17:14:55.842Z",
+  "lastRun": "2026-03-03T17:18:30.150Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
-  "fixApplied": 0,
+  "fixApplied": 1,
   "fixFailed": 0,
-  "noFixNeeded": 2,
+  "noFixNeeded": 1,
   "details": [
     {
       "action": "archived",
       "reason": "Critical route: /login"
     },
     {
-      "action": "no_fix_needed",
-      "reason": "No type errors. The file is clean and no findings were provided describing an actual bug. No changes are needed — this MOC appears to be noise (likely triggered by a build-phase task with no actionable content).\n"
+      "mocId": "build-dashboard_and_project_overview-1772558210276",
+      "action": "claude_fixed",
+      "tier": "build",
+      "status": "implemented",
+      "files": [
+        "app/api/projects/route.ts"
+      ],
+      "title": "Build feature: Dashboard and Project Overview",
+      "changeType": ""
     },
     {
       "action": "no_fix_needed",
-      "reason": "No TypeScript errors. The code in `app/api/ideas/route.ts` and `lib/ideas.ts` is clean:\n\n- The POST handler validates all required fields, runs the quality gate, and upserts to Supabase.\n- The GET handler checks auth, requires `project_id`, and returns ideas filtered by user.\n- `lib/ideas.ts` export"
+      "reason": "No type errors. The findings section for this MOC is **empty** — no specific issues were reported. The code in `app/api/ideas/route.ts` and `lib/ideas.ts` is correct:\n\n- Auth check guards both POST and GET\n- Required field validation on POST\n- JSON parse error handling\n- Proper upsert with `onConfli"
     }
   ]
 }
