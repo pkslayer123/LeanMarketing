@@ -1,22 +1,22 @@
 {
   "passed": [
-    "moc-queue: correct format ({ mocs: [...] }), 241 entries",
+    "moc-queue: correct format ({ mocs: [...] }), 244 entries",
     "findings: valid format, 0 entries",
     "claw-signals: correct format ({ signals, claws })",
-    "issue-queue: all 241 entries have valid schema",
+    "issue-queue: all 244 entries have valid schema",
     "findings: all 0 entries have valid schema",
-    "convergence: valid state \"stuck\"",
+    "convergence: valid state \"converged\"",
     "plausibility: health summary queue depth consistent with moc-queue",
     "signal-flow: test-runner → tests-complete signal connected"
   ],
   "failed": [
-    "config-alignment: auto-tune made 26 config changes across 26 cycles in 24h. Possible oscillation — check autoTune min/max guards."
+    "config-alignment: auto-tune made 27 config changes across 27 cycles in 24h. Possible oscillation — check autoTune min/max guards."
   ],
   "warnings": [
     "config-alignment: test-runner.coverageBasedSuspend is not set in config (defaults to false). Add it explicitly to prevent surprises.",
     "principles: daemon-principles.json does not exist — no design constraints encoded"
   ],
-  "at": "2026-03-03T09:13:05.975Z",
+  "at": "2026-03-03T09:15:54.339Z",
   "passedCount": 8,
   "failedCount": 1,
   "warningCount": 2,
