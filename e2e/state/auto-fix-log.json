@@ -1,23 +1,10 @@
 {
-  "lastRun": "2026-03-03T19:03:31.642Z",
-  "total": 3,
+  "lastRun": "2026-03-03T19:04:47.865Z",
+  "total": 0,
   "noiseAutoClose": 0,
-  "fixAttempted": 2,
+  "fixAttempted": 0,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 2,
-  "details": [
-    {
-      "action": "archived",
-      "reason": "Critical route: /login"
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "es were reported for this file. Looking at the code itself, `app/api/projects/route.ts` is well-formed:\n\n- Auth check before any data access\n- Null safety with `?.` and `?? []`\n- Proper error propagation with appropriate HTTP status codes\n- Input validation on POST (name required, JSON parse guarded"
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "ed for this MOC. The route code in `app/api/ideas/route.ts` and `lib/ideas.ts` are both correct:\n\n- Auth check is present and returns 401 properly\n- All fields are validated before use\n- `runQualityGate` is called correctly\n- Upsert with `onConflict: \"project_id,user_id\"` is appropriate\n- GET endpoi"
-    }
-  ]
+  "noFixNeeded": 0,
+  "details": []
 }
