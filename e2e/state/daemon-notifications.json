@@ -1,10 +1,5 @@
 [
   {
-    "message": "Daemon stuck: 3 approved MOCs, 155 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T19:23:23.874Z"
-  },
-  {
     "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 19:14:21] [builder]   fail: git-diff-check — \n[2026-03-03 19:15:28] [diagnostics]   classification: unknown — [2026-03-03 19:14:21] [builder]   fail: git-diff-check — \n[2026-03-03 19:16:16",
     "severity": "critical",
     "at": "2026-03-03T19:23:28.626Z"
@@ -498,5 +493,10 @@
     "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T21:48:23.471Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T21:49:08.521Z"
   }
 ]
