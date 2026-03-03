@@ -1,15 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T20:00:54.235Z"
-  },
-  {
-    "message": "11/11 claws healthy (builder:idle, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 100% pass rate. 0 MOCs pending approval. Pipeline: degraded (1 failures).",
-    "severity": "info",
-    "at": "2026-03-03T21:45:53.298Z"
-  },
-  {
     "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T21:47:53.773Z"
@@ -498,5 +488,15 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x2)",
     "severity": "warning",
     "at": "2026-03-03T22:49:03.765Z"
+  },
+  {
+    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x2)",
+    "severity": "warning",
+    "at": "2026-03-03T22:49:33.788Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T22:49:33.816Z"
   }
 ]
