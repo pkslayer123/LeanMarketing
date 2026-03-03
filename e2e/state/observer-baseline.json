@@ -189,6 +189,25 @@
       "regenFailed": 0,
       "regenPending": 0,
       "regenCost": 0
+    },
+    {
+      "cycle": 11,
+      "at": "2026-03-03T12:08:23.985Z",
+      "passRate": 100,
+      "effectivePassRate": 100,
+      "skipRate": 0,
+      "total": 10,
+      "fixesApplied": 0,
+      "fixesFailed": 0,
+      "trueCoverage": 0,
+      "quarantinedCount": 0,
+      "neverRanPersonas": 0,
+      "flakyCount": 0,
+      "manifestCoveragePct": 90,
+      "regenSucceeded": 0,
+      "regenFailed": 0,
+      "regenPending": 0,
+      "regenCost": 0
     }
   ],
   "rollingPassRate": {
@@ -196,28 +215,28 @@
     "stddev": 0,
     "min": 100,
     "max": 100,
-    "count": 8
+    "count": 9
   },
   "rollingEffectiveRate": {
-    "mean": 80,
-    "stddev": 40,
+    "mean": 81.8,
+    "stddev": 38.6,
     "min": 0,
     "max": 100,
-    "count": 10
+    "count": 11
   },
   "rollingSkipRate": {
     "mean": 0,
     "stddev": 0,
     "min": 0,
     "max": 0,
-    "count": 8
+    "count": 9
   },
   "rollingTotal": {
     "mean": 10,
     "stddev": 0,
     "min": 10,
     "max": 10,
-    "count": 8
+    "count": 9
   },
   "preFixSnapshots": [],
   "lastInvestigation": null,
@@ -235,6 +254,7 @@
   },
   "recommendations": [],
   "_trueCoverageHistory": [
+    0,
     0,
     0,
     0,
