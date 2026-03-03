@@ -15,6 +15,12 @@
       "gapsRemaining": 2,
       "mocsCreated": 2,
       "scaffolded": 0
+    },
+    "fixes-applied": {
+      "at": "2026-03-03T02:09:02.070Z",
+      "emittedBy": "fix-engine",
+      "applied": 0,
+      "failed": 0
     }
   },
   "claws": {
@@ -61,13 +67,15 @@
       "phase": "starting"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 23536,
-      "lastRun": null,
-      "nextRun": null,
-      "heartbeat": "2026-03-03T02:09:00.580Z",
+      "lastRun": "2026-03-03T02:09:02.207Z",
+      "nextRun": "2026-03-03T03:09:02.207Z",
+      "heartbeat": "2026-03-03T02:09:02.210Z",
       "cycle": 1,
-      "phase": "docs-update"
+      "phase": "docs-update",
+      "lastCycleDurationMs": 1625,
+      "lastCycleResult": "ok"
     },
     "intelligence": {
       "status": "running",
@@ -91,10 +99,4 @@
       "status": "running",
       "pid": 29688,
       "lastRun": null,
-      "nextRun": null,
-      "heartbeat": "2026-03-03T02:09:00.650Z",
-      "cycle": 1,
-      "phase": "starting"
-    }
-  }
-}
+      "nextRun": nu
