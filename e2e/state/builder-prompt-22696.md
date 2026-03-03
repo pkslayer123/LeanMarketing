@@ -12,11 +12,9 @@ You are building a new feature for a Next.js application.
 | Session management | None | Supabase session handling in layout |
 | Logout | None | Sign-out action and redirect |
 
-## Missing Code Areas (MUST CREATE)
-- app/api/auth
-
 ## Already Existing (do NOT recreate)
 - app/auth
+- app/api/auth
 - lib/auth
 - components/AuthForm.tsx
 
