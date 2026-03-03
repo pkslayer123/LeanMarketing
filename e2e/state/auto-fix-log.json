@@ -1,15 +1,23 @@
 {
-  "lastRun": "2026-03-03T16:22:50.992Z",
-  "total": 1,
+  "lastRun": "2026-03-03T16:28:31.245Z",
+  "total": 3,
   "noiseAutoClose": 0,
-  "fixAttempted": 1,
+  "fixAttempted": 2,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 1,
+  "noFixNeeded": 2,
   "details": [
     {
+      "action": "archived",
+      "reason": "Critical route: /login"
+    },
+    {
       "action": "no_fix_needed",
-      "reason": "The findings section is empty — there are no specific bugs reported. The route file (`app/api/leads/route.ts`) is well-formed:\n\n- Auth check before any data access\n- Required field validation on POST\n- Null-safe inserts (`company ?? null`, `job_role ?? null`)\n- Correct user scoping (`user_id` filter"
+      "reason": "The findings section is empty — there are no specific issues reported for this file. The code in `app/api/projects/route.ts` looks correct:\n\n- Auth guard in place (401 on unauthenticated)\n- Null safety with `?.` and `??`\n- Proper error handling returning structured JSON errors\n- Projects filtered by"
+    },
+    {
+      "action": "no_fix_needed",
+      "reason": "x.ts` looks correct:\n\n- Auth check is present and returns 401 for unauthenticated requests\n- Input validation covers all required fields\n- The `runQualityGate` function exists and matches the expected call signature\n- Upsert uses correct conflict target (`project_id,user_id`)\n- GET returns proper re"
     }
   ]
 }

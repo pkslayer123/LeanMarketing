@@ -1,36 +1,36 @@
 {
-  "generatedAt": "2026-03-03T16:23:09.186Z",
+  "generatedAt": "2026-03-03T16:28:41.809Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 394,
-    "mocs_implemented": 8,
+    "mocs_total": 400,
+    "mocs_implemented": 12,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 386,
+    "mocs_archived": 388,
     "mocs_with_commit": 0,
     "mocs_verified": 0,
-    "fixes_attempted": 1,
+    "fixes_attempted": 2,
     "fixes_applied": 0,
     "fixes_failed": 0,
     "fixes_noise_closed": 0,
-    "fixes_no_fix_needed": 1
+    "fixes_no_fix_needed": 2
   },
   "conversionRates": {
     "finding_to_moc": 0,
-    "moc_to_fix_attempt": 0.003,
+    "moc_to_fix_attempt": 0.005,
     "fix_attempt_to_success": 0,
-    "moc_to_implemented": 0.02,
+    "moc_to_implemented": 0.03,
     "implemented_to_verified": 0,
     "end_to_end": 0
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 386,
-    "implemented": 8
+    "archived": 388,
+    "implemented": 12
   },
   "byTier": {
     "auto_approve": {
@@ -41,10 +41,10 @@
       "awaiting": 0
     },
     "build": {
-      "total": 85,
-      "implemented": 7,
+      "total": 91,
+      "implemented": 11,
       "failed": 0,
-      "archived": 78,
+      "archived": 80,
       "awaiting": 0
     },
     "auto_fix": {
@@ -59,48 +59,21 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 394,
-      "to": 8,
-      "lostCount": 386,
-      "dropRate": 98
+      "from": 400,
+      "to": 12,
+      "lostCount": 388,
+      "dropRate": 97
     },
     {
       "stage": "implemented_to_verified",
       "label": "Implemented → Verified (commit)",
-      "from": 8,
+      "from": 12,
       "to": 0,
-      "lostCount": 8,
+      "lostCount": 12,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 479,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
-    {
-      "date": "2026-03-03",
-      "iteration": 480,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
-    {
-      "date": "2026-03-03",
-      "iteration": 481,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 482,
@@ -158,6 +131,33 @@
     {
       "date": "2026-03-03",
       "iteration": 488,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 489,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 490,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 491,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
