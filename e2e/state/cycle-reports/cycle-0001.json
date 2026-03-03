@@ -1,0 +1,356 @@
+{
+  "cycle": 1,
+  "at": "2026-03-03T02:16:50.997Z",
+  "tests": {
+    "passed": 0,
+    "failed": 0,
+    "total": 0,
+    "skipped": 0,
+    "effectivePassRate": 0,
+    "duration": 32888,
+    "workers": 3,
+    "at": "2026-03-03T02:10:58.314Z"
+  },
+  "testBreakdown": {
+    "byRoute": {},
+    "bySpec": {},
+    "failingTests": [],
+    "slowTests": [],
+    "flakyTests": [],
+    "routeHeatmap": []
+  },
+  "personaPerformance": {
+    "personas": {},
+    "topFailers": [],
+    "highValueHealth": null
+  },
+  "findingsPipeline": {
+    "openCount": 0,
+    "newThisCycle": 0,
+    "autoResolved": 0,
+    "noiseRate": 0,
+    "themes": null,
+    "at": "2026-03-03T02:11:04.866Z"
+  },
+  "mocQueue": {
+    "total": 2,
+    "byStatus": {
+      "approved": 2
+    },
+    "byTier": {
+      "build": 2
+    },
+    "awaitingHuman": 0,
+    "staleApproved": 0,
+    "malformedCount": 0
+  },
+  "timeToFix": {
+    "medianApprovedToFixMs": null,
+    "p90ApprovedToFixMs": null,
+    "medianCreatedToClosedMs": null,
+    "oldestApprovedMoc": null,
+    "stuckMocs": [],
+    "completedLast24h": 0,
+    "byTier": {}
+  },
+  "fixes": {
+    "applied": 0,
+    "failed": 0,
+    "filesChanged": [],
+    "mocsFixed": [],
+    "revertedCount": 0,
+    "at": "2026-03-03T02:10:53.722Z"
+  },
+  "builder": {
+    "compliance": null,
+    "gaps": null,
+    "phase": null,
+    "at": "2026-03-03T02:10:48.505Z"
+  },
+  "cpMeta": {
+    "mocsAdvanced": 0,
+    "remaining": 0,
+    "playwrightOk": true,
+    "at": null
+  },
+  "intelligence": {
+    "subsystems": 36,
+    "failed": 35,
+    "at": "2026-03-03T02:10:43.403Z"
+  },
+  "diagnostics": {
+    "healthChecks": 8,
+    "failing": 0,
+    "actions": 3,
+    "at": "2026-03-03T02:10:49.357Z"
+  },
+  "git": {
+    "commitsSinceLastCycle": 0,
+    "autoFixCommits": 0,
+    "deploysSinceLastCycle": 0
+  },
+  "greenTracker": {
+    "totalTracked": 0,
+    "stable5": 0,
+    "stable20": 0,
+    "stable50": 0,
+    "skipListSize": 0,
+    "reintroductionDue": 0
+  },
+  "convergence": {
+    "state": "stuck",
+    "netProgress": 0,
+    "streak": null,
+    "convergedSince": null
+  },
+  "budget": {
+    "exhausted": false,
+    "exhaustedAt": null,
+    "clawSpend": {},
+    "hourlyTotal": 0,
+    "idleSpenders": [
+      "fix-engine",
+      "builder",
+      "intelligence",
+      "finding-pipeline",
+      "health-deploy"
+    ]
+  },
+  "clawHealth": {
+    "test-runner": {
+      "status": "idle",
+      "lastRun": "2026-03-03T02:10:58.316Z",
+      "cycle": 4,
+      "heartbeat": "2026-03-03T02:11:00.614Z",
+      "stale": true
+    },
+    "finding-pipeline": {
+      "status": "idle",
+      "lastRun": "2026-03-03T02:11:04.979Z",
+      "cycle": 5,
+      "heartbeat": "2026-03-03T02:16:50.961Z",
+      "stale": false
+    },
+    "builder": {
+      "status": "idle",
+      "lastRun": "2026-03-03T02:10:48.506Z",
+      "cycle": 4,
+      "heartbeat": "2026-03-03T02:11:00.581Z",
+      "stale": true
+    },
+    "cp-meta": {
+      "status": "idle",
+      "lastRun": "2026-03-03T02:16:50.940Z",
+      "cycle": 9,
+      "heartbeat": "2026-03-03T02:16:50.944Z",
+      "stale": false
+    },
+    "fix-engine": {
+      "status": "idle",
+      "lastRun": null,
+      "cycle": 8,
+      "heartbeat": "2026-03-03T02:11:00.799Z",
+      "stale": true
+    },
+    "intelligence": {
+      "status": "running",
+      "lastRun": "2026-03-03T02:10:43.404Z",
+      "cycle": 6,
+      "heartbeat": "2026-03-03T02:16:50.988Z",
+      "stale": false
+    },
+    "health-deploy": {
+      "status": "idle",
+      "lastRun": "2026-03-03T02:10:38.129Z",
+      "cycle": 5,
+      "heartbeat": "2026-03-03T02:11:00.815Z",
+      "stale": true
+    },
+    "diagnostics": {
+      "status": "running",
+      "lastRun": "2026-03-03T02:10:49.358Z",
+      "cycle": 7,
+      "heartbeat": "2026-03-03T02:16:50.953Z",
+      "stale": false
+    },
+    "observer": {
+      "status": "running",
+      "lastRun": null,
+      "cycle": 1,
+      "heartbeat": "2026-03-03T02:16:50.995Z",
+      "stale": false
+    },
+    "test-regen": {
+      "status": "unknown",
+      "lastRun": null,
+      "cycle": 0,
+      "heartbeat": null,
+      "stale": true
+    },
+    "docs-sync": {
+      "status": "unknown",
+      "lastRun": null,
+      "cycle": 0,
+      "heartbeat": null,
+      "stale": true
+    }
+  },
+  "oracle": {
+    "cacheEntries": 0,
+    "cacheHits": 0,
+    "modelRouting": null
+  },
+  "pool": {
+    "size": 0,
+    "activeSessions": 0
+  },
+  "deploy": {
+    "latestSha": null,
+    "at": null,
+    "timeSinceDeploy": null
+  },
+  "deployVerification": {
+    "lastDeploySha": null,
+    "deployAt": null,
+    "firstTestAfterDeploy": null,
+    "passRateBeforeDeploy": null,
+    "passRateAfterDeploy": null,
+    "verdict": null,
+    "verifiedFixCount": 0
+  },
+  "errors": {
+    "recentCount": 0,
+    "unresolvedCount": 0,
+    "topEndpoints": []
+  },
+  "resources": {
+    "observerHeapMB": 6,
+    "observerRssMB": 47,
+    "systemTotalMB": 32679,
+    "systemFreeMB": 16676,
+    "systemUsedPct": 49,
+    "clawProcesses": 0,
+    "nodeProcesses": 0
+  },
+  "testInventory": {
+    "specsOnDisk": 2,
+    "testsOnDisk": 10,
+    "testsInGreenHistory": 0,
+    "personasInManifest": 5,
+    "personasInStrategy": 0,
+    "specsWithoutManifest": [
+      "admin-power-admin",
+      "unauthenticated-outsider"
+    ],
+    "neverRanPersonas": [],
+    "testsNeverPassed": 0
+  },
+  "coverageDecay": {
+    "currentVolume": 0,
+    "peakVolume": 0,
+    "volumeDecayPct": 0,
+    "runningPersonas": 0,
+    "totalPersonas": 2,
+    "personaCoveragePct": 0,
+    "trueCoveragePct": 0
+  },
+  "flakyTests": {
+    "totalFlaky": 0,
+    "topFlaky": [],
+    "avgFlakinessScore": 0,
+    "flakyByRoute": {}
+  },
+  "testStaleness": {
+    "staleSpecs": [],
+    "outdatedSpecs": [],
+    "activeSpecs": 2,
+    "avgSpecAgeDays": 0
+  },
+  "manifestCompleteness": {
+    "personasInSpecs": 2,
+    "personasInManifest": 5,
+    "missingFromManifest": [
+      "admin-power-admin",
+      "unauthenticated-outsider"
+    ],
+    "orphanedInManifest": [
+      "admin_power_admin",
+      "admin_team_manager",
+      "user_impatient_buyer",
+      "user_bargain_hunter",
+      "unauthenticated_outsider"
+    ],
+    "featuresCoveredPct": 100
+  },
+  "routeMapping": {
+    "mappedRoutes": 21,
+    "totalAppRoutes": 0,
+    "unmappedDirectories": [],
+    "coveragePct": 0
+  },
+  "quarantine": {
+    "quarantinedTests": 0,
+    "oldestQuarantinedDays": 0,
+    "regenCandidates": 0,
+    "regenInProgress": 0,
+    "regenSucceeded": 0,
+    "regenFailed": 0
+  },
+  "testRegen": {
+    "totalCandidates": 0,
+    "succeeded": 0,
+    "failed": 0,
+    "needsHuman": 0,
+    "pending": 0,
+    "totalCost": 0,
+    "avgCostPerRegen": 0,
+    "successRate": 0,
+    "lastRun": null,
+    "recentAttempts": []
+  },
+  "stuckTests": {
+    "stuckTests": [],
+    "stuckForDays": {},
+    "repairExhausted": 0,
+    "totalRepairAttempts": 0,
+    "repairSuccessRate": 0
+  },
+  "docsSync": {
+    "driftCount": 1,
+    "fixedCount": 0,
+    "consecutiveUnfixedCycles": 1,
+    "lastRun": "2026-03-03T02:16:51.252Z",
+    "backlogSize": 0
+  },
+  "pipelineHealth": {
+    "dedup": {
+      "skipped": 0,
+      "byActive": 0,
+      "byImplemented": 0,
+      "throttled": 0
+    },
+    "testRunnerDeferrals": {
+      "total": 0,
+      "lastAt": null,
+      "lastReason": null
+    },
+    "lastFindingsRun": null,
+    "mocCreationRate": 0,
+    "noiseRate": 0,
+    "dbMocCount": null,
+    "pipelineAccuracy": {}
+  },
+  "deltas": {
+    "note": "insufficient history for deltas"
+  },
+  "findings": [
+    {
+      "name": "insufficient-data",
+      "ok": true,
+      "severity": "info",
+      "detail": "Only 1 cycles collected — need 3+"
+    }
+  ],
+  "investigations": {},
+  "actions": []
+}

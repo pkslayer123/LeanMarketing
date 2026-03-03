@@ -4,21 +4,29 @@
       "id": "build-master_build_prompt_copy_paste_-1772503740925",
       "title": "Build feature: Master Build Prompt (copy/paste)",
       "description": "**Feature:** Master Build Prompt (copy/paste)\n**Routes:** TBD\n\nYou are an expert software engineer building an AI-assisted marketing operations application.\n\nYou must treat the attached governance document as the source of truth. If the task request conflicts with the governance document, the governance document wins.\n\nYour job is to implement only the requested scope. You must not invent features that are not requested.\n\nYou must write clear, complete sentences. You must avoid marketing jargon.\n\n### Lean default interpretation rules (use these when anythin",
-      "tier": "build",
+      "tier": "auto_approve",
       "status": "approved",
       "featureKey": "master_build_prompt_copy_paste_",
       "createdAt": "2026-03-03T02:09:00.925Z",
-      "source": "builder-claw"
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-end_of_master_build_prompt-1772503740925",
       "title": "Build feature: End of Master Build Prompt",
       "description": "**Feature:** End of Master Build Prompt\n**Routes:** TBD\n\n",
-      "tier": "build",
-      "status": "approved",
+      "tier": "auto_approve",
+      "status": "archived",
       "featureKey": "end_of_master_build_prompt",
       "createdAt": "2026-03-03T02:09:00.925Z",
-      "source": "builder-claw"
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T02:16:51.959Z",
+      "archivedReason": "Deduplicated — newer MOC build-master_build_prompt_copy_paste_-1772503740925 covers same area"
     }
   ]
 }
