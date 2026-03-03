@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-03-03T05:53:53.495Z",
+  "generatedAt": "2026-03-03T05:56:34.434Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 124,
+    "mocs_total": 127,
     "mocs_implemented": 0,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 124,
+    "mocs_archived": 126,
     "mocs_with_commit": 0,
     "mocs_verified": 0,
     "fixes_attempted": 0,
@@ -29,14 +29,15 @@
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 124
+    "archived": 126,
+    "approved": 1
   },
   "byTier": {
     "auto_approve": {
-      "total": 53,
+      "total": 55,
       "implemented": 0,
       "failed": 0,
-      "archived": 53,
+      "archived": 54,
       "awaiting": 0
     },
     "build": {
@@ -47,10 +48,10 @@
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 36,
+      "total": 37,
       "implemented": 0,
       "failed": 0,
-      "archived": 36,
+      "archived": 37,
       "awaiting": 0
     }
   },
@@ -58,22 +59,13 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 124,
+      "from": 127,
       "to": 0,
-      "lostCount": 124,
+      "lostCount": 127,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 110,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 111,
@@ -149,6 +141,15 @@
     {
       "date": "2026-03-03",
       "iteration": 119,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 120,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
