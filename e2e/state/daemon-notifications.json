@@ -1,20 +1,5 @@
 [
   {
-    "message": "Daemon stuck: 2 approved MOCs, 61 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T03:45:25.717Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T03:45:35.834Z"
-  },
-  {
-    "message": "Daemon stuck: 2 approved MOCs, 62 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T03:45:42.536Z"
-  },
-  {
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T03:45:50.863Z"
@@ -498,5 +483,20 @@
     "message": "Watchdog restarted daemon (attempt 1). Reason: daemon pid 63876 not running",
     "severity": "warning",
     "at": "2026-03-03T04:33:09.226Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 130 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T04:44:11.454Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T04:44:22.812Z"
+  },
+  {
+    "message": "11/11 claws healthy (builder:running, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 83% pass rate. 0 MOCs pending approval. Pipeline: healthy.",
+    "severity": "info",
+    "at": "2026-03-03T04:44:25.743Z"
   }
 ]
