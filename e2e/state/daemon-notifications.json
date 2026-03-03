@@ -2,16 +2,6 @@
   {
     "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x2)",
     "severity": "warning",
-    "at": "2026-03-03T08:39:06.915Z"
-  },
-  {
-    "message": "Daemon stuck: 2 approved MOCs, 448 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T08:39:10.617Z"
-  },
-  {
-    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x2)",
-    "severity": "warning",
     "at": "2026-03-03T08:39:21.944Z"
   },
   {
@@ -498,5 +488,15 @@
     "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T09:40:10.038Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 516 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T09:40:13.790Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T09:40:20.104Z"
   }
 ]
