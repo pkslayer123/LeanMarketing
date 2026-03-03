@@ -1,15 +1,15 @@
 {
-  "lastRun": "2026-03-03T16:19:50.210Z",
+  "lastRun": "2026-03-03T16:22:50.992Z",
   "total": 1,
   "noiseAutoClose": 0,
-  "fixAttempted": 0,
+  "fixAttempted": 1,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 0,
+  "noFixNeeded": 1,
   "details": [
     {
-      "action": "archived",
-      "reason": "Auto-archived: no source files resolvable for \"null\" after 3 attempts"
+      "action": "no_fix_needed",
+      "reason": "The findings section is empty — there are no specific bugs reported. The route file (`app/api/leads/route.ts`) is well-formed:\n\n- Auth check before any data access\n- Required field validation on POST\n- Null-safe inserts (`company ?? null`, `job_role ?? null`)\n- Correct user scoping (`user_id` filter"
     }
   ]
 }

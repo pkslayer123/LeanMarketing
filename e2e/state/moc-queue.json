@@ -6017,6 +6017,51 @@
       "routedDepartments": [
         "Engineering"
       ]
+    },
+    {
+      "id": "build-layer_2_audience_and_outreach-1772554897545",
+      "title": "Build feature: Layer 2 — Audience and Outreach",
+      "description": "**Feature:** Layer 2 — Audience and Outreach\n**Routes:** /projects/[id]/audience\n\n**codeAreas:** `app/projects/[id]/audience/`, `app/api/leads/`, `app/api/outreach/`, `lib/outreach/`, `components/Outreach/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Audience definition | None | `/projects/[id]/audience` — job role, company type, inclusion/exclusion rules |\n| Lead management | None | Lead list with fit reasons, status tracking |\n| Message templates | None | A/B message editor with two parallel versions |\n| Mock sender | None | Provider-neutral mock sender for end-to-end testing (Milestone 1) |\n| Quality Gate 2 | None | Pass/fail: audience defined, lead fit documented, single CTA, opt-out enabled |\n| Sending controls | None | Rate limits, caps, stop-on-reply |",
+      "tier": "auto_fix",
+      "status": "implemented",
+      "featureKey": "layer_2_audience_and_outreach",
+      "createdAt": "2026-03-03T16:21:37.545Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "implementedAt": "2026-03-03T16:22:50.984Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: The findings section is empty — there are no specific bugs reported. The route file (`app/api/leads/route.ts`) is well-formed:\n\n- Auth check before any data access\n- Required field validation on POST\n- Null-safe inserts (`company ?? null`, `job_role ?? null`)\n- Correct user scoping (`user_id` filter on GET)\n- Type-check passes with zero errors\n\nThis MOC is a \"build-layer\" scaffolding ticket with no actual findings attached. No changes are needed.\n"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772554897545",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T16:21:37.545Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T16:21:43.693Z",
+      "archivedReason": "Deduplicated — newer MOC build-layer_2_audience_and_outreach-1772554897545 covers same area"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772554897545",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "auto_approve",
+      "status": "archived",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T16:21:37.545Z",
+      "source": "builder-claw",
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-03T16:21:43.693Z",
+      "archivedReason": "Deduplicated — newer MOC build-layer_2_audience_and_outreach-1772554897545 covers same area"
     }
   ]
 }
