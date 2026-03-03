@@ -6,13 +6,13 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T05:01:46.505Z",
+      "at": "2026-03-03T05:02:03.057Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-03T05:01:38.339Z",
+      "at": "2026-03-03T05:02:03.061Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -125,25 +125,25 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 53928,
-      "lastRun": "2026-03-03T05:01:46.615Z",
-      "nextRun": "2026-03-03T06:01:46.615Z",
-      "heartbeat": "2026-03-03T05:02:01.628Z",
+      "lastRun": "2026-03-03T05:02:03.153Z",
+      "nextRun": "2026-03-03T06:02:03.153Z",
+      "heartbeat": "2026-03-03T05:02:03.156Z",
       "cycle": 112,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1769,
+      "lastCycleDurationMs": 1524,
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "running",
+      "status": "idle",
       "pid": 37012,
-      "lastRun": "2026-03-03T05:01:38.342Z",
-      "nextRun": "2026-03-03T07:01:38.342Z",
-      "heartbeat": "2026-03-03T05:01:53.354Z",
+      "lastRun": "2026-03-03T05:02:03.064Z",
+      "nextRun": "2026-03-03T07:02:03.064Z",
+      "heartbeat": "2026-03-03T05:02:03.067Z",
       "cycle": 82,
       "phase": "starting",
-      "lastCycleDurationMs": 9354,
+      "lastCycleDurationMs": 9709,
       "lastCycleResult": "ok"
     },
     "test-runner": {
@@ -158,12 +158,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 31608,
       "lastRun": "2026-03-03T05:01:42.418Z",
       "nextRun": "2026-03-03T09:01:42.418Z",
-      "heartbeat": "2026-03-03T05:01:42.421Z",
-      "cycle": 80,
+      "heartbeat": "2026-03-03T05:02:12.435Z",
+      "cycle": 81,
       "phase": "starting",
       "lastCycleDurationMs": 2735,
       "lastCycleResult": "ok"
