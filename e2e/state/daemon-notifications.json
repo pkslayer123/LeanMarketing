@@ -1,15 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T08:26:36.332Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T08:26:36.341Z"
-  },
-  {
     "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x1)",
     "severity": "warning",
     "at": "2026-03-03T08:30:32.141Z"
@@ -498,5 +488,15 @@
     "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T09:23:54.308Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 503 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T09:25:01.170Z"
+  },
+  {
+    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T09:25:09.369Z"
   }
 ]
