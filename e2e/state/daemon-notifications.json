@@ -1,10 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T03:35:25.898Z"
-  },
-  {
     "message": "Daemon stuck: 1 approved MOCs, 47 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T03:35:26.613Z"
@@ -498,5 +493,10 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
     "severity": "warning",
     "at": "2026-03-03T04:26:21.581Z"
+  },
+  {
+    "message": "Daemon stuck: 1 approved MOCs, 120 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T04:26:24.826Z"
   }
 ]
