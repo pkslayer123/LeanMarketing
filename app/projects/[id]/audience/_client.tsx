@@ -350,7 +350,11 @@ interface QualityGate2PanelProps {
 }
 
 export function QualityGate2Panel({ audience, leads, templates }: QualityGate2PanelProps) {
-  const input: QualityGate2Input = { audience, leads, templates };
+  const input: QualityGate2Input = {
+    audience: audience ?? { job_roles: [], company_types: [], inclusion_rules: [], exclusion_rules: [] },
+    leads,
+    templates,
+  };
   const result: QualityGate2Feedback = runQualityGate2(input);
 
   return (

@@ -58,6 +58,9 @@ export interface AudienceDefinition extends AudienceInput {
 export interface MessageTemplate extends MessageTemplateInput {
   id: string;
   created_at: string;
+  has_cta: boolean;
+  has_opt_out: boolean;
+  cta_count: number;
 }
 
 export interface OutreachCampaign extends CampaignInput {
@@ -77,6 +80,14 @@ export interface QualityGateCheck {
 export interface QualityGateFeedback {
   overall_passed: boolean;
   checks: QualityGateCheck[];
+}
+
+export type QualityGate2Feedback = QualityGateFeedback;
+
+export interface QualityGate2Input {
+  audience: { job_roles?: string[]; company_types?: string[]; inclusion_rules?: string[]; exclusion_rules?: string[] };
+  leads: { name: string; email: string; fit_reason: string }[];
+  templates: { has_cta: boolean; has_opt_out: boolean }[];
 }
 
 // ─── Template analysis ────────────────────────────────────────────────────────
@@ -112,10 +123,10 @@ export function analyseTemplate(body: string): TemplateAnalysis {
 // ─── Quality gate 2 (Audience + Outreach) ────────────────────────────────────
 
 interface AudienceRecord {
-  job_roles: string[];
-  company_types: string[];
-  inclusion_rules: string[];
-  exclusion_rules: string[];
+  job_roles?: string[];
+  company_types?: string[];
+  inclusion_rules?: string[];
+  exclusion_rules?: string[];
 }
 
 interface LeadRecord {
@@ -141,9 +152,9 @@ export function runQualityGate2({
   const checks: QualityGateCheck[] = [
     {
       label: 'Audience defined',
-      passed: audience.job_roles.length > 0 || audience.company_types.length > 0,
+      passed: (audience.job_roles?.length ?? 0) > 0 || (audience.company_types?.length ?? 0) > 0,
       feedback:
-        audience.job_roles.length > 0 || audience.company_types.length > 0
+        (audience.job_roles?.length ?? 0) > 0 || (audience.company_types?.length ?? 0) > 0
           ? 'At least one job role or company type is defined.'
           : 'Define at least one job role or company type.',
     },
