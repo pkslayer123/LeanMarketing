@@ -1,15 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T13:33:06.889Z"
-  },
-  {
-    "message": "Watchdog restarted daemon (attempt 1). Reason: daemon pid 60320 not running",
-    "severity": "warning",
-    "at": "2026-03-03T13:33:45.252Z"
-  },
-  {
     "message": "Watchdog restarted daemon (attempt 1). Reason: daemon pid 36796 not running",
     "severity": "warning",
     "at": "2026-03-03T13:35:54.896Z"
@@ -498,5 +488,15 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
     "severity": "warning",
     "at": "2026-03-03T14:36:32.830Z"
+  },
+  {
+    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T14:37:02.847Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T14:37:02.856Z"
   }
 ]
