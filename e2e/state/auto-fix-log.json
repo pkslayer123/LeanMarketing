@@ -1,23 +1,30 @@
 {
-  "lastRun": "2026-03-03T16:36:04.371Z",
+  "lastRun": "2026-03-03T16:38:58.757Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
-  "fixApplied": 0,
+  "fixApplied": 1,
   "fixFailed": 0,
-  "noFixNeeded": 2,
+  "noFixNeeded": 1,
   "details": [
     {
       "action": "archived",
       "reason": "Critical route: /login"
     },
     {
-      "action": "no_fix_needed",
-      "reason": " code is already in good shape:\n- Authentication is checked with proper 401 response\n- Null safety is used (`??`, `?.`)\n- Error handling returns appropriate status codes (400, 401, 500)\n- GET returns `data ?? []` for safe empty state\n- POST validates the name and returns 201 on success\n\nNo changes a"
+      "mocId": "build-dashboard_and_project_overview-1772555869139",
+      "action": "claude_fixed",
+      "tier": "build",
+      "status": "implemented",
+      "files": [
+        "app/page.tsx"
+      ],
+      "title": "Build feature: Dashboard and Project Overview",
+      "changeType": ""
     },
     {
       "action": "no_fix_needed",
-      "reason": "s` and `lib/ideas/index.ts` appears correctly implemented:\n\n- The `runQualityGate` import and `IdeaInput` type resolve correctly from `lib/ideas/index.ts`\n- Auth checks are in place on both GET and POST handlers\n- The upsert uses the correct conflict key (`project_id,user_id`)\n- Null safety is handl"
+      "reason": "No type errors. The findings section is empty — no specific bugs were described for this MOC. The code in `app/api/ideas/route.ts` and `lib/ideas/index.ts` is correct:\n\n- Auth guard with proper 401 response\n- JSON parsing with try/catch\n- Required field validation\n- Quality gate integration\n- Upsert"
     }
   ]
 }
