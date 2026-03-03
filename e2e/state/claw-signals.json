@@ -6,13 +6,13 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T03:38:34.571Z",
+      "at": "2026-03-03T03:38:50.941Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-03T03:37:41.405Z",
+      "at": "2026-03-03T03:38:50.833Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -125,25 +125,25 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 93244,
-      "lastRun": "2026-03-03T03:38:34.668Z",
-      "nextRun": "2026-03-03T04:38:34.668Z",
-      "heartbeat": "2026-03-03T03:38:49.685Z",
+      "lastRun": "2026-03-03T03:38:51.035Z",
+      "nextRun": "2026-03-03T04:38:51.035Z",
+      "heartbeat": "2026-03-03T03:38:51.038Z",
       "cycle": 35,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1217,
+      "lastCycleDurationMs": 1349,
       "lastCycleResult": "ok"
     },
     "intelligence": {
       "status": "running",
       "pid": 95216,
-      "lastRun": "2026-03-03T03:37:41.408Z",
-      "nextRun": "2026-03-03T05:37:41.408Z",
-      "heartbeat": "2026-03-03T03:38:41.450Z",
-      "cycle": 25,
+      "lastRun": "2026-03-03T03:38:50.836Z",
+      "nextRun": "2026-03-03T05:38:50.836Z",
+      "heartbeat": "2026-03-03T03:39:05.852Z",
+      "cycle": 26,
       "phase": "starting",
-      "lastCycleDurationMs": 9779,
+      "lastCycleDurationMs": 9384,
       "lastCycleResult": "ok"
     },
     "test-runner": {
@@ -158,12 +158,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 28288,
       "lastRun": "2026-03-03T03:37:50.782Z",
       "nextRun": "2026-03-03T07:37:50.782Z",
-      "heartbeat": "2026-03-03T03:38:10.864Z",
-      "cycle": 24,
+      "heartbeat": "2026-03-03T03:39:05.836Z",
+      "cycle": 25,
       "phase": "starting",
       "lastCycleDurationMs": 3702,
       "lastCycleResult": "ok"
