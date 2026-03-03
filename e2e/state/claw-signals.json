@@ -6,13 +6,13 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T13:29:35.387Z",
+      "at": "2026-03-03T13:29:52.174Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-03T13:28:22.080Z",
+      "at": "2026-03-03T13:30:02.043Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -125,25 +125,25 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 53928,
-      "lastRun": "2026-03-03T13:29:35.487Z",
-      "nextRun": "2026-03-03T14:29:35.487Z",
-      "heartbeat": "2026-03-03T13:29:50.497Z",
+      "lastRun": "2026-03-03T13:29:52.271Z",
+      "nextRun": "2026-03-03T14:29:52.271Z",
+      "heartbeat": "2026-03-03T13:29:52.274Z",
       "cycle": 526,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1132,
+      "lastCycleDurationMs": 1773,
       "lastCycleResult": "ok"
     },
     "intelligence": {
       "status": "idle",
       "pid": 37012,
-      "lastRun": "2026-03-03T13:28:22.083Z",
-      "nextRun": "2026-03-03T15:28:22.083Z",
-      "heartbeat": "2026-03-03T13:29:50.979Z",
-      "cycle": 396,
+      "lastRun": "2026-03-03T13:30:02.045Z",
+      "nextRun": "2026-03-03T15:30:02.045Z",
+      "heartbeat": "2026-03-03T13:30:02.048Z",
+      "cycle": 397,
       "phase": "starting",
-      "lastCycleDurationMs": 10329,
+      "lastCycleDurationMs": 9930,
       "lastCycleResult": "ok"
     },
     "test-runner": {
@@ -158,12 +158,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 31608,
       "lastRun": "2026-03-03T13:28:33.843Z",
       "nextRun": "2026-03-03T17:28:33.843Z",
-      "heartbeat": "2026-03-03T13:28:53.290Z",
-      "cycle": 395,
+      "heartbeat": "2026-03-03T13:30:03.880Z",
+      "cycle": 396,
       "phase": "starting",
       "lastCycleDurationMs": 3372,
       "lastCycleResult": "error"
