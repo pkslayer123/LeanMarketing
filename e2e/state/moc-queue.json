@@ -8325,7 +8325,10 @@
       "createdAt": "2026-03-03T19:04:53.000Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T19:05:04.926Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772564693000",
@@ -8337,7 +8340,10 @@
       "createdAt": "2026-03-03T19:04:53.000Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:05:22.619Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: re reported. The `app/api/projects/route.ts` code is well-implemented:\n\n- GET: authenticates user, queries projects filtered by `user_id`, ordered by `last_activity_at`, returns `data ?? []`\n- POST: validates auth, parses body safely, validates `name`, inserts with `user_id`, returns 201\n\nNo changes needed. This appears to be a noise MOC — the \"Build feature\" title suggests it was generated as a placeholder when the feature was first scaffolded, but the API route itself is correct and complete.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: re reported. The `app/api/projects/route.ts` code is well-implemented:\n\n- GET: authenticates user, queries projects filtered by `user_id`, ordered by `last_activity_at`, returns `data ?? []`\n- POST: validates auth, parses body safely, validates `name`, inserts with `user_id`, returns 201\n\nNo changes needed. This appears to be a noise MOC — the \"Build feature\" title suggests it was generated as a placeholder when the feature was first scaffolded, but the API route itself is correct and complete.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772564693000",
@@ -8349,7 +8355,10 @@
       "createdAt": "2026-03-03T19:04:53.000Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:06:00.817Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: t:\n\n- `POST /api/ideas` — authenticates, validates all fields, runs the quality gate, and upserts to Supabase\n- `GET /api/ideas` — authenticates and fetches ideas by `project_id` scoped to the current user\n- `lib/ideas.ts` — exports proper types and `runQualityGate` logic\n\nThe TypeScript errors shown are pre-existing in an unrelated file (`audience/_client.tsx`) and not introduced by this route.\n\nNo changes needed — this MOC appears to be noise (empty findings with no actionable bug described).\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: t:\n\n- `POST /api/ideas` — authenticates, validates all fields, runs the quality gate, and upserts to Supabase\n- `GET /api/ideas` — authenticates and fetches ideas by `project_id` scoped to the current user\n- `lib/ideas.ts` — exports proper types and `runQualityGate` logic\n\nThe TypeScript errors shown are pre-existing in an unrelated file (`audience/_client.tsx`) and not introduced by this route.\n\nNo changes needed — this MOC appears to be noise (empty findings with no actionable bug described).\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }

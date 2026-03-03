@@ -1,58 +1,57 @@
 {
-  "generatedAt": "2026-03-03T19:04:58.513Z",
+  "generatedAt": "2026-03-03T19:06:08.801Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
     "mocs_total": 547,
-    "mocs_implemented": 80,
+    "mocs_implemented": 82,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 466,
+    "mocs_archived": 465,
     "mocs_with_commit": 2,
     "mocs_verified": 0,
-    "fixes_attempted": 0,
+    "fixes_attempted": 2,
     "fixes_applied": 0,
     "fixes_failed": 0,
     "fixes_noise_closed": 0,
-    "fixes_no_fix_needed": 0
+    "fixes_no_fix_needed": 2
   },
   "conversionRates": {
     "finding_to_moc": 0,
-    "moc_to_fix_attempt": 0,
+    "moc_to_fix_attempt": 0.004,
     "fix_attempt_to_success": 0,
-    "moc_to_implemented": 0.146,
+    "moc_to_implemented": 0.15,
     "implemented_to_verified": 0,
     "end_to_end": 0
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 466,
-    "implemented": 80,
-    "approved": 1
+    "archived": 465,
+    "implemented": 82
   },
   "byTier": {
     "auto_approve": {
-      "total": 207,
+      "total": 205,
       "implemented": 0,
       "failed": 0,
-      "archived": 206,
+      "archived": 205,
       "awaiting": 0
     },
     "build": {
-      "total": 193,
-      "implemented": 79,
+      "total": 196,
+      "implemented": 81,
       "failed": 0,
-      "archived": 114,
+      "archived": 115,
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 147,
+      "total": 146,
       "implemented": 1,
       "failed": 0,
-      "archived": 146,
+      "archived": 145,
       "awaiting": 0
     }
   },
@@ -61,29 +60,20 @@
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
       "from": 547,
-      "to": 80,
-      "lostCount": 467,
+      "to": 82,
+      "lostCount": 465,
       "dropRate": 85
     },
     {
       "stage": "implemented_to_verified",
       "label": "Implemented → Verified (commit)",
-      "from": 80,
+      "from": 82,
       "to": 0,
-      "lostCount": 80,
+      "lostCount": 82,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 560,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 561,
@@ -159,6 +149,15 @@
     {
       "date": "2026-03-03",
       "iteration": 569,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 570,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
