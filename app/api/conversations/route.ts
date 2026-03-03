@@ -1,0 +1,100 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { createServerClient } from '@supabase/ssr';
+import {
+  ConversationInput,
+  runQualityGate3,
+  suggestNextAction,
+} from '@/lib/conversations';
+
+function makeSupabase(cookieStore: Awaited<ReturnType<typeof cookies>>) {
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '',
+    {
+      cookies: {
+        getAll: () => cookieStore.getAll(),
+        setAll: (cookiesToSet) => {
+          for (const { name, value, options } of cookiesToSet) {
+            cookieStore.set(name, value, options);
+          }
+        },
+      },
+    }
+  );
+}
+
+export async function GET(request: NextRequest) {
+  const cookieStore = await cookies();
+  const supabase = makeSupabase(cookieStore);
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  const { searchParams } = new URL(request.url);
+  const project_id = searchParams.get('project_id');
+
+  if (!project_id) {
+    return NextResponse.json({ error: 'project_id is required' }, { status: 400 });
+  }
+
+  const { data, error } = await supabase
+    .from('conversations')
+    .select('*, leads(id, name, email)')
+    .eq('project_id', project_id)
+    .eq('user_id', user.id)
+    .order('updated_at', { ascending: false });
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  return NextResponse.json(data ?? []);
+}
+
+export async function POST(request: NextRequest) {
+  const cookieStore = await cookies();
+  const supabase = makeSupabase(cookieStore);
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  let body: ConversationInput;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+
+  const { project_id, lead_id, stage = 'curious' } = body;
+
+  if (!project_id || !lead_id) {
+    return NextResponse.json(
+      { error: 'project_id and lead_id are required' },
+      { status: 400 }
+    );
+  }
+
+  const next_action = suggestNextAction(stage);
+  const quality_gate_feedback = runQualityGate3([]);
+
+  const { data, error } = await supabase
+    .from('conversations')
+    .upsert(
+      {
+        project_id,
+        lead_id,
+        user_id: user.id,
+        stage,
+        next_action,
+        quality_gate_passed: quality_gate_feedback.overall_passed,
+        quality_gate_feedback,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: 'lead_id' }
+    )
+    .select()
+    .single();
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  return NextResponse.json(data, { status: 201 });
+}

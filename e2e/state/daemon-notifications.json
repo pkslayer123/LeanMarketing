@@ -1,65 +1,5 @@
 [
   {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T15:00:09.126Z"
-  },
-  {
-    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T15:00:51.801Z"
-  },
-  {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T15:01:09.175Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T15:01:09.185Z"
-  },
-  {
-    "message": "Daemon stuck: 2 approved MOCs, 933 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T15:03:03.731Z"
-  },
-  {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T15:03:09.272Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T15:03:09.284Z"
-  },
-  {
-    "message": "Daemon stuck: 1 approved MOCs, 934 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T15:03:20.632Z"
-  },
-  {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T15:03:24.299Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T15:03:24.311Z"
-  },
-  {
-    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x1)",
-    "severity": "warning",
-    "at": "2026-03-03T15:04:08.220Z"
-  },
-  {
-    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
-    "severity": "warning",
-    "at": "2026-03-03T15:04:24.371Z"
-  },
-  {
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T15:04:24.381Z"
@@ -498,5 +438,65 @@
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T15:54:33.430Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 982 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T16:00:43.382Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 14:57:44] [builder]   fail: git-diff-check — \n[2026-03-03 14:59:14] [builder]   fail: git-diff-check — \n[2026-03-03 15:00:42] [builder]   fail: git-diff-check — \n[2026-03-03 15:02:26] [bui",
+    "severity": "critical",
+    "at": "2026-03-03T16:00:48.666Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T16:00:48.668Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T16:00:48.680Z"
+  },
+  {
+    "message": "Daemon stuck: 1 approved MOCs, 983 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T16:01:00.560Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 14:59:14] [builder]   fail: git-diff-check — \n[2026-03-03 15:00:42] [builder]   fail: git-diff-check — \n[2026-03-03 15:02:26] [builder]   fail: git-diff-check — \n[2026-03-03 15:03:57] [bui",
+    "severity": "critical",
+    "at": "2026-03-03T16:01:03.716Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T16:01:03.717Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T16:01:03.728Z"
+  },
+  {
+    "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x2)",
+    "severity": "warning",
+    "at": "2026-03-03T16:01:03.744Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 14:59:14] [builder]   fail: git-diff-check — \n[2026-03-03 15:00:42] [builder]   fail: git-diff-check — \n[2026-03-03 15:02:26] [builder]   fail: git-diff-check — \n[2026-03-03 15:03:57] [bui",
+    "severity": "critical",
+    "at": "2026-03-03T16:01:33.781Z"
+  },
+  {
+    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x2)",
+    "severity": "warning",
+    "at": "2026-03-03T16:01:33.783Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T16:01:33.795Z"
   }
 ]
