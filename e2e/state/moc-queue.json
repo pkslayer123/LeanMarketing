@@ -6208,7 +6208,10 @@
       "createdAt": "2026-03-03T16:32:46.173Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T16:32:50.047Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772555566173",
@@ -6220,7 +6223,10 @@
       "createdAt": "2026-03-03T16:32:46.173Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:33:05.250Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: . The code in `app/api/projects/route.ts` is already well-implemented:\n\n- Auth check on both GET and POST before any DB access\n- `?? ''` null safety on env vars\n- `body?.name?.trim()` null-safe input handling\n- `?? []` fallback on GET response\n- Proper error propagation with appropriate HTTP status codes\n\nNo changes are needed. This appears to be a noise MOC — the task was created with a title (\"Build feature: Dashboard and Project Overview\") but no actual findings were attached to drive a fix.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: . The code in `app/api/projects/route.ts` is already well-implemented:\n\n- Auth check on both GET and POST before any DB access\n- `?? ''` null safety on env vars\n- `body?.name?.trim()` null-safe input handling\n- `?? []` fallback on GET response\n- Proper error propagation with appropriate HTTP status codes\n\nNo changes are needed. This appears to be a noise MOC — the task was created with a title (\"Build feature: Dashboard and Project Overview\") but no actual findings were attached to drive a fix.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772555566173",
@@ -6232,7 +6238,10 @@
       "createdAt": "2026-03-03T16:32:46.173Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:33:44.096Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: No changes needed. The findings section was empty — there are no specific bugs reported. The code in `app/api/ideas/route.ts` and `lib/ideas/index.ts` is correct:\n\n- Auth is properly guarded with 401 on unauthenticated requests\n- JSON parse errors are caught and return 400\n- All required fields are validated\n- Upsert uses the correct conflict key `project_id,user_id`\n- TypeScript type-check passes with zero errors\n\nThis MOC appears to have been queued without any actual findings attached to it.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: No changes needed. The findings section was empty — there are no specific bugs reported. The code in `app/api/ideas/route.ts` and `lib/ideas/index.ts` is correct:\n\n- Auth is properly guarded with 401 on unauthenticated requests\n- JSON parse errors are caught and return 400\n- All required fields are validated\n- Upsert uses the correct conflict key `project_id,user_id`\n- TypeScript type-check passes with zero errors\n\nThis MOC appears to have been queued without any actual findings attached to it.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
