@@ -1997,3 +1997,7 @@
 {"claw":"docs-sync","cycle":9,"at":"2026-03-03T10:08:18.198Z","durationMs":12,"ok":true,"summary":"1 drift(s), 0 fixed, backlog: 0 items"}
 {"claw":"observer","cycle":9,"at":"2026-03-03T10:08:19.756Z","durationMs":227,"ok":true,"summary":"2 anomalies (0 critical)"}
 {"claw":"intelligence","cycle":272,"at":"2026-03-03T10:08:28.285Z","durationMs":9653,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
+{"claw":"health-deploy","cycle":271,"at":"2026-03-03T10:08:49.663Z","durationMs":3489,"ok":false,"summary":"6 checks, 1 failed"}
+{"claw":"builder","cycle":186,"at":"2026-03-03T10:09:18.693Z","durationMs":69668,"ok":false,"summary":"0% complete, 10 gaps, 3 MOCs [failed: commit]"}
+{"claw":"test-runner","cycle":182,"at":"2026-03-03T10:09:39.655Z","durationMs":6636,"ok":true,"summary":"10/10 passed, 0 failed"}
+{"claw":"finding-pipeline","cycle":182,"at":"2026-03-03T10:09:48.745Z","durationMs":738,"ok":true,"summary":"6 phases, 1 failed, 0 MOCs queued"}
