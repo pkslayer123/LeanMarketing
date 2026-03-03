@@ -6310,7 +6310,8 @@
       "createdAt": "2026-03-03T16:37:49.139Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:38:19.304Z",
-      "implementationNotes": "Claude Code fix (build): app/page.tsx. The findings section is empty — no specific bugs or issues were reported for this MOC. The route file itself looks correct:\n\n- Auth check is in place  [Verification: 3/10 — The diff adds authentication and redirects to `/dashboard`, but does not implement the dashboard page, project detection, project cards, navigation, or project isolation logic required by the feature.]"
+      "implementationNotes": "Claude Code fix (build): app/page.tsx. The findings section is empty — no specific bugs or issues were reported for this MOC. The route file itself looks correct:\n\n- Auth check is in place  [Verification: 3/10 — The diff adds authentication and redirects to `/dashboard`, but does not implement the dashboard page, project detection, project cards, navigation, or project isolation logic required by the feature.]",
+      "commit_sha": "cc33abdb1163ce8aa8bfc9937b1743bba52d91ba"
     },
     {
       "id": "build-layer_1_idea_definition-1772555869139",
