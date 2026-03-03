@@ -6,29 +6,29 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T12:06:36.439Z",
+      "at": "2026-03-03T12:09:08.760Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-03T12:07:00.673Z",
+      "at": "2026-03-03T12:09:25.030Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
     },
     "diagnostics-complete": {
-      "at": "2026-03-03T12:07:17.560Z",
+      "at": "2026-03-03T12:09:17.672Z",
       "emittedBy": "diagnostics",
       "actions": 3,
       "healthChecks": 8,
       "healthChecksFailing": 1
     },
     "diagnostics-requested": {
-      "at": "2026-03-03T12:06:36.548Z",
+      "at": "2026-03-03T12:09:08.845Z",
       "emittedBy": "convergence-tracker",
       "reason": "stuck",
-      "mocCount": 3
+      "mocCount": 2
     },
     "docs-synced": {
       "at": "2026-03-03T12:08:22.158Z",
@@ -72,9 +72,9 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-03T12:07:05.492Z",
-      "emittedBy": "health-deploy",
-      "claw": "health-deploy",
+      "at": "2026-03-03T12:09:15.158Z",
+      "emittedBy": "cp-meta",
+      "claw": "cp-meta",
       "reason": "5 consecutive failures (same error x5)",
       "consecutiveFailures": 5
     }
@@ -92,14 +92,14 @@
       "lastCycleResult": "error"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 61764,
-      "lastRun": "2026-03-03T12:06:45.820Z",
-      "nextRun": "2026-03-03T12:36:45.820Z",
-      "heartbeat": "2026-03-03T12:08:41.282Z",
+      "lastRun": "2026-03-03T12:09:15.154Z",
+      "nextRun": "2026-03-03T12:39:15.154Z",
+      "heartbeat": "2026-03-03T12:09:30.183Z",
       "cycle": 300,
       "phase": "starting",
-      "lastCycleDurationMs": 44962,
+      "lastCycleDurationMs": 44252,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
@@ -116,34 +116,34 @@
     "diagnostics": {
       "status": "idle",
       "pid": 94912,
-      "lastRun": "2026-03-03T12:07:17.562Z",
-      "nextRun": "2026-03-03T18:07:17.562Z",
-      "heartbeat": "2026-03-03T12:08:41.203Z",
-      "cycle": 363,
+      "lastRun": "2026-03-03T12:09:17.675Z",
+      "nextRun": "2026-03-03T18:09:17.675Z",
+      "heartbeat": "2026-03-03T12:09:17.678Z",
+      "cycle": 364,
       "phase": "starting",
-      "lastCycleDurationMs": 15,
+      "lastCycleDurationMs": 16,
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 53928,
-      "lastRun": "2026-03-03T12:06:36.571Z",
-      "nextRun": "2026-03-03T13:06:36.571Z",
-      "heartbeat": "2026-03-03T12:09:06.658Z",
+      "lastRun": "2026-03-03T12:09:08.867Z",
+      "nextRun": "2026-03-03T13:09:08.867Z",
+      "heartbeat": "2026-03-03T12:09:08.870Z",
       "cycle": 458,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1651,
+      "lastCycleDurationMs": 2207,
       "lastCycleResult": "ok"
     },
     "intelligence": {
       "status": "idle",
       "pid": 37012,
-      "lastRun": "2026-03-03T12:07:00.675Z",
-      "nextRun": "2026-03-03T14:07:00.675Z",
-      "heartbeat": "2026-03-03T12:08:21.830Z",
-      "cycle": 345,
+      "lastRun": "2026-03-03T12:09:25.032Z",
+      "nextRun": "2026-03-03T14:09:25.032Z",
+      "heartbeat": "2026-03-03T12:09:25.037Z",
+      "cycle": 346,
       "phase": "starting",
-      "lastCycleDurationMs": 9690,
+      "lastCycleDurationMs": 9254,
       "lastCycleResult": "ok"
     },
     "test-runner": {
@@ -158,12 +158,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 31608,
       "lastRun": "2026-03-03T12:07:05.487Z",
       "nextRun": "2026-03-03T16:07:05.487Z",
-      "heartbeat": "2026-03-03T12:08:50.146Z",
-      "cycle": 344,
+      "heartbeat": "2026-03-03T12:09:35.577Z",
+      "cycle": 345,
       "phase": "starting",
       "lastCycleDurationMs": 3237,
       "lastCycleResult": "error"
