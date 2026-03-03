@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-03-03T03:47:20.932Z",
+  "generatedAt": "2026-03-03T03:47:45.285Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 19,
+    "mocs_total": 22,
     "mocs_implemented": 0,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 19,
+    "mocs_archived": 21,
     "mocs_with_commit": 0,
     "mocs_verified": 0,
     "fixes_attempted": 0,
@@ -29,28 +29,29 @@
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 19
+    "archived": 21,
+    "approved": 1
   },
   "byTier": {
     "auto_approve": {
-      "total": 7,
+      "total": 8,
       "implemented": 0,
       "failed": 0,
       "archived": 7,
       "awaiting": 0
     },
     "build": {
-      "total": 10,
+      "total": 11,
       "implemented": 0,
       "failed": 0,
-      "archived": 10,
+      "archived": 11,
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 2,
+      "total": 3,
       "implemented": 0,
       "failed": 0,
-      "archived": 2,
+      "archived": 3,
       "awaiting": 0
     }
   },
@@ -58,22 +59,13 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 19,
+      "from": 22,
       "to": 0,
-      "lostCount": 19,
+      "lostCount": 22,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 23,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 24,
@@ -149,6 +141,15 @@
     {
       "date": "2026-03-03",
       "iteration": 32,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 33,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
