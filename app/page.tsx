@@ -1,12 +1,13 @@
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
-        LeanMarketing
-      </h1>
-      <p className="mt-4 text-gray-600 dark:text-gray-400">
-        Application is being built by the Persona Engine daemon.
-      </p>
-    </main>
-  );
+import { redirect } from "next/navigation";
+import { createServerSupabaseClient } from "@/lib/supabaseServer";
+
+export default async function Home() {
+  const supabase = await createServerSupabaseClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (user) {
+    redirect("/dashboard");
+  }
+
+  redirect("/auth/login");
 }
