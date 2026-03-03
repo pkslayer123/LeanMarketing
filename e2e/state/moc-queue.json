@@ -8989,6 +8989,42 @@
       ],
       "archivedAt": "2026-03-03T19:33:55.214Z",
       "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772566422810 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772566610563",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T19:36:50.563Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T19:36:59.576Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772566610563",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T19:36:50.563Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T19:37:14.880Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  are no specific issues reported for this file. The existing code in `app/api/projects/route.ts` looks correct:\n\n- GET handler authenticates the user and fetches their projects with proper ordering and null safety (`?? []`)\n- POST handler validates auth, parses JSON safely with try/catch, validates the `name` field, and inserts with proper error handling\n- Both handlers use `?.` for null safety on auth responses\n\nNo changes are needed. This appears to be a stale MOC with no actionable findings.\n"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772566610564",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T19:36:50.564Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T19:37:51.213Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: The findings section is empty — no specific issues were reported for this MOC. After reviewing both source files:\n\n- `app/api/ideas/route.ts` is complete with proper auth checks, validation, error handling, and upsert logic.\n- `lib/ideas.ts` has well-typed interfaces and a working quality gate implementation.\n\nTypeScript type check passes with zero errors. No changes are needed — this appears to be a scaffolding task that was already completed by the builder claw.\n"
     }
   ]
 }
