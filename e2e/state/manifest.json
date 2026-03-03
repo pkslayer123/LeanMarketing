@@ -2,8 +2,15 @@
   "features": {
     "dashboard": {
       "spec": "Multi-project dashboard showing all marketing campaigns, per-project tabs, campaign status per layer",
-      "routes": ["/", "/dashboard"],
-      "personas": ["admin_power_admin", "admin_team_manager", "user_impatient_buyer"],
+      "routes": [
+        "/",
+        "/dashboard"
+      ],
+      "personas": [
+        "admin_power_admin",
+        "admin_team_manager",
+        "user_impatient_buyer"
+      ],
       "expectations": [
         "Dashboard loads with project tabs",
         "Each project shows campaign count and layer progress",
@@ -14,8 +21,14 @@
     },
     "layer-1-idea-definition": {
       "spec": "Layer 1: Idea Definition — store one-sentence idea, audience, problem, payment condition, next step. Quality Gate 1 enforces all fields before outreach.",
-      "routes": ["/projects/[id]/ideas", "/projects/[id]/ideas/new"],
-      "personas": ["admin_power_admin", "user_impatient_buyer"],
+      "routes": [
+        "/projects/[id]/ideas",
+        "/projects/[id]/ideas/new"
+      ],
+      "personas": [
+        "admin_power_admin",
+        "user_impatient_buyer"
+      ],
       "expectations": [
         "Can create new idea with all 5 required fields",
         "Quality Gate 1 blocks launch if any field is empty or unclear",
@@ -26,8 +39,14 @@
     },
     "layer-2-audience-outreach": {
       "spec": "Layer 2: Audience and Outreach — define audience (job role + company type), source leads, record fit reason, enroll in sending engine, run A/B messages, stop on reply. Quality Gate 2 enforces all rules.",
-      "routes": ["/projects/[id]/audiences", "/projects/[id]/outreach"],
-      "personas": ["admin_power_admin", "admin_team_manager"],
+      "routes": [
+        "/projects/[id]/audiences",
+        "/projects/[id]/outreach"
+      ],
+      "personas": [
+        "admin_power_admin",
+        "admin_team_manager"
+      ],
       "expectations": [
         "Can define audience with inclusion/exclusion rules",
         "Each lead has written fit reason",
@@ -40,8 +59,13 @@
     },
     "layer-3-conversation-qualification": {
       "spec": "Layer 3: Conversation and Qualification — classify replies (not relevant, curious, interested, ready to evaluate), suggest next action, log exchanges, move leads through stages. Quality Gate 3 enforces accuracy.",
-      "routes": ["/projects/[id]/conversations"],
-      "personas": ["admin_power_admin", "user_impatient_buyer"],
+      "routes": [
+        "/projects/[id]/conversations"
+      ],
+      "personas": [
+        "admin_power_admin",
+        "user_impatient_buyer"
+      ],
       "expectations": [
         "Replies are classified into 4 categories",
         "Next action requires <10 min from recipient",
@@ -53,8 +77,13 @@
     },
     "layer-4-proof-demonstration": {
       "spec": "Layer 4: Proof and Demonstration — provide proof via summary, walkthrough, or trial. Landing page rules (problem, outcome, one CTA). Demo rules (<10 min, outcome before features). Quality Gate 4 enforces.",
-      "routes": ["/projects/[id]/proof"],
-      "personas": ["admin_power_admin", "user_bargain_hunter"],
+      "routes": [
+        "/projects/[id]/proof"
+      ],
+      "personas": [
+        "admin_power_admin",
+        "user_bargain_hunter"
+      ],
       "expectations": [
         "Can create proof in 3 forms (summary, walkthrough, trial)",
         "Landing page shows problem clearly with single CTA",
@@ -65,8 +94,13 @@
     },
     "layer-5-paid-conversion": {
       "spec": "Layer 5: Paid Conversion — propose paid step with scope, time period, price, success definition. Options: free trial, early access, pilot. Quality Gate 5 enforces concrete terms.",
-      "routes": ["/projects/[id]/offers"],
-      "personas": ["admin_power_admin", "admin_team_manager"],
+      "routes": [
+        "/projects/[id]/offers"
+      ],
+      "personas": [
+        "admin_power_admin",
+        "admin_team_manager"
+      ],
       "expectations": [
         "Can create offer with scope, duration, price, success criteria",
         "Quality Gate 5 blocks if any field is missing or vague"
@@ -76,8 +110,13 @@
     },
     "layer-6-review-adjustment": {
       "spec": "Layer 6: Weekly Review — messages sent, replies, stage advancement, biggest drop-off, single variable change. Only one major change per cycle. Quality Gate 6 enforces.",
-      "routes": ["/projects/[id]/review"],
-      "personas": ["admin_power_admin", "admin_team_manager"],
+      "routes": [
+        "/projects/[id]/review"
+      ],
+      "personas": [
+        "admin_power_admin",
+        "admin_team_manager"
+      ],
       "expectations": [
         "Weekly dashboard shows 5 review metrics",
         "Only one variable can be changed per cycle",
@@ -88,8 +127,14 @@
     },
     "authentication": {
       "spec": "Supabase Auth for multi-employee access. No special roles — internal product. Login/signup flow.",
-      "routes": ["/login", "/signup"],
-      "personas": ["admin_power_admin", "unauthenticated_outsider"],
+      "routes": [
+        "/login",
+        "/signup"
+      ],
+      "personas": [
+        "admin_power_admin",
+        "unauthenticated_outsider"
+      ],
       "expectations": [
         "Login works with valid credentials",
         "Unauthenticated users are redirected to login",
@@ -100,8 +145,12 @@
     },
     "approval-modes": {
       "spec": "Strict mode (all classifications require approval) and Relaxed mode (low-risk auto-advance). Toggle visible to founder.",
-      "routes": ["/settings"],
-      "personas": ["admin_power_admin"],
+      "routes": [
+        "/settings"
+      ],
+      "personas": [
+        "admin_power_admin"
+      ],
       "expectations": [
         "Toggle between Strict and Relaxed mode",
         "Default is Strict mode",
@@ -109,9 +158,22 @@
       ],
       "built": false,
       "tested": false
+    },
+    "authentication_and_user_management": {
+      "name": "Authentication and User Management",
+      "routes": [
+        "/auth/login",
+        "/auth/signup"
+      ],
+      "builtAt": "2026-03-03T03:29:50.366Z",
+      "builtBy": "builder-claw",
+      "status": "scaffolded"
     }
   },
-  "roles": ["user", "admin"],
+  "roles": [
+    "user",
+    "admin"
+  ],
   "permissions": [],
   "generatedAt": "2026-03-03T02:12:00.000Z"
 }
