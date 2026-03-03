@@ -1,10 +1,5 @@
 [
   {
-    "message": "11/11 claws healthy (builder:idle, cp-meta:idle, finding-pipeline:idle, diagnostics:running, fix-engine:idle, intelligence:running, test-runner:running, health-deploy:running, observer:idle, test-regen:idle, docs-sync:idle). 0% pass rate. 0 MOCs pending approval. Pipeline: healthy.",
-    "severity": "info",
-    "at": "2026-03-03T03:07:55.715Z"
-  },
-  {
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T03:13:25.861Z"
@@ -498,5 +493,10 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x2)",
     "severity": "warning",
     "at": "2026-03-03T04:20:36.363Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 111 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T04:20:43.434Z"
   }
 ]
