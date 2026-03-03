@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-03-03T16:28:31.245Z",
+  "lastRun": "2026-03-03T16:31:02.941Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
@@ -13,11 +13,11 @@
     },
     {
       "action": "no_fix_needed",
-      "reason": "The findings section is empty — there are no specific issues reported for this file. The code in `app/api/projects/route.ts` looks correct:\n\n- Auth guard in place (401 on unauthenticated)\n- Null safety with `?.` and `??`\n- Proper error handling returning structured JSON errors\n- Projects filtered by"
+      "reason": "The findings section is empty and the code is already correct. No changes are needed.\n\nThe `/api/projects/route.ts` file is well-implemented:\n- `GET` authenticates, queries with `user_id` filter, orders by `last_activity_at`, and returns `data ?? []`\n- `POST` validates the name, inserts with `user_i"
     },
     {
       "action": "no_fix_needed",
-      "reason": "x.ts` looks correct:\n\n- Auth check is present and returns 401 for unauthenticated requests\n- Input validation covers all required fields\n- The `runQualityGate` function exists and matches the expected call signature\n- Upsert uses correct conflict target (`project_id,user_id`)\n- GET returns proper re"
+      "reason": "section is empty — no actual bugs or issues were reported by quality testing for this MOC. The code in `app/api/ideas/route.ts` looks correct:\n\n- Auth is properly checked on both GET and POST\n- Input validation is present\n- Null safety is used (`??` for env vars)\n- The upsert logic and conflict reso"
     }
   ]
 }
