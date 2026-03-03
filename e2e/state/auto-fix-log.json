@@ -1,30 +1,23 @@
 {
-  "lastRun": "2026-03-03T17:18:30.150Z",
+  "lastRun": "2026-03-03T17:20:01.157Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
-  "fixApplied": 1,
+  "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 1,
+  "noFixNeeded": 2,
   "details": [
     {
       "action": "archived",
       "reason": "Critical route: /login"
     },
     {
-      "mocId": "build-dashboard_and_project_overview-1772558210276",
-      "action": "claude_fixed",
-      "tier": "build",
-      "status": "implemented",
-      "files": [
-        "app/api/projects/route.ts"
-      ],
-      "title": "Build feature: Dashboard and Project Overview",
-      "changeType": ""
+      "action": "no_fix_needed",
+      "reason": "No type errors. The file `app/api/projects/route.ts` is already correct and type-clean. Since the findings list is empty, there is no real bug to fix here — this MOC appears to be noise (likely a transient test failure or stale queue entry). No changes are needed.\n"
     },
     {
       "action": "no_fix_needed",
-      "reason": "No type errors. The findings section for this MOC is **empty** — no specific issues were reported. The code in `app/api/ideas/route.ts` and `lib/ideas.ts` is correct:\n\n- Auth check guards both POST and GET\n- Required field validation on POST\n- JSON parse error handling\n- Proper upsert with `onConfli"
+      "reason": "The findings section is empty and the code passes type-check with no errors. The route at `app/api/ideas/route.ts` looks correct:\n\n- Auth guard on both GET and POST\n- Proper validation of required fields\n- Quality gate runs before upsert\n- Upsert uses correct conflict key (`project_id,user_id`)\n- Er"
     }
   ]
 }

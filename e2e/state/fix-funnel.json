@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-03-03T17:15:07.944Z",
+  "generatedAt": "2026-03-03T17:20:14.771Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 442,
-    "mocs_implemented": 34,
+    "mocs_total": 448,
+    "mocs_implemented": 36,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 408,
+    "mocs_archived": 412,
     "mocs_with_commit": 2,
     "mocs_verified": 0,
     "fixes_attempted": 2,
@@ -21,37 +21,37 @@
   },
   "conversionRates": {
     "finding_to_moc": 0,
-    "moc_to_fix_attempt": 0.005,
+    "moc_to_fix_attempt": 0.004,
     "fix_attempt_to_success": 0,
-    "moc_to_implemented": 0.077,
+    "moc_to_implemented": 0.08,
     "implemented_to_verified": 0,
     "end_to_end": 0
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 408,
-    "implemented": 34
+    "archived": 412,
+    "implemented": 36
   },
   "byTier": {
     "auto_approve": {
-      "total": 183,
+      "total": 185,
       "implemented": 0,
       "failed": 0,
-      "archived": 183,
+      "archived": 185,
       "awaiting": 0
     },
     "build": {
-      "total": 124,
-      "implemented": 33,
+      "total": 127,
+      "implemented": 35,
       "failed": 0,
-      "archived": 91,
+      "archived": 92,
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 135,
+      "total": 136,
       "implemented": 1,
       "failed": 0,
-      "archived": 134,
+      "archived": 135,
       "awaiting": 0
     }
   },
@@ -59,39 +59,21 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 442,
-      "to": 34,
-      "lostCount": 408,
+      "from": 448,
+      "to": 36,
+      "lostCount": 412,
       "dropRate": 92
     },
     {
       "stage": "implemented_to_verified",
       "label": "Implemented → Verified (commit)",
-      "from": 34,
+      "from": 36,
       "to": 0,
-      "lostCount": 34,
+      "lostCount": 36,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 503,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
-    {
-      "date": "2026-03-03",
-      "iteration": 504,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 505,
@@ -158,6 +140,24 @@
     {
       "date": "2026-03-03",
       "iteration": 512,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 513,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 514,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,

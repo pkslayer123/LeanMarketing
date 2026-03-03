@@ -1,25 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
-    "severity": "warning",
-    "at": "2026-03-03T16:07:49.082Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
-    "at": "2026-03-03T16:07:49.094Z"
-  },
-  {
-    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T16:07:59.142Z"
-  },
-  {
-    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 15:00:42] [builder]   fail: git-diff-check — \n[2026-03-03 15:02:26] [builder]   fail: git-diff-check — \n[2026-03-03 15:03:57] [builder]   fail: git-diff-check — \n[2026-03-03 15:05:35] [bui",
-    "severity": "critical",
-    "at": "2026-03-03T16:08:04.124Z"
-  },
-  {
     "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T16:08:04.126Z"
@@ -498,5 +478,25 @@
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
     "at": "2026-03-03T17:14:52.200Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T17:18:33.752Z"
+  },
+  {
+    "message": "Claw \"builder\" crashed and auto-diagnosis could not fix it. Classification: unknown. Detail: [2026-03-03 15:58:55] [builder]   fail: git-diff-check — \n[2026-03-03 16:29:38] [builder]   fail: git-diff-check — \n[2026-03-03 16:30:35] [diagnostics]   classification: unknown — [2026-03-03 14:59:14",
+    "severity": "critical",
+    "at": "2026-03-03T17:18:37.343Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T17:18:37.345Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T17:18:37.357Z"
   }
 ]
