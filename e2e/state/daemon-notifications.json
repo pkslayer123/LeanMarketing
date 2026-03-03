@@ -1,10 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T09:49:25.580Z"
-  },
-  {
     "message": "Daemon stuck: 2 approved MOCs, 527 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
     "severity": "warning",
     "at": "2026-03-03T09:51:08.815Z"
@@ -498,5 +493,10 @@
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T10:36:12.909Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 586 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T10:38:09.760Z"
   }
 ]
