@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-03-03T08:46:32.631Z",
+  "generatedAt": "2026-03-03T08:48:57.916Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 229,
+    "mocs_total": 232,
     "mocs_implemented": 0,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 229,
+    "mocs_archived": 231,
     "mocs_with_commit": 0,
     "mocs_verified": 0,
     "fixes_attempted": 0,
@@ -29,28 +29,29 @@
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 229
+    "archived": 231,
+    "approved": 1
   },
   "byTier": {
     "auto_approve": {
-      "total": 103,
+      "total": 104,
       "implemented": 0,
       "failed": 0,
       "archived": 103,
       "awaiting": 0
     },
     "build": {
-      "total": 55,
+      "total": 56,
       "implemented": 0,
       "failed": 0,
-      "archived": 55,
+      "archived": 56,
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 71,
+      "total": 72,
       "implemented": 0,
       "failed": 0,
-      "archived": 71,
+      "archived": 72,
       "awaiting": 0
     }
   },
@@ -58,22 +59,13 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 229,
+      "from": 232,
       "to": 0,
-      "lostCount": 229,
+      "lostCount": 232,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 218,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 219,
@@ -149,6 +141,15 @@
     {
       "date": "2026-03-03",
       "iteration": 227,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 228,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
