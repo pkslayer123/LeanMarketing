@@ -33,9 +33,9 @@
       ]
     },
     "build-complete": {
-      "at": "2026-03-03T22:06:24.238Z",
+      "at": "2026-03-03T22:07:09.364Z",
       "emittedBy": "builder",
-      "iteration": 520,
+      "iteration": 521,
       "specCompletionRate": 1,
       "gapsRemaining": 0
     },
@@ -52,7 +52,7 @@
       "failed": 2
     },
     "diagnostics-complete": {
-      "at": "2026-03-03T22:06:54.927Z",
+      "at": "2026-03-03T22:07:09.958Z",
       "emittedBy": "diagnostics",
       "actions": 2,
       "healthChecks": 8,
@@ -68,9 +68,9 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-03T22:06:33.987Z",
-      "emittedBy": "cp-meta",
-      "claw": "cp-meta",
+      "at": "2026-03-03T22:07:05.135Z",
+      "emittedBy": "health-deploy",
+      "claw": "health-deploy",
       "reason": "5 consecutive failures (same error x5)",
       "consecutiveFailures": 5
     }
@@ -79,24 +79,24 @@
     "builder": {
       "status": "idle",
       "pid": 62296,
-      "lastRun": "2026-03-03T22:06:24.240Z",
-      "nextRun": "2026-03-04T04:06:24.240Z",
-      "heartbeat": "2026-03-03T22:06:24.242Z",
-      "cycle": 520,
+      "lastRun": "2026-03-03T22:07:09.367Z",
+      "nextRun": "2026-03-04T04:07:09.367Z",
+      "heartbeat": "2026-03-03T22:07:09.369Z",
+      "cycle": 521,
       "phase": "starting",
-      "lastCycleDurationMs": 101,
+      "lastCycleDurationMs": 100,
       "lastCycleResult": "ok",
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 11832,
-      "lastRun": "2026-03-03T22:06:33.982Z",
-      "nextRun": "2026-03-03T22:36:33.982Z",
-      "heartbeat": "2026-03-03T22:07:04.014Z",
+      "lastRun": "2026-03-03T22:07:10.590Z",
+      "nextRun": "2026-03-03T22:37:10.590Z",
+      "heartbeat": "2026-03-03T22:07:10.593Z",
       "cycle": 697,
       "phase": "starting",
-      "lastCycleDurationMs": 6733,
+      "lastCycleDurationMs": 6574,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
@@ -113,21 +113,21 @@
     "diagnostics": {
       "status": "idle",
       "pid": 50572,
-      "lastRun": "2026-03-03T22:06:54.929Z",
-      "nextRun": "2026-03-04T04:06:54.929Z",
-      "heartbeat": "2026-03-03T22:06:54.932Z",
-      "cycle": 688,
+      "lastRun": "2026-03-03T22:07:09.960Z",
+      "nextRun": "2026-03-04T04:07:09.960Z",
+      "heartbeat": "2026-03-03T22:07:09.963Z",
+      "cycle": 689,
       "phase": "starting",
       "lastCycleDurationMs": 18,
       "lastCycleResult": "ok"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 3464,
       "lastRun": "2026-03-03T22:06:27.510Z",
       "nextRun": "2026-03-03T23:06:27.510Z",
-      "heartbeat": "2026-03-03T22:06:27.513Z",
-      "cycle": 296,
+      "heartbeat": "2026-03-03T22:07:12.556Z",
+      "cycle": 297,
       "phase": "docs-update",
       "lastCycleDurationMs": 1065,
       "lastCycleResult": "ok"
@@ -144,25 +144,25 @@
       "lastCycleResult": "ok"
     },
     "test-runner": {
-      "status": "idle",
+      "status": "running",
       "pid": 90596,
       "lastRun": "2026-03-03T22:06:42.515Z",
-      "nextRun": "2026-03-04T04:21:42.515Z",
-      "heartbeat": "2026-03-03T22:06:42.520Z",
-      "cycle": 504,
+      "nextRun": "2026-03-04T04:31:42.515Z",
+      "heartbeat": "2026-03-03T22:07:12.541Z",
+      "cycle": 505,
       "phase": "starting",
       "lastCycleDurationMs": 6671,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 73216,
-      "lastRun": "2026-03-03T22:06:16.271Z",
-      "nextRun": "2026-03-04T02:06:16.271Z",
-      "heartbeat": "2026-03-03T22:07:01.290Z",
+      "lastRun": "2026-03-03T22:07:05.131Z",
+      "nextRun": "2026-03-04T02:07:05.131Z",
+      "heartbeat": "2026-03-03T22:07:05.139Z",
       "cycle": 654,
       "phase": "starting",
-      "lastCycleDurationMs": 3882,
+      "lastCycleDurationMs": 3840,
       "lastCycleResult": "error"
     },
     "observer": {
