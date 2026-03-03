@@ -303,5 +303,66 @@
       "iteration report generated",
       "passRate recorded"
     ]
+  },
+  "iteration-12": {
+    "iteration": 12,
+    "timestamp": "2026-03-03T03:14:10.994Z",
+    "phases": {
+      "after-iteration": {
+        "passed": 3,
+        "failed": 5,
+        "checks": [
+          {
+            "name": "orchestrator-state.json fresh",
+            "passed": false,
+            "detail": "STALE — last updated Infinitym ago"
+          },
+          {
+            "name": "orchestrator subsystems ran",
+            "passed": false,
+            "detail": "no orchestrator state"
+          },
+          {
+            "name": "critical subsystems passed",
+            "passed": false,
+            "detail": "no subsystem data"
+          },
+          {
+            "name": "subsystem failure count reasonable",
+            "passed": true,
+            "detail": "0 failures (within threshold)"
+          },
+          {
+            "name": "green-history.json valid",
+            "passed": true,
+            "detail": "1 test entries"
+          },
+          {
+            "name": "persona-learning.json valid",
+            "passed": true,
+            "detail": "0 persona entries"
+          },
+          {
+            "name": "iteration report generated",
+            "passed": false,
+            "detail": "no iteration-12-*.md report found"
+          },
+          {
+            "name": "passRate recorded",
+            "passed": false,
+            "detail": "passed=0 failed=0 total=0"
+          }
+        ]
+      }
+    },
+    "totalPassed": 3,
+    "totalFailed": 5,
+    "failedChecks": [
+      "orchestrator-state.json fresh",
+      "orchestrator subsystems ran",
+      "critical subsystems passed",
+      "iteration report generated",
+      "passRate recorded"
+    ]
   }
 }
