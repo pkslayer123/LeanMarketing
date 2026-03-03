@@ -6298,7 +6298,10 @@
       "createdAt": "2026-03-03T16:37:49.139Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T16:37:51.743Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772555869139",
@@ -6311,7 +6314,10 @@
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:38:19.304Z",
       "implementationNotes": "Claude Code fix (build): app/page.tsx. The findings section is empty — no specific bugs or issues were reported for this MOC. The route file itself looks correct:\n\n- Auth check is in place  [Verification: 3/10 — The diff adds authentication and redirects to `/dashboard`, but does not implement the dashboard page, project detection, project cards, navigation, or project isolation logic required by the feature.]",
-      "commit_sha": "cc33abdb1163ce8aa8bfc9937b1743bba52d91ba"
+      "commit_sha": "cc33abdb1163ce8aa8bfc9937b1743bba52d91ba",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772555869139",
@@ -6323,7 +6329,10 @@
       "createdAt": "2026-03-03T16:37:49.139Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T16:38:58.750Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: No type errors. The findings section is empty — no specific bugs were described for this MOC. The code in `app/api/ideas/route.ts` and `lib/ideas/index.ts` is correct:\n\n- Auth guard with proper 401 response\n- JSON parsing with try/catch\n- Required field validation\n- Quality gate integration\n- Upsert with `project_id,user_id` conflict key\n- GET filtered by both `project_id` and `user_id`\n\nNo changes needed — this appears to be a spurious/empty finding with no actionable content.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: No type errors. The findings section is empty — no specific bugs were described for this MOC. The code in `app/api/ideas/route.ts` and `lib/ideas/index.ts` is correct:\n\n- Auth guard with proper 401 response\n- JSON parsing with try/catch\n- Required field validation\n- Quality gate integration\n- Upsert with `project_id,user_id` conflict key\n- GET filtered by both `project_id` and `user_id`\n\nNo changes needed — this appears to be a spurious/empty finding with no actionable content.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
