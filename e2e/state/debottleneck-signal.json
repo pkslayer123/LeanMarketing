@@ -1,11 +1,11 @@
 {
-  "signal": "crash_recovery",
-  "suggestion": "3 crashes in last 3 runs. Likely timeout with too few workers. Resetting to safe default.",
-  "passRate": "0",
+  "signal": "headroom",
+  "suggestion": "High pass rate. Consider titrating up if duration is acceptable.",
+  "passRate": "100.0",
   "workers": 3,
-  "recommendedWorkers": 6,
+  "recommendedWorkers": 5,
   "throughput": null,
   "durationTrend": "stable",
-  "passRateTrend": "stable",
-  "timestamp": "2026-03-03T03:07:56.760Z"
+  "passRateTrend": "improving",
+  "timestamp": "2026-03-03T03:10:17.908Z"
 }
