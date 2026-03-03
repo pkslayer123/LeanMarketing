@@ -1,44 +1,43 @@
 {
-  "generatedAt": "2026-03-03T18:53:30.803Z",
+  "generatedAt": "2026-03-03T18:57:25.933Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 541,
+    "mocs_total": 538,
     "mocs_implemented": 76,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 464,
+    "mocs_archived": 462,
     "mocs_with_commit": 2,
     "mocs_verified": 0,
-    "fixes_attempted": 2,
+    "fixes_attempted": 0,
     "fixes_applied": 0,
     "fixes_failed": 0,
     "fixes_noise_closed": 0,
-    "fixes_no_fix_needed": 2
+    "fixes_no_fix_needed": 0
   },
   "conversionRates": {
     "finding_to_moc": 0,
-    "moc_to_fix_attempt": 0.004,
+    "moc_to_fix_attempt": 0,
     "fix_attempt_to_success": 0,
-    "moc_to_implemented": 0.14,
+    "moc_to_implemented": 0.141,
     "implemented_to_verified": 0,
     "end_to_end": 0
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 464,
-    "implemented": 76,
-    "approved": 1
+    "archived": 462,
+    "implemented": 76
   },
   "byTier": {
     "auto_approve": {
-      "total": 207,
+      "total": 205,
       "implemented": 0,
       "failed": 0,
-      "archived": 206,
+      "archived": 205,
       "awaiting": 0
     },
     "build": {
@@ -49,10 +48,10 @@
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 147,
+      "total": 146,
       "implemented": 1,
       "failed": 0,
-      "archived": 146,
+      "archived": 145,
       "awaiting": 0
     }
   },
@@ -60,9 +59,9 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 541,
+      "from": 538,
       "to": 76,
-      "lostCount": 465,
+      "lostCount": 462,
       "dropRate": 86
     },
     {
@@ -75,15 +74,6 @@
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 556,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 557,
@@ -159,6 +149,15 @@
     {
       "date": "2026-03-03",
       "iteration": 565,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 566,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
