@@ -7,16 +7,15 @@
     "findings: all 0 entries have valid schema",
     "convergence: valid state \"converged\"",
     "plausibility: health summary queue depth consistent with moc-queue",
-    "config-alignment: auto-tune made 2 adjustments in 24h (within bounds)",
-    "signal-flow: test-runner → tests-complete signal connected"
+    "config-alignment: auto-tune made 2 adjustments in 24h (within bounds)"
   ],
   "failed": [],
   "warnings": [
     "config-alignment: test-runner.coverageBasedSuspend is not set in config (defaults to false). Add it explicitly to prevent surprises.",
     "principles: daemon-principles.json does not exist — no design constraints encoded"
   ],
-  "at": "2026-03-03T02:43:22.943Z",
-  "passedCount": 9,
+  "at": "2026-03-03T03:07:55.700Z",
+  "passedCount": 8,
   "failedCount": 0,
   "warningCount": 2,
   "healthy": true
