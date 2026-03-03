@@ -1,20 +1,5 @@
 [
   {
-    "message": "Daemon stuck: 2 approved MOCs, 778 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T13:06:32.404Z"
-  },
-  {
-    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x3)",
-    "severity": "warning",
-    "at": "2026-03-03T13:06:50.660Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
-    "severity": "warning",
-    "at": "2026-03-03T13:06:50.669Z"
-  },
-  {
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x4)",
     "severity": "warning",
     "at": "2026-03-03T13:06:50.682Z"
@@ -498,5 +483,20 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
     "severity": "warning",
     "at": "2026-03-03T14:08:43.673Z"
+  },
+  {
+    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T14:08:44.130Z"
+  },
+  {
+    "message": "Watchdog restarted daemon (attempt 1). Reason: daemon pid 25608 not running",
+    "severity": "warning",
+    "at": "2026-03-03T14:08:54.735Z"
+  },
+  {
+    "message": "Watchdog restarted daemon (attempt 1). Reason: daemon pid 4792 not running",
+    "severity": "warning",
+    "at": "2026-03-03T14:09:31.173Z"
   }
 ]
