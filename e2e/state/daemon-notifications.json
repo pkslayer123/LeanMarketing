@@ -1,15 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped for health-deploy: 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T22:55:07.339Z"
-  },
-  {
-    "message": "Circuit breaker tripped: health-deploy — 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T22:55:19.045Z"
-  },
-  {
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T22:55:19.062Z"
@@ -498,5 +488,15 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T23:57:52.174Z"
+  },
+  {
+    "message": "Circuit breaker tripped: diagnostics — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T23:58:22.197Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
+    "severity": "warning",
+    "at": "2026-03-03T23:58:22.217Z"
   }
 ]
