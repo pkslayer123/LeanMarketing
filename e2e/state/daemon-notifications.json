@@ -1,10 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
-    "severity": "warning",
-    "at": "2026-03-03T08:41:07.037Z"
-  },
-  {
     "message": "Circuit breaker tripped for builder: 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T08:43:10.651Z"
@@ -498,5 +493,10 @@
     "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T09:43:40.320Z"
+  },
+  {
+    "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
+    "severity": "warning",
+    "at": "2026-03-03T09:47:10.462Z"
   }
 ]
