@@ -2006,3 +2006,7 @@
 {"claw":"finding-pipeline","cycle":651,"at":"2026-03-03T23:46:20.728Z","durationMs":762,"ok":true,"summary":"6 phases, 0 failed, 0 MOCs queued"}
 {"claw":"builder","cycle":661,"at":"2026-03-03T23:46:24.467Z","durationMs":120,"ok":true,"summary":"spec complete (100%)"}
 {"claw":"fix-engine","cycle":441,"at":"2026-03-03T23:46:26.470Z","durationMs":1176,"ok":true,"summary":"0 fixes applied, 0 failed"}
+{"claw":"health-deploy","cycle":793,"at":"2026-03-03T23:46:33.552Z","durationMs":3661,"ok":false,"summary":"6 checks, 1 failed"}
+{"claw":"intelligence","cycle":803,"at":"2026-03-03T23:46:42.082Z","durationMs":10902,"ok":true,"summary":"36 subsystems, 2 failed (learn-from-production, curiosity-engine)"}
+{"claw":"test-runner","cycle":645,"at":"2026-03-03T23:46:47.096Z","durationMs":6421,"ok":true,"summary":"9/9 passed, 0 failed"}
+{"claw":"diagnostics","cycle":743,"at":"2026-03-03T23:46:51.598Z","durationMs":21,"ok":false,"summary":"3 actions, 1/8 checks failing"}
