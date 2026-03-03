@@ -1,10 +1,30 @@
 {
-  "lastRun": "2026-03-03T16:39:31.921Z",
-  "total": 0,
+  "lastRun": "2026-03-03T16:41:13.683Z",
+  "total": 3,
   "noiseAutoClose": 0,
-  "fixAttempted": 0,
-  "fixApplied": 0,
+  "fixAttempted": 2,
+  "fixApplied": 1,
   "fixFailed": 0,
-  "noFixNeeded": 0,
-  "details": []
+  "noFixNeeded": 1,
+  "details": [
+    {
+      "action": "archived",
+      "reason": "Critical route: /login"
+    },
+    {
+      "action": "no_fix_needed",
+      "reason": "The findings section is empty — there are no actual reported issues to fix. The code in `app/api/projects/route.ts` looks correct:\n\n- Auth check before data access\n- Null-safe response (`data ?? []`)\n- Proper error handling with appropriate HTTP status codes (401, 400, 500, 201)\n- POST validates req"
+    },
+    {
+      "mocId": "build-layer_1_idea_definition-1772555981549",
+      "action": "claude_fixed",
+      "tier": "build",
+      "status": "implemented",
+      "files": [
+        "app/auth/login/page.tsx"
+      ],
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "changeType": ""
+    }
+  ]
 }
