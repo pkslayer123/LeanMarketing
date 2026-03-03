@@ -1,10 +1,5 @@
 [
   {
-    "message": "Circuit breaker tripped for builder: 5 consecutive failures (same error x5)",
-    "severity": "warning",
-    "at": "2026-03-03T12:34:55.481Z"
-  },
-  {
     "message": "Circuit breaker tripped: builder — 5 consecutive failures (same error x5)",
     "severity": "warning",
     "at": "2026-03-03T12:35:04.037Z"
@@ -498,5 +493,10 @@
     "message": "Circuit breaker tripped for diagnostics: 5 consecutive failures (same error x1)",
     "severity": "warning",
     "at": "2026-03-03T13:11:20.940Z"
+  },
+  {
+    "message": "Daemon stuck: 1 approved MOCs, 783 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T13:11:22.403Z"
   }
 ]
