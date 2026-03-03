@@ -6,7 +6,7 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T05:23:31.961Z",
+      "at": "2026-03-03T05:23:48.427Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -72,10 +72,10 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-03T05:17:09.759Z",
-      "emittedBy": "builder",
-      "claw": "builder",
-      "reason": "5 consecutive failures (same error x5)",
+      "at": "2026-03-03T05:23:48.769Z",
+      "emittedBy": "cp-meta",
+      "claw": "cp-meta",
+      "reason": "5 consecutive failures (same error x4)",
       "consecutiveFailures": 5
     }
   },
@@ -92,14 +92,14 @@
       "lastCycleResult": "error"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 61764,
-      "lastRun": "2026-03-03T05:23:19.538Z",
-      "nextRun": "2026-03-03T05:53:19.538Z",
-      "heartbeat": "2026-03-03T05:23:37.946Z",
+      "lastRun": "2026-03-03T05:23:48.764Z",
+      "nextRun": "2026-03-03T05:53:48.764Z",
+      "heartbeat": "2026-03-03T05:23:48.773Z",
       "cycle": 100,
       "phase": "starting",
-      "lastCycleDurationMs": 14300,
+      "lastCycleDurationMs": 14215,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
@@ -125,14 +125,14 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 53928,
-      "lastRun": "2026-03-03T05:23:32.053Z",
-      "nextRun": "2026-03-03T06:23:32.053Z",
-      "heartbeat": "2026-03-03T05:23:47.068Z",
+      "lastRun": "2026-03-03T05:23:48.533Z",
+      "nextRun": "2026-03-03T06:23:48.533Z",
+      "heartbeat": "2026-03-03T05:23:48.536Z",
       "cycle": 130,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1116,
+      "lastCycleDurationMs": 1464,
       "lastCycleResult": "ok"
     },
     "intelligence": {
@@ -158,12 +158,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 31608,
       "lastRun": "2026-03-03T05:21:38.751Z",
       "nextRun": "2026-03-03T09:21:38.751Z",
-      "heartbeat": "2026-03-03T05:23:38.297Z",
-      "cycle": 93,
+      "heartbeat": "2026-03-03T05:23:53.819Z",
+      "cycle": 94,
       "phase": "starting",
       "lastCycleDurationMs": 3528,
       "lastCycleResult": "ok"
