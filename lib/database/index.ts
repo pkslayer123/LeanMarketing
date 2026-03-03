@@ -213,6 +213,20 @@ export interface ProjectSettingsRow {
   updated_at: string;
 }
 
+// ─── View types ───────────────────────────────────────────────────────────────
+
+/** Flat shape exposed by the `messages` view (mirrors outreach_sends columns). */
+export interface MessageView {
+  id: string;
+  project_id: string;
+  lead_id: string;
+  template_version: 'A' | 'B';
+  content: string | null;
+  status: SendStatus;
+  sent_at: string | null;
+  created_at: string;
+}
+
 // ─── Supabase Database type ───────────────────────────────────────────────────
 // Pass this to createBrowserClient<Database> / createServerClient<Database>
 // for fully typed query results.
@@ -241,7 +255,9 @@ export interface Database {
       review_cycles: TableDef<ReviewCycleRow>;
       project_settings: TableDef<ProjectSettingsRow>;
     };
-    Views: Record<string, never>;
+    Views: {
+      messages: { Row: MessageView };
+    };
     Functions: Record<string, never>;
     Enums: {
       lead_status: LeadStatus;

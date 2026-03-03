@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-03-03T17:25:22.723Z",
+  "lastRun": "2026-03-03T17:27:49.635Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
@@ -13,11 +13,11 @@
     },
     {
       "action": "no_fix_needed",
-      "reason": "The findings section is empty — there are no specific bugs or issues described for this MOC. Looking at `app/api/projects/route.ts`, the code is correct:\n\n- Auth guard on both GET and POST\n- Null-safe user access (`data: { user }` destructuring with early return)\n- Proper error handling with appropr"
+      "reason": "/projects/route.ts` is clean:\n\n- Auth guard returns 401 for unauthenticated requests\n- GET filters by `user_id` with proper ordering (`nullsFirst: false`)\n- POST validates the request body and returns `data ?? []` / 201 on success\n- Null safety is correctly applied throughout (`?.`, `?? ''`, `?? []`"
     },
     {
       "action": "no_fix_needed",
-      "reason": " findings were provided in this MOC, and the type-check passes with zero errors. The `app/api/ideas/route.ts` file looks correct:\n\n- Auth is properly validated before any data access\n- Required fields are validated before upserting\n- The `runQualityGate` call is correct and typed properly\n- Error ha"
+      "reason": "/api/ideas/route.ts` and `lib/ideas.ts` is correctly implemented:\n\n- Auth check is present and returns 401 on failure\n- Input validation covers all required fields\n- The quality gate runs and stores results\n- Upsert uses the correct conflict target (`project_id,user_id`)\n- GET endpoint filters by bo"
     }
   ]
 }
