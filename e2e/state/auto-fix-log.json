@@ -1,23 +1,10 @@
 {
-  "lastRun": "2026-03-03T19:37:51.223Z",
-  "total": 3,
+  "lastRun": "2026-03-03T19:39:50.637Z",
+  "total": 0,
   "noiseAutoClose": 0,
-  "fixAttempted": 2,
+  "fixAttempted": 0,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 2,
-  "details": [
-    {
-      "action": "archived",
-      "reason": "Critical route: /login"
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": " are no specific issues reported for this file. The existing code in `app/api/projects/route.ts` looks correct:\n\n- GET handler authenticates the user and fetches their projects with proper ordering and null safety (`?? []`)\n- POST handler validates auth, parses JSON safely with try/catch, validates "
-    },
-    {
-      "action": "no_fix_needed",
-      "reason": "The findings section is empty — no specific issues were reported for this MOC. After reviewing both source files:\n\n- `app/api/ideas/route.ts` is complete with proper auth checks, validation, error handling, and upsert logic.\n- `lib/ideas.ts` has well-typed interfaces and a working quality gate imple"
-    }
-  ]
+  "noFixNeeded": 0,
+  "details": []
 }
