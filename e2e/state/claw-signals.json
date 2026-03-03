@@ -30,9 +30,9 @@
       "routes": []
     },
     "build-complete": {
-      "at": "2026-03-03T23:10:30.616Z",
+      "at": "2026-03-03T23:11:15.774Z",
       "emittedBy": "builder",
-      "iteration": 604,
+      "iteration": 605,
       "specCompletionRate": 1,
       "gapsRemaining": 0
     },
@@ -65,9 +65,9 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-03T23:08:49.697Z",
-      "emittedBy": "diagnostics",
-      "claw": "diagnostics",
+      "at": "2026-03-03T23:11:06.355Z",
+      "emittedBy": "health-deploy",
+      "claw": "health-deploy",
       "reason": "5 consecutive failures (same error x5)",
       "consecutiveFailures": 5
     }
@@ -76,12 +76,12 @@
     "builder": {
       "status": "idle",
       "pid": 59004,
-      "lastRun": "2026-03-03T23:10:30.619Z",
-      "nextRun": "2026-03-04T05:10:30.619Z",
-      "heartbeat": "2026-03-03T23:10:30.622Z",
-      "cycle": 604,
+      "lastRun": "2026-03-03T23:11:15.776Z",
+      "nextRun": "2026-03-04T05:11:15.776Z",
+      "heartbeat": "2026-03-03T23:11:15.779Z",
+      "cycle": 605,
       "phase": "starting",
-      "lastCycleDurationMs": 123,
+      "lastCycleDurationMs": 128,
       "lastCycleResult": "ok",
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
@@ -119,12 +119,12 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 89240,
       "lastRun": "2026-03-03T23:10:30.147Z",
       "nextRun": "2026-03-04T00:10:30.147Z",
-      "heartbeat": "2026-03-03T23:11:00.433Z",
-      "cycle": 384,
+      "heartbeat": "2026-03-03T23:11:15.195Z",
+      "cycle": 385,
       "phase": "docs-update",
       "lastCycleDurationMs": 1228,
       "lastCycleResult": "ok"
@@ -152,14 +152,14 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 45452,
-      "lastRun": "2026-03-03T23:10:32.807Z",
-      "nextRun": "2026-03-04T03:10:32.807Z",
-      "heartbeat": "2026-03-03T23:11:02.830Z",
+      "lastRun": "2026-03-03T23:11:06.350Z",
+      "nextRun": "2026-03-04T03:11:06.350Z",
+      "heartbeat": "2026-03-03T23:11:06.359Z",
       "cycle": 738,
       "phase": "starting",
-      "lastCycleDurationMs": 2957,
+      "lastCycleDurationMs": 3518,
       "lastCycleResult": "error"
     },
     "observer": {
