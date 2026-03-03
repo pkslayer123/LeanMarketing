@@ -6,13 +6,13 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T03:47:32.209Z",
+      "at": "2026-03-03T03:47:48.691Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-03T03:47:29.219Z",
+      "at": "2026-03-03T03:47:53.776Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -25,10 +25,10 @@
       "healthChecksFailing": 2
     },
     "diagnostics-requested": {
-      "at": "2026-03-03T03:47:32.293Z",
+      "at": "2026-03-03T03:47:48.776Z",
       "emittedBy": "convergence-tracker",
       "reason": "stuck",
-      "mocCount": 2
+      "mocCount": 1
     },
     "docs-synced": {
       "at": "2026-03-03T03:07:49.685Z",
@@ -118,7 +118,7 @@
       "pid": 84396,
       "lastRun": "2026-03-03T03:47:35.933Z",
       "nextRun": "2026-03-03T09:47:35.933Z",
-      "heartbeat": "2026-03-03T03:47:35.942Z",
+      "heartbeat": "2026-03-03T03:47:50.952Z",
       "cycle": 23,
       "phase": "starting",
       "lastCycleDurationMs": 12,
@@ -127,23 +127,23 @@
     "fix-engine": {
       "status": "running",
       "pid": 30416,
-      "lastRun": "2026-03-03T03:47:32.314Z",
-      "nextRun": "2026-03-03T04:47:32.314Z",
-      "heartbeat": "2026-03-03T03:47:47.324Z",
-      "cycle": 45,
+      "lastRun": "2026-03-03T03:47:48.796Z",
+      "nextRun": "2026-03-03T04:47:48.796Z",
+      "heartbeat": "2026-03-03T03:48:03.803Z",
+      "cycle": 46,
       "phase": "docs-update",
-      "lastCycleDurationMs": 2110,
+      "lastCycleDurationMs": 1470,
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "running",
+      "status": "idle",
       "pid": 69324,
-      "lastRun": "2026-03-03T03:47:29.223Z",
-      "nextRun": "2026-03-03T05:47:29.223Z",
-      "heartbeat": "2026-03-03T03:47:44.236Z",
+      "lastRun": "2026-03-03T03:47:53.779Z",
+      "nextRun": "2026-03-03T05:47:53.779Z",
+      "heartbeat": "2026-03-03T03:47:53.782Z",
       "cycle": 33,
       "phase": "starting",
-      "lastCycleDurationMs": 9372,
+      "lastCycleDurationMs": 9542,
       "lastCycleResult": "ok"
     },
     "test-runner": {
