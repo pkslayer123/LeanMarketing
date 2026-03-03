@@ -6,13 +6,13 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-03T07:12:37.285Z",
+      "at": "2026-03-03T07:12:54.476Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-03T07:10:52.002Z",
+      "at": "2026-03-03T07:13:01.502Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -125,25 +125,25 @@
       "lastCycleResult": "error"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 53928,
-      "lastRun": "2026-03-03T07:12:37.375Z",
-      "nextRun": "2026-03-03T08:12:37.375Z",
-      "heartbeat": "2026-03-03T07:12:52.393Z",
+      "lastRun": "2026-03-03T07:12:54.596Z",
+      "nextRun": "2026-03-03T08:12:54.596Z",
+      "heartbeat": "2026-03-03T07:12:54.600Z",
       "cycle": 231,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1111,
+      "lastCycleDurationMs": 2201,
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "running",
+      "status": "idle",
       "pid": 37012,
-      "lastRun": "2026-03-03T07:10:52.005Z",
-      "nextRun": "2026-03-03T09:10:52.005Z",
-      "heartbeat": "2026-03-03T07:12:52.088Z",
+      "lastRun": "2026-03-03T07:13:01.507Z",
+      "nextRun": "2026-03-03T09:13:01.507Z",
+      "heartbeat": "2026-03-03T07:13:01.511Z",
       "cycle": 168,
       "phase": "starting",
-      "lastCycleDurationMs": 9248,
+      "lastCycleDurationMs": 9417,
       "lastCycleResult": "ok"
     },
     "test-runner": {
@@ -158,12 +158,12 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 31608,
       "lastRun": "2026-03-03T07:11:01.341Z",
       "nextRun": "2026-03-03T11:11:01.341Z",
-      "heartbeat": "2026-03-03T07:12:41.644Z",
-      "cycle": 166,
+      "heartbeat": "2026-03-03T07:13:16.407Z",
+      "cycle": 167,
       "phase": "starting",
       "lastCycleDurationMs": 3451,
       "lastCycleResult": "ok"
