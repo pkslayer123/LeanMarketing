@@ -1,0 +1,33 @@
+# Persona Daemon Monitor
+
+The persona daemon runs autonomously. When it needs fixes it can't make itself,
+it writes a fix prompt to `e2e/state/builder-fix-prompt.md` or `e2e/state/fix-prompt.md`.
+
+## Default Behavior
+
+1. **When asked about the project** — Check `docs/BUILD-SPEC.md` for what should exist.
+2. **When the daemon needs help** — Read the fix prompt file and apply the changes.
+3. **When asked to start the daemon** — Run `npx persona-engine start`.
+4. **When asked about progress** — Read `e2e/state/spec-compliance-report.json`.
+
+## Key Commands
+
+```bash
+npx persona-engine start       # Start daemon
+npx persona-engine status      # Check status
+npx persona-engine stop        # Stop daemon
+```
+
+## Fix Prompt Workflow
+
+When the daemon can't fix something automatically (Claude rate-limited, complex change):
+1. It writes to `e2e/state/fix-prompt.md` or `e2e/state/builder-fix-prompt.md`
+2. Read the prompt, apply the fix, commit and push
+3. The daemon detects the deploy and continues
+
+## Code Standards
+
+- Use TypeScript strict mode
+- Use Tailwind CSS (include dark: variants)
+- Use `@supabase/ssr` for auth
+- Use `handleGET`/`handlePOST` from route-handler for API routes

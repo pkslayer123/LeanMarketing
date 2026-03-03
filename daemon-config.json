@@ -1,0 +1,144 @@
+{
+  "daemon": {
+    "healthPort": 9100,
+    "heartbeatIntervalSeconds": 60,
+    "heartbeatStaleThresholdMinutes": 5,
+    "maxRestartsPerHour": 3,
+    "gracefulShutdownTimeoutMs": 30000,
+    "signalExpiryHours": 24,
+    "logFile": "e2e/state/daemon.log",
+    "resources": {
+      "maxHeapMB": 256,
+      "clawHeapOverrides": {
+        "test-runner": 384,
+        "fix-engine": 384,
+        "intelligence": 256,
+        "finding-pipeline": 256,
+        "health-deploy": 192,
+        "diagnostics": 128,
+        "builder": 256,
+        "cp-meta": 256
+      },
+      "watchdogHeapMB": 128
+    },
+    "resourceCheckIntervalMs": 30000,
+    "memoryThresholdPercent": 85,
+    "emergencyMemoryPercent": 92,
+    "maxConcurrentClaws": 4
+  },
+  "claws": {
+    "test-runner": {
+      "enabled": true,
+      "intervalMinutes": 30,
+      "triggerOn": [
+        "deploy-detected",
+        "build-complete"
+      ],
+      "budgetPerCycle": 5,
+      "budgetPerHour": 15,
+      "maxWorkersOverride": 3,
+      "convergenceExtendedIntervalMinutes": 240
+    },
+    "finding-pipeline": {
+      "enabled": true,
+      "intervalMinutes": 30,
+      "triggerOn": [
+        "tests-complete"
+      ],
+      "budgetPerCycle": 3,
+      "budgetPerHour": 10
+    },
+    "builder": {
+      "enabled": true,
+      "intervalMinutes": 120,
+      "triggerOn": [
+        "mocs-ready"
+      ],
+      "specPath": "docs/BUILD-SPEC.md",
+      "maxBuildsPerCycle": 3,
+      "budgetPerCycle": 20,
+      "budgetPerHour": 30
+    },
+    "cp-meta": {
+      "enabled": true,
+      "intervalMinutes": 30,
+      "triggerOn": [
+        "mocs-ready",
+        "build-complete"
+      ],
+      "workers": 4,
+      "testTimeoutMs": 480000
+    },
+    "fix-engine": {
+      "enabled": true,
+      "intervalMinutes": 60,
+      "triggerOn": [
+        "mocs-ready"
+      ],
+      "budgetPerCycle": 10,
+      "budgetPerHour": 20
+    },
+    "intelligence": {
+      "enabled": true,
+      "intervalMinutes": 120,
+      "triggerOn": [
+        "fixes-applied"
+      ],
+      "budgetPerCycle": 5,
+      "budgetPerHour": 10
+    },
+    "health-deploy": {
+      "enabled": true,
+      "intervalMinutes": 240,
+      "triggerOn": [
+        "deploy-detected",
+        "intelligence-complete"
+      ],
+      "budgetPerCycle": 3,
+      "budgetPerHour": 5
+    },
+    "diagnostics": {
+      "enabled": true,
+      "intervalMinutes": 360,
+      "triggerOn": [
+        "diagnostics-requested",
+        "claw-crashed",
+        "circuit-broken"
+      ],
+      "budgetPerCycle": 2,
+      "budgetPerHour": 3,
+      "selfTestIntervalHours": 12,
+      "stuckCycleThreshold": 5
+    }
+  },
+  "circuitBreakers": {
+    "test-runner": {
+      "maxConsecutiveFailures": 3,
+      "maxSameError": 5
+    },
+    "fix-engine": {
+      "maxConsecutiveFailures": 3,
+      "maxSameError": 5
+    },
+    "default": {
+      "maxConsecutiveFailures": 5,
+      "maxSameError": 5
+    }
+  },
+  "autoTune": {
+    "enabled": true,
+    "minInterval": 15,
+    "maxInterval": 480,
+    "maxBudgetPerHour": 100
+  },
+  "convergence": {
+    "threshold": 0.85,
+    "suspendOnConverged": true
+  },
+  "crossProject": {
+    "sharePatterns": true,
+    "shareBudgets": true,
+    "shareInsights": true,
+    "sharedStateDir": "~/.persona-engine"
+  }
+}

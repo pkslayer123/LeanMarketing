@@ -1,0 +1,24 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "touch \"$CLAUDE_PROJECT_DIR/e2e/state/daemon.suspend\" 2>/dev/null; echo \"Daemon auto-suspended for Claude Code session\""
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rm -f \"$CLAUDE_PROJECT_DIR/e2e/state/daemon.suspend\" 2>/dev/null; echo \"Daemon suspend lifted\""
+          }
+        ]
+      }
+    ]
+  }
+}

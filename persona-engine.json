@@ -1,0 +1,22 @@
+{
+  "name": "LeanMarketing",
+  "baseUrl": "https://leanmarketing.vercel.app",
+  "stack": "nextjs",
+  "specPath": "docs/BUILD-SPEC.md",
+  "changepilot": {
+    "url": "https://moc-ai.vercel.app",
+    "orgKey": "",
+    "serviceKey": ""
+  },
+  "supabase": {
+    "projectRef": "pqbhwwwbknbabiibgfnf",
+    "url": "https://pqbhwwwbknbabiibgfnf.supabase.co"
+  },
+  "vercel": {
+    "url": "https://leanmarketing.vercel.app"
+  },
+  "daemon": {
+    "builderEnabled": true,
+    "convergenceThreshold": 0.85
+  }
+}
