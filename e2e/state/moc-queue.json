@@ -8235,7 +8235,10 @@
       "createdAt": "2026-03-03T19:00:17.607Z",
       "source": "builder-claw",
       "archivedAt": "2026-03-03T19:00:19.886Z",
-      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-dashboard_and_project_overview-1772564417607",
@@ -8247,7 +8250,10 @@
       "createdAt": "2026-03-03T19:00:17.607Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:00:35.564Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: described for this MOC. Looking at the code, `app/api/projects/route.ts` is already well-implemented:\n\n- Auth checks with proper 401 responses\n- Null-safe returns (`data ?? []`)\n- Input validation and JSON parse error handling\n- Proper error propagation (500 on DB errors)\n- RLS-safe queries scoped to `user.id`\n\nNo changes are needed. This MOC appears to be a \"build feature\" task that was auto-generated but has no actionable findings — the `/api/projects` route is already functional and correct.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: described for this MOC. Looking at the code, `app/api/projects/route.ts` is already well-implemented:\n\n- Auth checks with proper 401 responses\n- Null-safe returns (`data ?? []`)\n- Input validation and JSON parse error handling\n- Proper error propagation (500 on DB errors)\n- RLS-safe queries scoped to `user.id`\n\nNo changes are needed. This MOC appears to be a \"build feature\" task that was auto-generated but has no actionable findings — the `/api/projects` route is already functional and correct.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     },
     {
       "id": "build-layer_1_idea_definition-1772564417607",
@@ -8259,7 +8265,10 @@
       "createdAt": "2026-03-03T19:00:17.607Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T19:01:46.516Z",
-      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  Auth check with 401 on failure\n- JSON parse guard with 400 error\n- Full field validation before processing\n- Quality gate runs correctly via `runQualityGate()`\n- Upsert with `onConflict: \"project_id,user_id\"` handles idempotency\n- GET handler properly filters by both `project_id` and `user_id` (RLS-safe)\n\nThe route has no real bugs to fix. This MOC appears to have been created as a \"build feature\" scaffold task rather than an actual bug report, and the feature is already correctly implemented.\n"
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  Auth check with 401 on failure\n- JSON parse guard with 400 error\n- Full field validation before processing\n- Quality gate runs correctly via `runQualityGate()`\n- Upsert with `onConflict: \"project_id,user_id\"` handles idempotency\n- GET handler properly filters by both `project_id` and `user_id` (RLS-safe)\n\nThe route has no real bugs to fix. This MOC appears to have been created as a \"build feature\" scaffold task rather than an actual bug report, and the feature is already correctly implemented.\n",
+      "routedDepartments": [
+        "Engineering"
+      ]
     }
   ]
 }
