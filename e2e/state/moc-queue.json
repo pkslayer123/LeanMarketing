@@ -6242,6 +6242,42 @@
       "routedDepartments": [
         "Engineering"
       ]
+    },
+    {
+      "id": "build-authentication_and_user_management-1772555706962",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T16:35:06.962Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T16:35:16.112Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772555706962",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T16:35:06.962Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T16:35:32.232Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  code is already in good shape:\n- Authentication is checked with proper 401 response\n- Null safety is used (`??`, `?.`)\n- Error handling returns appropriate status codes (400, 401, 500)\n- GET returns `data ?? []` for safe empty state\n- POST validates the name and returns 201 on success\n\nNo changes are needed. This appears to be a noise MOC — the builder claw generated a task for \"Dashboard and Project Overview\" but the findings list is empty, meaning no actual issues were detected in this file.\n"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772555706962",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T16:35:06.962Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T16:36:04.364Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: s` and `lib/ideas/index.ts` appears correctly implemented:\n\n- The `runQualityGate` import and `IdeaInput` type resolve correctly from `lib/ideas/index.ts`\n- Auth checks are in place on both GET and POST handlers\n- The upsert uses the correct conflict key (`project_id,user_id`)\n- Null safety is handled with `?.` and `?? \"\"`\n- No type errors visible\n\n**No changes needed.** This MOC has empty findings, which means it was generated without any actual test failures to report. There is no bug to fix.\n"
     }
   ]
 }

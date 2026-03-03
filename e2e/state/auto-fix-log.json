@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-03-03T16:33:44.104Z",
+  "lastRun": "2026-03-03T16:36:04.371Z",
   "total": 3,
   "noiseAutoClose": 0,
   "fixAttempted": 2,
@@ -13,11 +13,11 @@
     },
     {
       "action": "no_fix_needed",
-      "reason": ". The code in `app/api/projects/route.ts` is already well-implemented:\n\n- Auth check on both GET and POST before any DB access\n- `?? ''` null safety on env vars\n- `body?.name?.trim()` null-safe input handling\n- `?? []` fallback on GET response\n- Proper error propagation with appropriate HTTP status "
+      "reason": " code is already in good shape:\n- Authentication is checked with proper 401 response\n- Null safety is used (`??`, `?.`)\n- Error handling returns appropriate status codes (400, 401, 500)\n- GET returns `data ?? []` for safe empty state\n- POST validates the name and returns 201 on success\n\nNo changes a"
     },
     {
       "action": "no_fix_needed",
-      "reason": "No changes needed. The findings section was empty — there are no specific bugs reported. The code in `app/api/ideas/route.ts` and `lib/ideas/index.ts` is correct:\n\n- Auth is properly guarded with 401 on unauthenticated requests\n- JSON parse errors are caught and return 400\n- All required fields are "
+      "reason": "s` and `lib/ideas/index.ts` appears correctly implemented:\n\n- The `runQualityGate` import and `IdeaInput` type resolve correctly from `lib/ideas/index.ts`\n- Auth checks are in place on both GET and POST handlers\n- The upsert uses the correct conflict key (`project_id,user_id`)\n- Null safety is handl"
     }
   ]
 }
