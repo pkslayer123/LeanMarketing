@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-03-03T06:32:38.453Z",
+  "generatedAt": "2026-03-03T06:35:02.524Z",
   "funnel": {
     "findings_total": 0,
     "findings_open": 0,
     "findings_resolved": 0,
     "findings_noise": 0,
-    "mocs_total": 142,
+    "mocs_total": 145,
     "mocs_implemented": 0,
     "mocs_awaiting_closeout": 0,
     "mocs_pending_approval": 0,
     "mocs_needs_human": 0,
-    "mocs_archived": 142,
+    "mocs_archived": 144,
     "mocs_with_commit": 0,
     "mocs_verified": 0,
     "fixes_attempted": 0,
@@ -29,28 +29,29 @@
   },
   "findingsBySeverity": {},
   "mocsByStatus": {
-    "archived": 142
+    "archived": 144,
+    "approved": 1
   },
   "byTier": {
     "auto_approve": {
-      "total": 62,
+      "total": 63,
       "implemented": 0,
       "failed": 0,
       "archived": 62,
       "awaiting": 0
     },
     "build": {
-      "total": 38,
+      "total": 39,
       "implemented": 0,
       "failed": 0,
-      "archived": 38,
+      "archived": 39,
       "awaiting": 0
     },
     "auto_fix": {
-      "total": 42,
+      "total": 43,
       "implemented": 0,
       "failed": 0,
-      "archived": 42,
+      "archived": 43,
       "awaiting": 0
     }
   },
@@ -58,22 +59,13 @@
     {
       "stage": "moc_to_implemented",
       "label": "MOCs → Implemented",
-      "from": 142,
+      "from": 145,
       "to": 0,
-      "lostCount": 142,
+      "lostCount": 145,
       "dropRate": 100
     }
   ],
   "trend": [
-    {
-      "date": "2026-03-03",
-      "iteration": 134,
-      "findingsBefore": 0,
-      "findingsAfter": 0,
-      "resolved": 0,
-      "newFound": 0,
-      "regressed": 0
-    },
     {
       "date": "2026-03-03",
       "iteration": 135,
@@ -149,6 +141,15 @@
     {
       "date": "2026-03-03",
       "iteration": 143,
+      "findingsBefore": 0,
+      "findingsAfter": 0,
+      "resolved": 0,
+      "newFound": 0,
+      "regressed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "iteration": 144,
       "findingsBefore": 0,
       "findingsAfter": null,
       "resolved": 0,
