@@ -6807,7 +6807,8 @@
       "createdAt": "2026-03-03T17:16:50.276Z",
       "source": "builder-claw",
       "implementedAt": "2026-03-03T17:17:48.230Z",
-      "implementationNotes": "Claude Code fix (build): app/api/projects/route.ts. No type errors. The only real change was adding a try/catch around `request.json()` to return a proper 400 instead of an unhandled 500 on malformed JS [Verification: 2/10 — The diff only adds error handling to the projects API endpoint but doesn't implement any of the core required features: the dashboard page, project cards, navigation, or project detection/isolation logic.]"
+      "implementationNotes": "Claude Code fix (build): app/api/projects/route.ts. No type errors. The only real change was adding a try/catch around `request.json()` to return a proper 400 instead of an unhandled 500 on malformed JS [Verification: 2/10 — The diff only adds error handling to the projects API endpoint but doesn't implement any of the core required features: the dashboard page, project cards, navigation, or project detection/isolation logic.]",
+      "commit_sha": "56c5f94f8176eb04b585d695c739b54ba1ce91d4"
     },
     {
       "id": "build-layer_1_idea_definition-1772558210276",
