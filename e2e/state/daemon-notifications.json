@@ -2,26 +2,6 @@
   {
     "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
     "severity": "warning",
-    "at": "2026-03-03T02:40:38.682Z"
-  },
-  {
-    "message": "Daemon stuck: 1 approved MOCs, 16 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T02:40:39.412Z"
-  },
-  {
-    "message": "11/11 claws healthy (builder:idle, cp-meta:idle, finding-pipeline:idle, diagnostics:idle, fix-engine:idle, intelligence:idle, test-runner:idle, health-deploy:idle, observer:idle, test-regen:idle, docs-sync:idle). 0% pass rate. 0 MOCs pending approval.",
-    "severity": "info",
-    "at": "2026-03-03T02:40:41.786Z"
-  },
-  {
-    "message": "Daemon stuck: 1 approved MOCs, 17 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
-    "severity": "warning",
-    "at": "2026-03-03T02:40:42.014Z"
-  },
-  {
-    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
-    "severity": "warning",
     "at": "2026-03-03T02:40:56.809Z"
   },
   {
@@ -498,5 +478,25 @@
     "message": "Convergence stuck: stuck for 0 cycles — no approved MOCs in queue",
     "severity": "warning",
     "at": "2026-03-03T04:17:06.242Z"
+  },
+  {
+    "message": "Daemon stuck: 2 approved MOCs, 107 consecutive zero-fix runs. Run auto-fix manually or enable fix-engine.",
+    "severity": "warning",
+    "at": "2026-03-03T04:17:37.932Z"
+  },
+  {
+    "message": "Circuit breaker tripped for cp-meta: 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T04:17:39.779Z"
+  },
+  {
+    "message": "Circuit breaker tripped: cp-meta — 5 consecutive failures (same error x1)",
+    "severity": "warning",
+    "at": "2026-03-03T04:17:51.261Z"
+  },
+  {
+    "message": "Convergence stuck: stuck for 0 cycles — unknown root cause",
+    "severity": "warning",
+    "at": "2026-03-03T04:17:51.267Z"
   }
 ]
