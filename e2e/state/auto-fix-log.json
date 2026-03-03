@@ -1,10 +1,23 @@
 {
-  "lastRun": "2026-03-03T19:04:47.865Z",
-  "total": 0,
+  "lastRun": "2026-03-03T19:06:00.827Z",
+  "total": 3,
   "noiseAutoClose": 0,
-  "fixAttempted": 0,
+  "fixAttempted": 2,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 0,
-  "details": []
+  "noFixNeeded": 2,
+  "details": [
+    {
+      "action": "archived",
+      "reason": "Critical route: /login"
+    },
+    {
+      "action": "no_fix_needed",
+      "reason": "re reported. The `app/api/projects/route.ts` code is well-implemented:\n\n- GET: authenticates user, queries projects filtered by `user_id`, ordered by `last_activity_at`, returns `data ?? []`\n- POST: validates auth, parses body safely, validates `name`, inserts with `user_id`, returns 201\n\nNo changes"
+    },
+    {
+      "action": "no_fix_needed",
+      "reason": "t:\n\n- `POST /api/ideas` — authenticates, validates all fields, runs the quality gate, and upserts to Supabase\n- `GET /api/ideas` — authenticates and fetches ideas by `project_id` scoped to the current user\n- `lib/ideas.ts` — exports proper types and `runQualityGate` logic\n\nThe TypeScript errors show"
+    }
+  ]
 }
