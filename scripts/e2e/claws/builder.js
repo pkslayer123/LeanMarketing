@@ -105,24 +105,53 @@ class BuilderClaw extends Claw {
     phases.push({ name: "create-build-mocs", ok: mocsCreated >= 0 });
 
     // Phase 4: Attempt to scaffold the highest-priority gap via LLM
-    const scaffolded = await this._scaffoldFeature(gaps[0]);
+    // Skip gaps that Claude already said "nothing to do" — rotate to next gap
+    const skipState = this._loadSkipState();
+    let targetGap = null;
+    for (const gap of gaps) {
+      const skipInfo = skipState[gap.featureKey];
+      if (skipInfo && skipInfo.failCount >= 2 && (Date.now() - skipInfo.lastAttempt) < 3600000) {
+        this.log(`Skipping ${gap.name} (${skipInfo.failCount} consecutive no-ops, retry in ${Math.round((3600000 - (Date.now() - skipInfo.lastAttempt)) / 60000)}min)`);
+        continue;
+      }
+      targetGap = gap;
+      break;
+    }
+
+    if (!targetGap) {
+      // All gaps skipped — reset skip state and try again next cycle
+      this.log("All gaps skipped — resetting skip state");
+      this._saveSkipState({});
+      targetGap = gaps[0];
+    }
+
+    const scaffolded = await this._scaffoldFeature(targetGap);
     if (scaffolded) {
       phases.push({ name: "scaffold", ok: true });
+      // Clear skip state on success
+      delete skipState[targetGap.featureKey];
+      this._saveSkipState(skipState);
 
       // Phase 4.5: Update manifest with new routes and generate tests
-      this._updateManifestFromGap(gaps[0]);
-      this._generateTestsForGap(gaps[0]);
+      this._updateManifestFromGap(targetGap);
+      this._generateTestsForGap(targetGap);
       this.emitSignal("tests-regenerated", {
-        feature: gaps[0].featureKey,
-        routes: gaps[0].routes,
+        feature: targetGap.featureKey,
+        routes: targetGap.routes,
       });
+    } else {
+      // Track failed attempt for skip rotation
+      const prev = skipState[targetGap.featureKey] || { failCount: 0 };
+      skipState[targetGap.featureKey] = { failCount: prev.failCount + 1, lastAttempt: Date.now() };
+      this._saveSkipState(skipState);
+      this.log(`Gap "${targetGap.name}" produced no files (attempt ${skipState[targetGap.featureKey].failCount})`);
     }
 
     // Phase 4.6: Read findings to identify regressions from last build
-    this._checkFindingsForBuildRegressions(gaps[0]);
+    this._checkFindingsForBuildRegressions(targetGap);
 
     // Phase 5: Commit and push (if files changed)
-    const committed = this._commitAndPush(scaffolded ? gaps[0] : null);
+    const committed = this._commitAndPush(scaffolded ? targetGap : null);
     phases.push({ name: "commit", ok: committed });
 
     // Update state and emit signal
@@ -389,6 +418,15 @@ class BuilderClaw extends Claw {
       });
     }
 
+    // Sort: least-built features first (lowest coverage), then by severity
+    gaps.sort((a, b) => {
+      if (a.codeAreaCoverage !== b.codeAreaCoverage) {
+        return a.codeAreaCoverage - b.codeAreaCoverage; // 0% before 50%
+      }
+      const sevOrder = { major: 0, minor: 1 };
+      return (sevOrder[a.severity] ?? 1) - (sevOrder[b.severity] ?? 1);
+    });
+
     return gaps;
   }
 
@@ -586,8 +624,23 @@ ${gap.routes.length > 0 ? gap.routes.map((r) => `- ${r}`).join("\n") : "- Determ
 - lib/ — Utilities, services, hooks
 - supabase/migrations/ — Database migrations (numbered sequentially)
 
-Focus on creating the MISSING code areas listed above. Create minimal but functional
-implementations. Do NOT import modules that don't exist yet — keep each file self-contained.
+## Design Requirements
+- Every page must have a proper navigation header with the app name "LeanMarketing" and links to
+  Dashboard, Settings. If the user is authenticated, show a logout button.
+- Use a shared layout component or import a shared <Nav /> component from components/Nav.tsx.
+  Create components/Nav.tsx if it doesn't exist.
+- Pages must look professional and complete — use Tailwind utility classes for:
+  - Consistent spacing (p-6/p-8), max-width containers (max-w-4xl mx-auto)
+  - Card-style sections with borders, rounded corners, subtle shadows
+  - Clear visual hierarchy: headings, subheadings, body text with proper font sizes
+  - Empty states with helpful text when no data exists
+  - Form inputs with labels, focus rings, and error states
+- Use indigo-600 as the primary color, gray-50 backgrounds, white cards.
+- The app should feel like a real SaaS product, not a coding exercise.
+
+Focus on creating the MISSING code areas listed above. Create functional implementations
+that look production-ready. Do NOT import modules that don't exist yet — keep each file
+self-contained or create the needed shared components.
 `;
   }
 
@@ -602,6 +655,16 @@ ${this._buildScaffoldPrompt(gap)}
 `;
     fs.writeFileSync(promptPath, content);
     this.log(`Cursor build prompt written to: ${promptPath}`);
+  }
+
+  _loadSkipState() {
+    const skipPath = path.join(STATE_DIR, "builder-skip-state.json");
+    try { return JSON.parse(fs.readFileSync(skipPath, "utf-8")); } catch { return {}; }
+  }
+
+  _saveSkipState(state) {
+    const skipPath = path.join(STATE_DIR, "builder-skip-state.json");
+    try { fs.writeFileSync(skipPath, JSON.stringify(state, null, 2) + "\n"); } catch {}
   }
 
   _isClaudeAvailable() {
