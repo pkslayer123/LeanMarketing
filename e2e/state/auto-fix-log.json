@@ -1,23 +1,15 @@
 {
-  "lastRun": "2026-03-03T22:42:25.210Z",
+  "lastRun": "2026-03-03T22:43:29.339Z",
   "total": 1,
   "noiseAutoClose": 0,
   "fixAttempted": 1,
-  "fixApplied": 1,
+  "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 0,
+  "noFixNeeded": 1,
   "details": [
     {
-      "mocId": "build-approval_mode_toggle-1772577675178",
-      "action": "claude_fixed",
-      "tier": "auto_approve",
-      "status": "implemented",
-      "files": [
-        "app/settings/page.tsx",
-        "lib/settings/index.ts"
-      ],
-      "title": "Build feature: Approval Mode Toggle",
-      "changeType": ""
+      "action": "no_fix_needed",
+      "reason": "The findings section is empty — there are no specific issues reported for this file. The code looks correct:\n\n- Auth check with 401 on failure\n- Null-safe data access with `?.` and `?? []`\n- Proper error handling for both GET and POST\n- Input validation for POST body\n\nNo changes needed — this appear"
     }
   ]
 }
