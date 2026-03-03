@@ -1,15 +1,23 @@
 {
-  "lastRun": "2026-03-03T19:09:51.741Z",
-  "total": 1,
+  "lastRun": "2026-03-03T19:11:30.353Z",
+  "total": 3,
   "noiseAutoClose": 0,
-  "fixAttempted": 0,
+  "fixAttempted": 2,
   "fixApplied": 0,
   "fixFailed": 0,
-  "noFixNeeded": 0,
+  "noFixNeeded": 2,
   "details": [
     {
       "action": "archived",
       "reason": "Critical route: /login"
+    },
+    {
+      "action": "no_fix_needed",
+      "reason": "bed for this MOC. The `app/api/projects/route.ts` code is already well-structured:\n\n- Auth checks on both GET and POST\n- Proper error handling with correct status codes\n- Null safety (`??`, optional chaining)\n- Input validation on POST (name required, trimmed)\n- Ordered query with `nullsFirst: false"
+    },
+    {
+      "action": "no_fix_needed",
+      "reason": " changes are needed.** The findings section for this MOC is empty — no specific bugs or issues were reported. The route code is correct:\n\n- Auth check with proper null guard\n- JSON body parsing with error handling  \n- All required field validation\n- Quality gate evaluation\n- Upsert with conflict res"
     }
   ]
 }

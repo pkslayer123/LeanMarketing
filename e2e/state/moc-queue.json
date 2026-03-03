@@ -8404,6 +8404,42 @@
       ],
       "archivedAt": "2026-03-03T19:09:30.043Z",
       "archivedReason": "Deduplicated — newer MOC build-authentication_and_user_management-1772564961695 covers same area"
+    },
+    {
+      "id": "build-authentication_and_user_management-1772565035993",
+      "title": "Build feature: Authentication and User Management",
+      "description": "**Feature:** Authentication and User Management\n**Routes:** /auth/login, /auth/signup\n\n**codeAreas:** `app/auth/`, `app/api/auth/`, `lib/auth/`, `components/AuthForm.tsx`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Login page | None | `/auth/login` — email/password login via Supabase Auth |\n| Signup page | None | `/auth/signup` — registration with email verification |\n| Auth middleware | None | Protect routes, redirect unauthenticated users |\n| Session management | None | Supabase session handling in layout |\n| Logout | None | Sign-out action and redirect |",
+      "tier": "build",
+      "status": "archived",
+      "featureKey": "authentication_and_user_management",
+      "createdAt": "2026-03-03T19:10:35.993Z",
+      "source": "builder-claw",
+      "archivedAt": "2026-03-03T19:10:38.712Z",
+      "archivedReason": "Critical route (/login) — requires manual review, not eligible for auto-fix"
+    },
+    {
+      "id": "build-dashboard_and_project_overview-1772565035993",
+      "title": "Build feature: Dashboard and Project Overview",
+      "description": "**Feature:** Dashboard and Project Overview\n**Routes:** /dashboard\n\n**codeAreas:** `app/dashboard/`, `app/api/projects/`, `lib/projects/`, `components/Dashboard/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Dashboard page | None | `/dashboard` — list all projects with status |\n| Project detection | None | Detect persona-engine projects in the daemon network |\n| Project cards | None | Show project name, status, last activity |\n| Navigation | None | Sidebar/header nav between sections |\n| Project isolation | None | Ensure projects never share data |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "dashboard_and_project_overview",
+      "createdAt": "2026-03-03T19:10:35.993Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T19:10:54.258Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning: bed for this MOC. The `app/api/projects/route.ts` code is already well-structured:\n\n- Auth checks on both GET and POST\n- Proper error handling with correct status codes\n- Null safety (`??`, optional chaining)\n- Input validation on POST (name required, trimmed)\n- Ordered query with `nullsFirst: false`\n\nNo changes are needed. This appears to be a builder-generated MOC (\"Build feature: Dashboard and Project Overview\") with no actual findings attached, making it noise rather than a real bug to fix.\n"
+    },
+    {
+      "id": "build-layer_1_idea_definition-1772565035993",
+      "title": "Build feature: Layer 1 — Idea Definition",
+      "description": "**Feature:** Layer 1 — Idea Definition\n**Routes:** /projects/[id]/idea\n\n**codeAreas:** `app/projects/[id]/idea/`, `app/api/ideas/`, `lib/ideas/`, `components/IdeaForm/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Idea form | None | `/projects/[id]/idea` — capture one-sentence description, audience, problem |\n| Payment assumption | None | Field: what must be true for someone to pay |\n| Next step definition | None | Field: smallest next step after reply |\n| Quality Gate 1 | None | Pass/fail check: clarity, specificity, audience, next step |\n| Idea storage | None | Supabase table for ideas linked to projects |",
+      "tier": "build",
+      "status": "implemented",
+      "featureKey": "layer_1_idea_definition",
+      "createdAt": "2026-03-03T19:10:35.993Z",
+      "source": "builder-claw",
+      "implementedAt": "2026-03-03T19:11:30.339Z",
+      "implementationNotes": "Claude analysis: no code fix required.\n\nReasoning:  changes are needed.** The findings section for this MOC is empty — no specific bugs or issues were reported. The route code is correct:\n\n- Auth check with proper null guard\n- JSON body parsing with error handling  \n- All required field validation\n- Quality gate evaluation\n- Upsert with conflict resolution on `project_id,user_id`\n- Correct GET handler with user-scoped filtering\n\nThe existing type errors are pre-existing issues in a different file (`audience/_client.tsx`) unrelated to this task.\n"
     }
   ]
 }
