@@ -190,6 +190,26 @@ class TestRunnerClaw extends Claw {
     this._logPerformance(results, workers);
     this.exec("node scripts/e2e/debottleneck-analysis.js", { label: "debottleneck" });
 
+    // Phase 7.5: Run feature tests (tests/features/) — real functional assertions
+    const featureTestResult = this.exec(
+      `cd ${this.testDir} && npx playwright test tests/features/ --workers 4 --reporter=json 2>/dev/null || true`,
+      { label: "feature-tests", timeoutMs: 120000 }
+    );
+    if (featureTestResult.ok) {
+      this.log("feature tests completed");
+    }
+
+    // Phase 7.6: Run visual tests periodically (every 5 cycles)
+    if (this.currentCycle % 5 === 0 || this.currentCycle === 1) {
+      const visualResult = this.exec(
+        "node scripts/e2e/visual-test.js",
+        { label: "visual-tests", timeoutMs: 120000 }
+      );
+      if (visualResult.ok) {
+        this.log("visual tests completed");
+      }
+    }
+
     // Phase 8: Run before-hooks for next cycle (route discovery on first run)
     if (this.currentCycle === 1) {
       this.exec("node scripts/e2e/discover-routes.js", { label: "discover-routes", timeoutMs: 60000 });

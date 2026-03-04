@@ -8,6 +8,16 @@ export interface Project {
   last_activity_at: string | null;
   created_at: string;
   updated_at: string;
+  // Daemon network fields
+  daemon_project_name?: string | null;
+  daemon_node_id?: string | null;
+  is_network_project?: boolean;
+  daemon_status?: string | null;
+  daemon_convergence_score?: number | null;
+  daemon_build_phase?: string | null;
+  daemon_claw_cycle?: number | null;
+  daemon_moc_count?: number | null;
+  last_synced_at?: string | null;
 }
 
 export interface CreateProjectInput {

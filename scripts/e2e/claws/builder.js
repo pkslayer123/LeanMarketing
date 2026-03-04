@@ -338,7 +338,7 @@ class BuilderClaw extends Claw {
 
       sections.push({
         name,
-        body: body.slice(0, 1000),
+        body, // Full body — don't truncate; scaffold prompt needs complete spec
         codeAreas,
         routes,
         gapValues,
@@ -374,11 +374,19 @@ class BuilderClaw extends Claw {
       //    enumerate actual files expected and check content quality.
       const fileReport = this._deepScanCodeAreas(section.codeAreas ?? []);
 
-      // A section is "complete" only when ALL expected files exist AND have real content.
-      // Previous bug: directory-level checks at 80% threshold falsely marked features as
-      // "built" when a directory existed but most files inside were missing or stubs.
+      // A section is "complete" only when ALL expected files exist, have real content,
+      // AND the spec requirements are actually implemented in the code.
+      // Previous bug: file-level checks falsely marked features as "built" when files
+      // existed with 50+ lines but didn't implement the spec requirements (e.g., dashboard
+      // shows "No projects yet" instead of detecting daemon network projects).
       if (fileReport.completionScore >= 0.95 && fileReport.thinFiles.length === 0) {
-        continue;
+        // Files exist and are substantial — but do they implement what the spec requires?
+        const specCheck = this._checkSpecRequirements(section, fileReport.existingFiles);
+        if (specCheck.allMet) {
+          continue; // Truly complete: files exist AND spec requirements are in the code
+        }
+        // Files exist but spec requirements are missing — mark as functionally incomplete
+        specGaps.push(...specCheck.missingRequirements);
       }
 
       // Determine gap severity for prioritization
@@ -484,6 +492,84 @@ class BuilderClaw extends Claw {
       : 1;
 
     return { missingFiles, thinFiles, existingFiles, totalExpected, completionScore };
+  }
+
+  /**
+   * Check if spec requirements (Gap column values) are actually implemented in existing files.
+   * Returns { allMet: boolean, missingRequirements: string[] }
+   *
+   * This prevents the builder from marking a feature as "complete" when files exist
+   * but don't implement the actual spec requirements (e.g., dashboard exists but doesn't
+   * detect daemon network projects as specified in the Gap column).
+   */
+  _checkSpecRequirements(section, existingFiles) {
+    const gapValues = (section.gapValues ?? []).filter(
+      (g) => g !== "None" && g !== "--" && g !== ""
+    );
+
+    // If no gap values defined in spec, can't do content check — assume met
+    if (gapValues.length === 0) {
+      return { allMet: true, missingRequirements: [] };
+    }
+
+    // Read all existing file contents
+    const fileContents = {};
+    for (const f of existingFiles) {
+      const filePath = typeof f === "string" ? f : f.path;
+      try {
+        fileContents[filePath] = fs.readFileSync(path.join(ROOT, filePath), "utf-8").toLowerCase();
+      } catch {
+        fileContents[filePath] = "";
+      }
+    }
+    const allContent = Object.values(fileContents).join("\n");
+
+    const missingRequirements = [];
+
+    for (const gap of gapValues) {
+      // Extract key functional terms from each gap description
+      const keywords = this._extractSpecKeywords(gap);
+      if (keywords.length === 0) continue;
+
+      // Check if at least half of the key terms appear in the codebase files
+      const foundCount = keywords.filter((kw) => allContent.includes(kw.toLowerCase())).length;
+      const ratio = foundCount / keywords.length;
+
+      if (ratio < 0.5) {
+        missingRequirements.push(gap);
+      }
+    }
+
+    return {
+      allMet: missingRequirements.length === 0,
+      missingRequirements,
+    };
+  }
+
+  /**
+   * Extract functional keywords from a spec gap description.
+   * E.g., "Detect persona-engine projects in the daemon network" →
+   *   ["detect", "persona-engine", "daemon", "network"]
+   */
+  _extractSpecKeywords(gapDescription) {
+    // Remove common filler words
+    const stopWords = new Set([
+      "a", "an", "the", "in", "on", "at", "to", "for", "of", "with", "and", "or",
+      "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+      "do", "does", "did", "will", "would", "shall", "should", "may", "might",
+      "can", "could", "must", "that", "this", "it", "its", "by", "from", "as",
+      "all", "each", "every", "per", "via", "none", "not", "no",
+    ]);
+
+    // Split on word boundaries, filter stopwords and short words
+    const words = gapDescription
+      .replace(/[`/|—–]/g, " ")  // Replace special chars with spaces
+      .split(/[\s,;:()]+/)
+      .map((w) => w.replace(/[^a-z0-9_-]/gi, "").toLowerCase())
+      .filter((w) => w.length >= 3 && !stopWords.has(w));
+
+    // Dedupe
+    return [...new Set(words)];
   }
 
   /**
@@ -738,7 +824,7 @@ class BuilderClaw extends Claw {
       : "";
 
     const gapItems = (gap.specGaps || []).length > 0
-      ? `\n## Specification Requirements (from BUILD-SPEC)\nThe spec says these aspects need implementation:\n${gap.specGaps.map(g => `- ${g}`).join("\n")}\n`
+      ? `\n## Specification Requirements NOT YET IMPLEMENTED (from BUILD-SPEC)\nThe following requirements from the spec are MISSING from the existing code. You MUST implement these:\n${gap.specGaps.map(g => `- **${g}**`).join("\n")}\n\nThese are the reason this feature is marked as incomplete. The files may exist, but they do NOT implement these specific requirements.\n`
       : "";
 
     return `You are building a feature for a production Next.js application called "LeanMarketing".
