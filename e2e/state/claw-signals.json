@@ -1,7 +1,7 @@
 {
   "signals": {
     "mocs-ready": {
-      "at": "2026-03-04T02:53:00.459Z",
+      "at": "2026-03-04T02:53:31.288Z",
       "emittedBy": "finding-pipeline",
       "newMocs": 0
     },
@@ -30,14 +30,14 @@
       "routes": []
     },
     "build-complete": {
-      "at": "2026-03-04T02:53:08.977Z",
+      "at": "2026-03-04T02:53:39.115Z",
       "emittedBy": "builder",
-      "iteration": 951,
+      "iteration": 952,
       "specCompletionRate": 1,
       "gapsRemaining": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-04T02:53:10.044Z",
+      "at": "2026-03-04T02:53:35.675Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -70,35 +70,35 @@
     "builder": {
       "status": "idle",
       "pid": 59004,
-      "lastRun": "2026-03-04T02:53:08.979Z",
-      "nextRun": "2026-03-04T08:53:08.979Z",
-      "heartbeat": "2026-03-04T02:53:11.624Z",
-      "cycle": 951,
+      "lastRun": "2026-03-04T02:53:39.117Z",
+      "nextRun": "2026-03-04T08:53:39.117Z",
+      "heartbeat": "2026-03-04T02:53:39.120Z",
+      "cycle": 952,
       "phase": "starting",
-      "lastCycleDurationMs": 123,
+      "lastCycleDurationMs": 118,
       "lastCycleResult": "ok",
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 89092,
-      "lastRun": "2026-03-04T02:51:35.750Z",
-      "nextRun": "2026-03-04T03:21:35.750Z",
-      "heartbeat": "2026-03-04T02:53:02.159Z",
+      "lastRun": "2026-03-04T02:53:34.749Z",
+      "nextRun": "2026-03-04T03:23:34.749Z",
+      "heartbeat": "2026-03-04T02:53:34.752Z",
       "cycle": 858,
       "phase": "starting",
-      "lastCycleDurationMs": 89456,
+      "lastCycleDurationMs": 88974,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
       "status": "idle",
       "pid": 89160,
-      "lastRun": "2026-03-04T02:53:00.597Z",
-      "nextRun": "2026-03-04T03:23:00.597Z",
-      "heartbeat": "2026-03-04T02:53:02.329Z",
-      "cycle": 941,
+      "lastRun": "2026-03-04T02:53:31.397Z",
+      "nextRun": "2026-03-04T03:23:31.397Z",
+      "heartbeat": "2026-03-04T02:53:31.400Z",
+      "cycle": 942,
       "phase": "starting",
-      "lastCycleDurationMs": 850,
+      "lastCycleDurationMs": 783,
       "lastCycleResult": "ok"
     },
     "diagnostics": {
@@ -113,12 +113,12 @@
       "lastCycleResult": "ok"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 89240,
       "lastRun": "2026-03-04T02:53:12.318Z",
       "nextRun": "2026-03-04T03:53:12.318Z",
-      "heartbeat": "2026-03-04T02:53:12.321Z",
-      "cycle": 731,
+      "heartbeat": "2026-03-04T02:53:42.349Z",
+      "cycle": 732,
       "phase": "docs-update",
       "lastCycleDurationMs": 1293,
       "lastCycleResult": "ok"
@@ -126,12 +126,12 @@
     "intelligence": {
       "status": "idle",
       "pid": 82152,
-      "lastRun": "2026-03-04T02:53:10.047Z",
-      "nextRun": "2026-03-04T04:53:10.047Z",
-      "heartbeat": "2026-03-04T02:53:10.050Z",
-      "cycle": 1081,
+      "lastRun": "2026-03-04T02:53:35.678Z",
+      "nextRun": "2026-03-04T04:53:35.678Z",
+      "heartbeat": "2026-03-04T02:53:35.682Z",
+      "cycle": 1082,
       "phase": "starting",
-      "lastCycleDurationMs": 11672,
+      "lastCycleDurationMs": 10616,
       "lastCycleResult": "ok"
     },
     "test-runner": {
@@ -146,14 +146,14 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 45452,
-      "lastRun": "2026-03-04T02:52:32.892Z",
-      "nextRun": "2026-03-04T06:52:32.892Z",
-      "heartbeat": "2026-03-04T02:53:20.297Z",
+      "lastRun": "2026-03-04T02:53:21.078Z",
+      "nextRun": "2026-03-04T06:53:21.078Z",
+      "heartbeat": "2026-03-04T02:53:21.081Z",
       "cycle": 1072,
       "phase": "starting",
-      "lastCycleDurationMs": 2993,
+      "lastCycleDurationMs": 3164,
       "lastCycleResult": "error"
     },
     "observer": {
