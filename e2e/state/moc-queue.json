@@ -9054,12 +9054,17 @@
       "id": "build-database_schema-1772595529856",
       "title": "Build feature: Database Schema",
       "description": "**Feature:** Database Schema\n**Routes:** TBD\n\n**codeAreas:** `lib/database/`, `supabase/migrations/`\n\n| Aspect | Current | Gap |\n|--------|---------|-----|\n| Projects table | None | id, name, owner_id, created_at, status |\n| Ideas table | None | project_id, description, audience, problem, payment_assumption, next_step |\n| Leads table | None | project_id, name, email, company, fit_reason, status, stage |\n| Messages table | None | project_id, lead_id, template_version, sent_at, content |\n| Conversations table | None | lead_id, direction, content, classification, created_at |\n| Offers table | None | project_id, lead_id, scope, duration, price, success_definition, status |\n| Analytics table | None | project_id, cycle, messages_sent, replies, stage_advances, bottleneck |\n| RLS policies | None | Row-level security per user/project |",
-      "tier": "build",
-      "status": "approved",
+      "tier": "auto_approve",
+      "status": "archived",
       "featureKey": "database_schema",
       "createdAt": "2026-03-04T03:38:49.856Z",
       "source": "builder-claw",
-      "noSourceSkips": 2
+      "noSourceSkips": 3,
+      "routedDepartments": [
+        "Engineering"
+      ],
+      "archivedAt": "2026-03-04T03:39:28.958Z",
+      "archivedReason": "Auto-archived: no source files resolvable for \"null\" after 3 attempts"
     }
   ]
 }
