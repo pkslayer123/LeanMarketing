@@ -37,7 +37,7 @@
       "gapsRemaining": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-04T04:15:08.191Z",
+      "at": "2026-03-04T04:15:34.601Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -50,9 +50,9 @@
       "healthChecksFailing": 1
     },
     "tests-complete": {
-      "at": "2026-03-04T04:14:54.419Z",
+      "at": "2026-03-04T04:15:32.020Z",
       "emittedBy": "test-runner",
-      "iteration": 1057,
+      "iteration": 1058,
       "passed": 10,
       "failed": 0,
       "total": 10,
@@ -136,36 +136,36 @@
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "running",
+      "status": "idle",
       "pid": 82152,
-      "lastRun": "2026-03-04T04:15:08.194Z",
-      "nextRun": "2026-03-04T06:15:08.194Z",
-      "heartbeat": "2026-03-04T04:15:23.211Z",
+      "lastRun": "2026-03-04T04:15:34.604Z",
+      "nextRun": "2026-03-04T06:15:34.604Z",
+      "heartbeat": "2026-03-04T04:15:34.609Z",
       "cycle": 1201,
       "phase": "starting",
-      "lastCycleDurationMs": 10533,
+      "lastCycleDurationMs": 11391,
       "lastCycleResult": "ok"
     },
     "test-runner": {
-      "status": "running",
+      "status": "idle",
       "pid": 76796,
-      "lastRun": "2026-03-04T04:14:54.421Z",
-      "nextRun": "2026-03-04T12:14:54.421Z",
-      "heartbeat": "2026-03-04T04:15:24.436Z",
+      "lastRun": "2026-03-04T04:15:32.022Z",
+      "nextRun": "2026-03-04T12:15:32.022Z",
+      "heartbeat": "2026-03-04T04:15:32.024Z",
       "cycle": 1058,
       "phase": "starting",
-      "lastCycleDurationMs": 7211,
+      "lastCycleDurationMs": 7584,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
       "status": "running",
       "pid": 45452,
-      "lastRun": "2026-03-04T04:14:20.237Z",
-      "nextRun": "2026-03-04T08:14:20.237Z",
-      "heartbeat": "2026-03-04T04:15:20.262Z",
-      "cycle": 1191,
+      "lastRun": "2026-03-04T04:15:24.750Z",
+      "nextRun": "2026-03-04T08:15:24.750Z",
+      "heartbeat": "2026-03-04T04:15:39.766Z",
+      "cycle": 1192,
       "phase": "starting",
-      "lastCycleDurationMs": 2862,
+      "lastCycleDurationMs": 4487,
       "lastCycleResult": "error"
     },
     "observer": {
@@ -207,3 +207,4 @@
     "emittedBy": "manual",
     "reason": "gap detection rewrite"
   }
+}
