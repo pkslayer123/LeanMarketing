@@ -1,11 +1,11 @@
 {
-  "signal": "test_quality",
-  "suggestion": "Playwright crash (0 results). Maintaining current workers — single crash may be transient.",
-  "passRate": "0",
+  "signal": "headroom",
+  "suggestion": "High pass rate. Consider titrating up if duration is acceptable.",
+  "passRate": "100.0",
   "workers": 3,
-  "recommendedWorkers": 3,
-  "throughput": null,
+  "recommendedWorkers": 5,
+  "throughput": 0,
   "durationTrend": "stable",
   "passRateTrend": "stable",
-  "timestamp": "2026-03-04T03:51:37.487Z"
+  "timestamp": "2026-03-04T03:52:14.388Z"
 }
