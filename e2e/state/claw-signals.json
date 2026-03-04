@@ -59,9 +59,9 @@
       "playwrightExitOk": true
     },
     "circuit-broken": {
-      "at": "2026-03-04T01:18:24.970Z",
-      "emittedBy": "cp-meta",
-      "claw": "cp-meta",
+      "at": "2026-03-04T01:20:03.546Z",
+      "emittedBy": "health-deploy",
+      "claw": "health-deploy",
       "reason": "5 consecutive failures (same error x5)",
       "consecutiveFailures": 5
     }
@@ -113,12 +113,12 @@
       "lastCycleResult": "ok"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 89240,
       "lastRun": "2026-03-04T01:19:22.150Z",
       "nextRun": "2026-03-04T02:19:22.150Z",
-      "heartbeat": "2026-03-04T01:20:03.101Z",
-      "cycle": 584,
+      "heartbeat": "2026-03-04T01:20:07.184Z",
+      "cycle": 585,
       "phase": "docs-update",
       "lastCycleDurationMs": 1152,
       "lastCycleResult": "ok"
@@ -146,14 +146,14 @@
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 45452,
-      "lastRun": "2026-03-04T01:19:28.770Z",
-      "nextRun": "2026-03-04T05:19:28.770Z",
-      "heartbeat": "2026-03-04T01:19:58.797Z",
+      "lastRun": "2026-03-04T01:20:03.541Z",
+      "nextRun": "2026-03-04T05:20:03.541Z",
+      "heartbeat": "2026-03-04T01:20:03.550Z",
       "cycle": 933,
       "phase": "starting",
-      "lastCycleDurationMs": 3515,
+      "lastCycleDurationMs": 4743,
       "lastCycleResult": "error"
     },
     "observer": {
