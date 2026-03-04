@@ -75,11 +75,25 @@ function computeRouteCoverage() {
             const gap = cells[gapColIndex];
             if (gap && gap !== "None" && !gap.match(/^-+$/)) {
               totalGaps++;
-              // Check if code area files exist for this sub-feature
+              // Check if code area files exist AND have substantive content (>50 lines)
+              // for this sub-feature. Files must also not contain placeholder text.
               const hasCode = currentCodeAreas.some(area => {
                 const fp = path.join(ROOT, area);
-                return fs.existsSync(fp) || fs.existsSync(fp + ".ts") || fs.existsSync(fp + ".tsx") ||
-                  fs.existsSync(fp + "/page.tsx") || fs.existsSync(fp + "/route.ts");
+                const candidates = [fp, fp + ".ts", fp + ".tsx", fp + "/page.tsx", fp + "/route.ts", fp + "/index.ts", fp + "/index.tsx"];
+                for (const c of candidates) {
+                  if (fs.existsSync(c)) {
+                    try {
+                      const content = fs.readFileSync(c, "utf-8");
+                      const lines = content.split("\n").length;
+                      const lower = content.toLowerCase();
+                      // Must have >50 lines AND no placeholder indicators
+                      if (lines >= 50 && !lower.includes("no projects yet") && !lower.includes("coming soon") && !lower.includes("placeholder")) {
+                        return true;
+                      }
+                    } catch { /* skip */ }
+                  }
+                }
+                return false;
               });
               if (hasCode) builtGaps++;
             }

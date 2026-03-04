@@ -498,9 +498,11 @@ class BuilderClaw extends Claw {
    * Check if spec requirements (Gap column values) are actually implemented in existing files.
    * Returns { allMet: boolean, missingRequirements: string[] }
    *
-   * This prevents the builder from marking a feature as "complete" when files exist
-   * but don't implement the actual spec requirements (e.g., dashboard exists but doesn't
-   * detect daemon network projects as specified in the Gap column).
+   * Uses multiple heuristics to prevent false positives:
+   * 1. Keyword matching (75% threshold, not 50%)
+   * 2. Implementation pattern detection (functions, handlers, API calls)
+   * 3. "No projects yet" / placeholder detection
+   * 4. Minimum functional line count (files with real logic, not just UI shells)
    */
   _checkSpecRequirements(section, existingFiles) {
     const gapValues = (section.gapValues ?? []).filter(
@@ -517,12 +519,37 @@ class BuilderClaw extends Claw {
     for (const f of existingFiles) {
       const filePath = typeof f === "string" ? f : f.path;
       try {
-        fileContents[filePath] = fs.readFileSync(path.join(ROOT, filePath), "utf-8").toLowerCase();
+        fileContents[filePath] = fs.readFileSync(path.join(ROOT, filePath), "utf-8");
       } catch {
         fileContents[filePath] = "";
       }
     }
-    const allContent = Object.values(fileContents).join("\n");
+    const allContentLower = Object.values(fileContents).join("\n").toLowerCase();
+    const allContentRaw = Object.values(fileContents).join("\n");
+
+    // Check for placeholder/stub indicators — if found, feature is NOT complete
+    const placeholderPatterns = [
+      "no projects yet",
+      "coming soon",
+      "todo:",
+      "placeholder",
+      "not yet implemented",
+      "stub",
+      "will be implemented",
+    ];
+    const hasPlaceholders = placeholderPatterns.some((p) => allContentLower.includes(p));
+
+    // Check for minimum functional patterns — real implementations have these
+    const functionalPatterns = [
+      /\bsupabase\b.*\.(from|rpc|select|insert|update|delete)\b/i,  // DB operations
+      /\bfetch\s*\(/,          // API calls
+      /\bonSubmit\b/i,         // Form handlers
+      /\buseState\b/,          // React state
+      /\bvalidat/i,            // Validation logic
+      /\bquality.?gate/i,      // Quality gate checks
+    ];
+    const functionalCount = functionalPatterns.filter((p) => p.test(allContentRaw)).length;
+    const hasFunctionalCode = functionalCount >= 2; // At least 2 functional patterns
 
     const missingRequirements = [];
 
@@ -531,13 +558,22 @@ class BuilderClaw extends Claw {
       const keywords = this._extractSpecKeywords(gap);
       if (keywords.length === 0) continue;
 
-      // Check if at least half of the key terms appear in the codebase files
-      const foundCount = keywords.filter((kw) => allContent.includes(kw.toLowerCase())).length;
+      // Require 75% keyword match (stricter than before — surface vocabulary
+      // overlap with the spec was causing false positives at 50%)
+      const foundCount = keywords.filter((kw) => allContentLower.includes(kw)).length;
       const ratio = foundCount / keywords.length;
 
-      if (ratio < 0.5) {
+      if (ratio < 0.75) {
         missingRequirements.push(gap);
       }
+    }
+
+    // If files have placeholders or lack functional code, ALL gaps are unmet
+    if (hasPlaceholders || !hasFunctionalCode) {
+      return {
+        allMet: false,
+        missingRequirements: missingRequirements.length > 0 ? missingRequirements : gapValues,
+      };
     }
 
     return {

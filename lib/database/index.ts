@@ -21,6 +21,8 @@ export type OfferStatus = 'draft' | 'sent' | 'accepted' | 'declined' | 'expired'
 export type OfferTemplate = 'trial' | 'early_access' | 'pilot';
 export type ProjectStatus = 'active' | 'paused' | 'converged';
 export type ApprovalMode = 'strict' | 'relaxed';
+export type DaemonStatus = 'unknown' | 'running' | 'paused' | 'converged' | 'error';
+export type DaemonBuildPhase = 'BUILD' | 'STABILIZE' | 'POLISH' | 'CONVERGED';
 
 // ─── Row types (match DB columns exactly) ────────────────────────────────────
 
@@ -30,8 +32,37 @@ export interface ProjectRow {
   name: string;
   status: ProjectStatus;
   last_activity_at: string | null;
+  // Daemon network fields (null when not a network project)
+  daemon_project_name: string | null;
+  daemon_node_id: string | null;
+  is_network_project: boolean;
+  daemon_status: DaemonStatus;
+  daemon_convergence_score: number;
+  daemon_build_phase: DaemonBuildPhase | null;
+  daemon_claw_cycle: number;
+  daemon_moc_count: number;
+  last_synced_at: string | null;
   created_at: string;
   updated_at: string;
+}
+
+export interface DaemonSyncLogRow {
+  id: string;
+  project_id: string;
+  daemon_status: DaemonStatus;
+  convergence_score: number;
+  build_phase: DaemonBuildPhase | null;
+  claw_cycle: number;
+  moc_count: number;
+  claw_health: Record<string, unknown> | null;
+  error_detail: string | null;
+  synced_at: string;
+}
+
+/** Flat shape returned by the `daemon_network_projects` view. */
+export interface DaemonNetworkProjectRow extends ProjectRow {
+  seconds_since_sync: number | null;
+  is_stale: boolean;
 }
 
 export interface IdeaRow {
@@ -254,11 +285,29 @@ export interface Database {
       offers: TableDef<OfferRow>;
       review_cycles: TableDef<ReviewCycleRow>;
       project_settings: TableDef<ProjectSettingsRow>;
+      daemon_sync_log: TableDef<DaemonSyncLogRow>;
     };
     Views: {
       messages: { Row: MessageView };
+      daemon_network_projects: { Row: DaemonNetworkProjectRow };
     };
-    Functions: Record<string, never>;
+    Functions: {
+      sync_daemon_project: {
+        Args: {
+          p_project_id: string;
+          p_daemon_node_id: string;
+          p_daemon_project_name: string;
+          p_status: DaemonStatus;
+          p_convergence_score: number;
+          p_build_phase?: DaemonBuildPhase | null;
+          p_claw_cycle?: number;
+          p_moc_count?: number;
+          p_claw_health?: Record<string, unknown> | null;
+          p_error_detail?: string | null;
+        };
+        Returns: void;
+      };
+    };
     Enums: {
       lead_status: LeadStatus;
       campaign_status: CampaignStatus;
@@ -270,6 +319,8 @@ export interface Database {
       offer_template: OfferTemplate;
       project_status: ProjectStatus;
       approval_mode: ApprovalMode;
+      daemon_status: DaemonStatus;
+      daemon_build_phase: DaemonBuildPhase;
     };
   };
 }
