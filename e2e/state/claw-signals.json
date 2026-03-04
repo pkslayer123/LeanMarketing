@@ -6,7 +6,7 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-04T01:43:52.208Z",
+      "at": "2026-03-04T01:44:23.329Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -80,14 +80,14 @@
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 89092,
-      "lastRun": "2026-03-04T01:42:44.798Z",
-      "nextRun": "2026-03-04T02:12:44.798Z",
-      "heartbeat": "2026-03-04T01:44:01.624Z",
+      "lastRun": "2026-03-04T01:44:32.094Z",
+      "nextRun": "2026-03-04T02:14:32.094Z",
+      "heartbeat": "2026-03-04T01:44:32.096Z",
       "cycle": 823,
       "phase": "starting",
-      "lastCycleDurationMs": 95200,
+      "lastCycleDurationMs": 92274,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
@@ -113,14 +113,14 @@
       "lastCycleResult": "ok"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 89240,
-      "lastRun": "2026-03-04T01:43:52.310Z",
-      "nextRun": "2026-03-04T02:43:52.310Z",
-      "heartbeat": "2026-03-04T01:44:22.333Z",
+      "lastRun": "2026-03-04T01:44:23.419Z",
+      "nextRun": "2026-03-04T02:44:23.419Z",
+      "heartbeat": "2026-03-04T01:44:23.421Z",
       "cycle": 623,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1195,
+      "lastCycleDurationMs": 1085,
       "lastCycleResult": "ok"
     },
     "intelligence": {
@@ -135,23 +135,23 @@
       "lastCycleResult": "ok"
     },
     "test-runner": {
-      "status": "idle",
+      "status": "running",
       "pid": 76796,
       "lastRun": "2026-03-04T01:44:02.956Z",
       "nextRun": "2026-03-04T09:44:02.956Z",
-      "heartbeat": "2026-03-04T01:44:02.958Z",
-      "cycle": 826,
+      "heartbeat": "2026-03-04T01:44:32.971Z",
+      "cycle": 827,
       "phase": "starting",
       "lastCycleDurationMs": 7068,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 45452,
       "lastRun": "2026-03-04T01:44:01.089Z",
       "nextRun": "2026-03-04T05:44:01.089Z",
-      "heartbeat": "2026-03-04T01:44:16.113Z",
-      "cycle": 968,
+      "heartbeat": "2026-03-04T01:44:31.116Z",
+      "cycle": 969,
       "phase": "starting",
       "lastCycleDurationMs": 3180,
       "lastCycleResult": "error"
