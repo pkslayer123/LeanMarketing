@@ -6,7 +6,7 @@
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-04T00:28:00.644Z",
+      "at": "2026-03-04T00:28:16.849Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -30,14 +30,14 @@
       "routes": []
     },
     "build-complete": {
-      "at": "2026-03-04T00:27:49.570Z",
+      "at": "2026-03-04T00:28:19.714Z",
       "emittedBy": "builder",
-      "iteration": 724,
+      "iteration": 725,
       "specCompletionRate": 1,
       "gapsRemaining": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-04T00:27:53.967Z",
+      "at": "2026-03-04T00:28:19.517Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -50,9 +50,9 @@
       "healthChecksFailing": 0
     },
     "tests-complete": {
-      "at": "2026-03-04T00:28:07.209Z",
+      "at": "2026-03-04T00:28:28.907Z",
       "emittedBy": "test-runner",
-      "iteration": 708,
+      "iteration": 709,
       "passed": 10,
       "failed": 0,
       "total": 10,
@@ -70,22 +70,22 @@
     "builder": {
       "status": "idle",
       "pid": 59004,
-      "lastRun": "2026-03-04T00:27:49.572Z",
-      "nextRun": "2026-03-04T06:27:49.572Z",
-      "heartbeat": "2026-03-04T00:28:10.686Z",
-      "cycle": 724,
+      "lastRun": "2026-03-04T00:28:19.716Z",
+      "nextRun": "2026-03-04T06:28:19.716Z",
+      "heartbeat": "2026-03-04T00:28:19.719Z",
+      "cycle": 725,
       "phase": "starting",
-      "lastCycleDurationMs": 121,
+      "lastCycleDurationMs": 118,
       "lastCycleResult": "ok",
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "idle",
+      "status": "running",
       "pid": 89092,
       "lastRun": "2026-03-04T00:28:01.357Z",
       "nextRun": "2026-03-04T00:58:01.357Z",
-      "heartbeat": "2026-03-04T00:28:16.496Z",
-      "cycle": 785,
+      "heartbeat": "2026-03-04T00:28:31.500Z",
+      "cycle": 786,
       "phase": "starting",
       "lastCycleDurationMs": 101531,
       "lastCycleResult": "error"
@@ -113,45 +113,45 @@
       "lastCycleResult": "ok"
     },
     "fix-engine": {
-      "status": "running",
+      "status": "idle",
       "pid": 89240,
-      "lastRun": "2026-03-04T00:28:00.744Z",
-      "nextRun": "2026-03-04T01:28:00.744Z",
-      "heartbeat": "2026-03-04T00:28:15.751Z",
+      "lastRun": "2026-03-04T00:28:16.945Z",
+      "nextRun": "2026-03-04T01:28:16.945Z",
+      "heartbeat": "2026-03-04T00:28:16.948Z",
       "cycle": 505,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1299,
+      "lastCycleDurationMs": 1192,
       "lastCycleResult": "ok"
     },
     "intelligence": {
-      "status": "running",
+      "status": "idle",
       "pid": 82152,
-      "lastRun": "2026-03-04T00:27:53.970Z",
-      "nextRun": "2026-03-04T02:27:53.970Z",
-      "heartbeat": "2026-03-04T00:28:08.977Z",
+      "lastRun": "2026-03-04T00:28:19.520Z",
+      "nextRun": "2026-03-04T02:28:19.520Z",
+      "heartbeat": "2026-03-04T00:28:19.523Z",
       "cycle": 865,
       "phase": "starting",
-      "lastCycleDurationMs": 11083,
+      "lastCycleDurationMs": 10542,
       "lastCycleResult": "ok"
     },
     "test-runner": {
       "status": "idle",
       "pid": 76796,
-      "lastRun": "2026-03-04T00:28:07.212Z",
-      "nextRun": "2026-03-04T08:28:07.212Z",
-      "heartbeat": "2026-03-04T00:28:07.214Z",
-      "cycle": 708,
+      "lastRun": "2026-03-04T00:28:28.910Z",
+      "nextRun": "2026-03-04T08:28:28.910Z",
+      "heartbeat": "2026-03-04T00:28:28.913Z",
+      "cycle": 709,
       "phase": "starting",
-      "lastCycleDurationMs": 6792,
+      "lastCycleDurationMs": 6688,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "idle",
+      "status": "running",
       "pid": 45452,
       "lastRun": "2026-03-04T00:28:01.160Z",
       "nextRun": "2026-03-04T04:28:01.160Z",
-      "heartbeat": "2026-03-04T00:28:07.634Z",
-      "cycle": 855,
+      "heartbeat": "2026-03-04T00:28:31.184Z",
+      "cycle": 856,
       "phase": "starting",
       "lastCycleDurationMs": 4072,
       "lastCycleResult": "error"
