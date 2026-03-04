@@ -1,12 +1,12 @@
 {
   "signals": {
     "mocs-ready": {
-      "at": "2026-03-04T02:49:25.510Z",
+      "at": "2026-03-04T02:49:56.310Z",
       "emittedBy": "finding-pipeline",
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-04T02:48:58.127Z",
+      "at": "2026-03-04T02:49:44.428Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -37,7 +37,7 @@
       "gapsRemaining": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-04T02:49:19.442Z",
+      "at": "2026-03-04T02:50:00.189Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -50,9 +50,9 @@
       "healthChecksFailing": 0
     },
     "tests-complete": {
-      "at": "2026-03-04T02:49:10.852Z",
+      "at": "2026-03-04T02:49:48.392Z",
       "emittedBy": "test-runner",
-      "iteration": 928,
+      "iteration": 929,
       "passed": 10,
       "failed": 0,
       "total": 10,
@@ -80,25 +80,25 @@
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "running",
+      "status": "idle",
       "pid": 89092,
-      "lastRun": "2026-03-04T02:47:51.421Z",
-      "nextRun": "2026-03-04T03:17:51.421Z",
-      "heartbeat": "2026-03-04T02:49:02.135Z",
+      "lastRun": "2026-03-04T02:49:51.272Z",
+      "nextRun": "2026-03-04T03:19:51.272Z",
+      "heartbeat": "2026-03-04T02:49:51.275Z",
       "cycle": 856,
       "phase": "starting",
-      "lastCycleDurationMs": 92895,
+      "lastCycleDurationMs": 89811,
       "lastCycleResult": "error"
     },
     "finding-pipeline": {
       "status": "idle",
       "pid": 89160,
-      "lastRun": "2026-03-04T02:49:25.611Z",
-      "nextRun": "2026-03-04T03:19:25.611Z",
-      "heartbeat": "2026-03-04T02:49:25.614Z",
-      "cycle": 935,
+      "lastRun": "2026-03-04T02:49:56.411Z",
+      "nextRun": "2026-03-04T03:19:56.411Z",
+      "heartbeat": "2026-03-04T02:49:56.413Z",
+      "cycle": 936,
       "phase": "starting",
-      "lastCycleDurationMs": 796,
+      "lastCycleDurationMs": 785,
       "lastCycleResult": "ok"
     },
     "diagnostics": {
@@ -115,34 +115,34 @@
     "fix-engine": {
       "status": "running",
       "pid": 89240,
-      "lastRun": "2026-03-04T02:48:58.227Z",
-      "nextRun": "2026-03-04T03:48:58.227Z",
-      "heartbeat": "2026-03-04T02:49:43.252Z",
-      "cycle": 725,
+      "lastRun": "2026-03-04T02:49:44.565Z",
+      "nextRun": "2026-03-04T03:49:44.565Z",
+      "heartbeat": "2026-03-04T02:49:59.577Z",
+      "cycle": 726,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1232,
+      "lastCycleDurationMs": 1311,
       "lastCycleResult": "ok"
     },
     "intelligence": {
       "status": "idle",
       "pid": 82152,
-      "lastRun": "2026-03-04T02:49:19.444Z",
-      "nextRun": "2026-03-04T04:49:19.444Z",
-      "heartbeat": "2026-03-04T02:49:26.934Z",
-      "cycle": 1075,
+      "lastRun": "2026-03-04T02:50:00.192Z",
+      "nextRun": "2026-03-04T04:50:00.192Z",
+      "heartbeat": "2026-03-04T02:50:00.195Z",
+      "cycle": 1076,
       "phase": "starting",
-      "lastCycleDurationMs": 12000,
+      "lastCycleDurationMs": 10737,
       "lastCycleResult": "ok"
     },
     "test-runner": {
-      "status": "running",
+      "status": "idle",
       "pid": 76796,
-      "lastRun": "2026-03-04T02:49:10.855Z",
-      "nextRun": "2026-03-04T10:49:10.855Z",
-      "heartbeat": "2026-03-04T02:49:40.875Z",
+      "lastRun": "2026-03-04T02:49:48.394Z",
+      "nextRun": "2026-03-04T10:49:48.394Z",
+      "heartbeat": "2026-03-04T02:49:48.397Z",
       "cycle": 929,
       "phase": "starting",
-      "lastCycleDurationMs": 8446,
+      "lastCycleDurationMs": 7517,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
