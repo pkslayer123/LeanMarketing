@@ -80,12 +80,12 @@
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
     "cp-meta": {
-      "status": "idle",
+      "status": "running",
       "pid": 89092,
       "lastRun": "2026-03-04T03:13:32.905Z",
       "nextRun": "2026-03-04T03:43:32.905Z",
-      "heartbeat": "2026-03-04T03:14:02.352Z",
-      "cycle": 868,
+      "heartbeat": "2026-03-04T03:14:02.932Z",
+      "cycle": 869,
       "phase": "starting",
       "lastCycleDurationMs": 90427,
       "lastCycleResult": "error"
@@ -113,12 +113,12 @@
       "lastCycleResult": "ok"
     },
     "fix-engine": {
-      "status": "idle",
+      "status": "running",
       "pid": 89240,
       "lastRun": "2026-03-04T03:13:23.369Z",
       "nextRun": "2026-03-04T04:13:23.369Z",
-      "heartbeat": "2026-03-04T03:13:23.372Z",
-      "cycle": 764,
+      "heartbeat": "2026-03-04T03:14:08.412Z",
+      "cycle": 765,
       "phase": "docs-update",
       "lastCycleDurationMs": 1172,
       "lastCycleResult": "ok"
@@ -139,21 +139,21 @@
       "pid": 76796,
       "lastRun": "2026-03-04T03:13:44.877Z",
       "nextRun": "2026-03-04T11:13:44.877Z",
-      "heartbeat": "2026-03-04T03:13:44.880Z",
+      "heartbeat": "2026-03-04T03:14:03.277Z",
       "cycle": 968,
       "phase": "starting",
       "lastCycleDurationMs": 7869,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
-      "status": "running",
+      "status": "idle",
       "pid": 45452,
-      "lastRun": "2026-03-04T03:13:14.279Z",
-      "nextRun": "2026-03-04T07:13:14.279Z",
-      "heartbeat": "2026-03-04T03:13:59.312Z",
+      "lastRun": "2026-03-04T03:14:03.107Z",
+      "nextRun": "2026-03-04T07:14:03.107Z",
+      "heartbeat": "2026-03-04T03:14:03.110Z",
       "cycle": 1104,
       "phase": "starting",
-      "lastCycleDurationMs": 3095,
+      "lastCycleDurationMs": 3794,
       "lastCycleResult": "error"
     },
     "observer": {
