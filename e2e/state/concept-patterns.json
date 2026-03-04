@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdated": "2026-03-04T02:49:10.702Z",
+  "lastUpdated": "2026-03-04T02:49:17.555Z",
   "stats": {
     "totalConcepts": 12,
     "confirmed": 0,
@@ -14,10 +14,11 @@
       "description": "API response fields and object properties should be null-checked before access",
       "transferable": true,
       "evidence": 0,
-      "confidence": 0,
+      "confidence": 0.3,
       "status": "weak",
       "exampleSources": [],
-      "lastUpdated": "2026-03-04T02:49:10.699Z"
+      "lastUpdated": "2026-03-04T02:49:10.699Z",
+      "crossProjectBoost": true
     },
     "bola-protection": {
       "concept": "bola-protection",
@@ -36,10 +37,11 @@
       "description": "Every light-mode style must have a corresponding dark: variant",
       "transferable": true,
       "evidence": 0,
-      "confidence": 0,
+      "confidence": 0.3,
       "status": "weak",
       "exampleSources": [],
-      "lastUpdated": "2026-03-04T02:49:10.700Z"
+      "lastUpdated": "2026-03-04T02:49:10.700Z",
+      "crossProjectBoost": true
     },
     "loading-state": {
       "concept": "loading-state",
@@ -47,10 +49,11 @@
       "description": "Async operations should show loading indicators before data arrives",
       "transferable": true,
       "evidence": 0,
-      "confidence": 0,
+      "confidence": 0.3,
       "status": "weak",
       "exampleSources": [],
-      "lastUpdated": "2026-03-04T02:49:10.700Z"
+      "lastUpdated": "2026-03-04T02:49:10.700Z",
+      "crossProjectBoost": true
     },
     "error-boundary": {
       "concept": "error-boundary",
@@ -69,10 +72,11 @@
       "description": "User input must be validated and sanitized at system boundaries",
       "transferable": true,
       "evidence": 0,
-      "confidence": 0,
+      "confidence": 0.3,
       "status": "weak",
       "exampleSources": [],
-      "lastUpdated": "2026-03-04T02:49:10.700Z"
+      "lastUpdated": "2026-03-04T02:49:10.700Z",
+      "crossProjectBoost": true
     },
     "permission-enforcement": {
       "concept": "permission-enforcement",
@@ -80,10 +84,11 @@
       "description": "Every endpoint and UI element must enforce appropriate permission checks",
       "transferable": true,
       "evidence": 0,
-      "confidence": 0,
+      "confidence": 0.3,
       "status": "weak",
       "exampleSources": [],
-      "lastUpdated": "2026-03-04T02:49:10.701Z"
+      "lastUpdated": "2026-03-04T02:49:10.701Z",
+      "crossProjectBoost": true
     },
     "responsive-layout": {
       "concept": "responsive-layout",
@@ -102,10 +107,11 @@
       "description": "API errors should be logged server-side with details but return generic messages to clients",
       "transferable": true,
       "evidence": 0,
-      "confidence": 0,
+      "confidence": 0.3,
       "status": "weak",
       "exampleSources": [],
-      "lastUpdated": "2026-03-04T02:49:10.701Z"
+      "lastUpdated": "2026-03-04T02:49:10.701Z",
+      "crossProjectBoost": true
     },
     "state-freshness": {
       "concept": "state-freshness",
@@ -124,10 +130,11 @@
       "description": "Interactive elements must be accessible via keyboard, screen reader, and WCAG guidelines",
       "transferable": true,
       "evidence": 0,
-      "confidence": 0,
+      "confidence": 0.3,
       "status": "weak",
       "exampleSources": [],
-      "lastUpdated": "2026-03-04T02:49:10.701Z"
+      "lastUpdated": "2026-03-04T02:49:10.701Z",
+      "crossProjectBoost": true
     },
     "form-validation": {
       "concept": "form-validation",
@@ -135,10 +142,11 @@
       "description": "Forms should validate inputs before submission with clear error messages",
       "transferable": true,
       "evidence": 0,
-      "confidence": 0,
+      "confidence": 0.3,
       "status": "weak",
       "exampleSources": [],
-      "lastUpdated": "2026-03-04T02:49:10.702Z"
+      "lastUpdated": "2026-03-04T02:49:10.702Z",
+      "crossProjectBoost": true
     }
   }
 }
