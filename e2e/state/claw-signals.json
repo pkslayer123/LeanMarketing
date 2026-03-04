@@ -1,12 +1,12 @@
 {
   "signals": {
     "mocs-ready": {
-      "at": "2026-03-04T01:43:15.486Z",
+      "at": "2026-03-04T01:43:46.270Z",
       "emittedBy": "finding-pipeline",
       "newMocs": 0
     },
     "fixes-applied": {
-      "at": "2026-03-04T01:42:49.786Z",
+      "at": "2026-03-04T01:43:20.977Z",
       "emittedBy": "fix-engine",
       "applied": 0,
       "failed": 0
@@ -30,14 +30,14 @@
       "routes": []
     },
     "build-complete": {
-      "at": "2026-03-04T01:42:52.088Z",
+      "at": "2026-03-04T01:43:22.233Z",
       "emittedBy": "builder",
-      "iteration": 840,
+      "iteration": 841,
       "specCompletionRate": 1,
       "gapsRemaining": 0
     },
     "intelligence-complete": {
-      "at": "2026-03-04T01:43:02.921Z",
+      "at": "2026-03-04T01:43:44.157Z",
       "emittedBy": "intelligence",
       "subsystems": 36,
       "failed": 2
@@ -50,12 +50,12 @@
       "healthChecksFailing": 0
     },
     "tests-complete": {
-      "at": "2026-03-04T01:43:03.121Z",
+      "at": "2026-03-04T01:43:40.867Z",
       "emittedBy": "test-runner",
-      "iteration": 824,
-      "passed": 10,
+      "iteration": 825,
+      "passed": 9,
       "failed": 0,
-      "total": 10,
+      "total": 9,
       "playwrightExitOk": true
     },
     "circuit-broken": {
@@ -70,12 +70,12 @@
     "builder": {
       "status": "idle",
       "pid": 59004,
-      "lastRun": "2026-03-04T01:42:52.091Z",
-      "nextRun": "2026-03-04T07:42:52.091Z",
-      "heartbeat": "2026-03-04T01:43:11.162Z",
-      "cycle": 840,
+      "lastRun": "2026-03-04T01:43:22.235Z",
+      "nextRun": "2026-03-04T07:43:22.235Z",
+      "heartbeat": "2026-03-04T01:43:22.238Z",
+      "cycle": 841,
       "phase": "starting",
-      "lastCycleDurationMs": 123,
+      "lastCycleDurationMs": 120,
       "lastCycleResult": "ok",
       "lastError": "exceeded max restarts — in healing mode (5min backoff)"
     },
@@ -93,12 +93,12 @@
     "finding-pipeline": {
       "status": "idle",
       "pid": 89160,
-      "lastRun": "2026-03-04T01:43:15.586Z",
-      "nextRun": "2026-03-04T02:13:15.586Z",
-      "heartbeat": "2026-03-04T01:43:15.589Z",
-      "cycle": 831,
+      "lastRun": "2026-03-04T01:43:46.368Z",
+      "nextRun": "2026-03-04T02:13:46.368Z",
+      "heartbeat": "2026-03-04T01:43:46.371Z",
+      "cycle": 832,
       "phase": "starting",
-      "lastCycleDurationMs": 767,
+      "lastCycleDurationMs": 760,
       "lastCycleResult": "ok"
     },
     "diagnostics": {
@@ -115,34 +115,34 @@
     "fix-engine": {
       "status": "running",
       "pid": 89240,
-      "lastRun": "2026-03-04T01:42:49.883Z",
-      "nextRun": "2026-03-04T02:42:49.883Z",
-      "heartbeat": "2026-03-04T01:43:19.918Z",
-      "cycle": 621,
+      "lastRun": "2026-03-04T01:43:21.082Z",
+      "nextRun": "2026-03-04T02:43:21.082Z",
+      "heartbeat": "2026-03-04T01:43:51.113Z",
+      "cycle": 622,
       "phase": "docs-update",
-      "lastCycleDurationMs": 1159,
+      "lastCycleDurationMs": 1162,
       "lastCycleResult": "ok"
     },
     "intelligence": {
       "status": "idle",
       "pid": 82152,
-      "lastRun": "2026-03-04T01:43:02.924Z",
-      "nextRun": "2026-03-04T03:43:02.924Z",
-      "heartbeat": "2026-03-04T01:43:02.929Z",
-      "cycle": 976,
+      "lastRun": "2026-03-04T01:43:44.160Z",
+      "nextRun": "2026-03-04T03:43:44.160Z",
+      "heartbeat": "2026-03-04T01:43:44.162Z",
+      "cycle": 977,
       "phase": "starting",
-      "lastCycleDurationMs": 10308,
+      "lastCycleDurationMs": 11215,
       "lastCycleResult": "ok"
     },
     "test-runner": {
       "status": "idle",
       "pid": 76796,
-      "lastRun": "2026-03-04T01:43:03.123Z",
-      "nextRun": "2026-03-04T09:43:03.123Z",
-      "heartbeat": "2026-03-04T01:43:03.127Z",
-      "cycle": 824,
+      "lastRun": "2026-03-04T01:43:40.870Z",
+      "nextRun": "2026-03-04T09:43:40.870Z",
+      "heartbeat": "2026-03-04T01:43:40.873Z",
+      "cycle": 825,
       "phase": "starting",
-      "lastCycleDurationMs": 6818,
+      "lastCycleDurationMs": 7718,
       "lastCycleResult": "ok"
     },
     "health-deploy": {
